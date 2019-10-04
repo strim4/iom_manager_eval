@@ -10,6 +10,46 @@
                         <v-list-item-content>Home</v-list-item-content>
                     </v-list-item>
                 </router-link>
+                 <router-link v-bind:to="{ name: 'Opencases' }" class="side_bar_link">
+                    <v-list-item>
+                        <v-list-item-action>
+                            <v-icon>folder_open</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>Offene Fälle</v-list-item-content>
+                    </v-list-item>
+                </router-link>
+                 <router-link v-bind:to="{ name: 'Newcase' }" class="side_bar_link">
+                    <v-list-item>
+                        <v-list-item-action>
+                            <v-icon>control_point</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>Neuer Fall</v-list-item-content>
+                    </v-list-item>
+                </router-link>
+                  <router-link v-bind:to="{ name: 'Casesearch' }" class="side_bar_link">
+                    <v-list-item>
+                        <v-list-item-action>
+                            <v-icon>search</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>Fallsuche</v-list-item-content>
+                    </v-list-item>
+                </router-link>
+                 <router-link v-bind:to="{ name: 'Analysis' }" class="side_bar_link">
+                    <v-list-item>
+                        <v-list-item-action>
+                            <v-icon>assessment</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>Analyse</v-list-item-content>
+                    </v-list-item>
+                </router-link>
+                 <router-link v-bind:to="{ name: 'Settings' }" class="side_bar_link">
+                    <v-list-item>
+                        <v-list-item-action>
+                            <v-icon>build</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>Einstellungen</v-list-item-content>
+                    </v-list-item>
+                </router-link>
                 <router-link v-bind:to="{ name: 'Contact' }" class="side_bar_link">
                     <v-list-item>
                         <v-list-item-action>

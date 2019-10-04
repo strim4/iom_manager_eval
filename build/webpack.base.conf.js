@@ -8,6 +8,8 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
+favicon: 'src/assets/favicon.png';
+
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',

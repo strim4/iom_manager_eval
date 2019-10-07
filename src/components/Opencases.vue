@@ -1,5 +1,5 @@
 <template>
 <v-layout>
-Hier entsteht die Seite der offenen Fällen
+<h1>Offene Fälle</h1>
 </v-layout>
 </template>

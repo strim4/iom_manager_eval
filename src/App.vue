@@ -1,5 +1,6 @@
 <template>
     <v-app id="inspire">
+    <!-- Start Seitenmenu-->
         <v-navigation-drawer fixed v-model="drawer" app>
             <v-list dense>
                 <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link">
@@ -60,10 +61,13 @@
                 </router-link>
             </v-list>
         </v-navigation-drawer>
+         <!-- Ende Seitenmenu-->
+          <!-- Start Hauptmenu-->
         <v-app-bar color="indigo" dark fixed app>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-                <v-toolbar-title>Home</v-toolbar-title>
+                <v-toolbar-title>IOM-Manager</v-toolbar-title>
         </v-app-bar>
+         <!-- Ende Hauptmenu-->
         <v-content>
             <v-container fluid>
                 <div id="app">
@@ -71,10 +75,12 @@
                 </div>
             </v-container>
         </v-content>
+         <!-- Start Footer-->
         <v-footer color="indigo" app>
             <span class="white--text">IOM Manager &copy; 2019 Chantal Zbinden,
              Moritz Strickler</span>
         </v-footer>
+         <!-- Ende Footer -->
     </v-app>
 </template>
 

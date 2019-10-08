@@ -2,6 +2,19 @@
 const CaseSchema = require('../models/Case.js');
 
 module.exports.controller = (app) => {
+// fetch all cases
+app.get('/cases', (req, res) => {
+    CaseSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant', (error,
+    cases) => {
+    if (error) { console.log(error); }
+    res.send({
+    cases,
+    });
+    });
+    });
+
+
+
 // add a new case
 app.post('/cases', (req, res) => {
 const newCase = new CaseSchema({

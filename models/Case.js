@@ -15,7 +15,7 @@ isismodality: String,
 opdate: Date,
 description: String,
 surgeon: String,
-assistand: String,
+assistant: String,
 });
 
 const Case = mongoose.model('Case', CaseSchema)

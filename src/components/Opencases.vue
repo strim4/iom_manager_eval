@@ -5,7 +5,7 @@
             <div class="flex-grow-1"></div>
             <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
         </v-card-title>
-        <v-data-table :headers="headers" :items="this.ccases" :search="search"></v-data-table>
+        <v-data-table :headers="headers" :items="this.ccases" :fixed-header="fixed"  :search="search"></v-data-table>
     </v-card>
 </template>
 
@@ -15,12 +15,13 @@ export default {
     name: 'Cases',
     data() {
         return {
+            
+            fixed: true,
             ccases: [],
             search: '',
             headers: [{
                     text: 'Fall Nr.',
                     align: 'left',
-                   
                     value: 'casenr',
                 },
                 { text: 'PID', value: 'pid' },
@@ -28,14 +29,16 @@ export default {
                 { text: 'Name', value: 'name' },
                 { text: 'Vorname', value: 'surname' },
                 { text: 'Geburtsdatum', value: 'birthdate' },
-                 { text: 'Diagnose', value: 'diagnose' },
+                { text: 'Diagnose', value: 'diagnose' },
                 { text: 'Operation', value: 'operation' },
                 { text: 'ISIS Mod.', value: 'isismodality' },
                 { text: 'OP-Datum', value: 'opdate' },
                 { text: 'Chirurg', value: 'surgeon' },
                 { text: 'Assistent', value: 'assistant' },
             ],
+
         };
+
     },
     mounted() {
         this.fetchCases();

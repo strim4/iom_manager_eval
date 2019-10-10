@@ -2,23 +2,21 @@
     <v-form v-model="valid" ref="form" lazy-validation>
     
         <h1>Neuer Fall</h1>
-        
         <label>Angaben zum Patienten</label>
         <v-text-field label="Fall Nr." v-model="casenr" :rules="requiredRules" required></v-text-field>
         <v-text-field label="PID" v-model="pid" :rules="requiredRules" required></v-text-field>
         <v-text-field label="FID" v-model="fid" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Name" v-model="name" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
-        <v-text-field label="Geburtsdatum" prepend-icon="event" v-model="birthdate" :rules="requiredRules" required></v-text-field>
+        <v-text-field label="Geburtsdatum" prepend-icon="event" :format="formatDate" v-model="birthdate" :rules="requiredRules" required></v-text-field>
         <v-date-picker v-model="birthdate" :landscape="$vuetify.breakpoint.smAndUp" :locale="'de'"></v-date-picker>
-    
-    
+        
         </br>
         </br>
         </br>
-    
+
         <label>Angaben zur Operation</label>
-        <v-select label="Diagnose" v-model="diagnose" :items="diagnoses"></v-select>
+        <v-select label="Diagnose" v-model="diagnose" :items="diagnoses" item-text="diagnose"></v-select>
         <v-select label="Operation" v-model="operation" :items="operations"></v-select>
         <v-select label="ISIS-Gerät" v-model="isismodality" :items="isismodalities"></v-select>
         <v-text-field label="OP-Datum" prepend-icon="event" v-model="opdate"></v-text-field>
@@ -31,10 +29,6 @@
         <v-btn @click="clear">zurücksetzten</v-btn>
     </v-form>
 </template>
- 
-
-    
-
 
 <script>
 import axios from 'axios';
@@ -51,7 +45,7 @@ export default {
         fid: '',
         name: '',
         surname: '',
-        birthdate: '',
+        birthdate: null,
         diagnose: '',
         operation: '',
         isismodality: '',
@@ -65,16 +59,7 @@ export default {
         ],
         select: null,
         diagnoses: [
-            'AKN R',
-            'AKN L',
-            'Gliom',
-            'Glioblastom',
-            'ICA Aneurysma',
-            'LGG',
-            'Meningeom',
-            'Oligodendrogliom',
-            'Raumforderung',
-            'SIH',
+           
         ],
         operations: [
             'CEA',
@@ -111,9 +96,12 @@ export default {
             'Hängi Levin Ayda',
         ],
     }),
-    
+    mounted() {
+        this.fetchDiagnoses();
+    },
 
     methods: {
+
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
@@ -158,6 +146,16 @@ export default {
         },
         clear() {
             this.$refs.form.reset();
+        },
+        async fetchDiagnoses() {
+            return axios({
+                    method: 'get',
+                    url: 'http://localhost:8081/diagnoses',
+                })
+                .then((response) => {
+                    this.diagnoses = response.data.diagnoses;
+                })
+                .catch(() => {});
         },
     },
 };

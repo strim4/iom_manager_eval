@@ -7,6 +7,7 @@ import Newcase from '@/components/Newcase';
 import Casesearch from '@/components/Casesearch';
 import Settings from '@/components/Settings';
 import Analysis from '@/components/Analysis';
+import Adddiagnose from '@/components/Adddiagnose';
 
 Vue.use(Router);
 
@@ -47,6 +48,11 @@ export default new Router({
       path: '/analysis',
       name: 'Analysis',
       component: Analysis,
+    },
+    {
+      path: '/adddiagnose',
+      name: 'Adddiagnose',
+      component: Adddiagnose,
     },
   ],
 });

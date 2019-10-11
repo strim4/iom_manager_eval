@@ -1,4 +1,4 @@
-//Database case model
+//Database diagnose model
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

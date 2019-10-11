@@ -1,4 +1,5 @@
-<template>
+
+<template slot="items" slot-scope="props">
     <v-container>
         <v-col>
             <v-form v-model="valid" ref="form" lazy-validation>
@@ -16,7 +17,7 @@
     
             <v-card>
                 <v-card-title>
-                    Erfasste Diagnosen Fälle
+                    Erfasste Diagnosen 
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
                 </v-card-title>

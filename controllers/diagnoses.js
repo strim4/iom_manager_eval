@@ -1,4 +1,4 @@
-//this file contains the endpoint to save cases in the database
+//this file contains the endpoint to CRUD diagnoses in the database
 const DiagnoseSchema = require('../models/Diagnose.js');
 
 module.exports.controller = (app) => {

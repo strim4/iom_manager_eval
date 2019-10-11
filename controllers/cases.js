@@ -1,4 +1,4 @@
-//this file contains the endpoint to save cases in the database
+//this file contains the endpoint to CRUD cases in the database
 const CaseSchema = require('../models/Case.js');
 
 module.exports.controller = (app) => {

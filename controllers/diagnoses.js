@@ -2,7 +2,7 @@
 const DiagnoseSchema = require('../models/Diagnose.js');
 
 module.exports.controller = (app) => {
-// fetch all cases
+// fetch all diagnoses
 app.get('/diagnoses', (req, res) => {
     DiagnoseSchema.find({}, 'diagnose', (error,
     diagnoses) => {
@@ -15,7 +15,7 @@ app.get('/diagnoses', (req, res) => {
 
 
 
-// add a new case
+// add a new diagnose
 app.post('/diagnoses', (req, res) => {
 const newDiagnose = new DiagnoseSchema({
         diagnose: req.body.diagnose,

@@ -1,3 +1,4 @@
+// This file contains the routerlinks used for the navigation between the components / sites 
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/Home';
@@ -12,6 +13,7 @@ import Adddiagnose from '@/components/Adddiagnose';
 Vue.use(Router);
 
 export default new Router({
+  // mode history makes it possible to use the arrows in the browser to navigate back and forth
   mode: 'history',
   routes: [
     {

@@ -1,7 +1,8 @@
-
+<!-- This file contains the structure for the add diagnose site-->
 <template slot="items" slot-scope="props">
     <v-container>
         <v-col>
+            <!-- Form to add a new diagnose -->
             <v-form v-model="valid" ref="form" lazy-validation>
                 <label>Neue Diagnose hinzufügen</label>
                 <v-text-field label="Diagnose" :rules="rules" v-model="diagnose" required></v-text-field>
@@ -14,7 +15,7 @@
         </br>
         </br>
         <v-col>
-    
+    <!-- Datatable with the stored diagnoses -->
             <v-card>
                 <v-card-title>
                     Erfasste Diagnosen 
@@ -51,10 +52,12 @@ export default {
 
 
     }),
+    // fetch all diagnoses on pageload
      mounted() {
         this.fetchDiagnoses();
     },
     methods: {
+        // submit method to send the new diagnose to the backend
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
@@ -86,9 +89,11 @@ export default {
             }
             return true;
         },
+        //Reset function
         clear() {
             this.$refs.form.reset();
         },
+        // fetches all diagnoses from the database
          async fetchDiagnoses() {
             return axios({
                     method: 'get',

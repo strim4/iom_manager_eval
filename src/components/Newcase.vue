@@ -1,4 +1,6 @@
+<!-- This file contains the structure to prapare a new case and save it to the database -->
 <template>
+<!-- Form to add a new Case -->
     <v-form v-model="valid" ref="form" lazy-validation>
     
         <h1>Neuer Fall</h1>
@@ -96,12 +98,13 @@ export default {
             'Hängi Levin Ayda',
         ],
     }),
+    // fetches all diagnoses on pageload
     mounted() {
         this.fetchDiagnoses();
     },
 
     methods: {
-
+        // submit method to save the new case to the database
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
@@ -144,9 +147,11 @@ export default {
             }
             return true;
         },
+        //method to reset the form
         clear() {
             this.$refs.form.reset();
         },
+        //method to fetch all diagnoses from the database
         async fetchDiagnoses() {
             return axios({
                     method: 'get',

@@ -1,3 +1,4 @@
+<!-- This file contains the structure to display all the open cases -->
 <template>
     <v-card>
         <v-card-title>
@@ -40,9 +41,11 @@ export default {
         };
 
     },
+   //run method fetch all cases on pageload
     mounted() {
         this.fetchCases();
     },
+     //method to fetch all cases from the database
     methods: {
         async fetchCases() {
             return axios({

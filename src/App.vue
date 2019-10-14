@@ -1,6 +1,7 @@
+<!-- This File contains the basic structure of the app including the main menu, the navbar and the footer Seitenmenu-->
 <template>
     <v-app id="inspire">
-    <!-- Start Seitenmenu-->
+    <!-- Start Sidemenu-->
         <v-navigation-drawer fixed v-model="drawer" app>
             <v-list dense>
                 <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link">
@@ -61,13 +62,13 @@
                 </router-link>
             </v-list>
         </v-navigation-drawer>
-         <!-- Ende Seitenmenu-->
-          <!-- Start Hauptmenu-->
+         <!-- End Sidemenu-->
+          <!-- Start Mainmenu / Navbar-->
         <v-app-bar color="indigo" dark fixed app>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>IOM-Manager</v-toolbar-title>
         </v-app-bar>
-         <!-- Ende Hauptmenu-->
+         <!-- End Mainmenu / Navbar-->
         <v-content>
             <v-container fluid>
                 <div id="app">
@@ -85,6 +86,7 @@
 </template>
 
 <script>
+// Import main stylesheet
 import './assets/stylesheets/main.css';
 
 export default {

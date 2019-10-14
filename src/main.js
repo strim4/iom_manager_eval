@@ -12,13 +12,14 @@ import VueSwal from 'vue-swal';
 import App from './App';
 import router from './router';
 
+//User Imports in Vue app
 Vue.use(BootstrapVue);
 Vue.use(Vuetify);
 Vue.use(VueSwal);
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
+//Initialize Vue App
 new Vue({
   el: '#app',
   router,

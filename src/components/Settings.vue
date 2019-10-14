@@ -1,5 +1,6 @@
+<!-- This file  contains the structure for the setting page -->
 <template>
-
+<!-- TNavigation to the different subpages -->
  <v-list   >
                <h3>Neue Einträge hinzufügen:</h3>
                  

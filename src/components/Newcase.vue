@@ -151,10 +151,7 @@ export default {
         clear() {
             this.$refs.form.reset();
         },
-        formatDate (date) {
-  return moment(date).format('DD-MM-YYYY')
-},
-        //method to fetch all diagnoses from the database
+            //method to fetch all diagnoses from the database
         async fetchDiagnoses() {
             return axios({
                     method: 'get',

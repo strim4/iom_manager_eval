@@ -20,11 +20,8 @@ export default {
             fixed: true,
             ccases: [],
             search: '',
-            headers: [{
-                    text: 'Fall Nr.',
-                    align: 'left',
-                    value: 'casenr',
-                },
+            headers: [
+                { text: 'Fall Nr.', value: 'casenr'},
                 { text: 'PID', value: 'pid' },
                 { text: 'FID', value: 'fid' },
                 { text: 'Name', value: 'name' },

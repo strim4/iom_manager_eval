@@ -10,8 +10,8 @@
         <v-text-field label="FID" v-model="fid" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Name" v-model="name" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
-        <v-text-field label="Geburtsdatum" prepend-icon="event" :format="formatDate" v-model="birthdate" :rules="requiredRules" required></v-text-field>
-        <v-date-picker v-model="birthdate" :landscape="$vuetify.breakpoint.smAndUp" :locale="'de'"></v-date-picker>
+        <v-text-field label="Geburtsdatum" readonly prepend-icon="event"  v-model="birthdate" :rules="requiredRules" required></v-text-field>
+        <v-date-picker v-model="birthdate" :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
         
         </br>
         </br>
@@ -104,7 +104,7 @@ export default {
     },
 
     methods: {
-        // submit method to save the new case to the database
+        // submit method to send the new case to the backend to store
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
@@ -151,6 +151,9 @@ export default {
         clear() {
             this.$refs.form.reset();
         },
+        formatDate (date) {
+  return moment(date).format('DD-MM-YYYY')
+},
         //method to fetch all diagnoses from the database
         async fetchDiagnoses() {
             return axios({

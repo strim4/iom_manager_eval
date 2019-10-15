@@ -1,5 +1,6 @@
 //Database case model
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const Schema = mongoose.Schema;
 const CaseSchema = new Schema({
@@ -8,15 +9,17 @@ pid: Number,
 fid: Number,
 name: String,
 surname: String,
-birthdate: Date,
+birthdate: String,
 diagnose: String,
 operation: String,
 isismodality: String,
-opdate: Date,
+opdate: String,
 description: String,
 surgeon: String,
 assistant: String,
 });
+
+
 
 const Case = mongoose.model('Case', CaseSchema)
 module.exports = Case;

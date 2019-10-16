@@ -28,3 +28,14 @@ res.send(diagnose);
 });
 });
 };
+
+// delete a diagnose
+app.delete('/person/:id', async (request, response) => {
+
+    try {
+        var result = await DiagnoseSchema.deleteOne({ _id: request.params.id }).exec();
+        response.send(result);
+    } catch (error) {
+        response.status(500).send(error);
+    }
+});

@@ -25,6 +25,39 @@
                 <v-data-table :headers="headers" :items="this.diagnoses" :fixed-header="fixed" :search="search"></v-data-table>
             </v-card>
         </v-col>
+
+
+        <!-- Test -->
+     
+    
+        <v-card>
+                <v-card-title>
+                    Erfasste Diagnosen 
+                    <div class="flex-grow-1"></div>
+                    <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
+                </v-card-title>
+      <v-data-table
+      v-model="selected"
+      :headers="headers"
+      :items="diagnoses"
+      item-key="name"
+      :search="search"
+      class="elevation-1"
+    >
+     
+      <template v-slot:item.action="{ item }">
+            <v-icon
+          small
+          @click="deleteItem(item)"
+        >
+          delete
+        </v-icon>
+      </template>
+     
+    </v-data-table>
+    
+      </v-card>
+   
     
     </v-container>
 </template>
@@ -35,6 +68,7 @@ export default {
     data: () => ({
         valid: true,
         diagnose: '',
+        selected: [],
         rules: [
             v => !!v || 'Bitte geben Sie eine Diagnose ein',
         ],
@@ -103,6 +137,13 @@ export default {
                     this.diagnoses = response.data.diagnoses;
                 })
                 .catch(() => {});
+        },
+     deleteDiagnose() {
+            this.$refs.form.reset();
+        },
+        deleteItem(item) {
+        const index = this.diagnoses.indexOf(item)
+      confirm('Are you sure you want to delete this item?') && this.diagnoses.splice(index, 1)
         },
     },
 };

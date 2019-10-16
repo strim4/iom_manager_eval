@@ -1,5 +1,6 @@
 <!-- This file contains the structure to display all the open cases -->
 <template>
+  
     <v-card>
         <v-card-title>
             Offene Fälle

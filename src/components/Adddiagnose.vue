@@ -14,20 +14,10 @@
         </v-col>
         </br>
         </br>
-        <v-col>
+     
     <!-- Datatable with the stored diagnoses -->
-            <v-card>
-                <v-card-title>
-                    Erfasste Diagnosen 
-                    <div class="flex-grow-1"></div>
-                    <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
-                </v-card-title>
-                <v-data-table :headers="headers" :items="this.diagnoses" :fixed-header="fixed" :search="search"></v-data-table>
-            </v-card>
-        </v-col>
 
-
-        <!-- Test -->
+        
      
     
         <v-card>
@@ -43,15 +33,17 @@
       item-key="name"
       :search="search"
       class="elevation-1"
+     
     >
      
       <template v-slot:item.action="{ item }">
             <v-icon
           small
-          @click="deleteItem(item)"
+          @click="deleteDiagnose(item._id, item)"
         >
           delete
         </v-icon>
+        
       </template>
      
     </v-data-table>
@@ -92,6 +84,7 @@ export default {
     },
     methods: {
         // submit method to send the new diagnose to the backend
+        
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
@@ -131,6 +124,9 @@ export default {
          async fetchDiagnoses() {
             return axios({
                     method: 'get',
+                    data: {
+                            diagnose: this.diagnose,
+                        },
                     url: 'http://localhost:8081/diagnoses',
                 })
                 .then((response) => {
@@ -138,13 +134,26 @@ export default {
                 })
                 .catch(() => {});
         },
-     deleteDiagnose() {
-            this.$refs.form.reset();
+   async  deleteDiagnose(id, item) {
+       console.log(id);
+            return axios({
+                    method: 'delete',
+                     data: {
+                            id: id,
+                        },
+                    url: 'http://localhost:8081/diagnoses/'+id,
+                    headers: {
+                            'Content-Type': 'application/json',
+                        },
+                })
+                .then((response) => {
+                   const index = this.diagnoses.indexOf(item)
+       this.diagnoses.splice(index, 1)
+                })
+                .catch(() => {});
         },
-        deleteItem(item) {
-        const index = this.diagnoses.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.diagnoses.splice(index, 1)
-        },
+       
     },
 };
+
 </script>

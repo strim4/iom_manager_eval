@@ -13,6 +13,19 @@ app.get('/diagnoses', (req, res) => {
     });
     });
 
+//delete
+
+app.delete('/diagnoses/:id', (req, res) => {
+  DiagnoseSchema.remove({
+      _id: req.params.id 
+  }, function(error, diagnose){
+      if (error){console.error(error);}
+      res.send({success:true})
+  })
+  });
+    
+
+
 
 
 // add a new diagnose
@@ -29,13 +42,7 @@ res.send(diagnose);
 });
 };
 
-// delete a diagnose
-app.delete('/person/:id', async (request, response) => {
 
-    try {
-        var result = await DiagnoseSchema.deleteOne({ _id: request.params.id }).exec();
-        response.send(result);
-    } catch (error) {
-        response.status(500).send(error);
-    }
-});
+
+    
+

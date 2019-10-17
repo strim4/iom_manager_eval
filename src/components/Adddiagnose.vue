@@ -103,6 +103,7 @@ export default {
                             'Die Diagnose wurde gespeichert!',
                             'success',
                         );
+                        this.fetchDiagnoses();
 
                         this.$refs.form.reset();
                     })
@@ -134,6 +135,7 @@ export default {
                 })
                 .catch(() => {});
         },
+        //delete a diagnose from the database
    async  deleteDiagnose(id, item) {
        console.log(id);
             return axios({
@@ -148,7 +150,8 @@ export default {
                 })
                 .then((response) => {
                    const index = this.diagnoses.indexOf(item)
-       this.diagnoses.splice(index, 1)
+       this.diagnoses.splice(index, 1);
+       
                 })
                 .catch(() => {});
         },

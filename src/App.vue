@@ -67,6 +67,16 @@
         <v-app-bar color="indigo" dark fixed app>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>IOM-Manager</v-toolbar-title>
+                <v-spacer></v-spacer>
+    Eingeloggt als xxx
+        <v-btn icon>
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
+  
+        <v-btn icon>
+          <v-icon>mdi-information</v-icon>
+     
+        </v-btn>
         </v-app-bar>
          <!-- End Mainmenu / Navbar-->
         <v-content>

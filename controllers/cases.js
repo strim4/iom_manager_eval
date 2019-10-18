@@ -52,7 +52,7 @@ app.put('/cases/:id', (req, res) => {
 
 
 
-    //delete case from the database
+    //delete a case from the database
 
 app.delete('/cases/:id', (req, res) => {
     CaseSchema.remove({

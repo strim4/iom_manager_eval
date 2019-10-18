@@ -1,6 +1,6 @@
-<!-- This file contains the structure to prapare a new case and save it to the database -->
+<!-- This file contains the structure to update a case and save it to the database -->
 <template>
-<!-- Form to add a new Case -->
+<!-- Form to update a case -->
     <v-form v-model="valid" ref="form" lazy-validation>
     
         <h1>Offener Fall bearbeiten</h1>
@@ -98,22 +98,23 @@ export default {
             'Hängi Levin Ayda',
         ],
     }),
-    // fetches all diagnoses on pageload
+    // fetches all diagnoses on pageload and fetch specific case from the database
     mounted() {
         this.fetchDiagnoses();
         this.fetchCase(this.id);
       
 
     },
+    //store case id from the routerlink to a local variable on page load
       created() {
             this.id = this.$route.params.id;
-            console.log(this.id);
+            
            
            
         },
 
     methods: {
-        // submit method to send the new case to the backend to store
+        // case update method
         update() {
            console.log(this.casenr);
             if (this.$refs.form.validate()) {

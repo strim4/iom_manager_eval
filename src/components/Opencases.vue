@@ -1,14 +1,51 @@
 <!-- This file contains the structure to display all the open cases -->
-<template>
+<template slot="items" slot-scope="props">
+    <v-container>
   
-    <v-card>
-        <v-card-title>
-            Offene Fälle
-            <div class="flex-grow-1"></div>
-            <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
-        </v-card-title>
-        <v-data-table :headers="headers" :items="this.ccases" :fixed-header="fixed"  :search="search"></v-data-table>
-    </v-card>
+  <!-- Datatable with containing all the open cases -->
+      <v-card>
+                <v-card-title>
+                  Offene Fälle
+                    <div class="flex-grow-1"></div>
+                    <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
+                </v-card-title>
+      <v-data-table
+     
+      :headers="headers"
+      :items="ccases"
+      item-key="name"
+      :search="search"
+      class="elevation-1"
+     
+    >
+        <template v-slot:item.edit="{ item }">
+       <router-link :to="{ name: 'Editopencase', params: { id: item._id } }">
+            <v-icon
+          
+      
+        >
+          edit
+        </v-icon>
+        </router-link>
+      </template>
+
+      <template v-slot:item.delete="{ item }">
+            <v-icon
+          
+          @click="deleteOpenCase(item._id, item)"
+        >
+          delete
+        </v-icon>
+        
+      </template>
+   
+     
+    </v-data-table>
+    
+      </v-card>
+   
+    
+    </v-container>
 </template>
 
 <script>
@@ -34,12 +71,15 @@ export default {
                 { text: 'OP-Datum', value: 'opdate' },
                 { text: 'Chirurg', value: 'surgeon' },
                 { text: 'Assistent', value: 'assistant' },
+                { text: 'Bearbeiten', value: 'edit', sortable: false },
+                { text: 'Löschen', value: 'delete', sortable: false },
+               
             ],
 
         };
 
     },
-   //run method fetch all cases on pageload
+   // fetch all cases on pageload
     mounted() {
         this.fetchCases();
     },
@@ -52,6 +92,27 @@ export default {
                 })
                 .then((response) => {
                     this.ccases = response.data.cases;
+                })
+                .catch(() => {});
+        },
+
+               //delete a opencase from the database
+   async  deleteOpenCase(id, item) {
+       console.log(id);
+            return axios({
+                    method: 'delete',
+                     data: {
+                            id: id,
+                        },
+                    url: 'http://localhost:8081/cases/'+id,
+                    headers: {
+                            'Content-Type': 'application/json',
+                        },
+                })
+                .then((response) => {
+                   const index = this.ccases.indexOf(item)
+       this.ccases.splice(index, 1);
+       
                 })
                 .catch(() => {});
         },

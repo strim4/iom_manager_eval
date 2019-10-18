@@ -38,7 +38,7 @@
      
       <template v-slot:item.action="{ item }">
             <v-icon
-          small
+          
           @click="deleteDiagnose(item._id, item)"
         >
           delete
@@ -72,7 +72,7 @@ export default {
                 align: 'left',
                 value: 'diagnose',
             },
-            { text: 'Aktionen', value: 'action', sortable: false },
+            { text: 'Löschen', value: 'action', sortable: false },
            
         ],
 

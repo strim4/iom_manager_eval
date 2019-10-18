@@ -13,7 +13,7 @@ app.get('/diagnoses', (req, res) => {
     });
     });
 
-//delete
+//delete diagnose from the database
 
 app.delete('/diagnoses/:id', (req, res) => {
   DiagnoseSchema.remove({

@@ -9,6 +9,7 @@ import Casesearch from '@/components/Casesearch';
 import Settings from '@/components/Settings';
 import Analysis from '@/components/Analysis';
 import Adddiagnose from '@/components/Adddiagnose';
+import Editopencase from '@/components/Editopencase';
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/opencases',
       name: 'Opencases',
       component: Opencases,
+    },
+    {
+      path: '/editopencase/:id',
+      name: 'Editopencase',
+      component: Editopencase,
     },
     {
       path: '/newcase',

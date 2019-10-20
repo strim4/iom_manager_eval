@@ -12,7 +12,7 @@
                         <v-list-item-content>Diagnosen hinzufügen / bearbeiten</v-list-item-content>
                     </v-list-item>
                 </router-link>
-                  <router-link v-bind:to="{ name: 'Newcase' }" class="side_bar_link">
+                  <router-link v-bind:to="{ name: 'Addoperation' }" class="side_bar_link">
                     <v-list-item>
                         <v-list-item-action>
                             <v-icon>control_point</v-icon>
@@ -20,7 +20,7 @@
                         <v-list-item-content>Operationen hinzufügen / bearbeiten</v-list-item-content>
                     </v-list-item>
                 </router-link>
-                  <router-link v-bind:to="{ name: 'Newcase' }" class="side_bar_link">
+                  <router-link v-bind:to="{ name: 'Adddevice' }" class="side_bar_link">
                     <v-list-item>
                         <v-list-item-action>
                             <v-icon>control_point</v-icon>
@@ -28,7 +28,7 @@
                         <v-list-item-content>ISIS-Geräte hinzufügen / bearbeiten</v-list-item-content>
                     </v-list-item>
                 </router-link>
-                  <router-link v-bind:to="{ name: 'Newcase' }" class="side_bar_link">
+                  <router-link v-bind:to="{ name: 'Addsurgeon' }" class="side_bar_link">
                     <v-list-item>
                         <v-list-item-action>
                             <v-icon>control_point</v-icon>
@@ -36,7 +36,7 @@
                         <v-list-item-content>Operateure hinzufügen / bearbeiten</v-list-item-content>
                     </v-list-item>
                 </router-link>
-                 <router-link v-bind:to="{ name: 'Newcase' }" class="side_bar_link">
+                 <router-link v-bind:to="{ name: 'Addassistant' }" class="side_bar_link">
                     <v-list-item>
                         <v-list-item-action>
                             <v-icon>control_point</v-icon>

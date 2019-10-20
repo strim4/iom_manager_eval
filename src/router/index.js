@@ -9,6 +9,10 @@ import Casesearch from '@/components/Casesearch';
 import Settings from '@/components/Settings';
 import Analysis from '@/components/Analysis';
 import Adddiagnose from '@/components/Adddiagnose';
+import Addoperation from '@/components/Addoperation';
+import Adddevice from '@/components/Adddevice';
+import Addsurgeon from '@/components/Addsurgeon';
+import Addassistant from '@/components/Addassistant';
 import Editopencase from '@/components/Editopencase';
 
 Vue.use(Router);
@@ -61,6 +65,26 @@ export default new Router({
       path: '/adddiagnose',
       name: 'Adddiagnose',
       component: Adddiagnose,
+    },
+    {
+      path: '/addoperation',
+      name: 'Addoperation',
+      component: Addoperation,
+    },
+    {
+      path: '/adddevice',
+      name: 'Adddevice',
+      component: Adddevice,
+    },
+    {
+      path: '/addsurgeon',
+      name: 'Addsurgeon',
+      component: Addsurgeon,
+    },
+    {
+      path: '/addassistant',
+      name: 'Addassistant',
+      component: Addassistant,
     },
   ],
 });

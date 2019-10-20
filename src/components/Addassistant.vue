@@ -1,11 +1,11 @@
-<!-- This file contains the structure for the add diagnose site-->
+<!-- This file contains the structure for the add assistant site-->
 <template slot="items" slot-scope="props">
     <v-container>
         <v-col>
-            <!-- Form to add a new diagnose -->
+            <!-- Form to add a new assistant -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neue Diagnose hinzufügen</label>
-                <v-text-field label="Diagnose" :rules="rules" v-model="diagnose" required></v-text-field>
+                <label>Neuen Assistenten hinzufügen</label>
+                <v-text-field label="Assistent" :rules="rules" v-model="assistant" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
                 </v-btn>
@@ -15,21 +15,21 @@
         </br>
         </br>
      
-    <!-- Datatable with the stored diagnoses -->
+    <!-- Datatable with the stored assistants -->
 
         
      
     
         <v-card>
                 <v-card-title>
-                    Erfasste Diagnosen 
+                    Erfasste Assistenten 
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
                 </v-card-title>
       <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="diagnoses"
+      :items="assistants"
       item-key="name"
       :search="search"
       class="elevation-1"
@@ -39,7 +39,7 @@
       <template v-slot:item.action="{ item }">
             <v-icon
           
-          @click="deleteDiagnose(item._id, item)"
+          @click="deleteAssistant(item._id, item)"
         >
           delete
         </v-icon>
@@ -59,18 +59,18 @@ import axios from 'axios';
 export default {
     data: () => ({
         valid: true,
-        diagnose: '',
+        assistant: '',
         selected: [],
         rules: [
-            v => !!v || 'Bitte geben Sie eine Diagnose ein',
+            v => !!v || 'Bitte geben Sie eine Assistent ein',
         ],
         fixed: true,
-        diagnoses: [],
+        assistants: [],
         search: '',
         headers: [{
-                text: 'Diagnose',
+                text: 'Assistent',
                 align: 'left',
-                value: 'diagnose',
+                value: 'assistant',
             },
             { text: 'Löschen', value: 'action', sortable: false },
            
@@ -78,21 +78,21 @@ export default {
 
 
     }),
-    // fetch all diagnoses on pageload
+    // fetch all assistants on pageload
      mounted() {
-        this.fetchDiagnoses();
+        this.fetchAssistants();
     },
     methods: {
-        // submit method to send the new diagnose to the backend
+        // submit method to send the new assistant to the backend
         
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
                         method: 'post',
                         data: {
-                            diagnose: this.diagnose,
+                            assistant: this.assistant,
                         },
-                        url: 'http://localhost:8081/diagnoses',
+                        url: 'http://localhost:8081/assistants',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -100,17 +100,17 @@ export default {
                     .then(() => {
                         this.$swal(
                             'Erfolgreich!',
-                            'Die Diagnose wurde gespeichert!',
+                            'Der Assistent wurde gespeichert!',
                             'success',
                         );
-                        this.fetchDiagnoses();
+                        this.fetchAssistants();
 
                         this.$refs.form.reset();
                     })
                     .catch(() => {
                         this.$swal(
                             'Fehlgeschlagen!',
-                            'Die Diagnose konnte nicht gespeichert werden!',
+                            'Der Assistent konnte nicht gespeichert werden!',
                             'error',
                         );
                     });
@@ -121,36 +121,36 @@ export default {
         clear() {
             this.$refs.form.reset();
         },
-        // fetches all diagnoses from the database
-         async fetchDiagnoses() {
+        // fetches all assistants from the database
+         async fetchAssistants() {
             return axios({
                     method: 'get',
                     data: {
-                            diagnose: this.diagnose,
+                            assistant: this.assistant,
                         },
-                    url: 'http://localhost:8081/diagnoses',
+                    url: 'http://localhost:8081/assistants',
                 })
                 .then((response) => {
-                    this.diagnoses = response.data.diagnoses;
+                    this.assistants = response.data.assistants;
                 })
                 .catch(() => {});
         },
-        //delete a diagnose from the database
-   async  deleteDiagnose(id, item) {
+        //delete a assistant from the database
+   async  deleteAssistant(id, item) {
        console.log(id);
             return axios({
                     method: 'delete',
                      data: {
                             id: id,
                         },
-                    url: 'http://localhost:8081/diagnoses/'+id,
+                    url: 'http://localhost:8081/assistants/'+id,
                     headers: {
                             'Content-Type': 'application/json',
                         },
                 })
                 .then((response) => {
-                   const index = this.diagnoses.indexOf(item)
-       this.diagnoses.splice(index, 1);
+                   const index = this.assistants.indexOf(item)
+       this.assistants.splice(index, 1);
        
                 })
                 .catch(() => {});

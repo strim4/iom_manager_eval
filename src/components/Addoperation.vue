@@ -1,11 +1,11 @@
-<!-- This file contains the structure for the add diagnose site-->
+<!-- This file contains the structure for the add operation site-->
 <template slot="items" slot-scope="props">
     <v-container>
         <v-col>
-            <!-- Form to add a new diagnose -->
+            <!-- Form to add a new operation -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neue Diagnose hinzufügen</label>
-                <v-text-field label="Diagnose" :rules="rules" v-model="diagnose" required></v-text-field>
+                <label>Neue Operation hinzufügen</label>
+                <v-text-field label="Operation" :rules="rules" v-model="operation" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
                 </v-btn>
@@ -15,21 +15,21 @@
         </br>
         </br>
      
-    <!-- Datatable with the stored diagnoses -->
+    <!-- Datatable with the stored operations -->
 
         
      
     
         <v-card>
                 <v-card-title>
-                    Erfasste Diagnosen 
+                    Erfasste Operationen 
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
                 </v-card-title>
       <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="diagnoses"
+      :items="operations"
       item-key="name"
       :search="search"
       class="elevation-1"
@@ -39,7 +39,7 @@
       <template v-slot:item.action="{ item }">
             <v-icon
           
-          @click="deleteDiagnose(item._id, item)"
+          @click="deleteOperation(item._id, item)"
         >
           delete
         </v-icon>
@@ -59,18 +59,18 @@ import axios from 'axios';
 export default {
     data: () => ({
         valid: true,
-        diagnose: '',
+        operation: '',
         selected: [],
         rules: [
-            v => !!v || 'Bitte geben Sie eine Diagnose ein',
+            v => !!v || 'Bitte geben Sie eine Operation ein',
         ],
         fixed: true,
-        diagnoses: [],
+        operations: [],
         search: '',
         headers: [{
-                text: 'Diagnose',
+                text: 'Operation',
                 align: 'left',
-                value: 'diagnose',
+                value: 'operation',
             },
             { text: 'Löschen', value: 'action', sortable: false },
            
@@ -78,21 +78,21 @@ export default {
 
 
     }),
-    // fetch all diagnoses on pageload
+    // fetch all operations on pageload
      mounted() {
-        this.fetchDiagnoses();
+        this.fetchOperations();
     },
     methods: {
-        // submit method to send the new diagnose to the backend
+        // submit method to send the new operation to the backend
         
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
                         method: 'post',
                         data: {
-                            diagnose: this.diagnose,
+                            operation: this.operation,
                         },
-                        url: 'http://localhost:8081/diagnoses',
+                        url: 'http://localhost:8081/operations',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -100,17 +100,17 @@ export default {
                     .then(() => {
                         this.$swal(
                             'Erfolgreich!',
-                            'Die Diagnose wurde gespeichert!',
+                            'Die Operation wurde gespeichert!',
                             'success',
                         );
-                        this.fetchDiagnoses();
+                        this.fetchOperations();
 
                         this.$refs.form.reset();
                     })
                     .catch(() => {
                         this.$swal(
                             'Fehlgeschlagen!',
-                            'Die Diagnose konnte nicht gespeichert werden!',
+                            'Die Operation konnte nicht gespeichert werden!',
                             'error',
                         );
                     });
@@ -121,36 +121,36 @@ export default {
         clear() {
             this.$refs.form.reset();
         },
-        // fetches all diagnoses from the database
-         async fetchDiagnoses() {
+        // fetches all operations from the database
+         async fetchOperations() {
             return axios({
                     method: 'get',
                     data: {
-                            diagnose: this.diagnose,
+                            operation: this.operation,
                         },
-                    url: 'http://localhost:8081/diagnoses',
+                    url: 'http://localhost:8081/operations',
                 })
                 .then((response) => {
-                    this.diagnoses = response.data.diagnoses;
+                    this.operations = response.data.operations;
                 })
                 .catch(() => {});
         },
-        //delete a diagnose from the database
-   async  deleteDiagnose(id, item) {
+        //delete a operation from the database
+   async  deleteOperation(id, item) {
        console.log(id);
             return axios({
                     method: 'delete',
                      data: {
                             id: id,
                         },
-                    url: 'http://localhost:8081/diagnoses/'+id,
+                    url: 'http://localhost:8081/operations/'+id,
                     headers: {
                             'Content-Type': 'application/json',
                         },
                 })
                 .then((response) => {
-                   const index = this.diagnoses.indexOf(item)
-       this.diagnoses.splice(index, 1);
+                   const index = this.operations.indexOf(item)
+       this.operations.splice(index, 1);
        
                 })
                 .catch(() => {});

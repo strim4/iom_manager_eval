@@ -1,11 +1,11 @@
-<!-- This file contains the structure for the add diagnose site-->
+<!-- This file contains the structure for the add device site-->
 <template slot="items" slot-scope="props">
     <v-container>
         <v-col>
-            <!-- Form to add a new diagnose -->
+            <!-- Form to add a new device -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neue Diagnose hinzufügen</label>
-                <v-text-field label="Diagnose" :rules="rules" v-model="diagnose" required></v-text-field>
+                <label>Neue IOM-Geräte hinzufügen</label>
+                <v-text-field label="IOM-Gerät" :rules="rules" v-model="device" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
                 </v-btn>
@@ -15,21 +15,21 @@
         </br>
         </br>
      
-    <!-- Datatable with the stored diagnoses -->
+    <!-- Datatable with the stored devices -->
 
         
      
     
         <v-card>
                 <v-card-title>
-                    Erfasste Diagnosen 
+                    Erfasste IOM-Geräte 
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
                 </v-card-title>
       <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="diagnoses"
+      :items="devices"
       item-key="name"
       :search="search"
       class="elevation-1"
@@ -39,7 +39,7 @@
       <template v-slot:item.action="{ item }">
             <v-icon
           
-          @click="deleteDiagnose(item._id, item)"
+          @click="deleteIOM-Gerät(item._id, item)"
         >
           delete
         </v-icon>
@@ -59,18 +59,18 @@ import axios from 'axios';
 export default {
     data: () => ({
         valid: true,
-        diagnose: '',
+        device: '',
         selected: [],
         rules: [
-            v => !!v || 'Bitte geben Sie eine Diagnose ein',
+            v => !!v || 'Bitte geben Sie eine IOM-Gerät ein',
         ],
         fixed: true,
-        diagnoses: [],
+        devices: [],
         search: '',
         headers: [{
-                text: 'Diagnose',
+                text: 'IOM-Gerät',
                 align: 'left',
-                value: 'diagnose',
+                value: 'device',
             },
             { text: 'Löschen', value: 'action', sortable: false },
            
@@ -78,21 +78,21 @@ export default {
 
 
     }),
-    // fetch all diagnoses on pageload
+    // fetch all devices on pageload
      mounted() {
-        this.fetchDiagnoses();
+        this.fetchDevices();
     },
     methods: {
-        // submit method to send the new diagnose to the backend
+        // submit method to send the new device to the backend
         
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
                         method: 'post',
                         data: {
-                            diagnose: this.diagnose,
+                            device: this.device,
                         },
-                        url: 'http://localhost:8081/diagnoses',
+                        url: 'http://localhost:8081/devices',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -100,17 +100,17 @@ export default {
                     .then(() => {
                         this.$swal(
                             'Erfolgreich!',
-                            'Die Diagnose wurde gespeichert!',
+                            'Das IOM-Gerät wurde gespeichert!',
                             'success',
                         );
-                        this.fetchDiagnoses();
+                        this.fetchDevices();
 
                         this.$refs.form.reset();
                     })
                     .catch(() => {
                         this.$swal(
                             'Fehlgeschlagen!',
-                            'Die Diagnose konnte nicht gespeichert werden!',
+                            'Das IOM-Gerät konnte nicht gespeichert werden!',
                             'error',
                         );
                     });
@@ -121,36 +121,36 @@ export default {
         clear() {
             this.$refs.form.reset();
         },
-        // fetches all diagnoses from the database
-         async fetchDiagnoses() {
+        // fetches all devices from the database
+         async fetchDevices() {
             return axios({
                     method: 'get',
                     data: {
-                            diagnose: this.diagnose,
+                            device: this.device,
                         },
-                    url: 'http://localhost:8081/diagnoses',
+                    url: 'http://localhost:8081/devices',
                 })
                 .then((response) => {
-                    this.diagnoses = response.data.diagnoses;
+                    this.devices = response.data.devices;
                 })
                 .catch(() => {});
         },
-        //delete a diagnose from the database
-   async  deleteDiagnose(id, item) {
+        //delete a device from the database
+   async  deleteDevice(id, item) {
        console.log(id);
             return axios({
                     method: 'delete',
                      data: {
                             id: id,
                         },
-                    url: 'http://localhost:8081/diagnoses/'+id,
+                    url: 'http://localhost:8081/devices/'+id,
                     headers: {
                             'Content-Type': 'application/json',
                         },
                 })
                 .then((response) => {
-                   const index = this.diagnoses.indexOf(item)
-       this.diagnoses.splice(index, 1);
+                   const index = this.devices.indexOf(item)
+       this.devices.splice(index, 1);
        
                 })
                 .catch(() => {});

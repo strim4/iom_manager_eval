@@ -1,11 +1,11 @@
-<!-- This file contains the structure for the add diagnose site-->
+<!-- This file contains the structure for the add surgeon site-->
 <template slot="items" slot-scope="props">
     <v-container>
         <v-col>
-            <!-- Form to add a new diagnose -->
+            <!-- Form to add a new surgeon -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neue Diagnose hinzufügen</label>
-                <v-text-field label="Diagnose" :rules="rules" v-model="diagnose" required></v-text-field>
+                <label>Neuen Operateur hinzufügen</label>
+                <v-text-field label="Operateur" :rules="rules" v-model="surgeon" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
                 </v-btn>
@@ -15,21 +15,21 @@
         </br>
         </br>
      
-    <!-- Datatable with the stored diagnoses -->
+    <!-- Datatable with the stored surgeons -->
 
         
      
     
         <v-card>
                 <v-card-title>
-                    Erfasste Diagnosen 
+                    Erfasste Operateure 
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
                 </v-card-title>
       <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="diagnoses"
+      :items="surgeons"
       item-key="name"
       :search="search"
       class="elevation-1"
@@ -39,7 +39,7 @@
       <template v-slot:item.action="{ item }">
             <v-icon
           
-          @click="deleteDiagnose(item._id, item)"
+          @click="deleteSurgeon(item._id, item)"
         >
           delete
         </v-icon>
@@ -59,18 +59,18 @@ import axios from 'axios';
 export default {
     data: () => ({
         valid: true,
-        diagnose: '',
+        surgeon: '',
         selected: [],
         rules: [
-            v => !!v || 'Bitte geben Sie eine Diagnose ein',
+            v => !!v || 'Bitte geben Sie einen Operateur ein',
         ],
         fixed: true,
-        diagnoses: [],
+        surgeons: [],
         search: '',
         headers: [{
-                text: 'Diagnose',
+                text: 'Operateur',
                 align: 'left',
-                value: 'diagnose',
+                value: 'surgeon',
             },
             { text: 'Löschen', value: 'action', sortable: false },
            
@@ -78,21 +78,21 @@ export default {
 
 
     }),
-    // fetch all diagnoses on pageload
+    // fetch all surgeons on pageload
      mounted() {
-        this.fetchDiagnoses();
+        this.fetchSurgeons();
     },
     methods: {
-        // submit method to send the new diagnose to the backend
+        // submit method to send the new surgeon to the backend
         
         submit() {
             if (this.$refs.form.validate()) {
                 return axios({
                         method: 'post',
                         data: {
-                            diagnose: this.diagnose,
+                            surgeon: this.surgeon,
                         },
-                        url: 'http://localhost:8081/diagnoses',
+                        url: 'http://localhost:8081/surgeons',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -100,17 +100,17 @@ export default {
                     .then(() => {
                         this.$swal(
                             'Erfolgreich!',
-                            'Die Diagnose wurde gespeichert!',
+                            'Der Operateur wurde gespeichert!',
                             'success',
                         );
-                        this.fetchDiagnoses();
+                        this.fetchSurgeons();
 
                         this.$refs.form.reset();
                     })
                     .catch(() => {
                         this.$swal(
                             'Fehlgeschlagen!',
-                            'Die Diagnose konnte nicht gespeichert werden!',
+                            'Der Operateur konnte nicht gespeichert werden!',
                             'error',
                         );
                     });
@@ -121,36 +121,36 @@ export default {
         clear() {
             this.$refs.form.reset();
         },
-        // fetches all diagnoses from the database
-         async fetchDiagnoses() {
+        // fetches all surgeons from the database
+         async fetchSurgeons() {
             return axios({
                     method: 'get',
                     data: {
-                            diagnose: this.diagnose,
+                            surgeon: this.surgeon,
                         },
-                    url: 'http://localhost:8081/diagnoses',
+                    url: 'http://localhost:8081/surgeons',
                 })
                 .then((response) => {
-                    this.diagnoses = response.data.diagnoses;
+                    this.surgeons = response.data.surgeons;
                 })
                 .catch(() => {});
         },
-        //delete a diagnose from the database
-   async  deleteDiagnose(id, item) {
+        //delete a surgeon from the database
+   async  deleteSurgeon(id, item) {
        console.log(id);
             return axios({
                     method: 'delete',
                      data: {
                             id: id,
                         },
-                    url: 'http://localhost:8081/diagnoses/'+id,
+                    url: 'http://localhost:8081/surgeons/'+id,
                     headers: {
                             'Content-Type': 'application/json',
                         },
                 })
                 .then((response) => {
-                   const index = this.diagnoses.indexOf(item)
-       this.diagnoses.splice(index, 1);
+                   const index = this.surgeons.indexOf(item)
+       this.surgeons.splice(index, 1);
        
                 })
                 .catch(() => {});

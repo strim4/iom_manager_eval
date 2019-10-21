@@ -72,10 +72,10 @@
         <v-btn icon>
           <v-icon>mdi-logout</v-icon>
         </v-btn>
-  
+
         <v-btn icon>
           <v-icon>mdi-information</v-icon>
-     
+
         </v-btn>
         </v-app-bar>
          <!-- End Mainmenu / Navbar-->

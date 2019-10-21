@@ -1,4 +1,4 @@
-// This file contains the routerlinks used for the navigation between the components / sites 
+// This file contains the routerlinks used for the navigation between the components / sites
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/Home';

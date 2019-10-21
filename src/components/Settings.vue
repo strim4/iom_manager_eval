@@ -3,7 +3,7 @@
 <!-- TNavigation to the different subpages -->
  <v-list   >
                <h3>Neue Einträge hinzufügen:</h3>
-                 
+
                  <router-link v-bind:to="{ name: 'Adddiagnose' }" class="side_bar_link">
                     <v-list-item>
                         <v-list-item-action>
@@ -44,6 +44,6 @@
                         <v-list-item-content>Assistenten hinzufügen / bearbeiten</v-list-item-content>
                     </v-list-item>
                 </router-link>
-                  
+
             </v-list>
 </template>

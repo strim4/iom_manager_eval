@@ -14,15 +14,13 @@
         </v-col>
         </br>
         </br>
-     
+
     <!-- Datatable with the stored diagnoses -->
 
-        
-     
-    
+
         <v-card>
                 <v-card-title>
-                    Erfasste Diagnosen 
+                    Erfasste Diagnosen
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
                 </v-card-title>
@@ -33,130 +31,130 @@
       item-key="name"
       :search="search"
       class="elevation-1"
-     
+
     >
-     
+
       <template v-slot:item.action="{ item }">
             <v-icon
-          
+
           @click="deleteDiagnose(item._id, item)"
         >
           delete
         </v-icon>
-        
+
       </template>
-     
+
     </v-data-table>
-    
+
       </v-card>
-   
-    
+
+
     </v-container>
 </template>
 
 <script>
 import axios from 'axios';
+
 export default {
-    data: () => ({
-        valid: true,
-        diagnose: '',
-        selected: [],
-        rules: [
-            v => !!v || 'Bitte geben Sie eine Diagnose ein',
-        ],
-        fixed: true,
-        diagnoses: [],
-        search: '',
-        headers: [{
-                text: 'Diagnose',
-                align: 'left',
-                value: 'diagnose',
-            },
-            { text: 'Löschen', value: 'action', sortable: false },
-           
-        ],
-
-
-    }),
-    // fetch all diagnoses on pageload
-     mounted() {
-        this.fetchDiagnoses();
+  data: () => ({
+    valid: true,
+    diagnose: '',
+    selected: [],
+    rules: [
+      v => !!v || 'Bitte geben Sie eine Diagnose ein',
+    ],
+    fixed: true,
+    diagnoses: [],
+    search: '',
+    headers: [{
+      text: 'Diagnose',
+      align: 'left',
+      value: 'diagnose',
     },
-    methods: {
-        // submit method to send the new diagnose to the backend
-        
-        submit() {
-            if (this.$refs.form.validate()) {
-                return axios({
-                        method: 'post',
-                        data: {
-                            diagnose: this.diagnose,
-                        },
-                        url: 'http://localhost:8081/diagnoses',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then(() => {
-                        this.$swal(
-                            'Erfolgreich!',
-                            'Die Diagnose wurde gespeichert!',
-                            'success',
-                        );
-                        this.fetchDiagnoses();
+    { text: 'Löschen', value: 'action', sortable: false },
 
-                        this.$refs.form.reset();
-                    })
-                    .catch(() => {
-                        this.$swal(
-                            'Fehlgeschlagen!',
-                            'Die Diagnose konnte nicht gespeichert werden!',
-                            'error',
-                        );
-                    });
-            }
-            return true;
-        },
-        //Reset function
-        clear() {
+    ],
+
+
+  }),
+  // fetch all diagnoses on pageload
+  mounted() {
+    this.fetchDiagnoses();
+  },
+  methods: {
+    // submit method to send the new diagnose to the backend
+
+    submit() {
+      if (this.$refs.form.validate()) {
+        return axios({
+          method: 'post',
+          data: {
+            diagnose: this.diagnose,
+          },
+          url: 'http://localhost:8081/diagnoses',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(() => {
+            this.$swal(
+              'Erfolgreich!',
+              'Die Diagnose wurde gespeichert!',
+              'success',
+            );
+            this.fetchDiagnoses();
+
             this.$refs.form.reset();
-        },
-        // fetches all diagnoses from the database
-         async fetchDiagnoses() {
-            return axios({
-                    method: 'get',
-                    data: {
-                            diagnose: this.diagnose,
-                        },
-                    url: 'http://localhost:8081/diagnoses',
-                })
-                .then((response) => {
-                    this.diagnoses = response.data.diagnoses;
-                })
-                .catch(() => {});
-        },
-        //delete a diagnose from the database
-   async  deleteDiagnose(id, item) {
-       console.log(id);
-            return axios({
-                    method: 'delete',
-                     data: {
-                            id: id,
-                        },
-                    url: 'http://localhost:8081/diagnoses/'+id,
-                    headers: {
-                            'Content-Type': 'application/json',
-                        },
-                })
-                .then((response) => {
-                   const index = this.diagnoses.indexOf(item)
-       this.diagnoses.splice(index, 1);
-       
-                })
-                .catch(() => {});
-        },
-       
+          })
+          .catch(() => {
+            this.$swal(
+              'Fehlgeschlagen!',
+              'Die Diagnose konnte nicht gespeichert werden!',
+              'error',
+            );
+          });
+      }
+      return true;
     },
+    // Reset function
+    clear() {
+      this.$refs.form.reset();
+    },
+    // fetches all diagnoses from the database
+    async fetchDiagnoses() {
+      return axios({
+        method: 'get',
+        data: {
+          diagnose: this.diagnose,
+        },
+        url: 'http://localhost:8081/diagnoses',
+      })
+        .then((response) => {
+          this.diagnoses = response.data.diagnoses;
+        })
+        .catch(() => {});
+    },
+    // delete a diagnose from the database
+    async  deleteDiagnose(id, item) {
+      console.log(id);
+      return axios({
+        method: 'delete',
+        data: {
+          id,
+        },
+        url: `http://localhost:8081/diagnoses/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => {
+          const index = this.diagnoses.indexOf(item);
+          this.diagnoses.splice(index, 1);
+        })
+        .catch(() => {});
+    },
+
+  },
 };
 
 </script>

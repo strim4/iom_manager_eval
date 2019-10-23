@@ -14,6 +14,7 @@ import Adddevice from '@/components/Adddevice';
 import Addsurgeon from '@/components/Addsurgeon';
 import Addassistant from '@/components/Addassistant';
 import Editopencase from '@/components/Editopencase';
+import Protocol from '@/components/Protocol';
 
 Vue.use(Router);
 
@@ -85,6 +86,11 @@ export default new Router({
       path: '/addassistant',
       name: 'Addassistant',
       component: Addassistant,
+    },
+    {
+      path: '/protocol/:id',
+      name: 'Protocol',
+      component: Protocol,
     },
   ],
 });

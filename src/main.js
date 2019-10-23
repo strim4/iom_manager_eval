@@ -23,7 +23,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
-  vuetify: new Vuetify(),
+  vuetify: new Vuetify({}),
   components: { App },
   template: '<App/>',
 });

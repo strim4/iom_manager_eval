@@ -5,7 +5,8 @@
             <!-- Form to add a new surgeon -->
             <v-form v-model="valid" ref="form" lazy-validation>
                 <label>Neuen Operateur hinzufügen</label>
-                <v-text-field label="Operateur" :rules="rules" v-model="surgeon" required></v-text-field>
+                <v-text-field label="Operateur" :rules="rules" v-model="surgeon" 
+                required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
                 </v-btn>

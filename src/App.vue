@@ -1,4 +1,4 @@
-<!-- This File contains the basic structure of the app including the main menu, the navbar and the footer Seitenmenu-->
+<!-- This File contains the basic structure of the app including the main menu, the navbar and the footer -->
 <template>
     <v-app id="inspire">
     <!-- Start Sidemenu-->
@@ -72,11 +72,15 @@
         <v-btn icon>
           <v-icon>mdi-logout</v-icon>
         </v-btn>
+        
+      
 
-        <v-btn icon>
-          <v-icon>mdi-information</v-icon>
-
-        </v-btn>
+         <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-icon   v-on="on">mdi-information</v-icon>
+        </template>
+        <span>Das ist ein Tooltip! Die Unterlagen zum IOM-Manager können hier bezogen werden.</span>
+      </v-tooltip>
         </v-app-bar>
          <!-- End Mainmenu / Navbar-->
         <v-content>

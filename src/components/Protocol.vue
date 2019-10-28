@@ -33,7 +33,8 @@
         <v-flex md1></v-flex>
         <v-flex md2><b>Eintrag</b></v-flex>
         <v-flex md1></v-flex>
-        <v-flex md3><b>Bemerkung</b></v-flex>
+        <v-flex md2><b>Bemerkung</b></v-flex>
+        <v-flex md1><b>Aktionen</b></v-flex>
       </v-layout >  </br>  
         <v-layout row>
           
@@ -52,6 +53,9 @@
           <v-icon @click="">
           delete
         </v-icon>
+         <v-icon @click="">
+          add
+        </v-icon>
         </v-flex>
       </v-layout > 
         
@@ -63,6 +67,8 @@
 
 </v-layout>
 </template>
+
+
 
 <script>
 import axios from 'axios';

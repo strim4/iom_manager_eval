@@ -44,6 +44,14 @@
                         <v-list-item-content>Assistenten hinzufügen / bearbeiten</v-list-item-content>
                     </v-list-item>
                 </router-link>
+                <router-link v-bind:to="{ name: 'Addprotocolentry' }" class="side_bar_link">
+                    <v-list-item>
+                        <v-list-item-action>
+                            <v-icon>control_point</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>Protokolleintrag hinzufügen / bearbeiten</v-list-item-content>
+                    </v-list-item>
+                </router-link>
 
             </v-list>
 </template>

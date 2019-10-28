@@ -27,16 +27,32 @@
     <v-flex md10>
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
       <v-layout row>
-        <v-flex md3><b>Uhrzeit</b></v-flex>
-        <v-flex md3><b>Kategorie</b></v-flex>
-        <v-flex md3><b>Eintrag</b></v-flex>
+        <v-flex md2><b><p>Uhrzeit</p></b></v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2><b>Kategorie</b></v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2><b>Eintrag</b></v-flex>
+        <v-flex md1></v-flex>
         <v-flex md3><b>Bemerkung</b></v-flex>
       </v-layout >  </br>  
         <v-layout row>
-        <v-flex md3>09:00:51</v-flex>
-        <v-flex md3>IOM</v-flex>
-        <v-flex md3>IOM Beginn</v-flex>
-        <v-flex md3>Beginn nach Plan </v-flex>
+          
+        <v-flex md2>{{ timestamp }}</v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2>
+           <v-select label="Kategorie" v-model="category" :items="categories" item-text="name"   return-object></v-select>
+        </v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2>
+              <v-select label="Event" v-model="event" :items="category.options" item-text="options" ></v-select>
+        </v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2> <v-text-field label="Bemerkung" v-model="comment" ></v-text-field></v-flex>
+        <v-flex md1>
+          <v-icon @click="">
+          delete
+        </v-icon>
+        </v-flex>
       </v-layout > 
         
       
@@ -71,9 +87,38 @@ export default {
     surgeon: '',
     assistant: '',
 
+   timestamp: "",
+    category: '',
+    event: '',
+    comment:'',
+
+    categories: [
+      {
+      name: 'IOM',
+      options: ['IOM 1', 'IOM 2', 'IOM 3']
+      },
+        {
+        name: 'Anästhesie',
+        options: ['Medigabe', 'Überdosis', 'Patient aufgewacht']
+      },
+       {
+        name: 'Events',
+        options: ['Event1', 'Event2', 'Event 3']
+      },
+       {
+        name: 'OP-Verlauf',
+        options: ['Schnitt', 'Nath']
+      }
+
+
+    ],
+
 
  
   }),
+
+  
+
   // fetches all data co
   mounted() {
   
@@ -85,10 +130,15 @@ export default {
   created() {
     this.id = this.$route.params.id;
     this.running = true;
+    this.getNow();
   },
 
   methods: {
-   
+   getNow: function() {
+                    const today = new Date();
+                    
+                    this.timestamp = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                },
 
   
     // fetch a single case from the database

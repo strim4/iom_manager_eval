@@ -36,6 +36,7 @@
         <v-flex md2><b>Bemerkung</b></v-flex>
         <v-flex md1><b>Aktionen</b></v-flex>
       </v-layout >  </br>  
+      
         <v-layout row>
           
         <v-flex md2>{{ timestamp }}</v-flex>
@@ -58,12 +59,42 @@
         </v-icon>
         </v-flex>
       </v-layout > 
+      
+      <form>
+      <div v-for="(entry, index) in entries">
+        <v-layout row>
+          
+        <v-flex md2 v-model="entry.ts" name="entries[][ts]">{{ timestamp }} {{entry.ts}}</v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2>
+           <v-select label="Kategorie" v-model="entry.entrycat"  :items="categories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
+        </v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2>
+              <v-select label="Event" v-model="entry.event" :items="entry.entrycat"  item-text="options" return-object  name="entries[][event]" ></v-select>
+        </v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2> <v-text-field label="Bemerkung" v-model="entry.comment"  name="entries[][comment]"></v-text-field></v-flex>
+        <v-flex md1>
+          <v-icon @click="removeEntry(index)">
+          delete
+        </v-icon>
+         <v-icon @click="addNewEntry(index)">
+          add
+        </v-icon>
+        </v-flex>
+      </v-layout > 
+      </div>
+      </form>
         
       
      
         </v-flex>
+        
   </v-layout> 
+  
 </v-container>
+
 
 </v-layout>
 </template>
@@ -75,7 +106,31 @@ import axios from 'axios';
 
 
 export default {
+  
   data: () => ({
+
+    entry: {
+      ts: '',
+      entrycat: '',
+      event: '',
+      comment: '',
+    },
+    entries: [
+       {
+      ts: "12:00",
+      entrycat: '',
+      event: '',
+      comment: 'qwe',
+    },
+       {
+      ts: "12:00",
+      entrycat: '',
+      event: '',
+      comment: 'asdf',
+    },
+    ],
+
+    
     running: false,
     status: 'läuft',
     id: 0,
@@ -123,7 +178,15 @@ export default {
  
   }),
 
-  
+  computed:{
+      getEvents() {
+       const filtered = this.pets.names.filter(name => {
+         return !this.pets.petSelection.some(x => x.pet == name)
+       });
+       return filtered
+      }
+  },
+
 
   // fetches all data co
   mounted() {
@@ -137,9 +200,32 @@ export default {
     this.id = this.$route.params.id;
     this.running = true;
     this.getNow();
+ 
   },
 
   methods: {
+    addNewEntry: function (index) {
+   
+  this.entries.push( index);
+      
+         
+      
+    },
+    
+    removeEntry: function (index) {
+      console.log(index); 
+      this.entries.splice(index, 1);
+    },
+    sumbitForm: function () {
+      /*
+       * You can remove or replace the "submitForm" method.
+       * Remove: if you handle form sumission on server side.
+       * Replace: for example you need an AJAX submission.
+       */
+      console.info('<< Form Submitted >>')
+      console.info('Vue.js apartments object:', this.apartments)
+      window.testSumbit()
+    },
    getNow: function() {
                     const today = new Date();
                     

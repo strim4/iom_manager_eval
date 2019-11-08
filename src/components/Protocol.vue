@@ -1,11 +1,12 @@
 <template>
-<v-layout>
-    <v-container>
+<v-layout  >
+    <v-container  >
   <v-layout row>
-    <v-flex md2>
+    <v-flex md2 >
         <v-card
       class="mx-auto"
-      max-width="344"
+      max-width="200" 
+      style="position: fixed;"
     >
     <v-card-title>Patientendaten</v-card-title>
       <v-card-text class="text-left">
@@ -24,7 +25,7 @@
       </v-card-text>
     </v-card>
     </v-flex>
-    <v-flex md10>
+    <v-flex md10 >
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
       <v-layout row>
         <v-flex md2><b><p>Uhrzeit</p></b></v-flex>
@@ -37,7 +38,7 @@
         <v-flex md1><b>Aktionen</b></v-flex>
       </v-layout >  </br>  
       
-        <v-layout row>
+      <!--  <v-layout row>
           
         <v-flex md2>{{ timestamp }}</v-flex>
         <v-flex md1></v-flex>
@@ -58,20 +59,20 @@
           add
         </v-icon>
         </v-flex>
-      </v-layout > 
+      </v-layout > -->
       
-      <form>
-      <div v-for="(entry, index) in entries">
+      <form >
+      <div v-for="(entry, index) in entries" >
         <v-layout row>
           
-        <v-flex md2 v-model="entry.ts" name="entries[][ts]">{{ timestamp }} {{entry.ts}}</v-flex>
+        <v-flex md2 v-model="entry.ts" name="entries[][ts]">{{entry.ts}}</v-flex>
         <v-flex md1></v-flex>
         <v-flex md2>
-           <v-select label="Kategorie" v-model="entry.entrycat"  :items="categories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
+           <v-select label="Kategorie"  v-model="entry.entrycat"  :items="categories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
         </v-flex>
         <v-flex md1></v-flex>
         <v-flex md2>
-              <v-select label="Event" v-model="entry.event" :items="entry.entrycat"  item-text="options" return-object  name="entries[][event]" ></v-select>
+              <v-select label="Event"  v-model="entry.event" :items="entry.entrycat.options" item-text="options"    return-object  name="entries[][event]" >{{entry.event}}</v-select>
         </v-flex>
         <v-flex md1></v-flex>
         <v-flex md2> <v-text-field label="Bemerkung" v-model="entry.comment"  name="entries[][comment]"></v-text-field></v-flex>
@@ -79,17 +80,19 @@
           <v-icon @click="removeEntry(index)">
           delete
         </v-icon>
-         <v-icon @click="addNewEntry(index)">
+         <v-icon @click="addNewEntry()">
           add
         </v-icon>
         </v-flex>
       </v-layout > 
       </div>
+      </br> </br></br> 
       </form>
         
       
      
         </v-flex>
+        
         
   </v-layout> 
   
@@ -116,18 +119,7 @@ export default {
       comment: '',
     },
     entries: [
-       {
-      ts: "12:00",
-      entrycat: '',
-      event: '',
-      comment: 'qwe',
-    },
-       {
-      ts: "12:00",
-      entrycat: '',
-      event: '',
-      comment: 'asdf',
-    },
+    
     ],
 
     
@@ -156,7 +148,7 @@ export default {
     categories: [
       {
       name: 'IOM',
-      options: ['IOM 1', 'IOM 2', 'IOM 3']
+      options: ['IOM 1', 'IOM 2', 'IOM 3', 'IOM gestartet']
       },
         {
         name: 'Anästhesie',
@@ -178,20 +170,26 @@ export default {
  
   }),
 
-  computed:{
-      getEvents() {
-       const filtered = this.pets.names.filter(name => {
-         return !this.pets.petSelection.some(x => x.pet == name)
-       });
-       return filtered
-      }
-  },
+
+  
 
 
-  // fetches all data co
+  // fetches all case data on load and pushs a first entry in the entry array
   mounted() {
   
     this.fetchCase(this.id);
+
+     this.getNow();
+     this.entry.entrycat = 'IOM';
+     this.entry.event = 'IOM gestartet';
+ this.entries.push( {
+      ts: this.entry.ts,
+      entrycat: this.entry.entrycat,
+      event: this.entry.event,
+      comment: 'Test',
+ }) ;
+
+ console.log(this.entries);
    
 
   },
@@ -199,21 +197,29 @@ export default {
   created() {
     this.id = this.$route.params.id;
     this.running = true;
-    this.getNow();
+    this.entry.event = 'IOM gestartet';
+    
  
   },
 
   methods: {
-    addNewEntry: function (index) {
-   
-  this.entries.push( index);
-      
-         
-      
+
+    addNewEntry: function () {
+   this.getNow();
+ this.entries.push( {
+      ts: this.entry.ts,
+      entrycat: this.entry.entrycat,
+      event: this.entry.event,
+      comment: this.entry.comment,
+ }) ;
+window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     },
+
+  
+    
     
     removeEntry: function (index) {
-      console.log(index); 
+     
       this.entries.splice(index, 1);
     },
     sumbitForm: function () {
@@ -226,10 +232,17 @@ export default {
       console.info('Vue.js apartments object:', this.apartments)
       window.testSumbit()
     },
+
+  checkTime: function(i) {
+        return (i < 10) ? "0" + i : i;
+    },
+
    getNow: function() {
-                    const today = new Date();
-                    
-                    this.timestamp = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const today = new Date();
+        var h = this.checkTime(today.getHours());
+      var      m = this.checkTime(today.getMinutes());
+          var  s = this.checkTime(today.getSeconds());
+       this.entry.ts = h + ":" + m + ":" + s;;
                 },
 
   

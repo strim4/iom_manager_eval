@@ -85,7 +85,7 @@
          <!-- End Mainmenu / Navbar-->
         <v-content>
             <v-container fluid>
-                <div id="app">
+                <div id="app" >
                     <router-view/>
                 </div>
             </v-container>

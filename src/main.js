@@ -11,11 +11,15 @@ import Vuetify from 'vuetify';
 import VueSwal from 'vue-swal';
 import App from './App';
 import router from './router';
+import VueChatScroll from 'vue-chat-scroll';
+
 
 // User Imports in Vue app
 Vue.use(BootstrapVue);
 Vue.use(Vuetify);
 Vue.use(VueSwal);
+Vue.use(VueChatScroll);
+
 
 Vue.config.productionTip = false;
 

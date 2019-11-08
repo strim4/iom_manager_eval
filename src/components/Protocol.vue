@@ -21,9 +21,11 @@
       Operateur: {{surgeon}} </br>
       Assistent: {{assistant}}
       </p>
+      
         
       </v-card-text>
     </v-card>
+    
     </v-flex>
     <v-flex md10 >
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
@@ -60,7 +62,7 @@
         </v-icon>
         </v-flex>
       </v-layout > -->
-      
+      <!-- Dynamic form for protocol entries -->
       <form >
       <div v-for="(entry, index) in entries" >
         <v-layout row>
@@ -84,8 +86,73 @@
           add
         </v-icon>
         </v-flex>
+        
       </v-layout > 
+      
       </div>
+      <v-layout row>
+        <v-flex md10><b></b></v-flex>
+        <v-flex md2> <v-btn depressed  large color="success" @click.stop="dialog = true">IOM beenden</v-btn>
+        <v-dialog
+        v-model="dialog"
+        max-width="400"
+      >
+      <!-- Dialog beim Beenden des IOM -->
+        <v-card>
+          <v-card-title class="headline">IOM beenden?</v-card-title>
+  
+          <v-card-text>
+            Sind Sie sicher, dass Sie das IOM-beenden möchten?
+          </v-card-text>
+  
+          <v-card-actions>
+            <v-spacer></v-spacer>
+  
+            <v-btn
+              depressed  large color="success"
+              @click="stopIom()"
+            >
+              Ja, beenden.
+            </v-btn>
+  
+            <v-btn
+             depressed  large color="error"
+              @click="dialog = false"
+            >
+              Nein, nicht beenden            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog></v-flex>
+
+<!-- dialog for case evaluation -->
+         <v-dialog v-model="dialog2" persistent max-width="600px">
+        
+        <v-card>
+          <v-card-title>
+            <span class="headline">Fallauswertung Monitorist:</span>
+          </v-card-title>
+          <v-card-text>
+          <label>Modalität auswählen:</label>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Platzhalter" ></v-text-field>
+                </v-col>
+               
+              </v-row>
+            </v-container>
+           
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn  depressed  large color="error" @click="dialog2 = false">Abbrechen</v-btn>
+            <v-btn  depressed  large color="success"  @click="dialog2 = false">Fall beenden</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+      
+      </v-layout >  </br>  
+           
       </br> </br></br> 
       </form>
         
@@ -112,6 +179,9 @@ export default {
   
   data: () => ({
 
+dialog: false,
+dialog2: false,
+
     entry: {
       ts: '',
       entrycat: '',
@@ -123,7 +193,7 @@ export default {
     ],
 
     
-    running: false,
+    
     status: 'läuft',
     id: 0,
     valid: true,
@@ -144,6 +214,8 @@ export default {
     category: '',
     event: '',
     comment:'',
+
+
 
     categories: [
       {
@@ -180,12 +252,11 @@ export default {
     this.fetchCase(this.id);
 
      this.getNow();
-     this.entry.entrycat = 'IOM';
-     this.entry.event = 'IOM gestartet';
+    
  this.entries.push( {
       ts: this.entry.ts,
-      entrycat: this.entry.entrycat,
-      event: this.entry.event,
+      entrycat: 'IOM',
+      event: 'IOM gestartet',
       comment: 'Test',
  }) ;
 
@@ -196,14 +267,14 @@ export default {
   // store case id from the routerlink to a local variable on page load
   created() {
     this.id = this.$route.params.id;
-    this.running = true;
-    this.entry.event = 'IOM gestartet';
+    
     
  
   },
 
   methods: {
 
+//method to add a new entry and scroll down to the last entry
     addNewEntry: function () {
    this.getNow();
  this.entries.push( {
@@ -217,11 +288,13 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
 
   
     
-    
+    //method to delete entry
     removeEntry: function (index) {
      
       this.entries.splice(index, 1);
     },
+
+    //Evt. löschen
     sumbitForm: function () {
       /*
        * You can remove or replace the "submitForm" method.
@@ -233,10 +306,11 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
       window.testSumbit()
     },
 
+//formate timestamp
   checkTime: function(i) {
         return (i < 10) ? "0" + i : i;
     },
-
+//method to get the timestamp
    getNow: function() {
       const today = new Date();
         var h = this.checkTime(today.getHours());
@@ -245,6 +319,12 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
        this.entry.ts = h + ":" + m + ":" + s;;
                 },
 
+//method to stop the iom
+stopIom: function(){
+this.status = 'beendet';
+this.dialog = false;
+this.dialog2 = true;
+},
   
     // fetch a single case from the database
     async  fetchCase(id) {

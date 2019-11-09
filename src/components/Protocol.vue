@@ -40,29 +40,7 @@
         <v-flex md1><b>Aktionen</b></v-flex>
       </v-layout >  </br>  
       
-      <!--  <v-layout row>
-          
-        <v-flex md2>{{ timestamp }}</v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md2>
-           <v-select label="Kategorie" v-model="category" :items="categories" item-text="name"   return-object></v-select>
-        </v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md2>
-              <v-select label="Event" v-model="event" :items="category.options" item-text="options" ></v-select>
-        </v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md2> <v-text-field label="Bemerkung" v-model="comment" ></v-text-field></v-flex>
-        <v-flex md1>
-          <v-icon @click="">
-          delete
-        </v-icon>
-         <v-icon @click="">
-          add
-        </v-icon>
-        </v-flex>
-      </v-layout > -->
-      <!-- Dynamic form for protocol entries -->
+ 
       <form >
       <div v-for="(entry, index) in entries" >
         <v-layout row>
@@ -173,6 +151,7 @@
 
 <script>
 import axios from 'axios';
+import Qs from 'qs';
 
 
 export default {
@@ -294,17 +273,7 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
       this.entries.splice(index, 1);
     },
 
-    //Evt. löschen
-    sumbitForm: function () {
-      /*
-       * You can remove or replace the "submitForm" method.
-       * Remove: if you handle form sumission on server side.
-       * Replace: for example you need an AJAX submission.
-       */
-      console.info('<< Form Submitted >>')
-      console.info('Vue.js apartments object:', this.apartments)
-      window.testSumbit()
-    },
+   
 
 //formate timestamp
   checkTime: function(i) {
@@ -321,10 +290,58 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
 
 //method to stop the iom
 stopIom: function(){
-this.status = 'beendet';
-this.dialog = false;
-this.dialog2 = true;
+//this.status = 'beendet';
+//this.dialog = false;
+//this.dialog2 = true;
+this.submit();
 },
+
+ // submit method to send the new protocol to the backend to store
+    submit() {
+      
+        var self = this;
+        return axios({
+          method: 'post',
+          data: {
+           // id: this.id,
+            casenr: this.casenr,
+            pid: this.pid,
+            fid: this.fid,
+            name: this.name,
+            surname: this.surname,
+            birthdate: this.birthdate,
+            diagnose: this.diagnose,
+            operation: this.operation,
+            isismodality: this.isismodality,
+            opdate: this.opdate,
+            surgeon: this.surgeon,
+            assistant: this.assistant,
+            entries: this.entries,
+          },
+          url: 'http://localhost:8081/protocols',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          
+        })
+          .then(() => {
+            this.$swal(
+              'Erfolgreich!',
+              'Das Protokoll wurde erfolgreich gespeichert!',
+              'success',
+            );
+            this.$router.push({ name: 'Protocolevaluation' });
+            
+          })
+          .catch(() => {
+            this.$swal(
+              'Fehler!',
+              'Das Protokoll konnte nicht gespeichert werden!',
+              'error',
+            );
+          });
+     
+    },
   
     // fetch a single case from the database
     async  fetchCase(id) {

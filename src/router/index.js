@@ -16,6 +16,7 @@ import Addassistant from '@/components/Addassistant';
 import Editopencase from '@/components/Editopencase';
 import Protocol from '@/components/Protocol';
 import Addprotocolentry from '@/components/Addprotocolentry';
+import Protocolevaluation from '@/components/Protocolevaluation';
 
 Vue.use(Router);
 
@@ -98,5 +99,11 @@ export default new Router({
       name: 'Protocol',
       component: Protocol,
     },
+    {
+      path: '/protocolevaluation/:id',
+      name: 'Protocolevaluation',
+      component: Protocolevaluation,
+    },
+    
   ],
 });

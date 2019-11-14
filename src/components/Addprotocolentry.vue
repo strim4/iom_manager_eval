@@ -5,7 +5,7 @@
             <!-- Form to add a new device -->
             <v-form v-model="valid" ref="form" lazy-validation>
                 <label>Neue Protokolleinträge hinzufügen</label>
-                <v-select label="Event" v-model="event" :items="categories" item-text="names" ></v-select>
+                <v-select label="Event" v-model="event" :items="selectoptions" item-text="names" ></v-select>
                 <v-text-field label="Event" :rules="rules" v-model="option" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
@@ -28,8 +28,9 @@
       <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="devices"
-      item-key="name"
+      :items="filteredCategories"
+      item-key="options"
+      item-text="options"
       :search="search"
       class="elevation-1"
 
@@ -59,7 +60,7 @@
       v-model="selected"
       :headers="headers"
       :items="devices"
-      item-key="name"
+      item-text="name"
       :search="search"
       class="elevation-1"
 
@@ -119,19 +120,27 @@ import axios from 'axios';
 
 export default {
   data: () => ({
+
+    event: '',
+    option:'',
+
+
+
     valid: true,
-    category: '',
-    option: [],
+  
+     selectoptions: ['IOM', 'Anästhesie', 'OP-Verlauf', 'Weitere'],
     selected: [],
-    categories: ['IOM', 'Anästhesie', 'OP-Verlauf', 'Weitere'],
+    categories: [],
+   
+  
     rules: [
       v => !!v || 'Bitte geben Sie eine IOM-Gerät ein',
     ],
     fixed: true,
-    devices: [],
+ 
     search: '',
     headers: [{
-      text: 'IOM-Gerät',
+      text: 'Event',
       align: 'left',
       value: 'device',
     },
@@ -141,21 +150,33 @@ export default {
 
 
   }),
+computed: {
+  filteredCategories() {
+   return this.categories.filter(cat => cat.name == 'IOM');
+  }
+},
+
+
   // fetch all devices on pageload
   mounted() {
-    this.fetchDevices();
+   this.fetchCategories();
+   
+
   },
   methods: {
-    // submit method to send the new device to the backend
+    // submit method to send the new entry oder update a entry to/in the backend
 
-    submit() {
+
+
+      submit() {
       if (this.$refs.form.validate()) {
         return axios({
-          method: 'post',
+          method: 'put',
           data: {
-            device: this.device,
+            name: this.event,
+            options: this.option,
           },
-          url: 'http://localhost:8081/devices',
+          url: 'http://localhost:8081/categories',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -163,17 +184,18 @@ export default {
           .then(() => {
             this.$swal(
               'Erfolgreich!',
-              'Das IOM-Gerät wurde gespeichert!',
+              'Der Eintrag wurde gespeichert!',
               'success',
             );
-            this.fetchDevices();
+           // this.fetchDevices();
 
             this.$refs.form.reset();
+            console.log(this.filteredCategories);
           })
           .catch(() => {
             this.$swal(
               'Fehlgeschlagen!',
-              'Das IOM-Gerät konnte nicht gespeichert werden!',
+              'Der Eintrag konnte nicht gespeichert werden!',
               'error',
             );
           });
@@ -184,17 +206,20 @@ export default {
     clear() {
       this.$refs.form.reset();
     },
-    // fetches all devices from the database
-    async fetchDevices() {
+    // fetches all categories from the database
+    async fetchCategories() {
       return axios({
         method: 'get',
         data: {
-          device: this.device,
+          name: this.categories,
         },
-        url: 'http://localhost:8081/devices',
+        url: 'http://localhost:8081/categories',
       })
         .then((response) => {
-          this.devices = response.data.devices;
+          this.categories = response.data.categories;
+          console.log(this.categories);
+          
+        
         })
         .catch(() => {});
     },
@@ -218,7 +243,12 @@ export default {
         .catch(() => {});
     },
 
+
+
   },
+
 };
+
+
 
 </script>

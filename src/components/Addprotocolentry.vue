@@ -19,96 +19,30 @@
     <!-- Datatable with the stored protocolentries -->
 
 
-        <v-card>
-                <v-card-title>
-                    Erfasste IOM Events
-                    <div class="flex-grow-1"></div>
-                    <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
-                </v-card-title>
-      <v-data-table
-      v-model="selected"
-      :headers="headers"
-      :items="filteredCategories"
-      item-key="options"
-      item-text="options"
-      :search="search"
-      class="elevation-1"
+ <v-layout row>
+        <v-flex md3><b><p>Kategorie</p></b></v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md3><b>Event</b></v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md1><b>Löschen</b></v-flex>
+      </v-layout >  </br> 
+      <div v-for="(category, index) in categories" >
 
-    >
+<div v-for="(option, index) in category.options" >
 
-      <template v-slot:item.action="{ item }">
-            <v-icon
-
-          @click="deleteIOM-Gerät(item._id, item)"
-        >
+ <v-layout row>
+  <v-flex md3>{{category.name}}</v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md3>{{option}}</v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md1><b> <v-icon @click="removeEntry(index)">
           delete
-        </v-icon>
-
-      </template>
-
-    </v-data-table>
-
-      </v-card>
+        </v-icon></b></v-flex>
+          </v-layout > 
+</div>
+      </div>
 </br></br>
-      <v-card>
-                <v-card-title>
-                    Erfasste OP-Verlauf Events
-                    <div class="flex-grow-1"></div>
-                    <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
-                </v-card-title>
-      <v-data-table
-      v-model="selected"
-      :headers="headers"
-      :items="devices"
-      item-text="name"
-      :search="search"
-      class="elevation-1"
-
-    >
-
-      <template v-slot:item.action="{ item }">
-            <v-icon
-
-          @click="deleteIOM-Gerät(item._id, item)"
-        >
-          delete
-        </v-icon>
-
-      </template>
-
-    </v-data-table>
-
-      </v-card>
-      </br></br>
-      <v-card>
-                <v-card-title>
-                    Erfasste Anästhesie-Events
-                    <div class="flex-grow-1"></div>
-                    <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
-                </v-card-title>
-      <v-data-table
-      v-model="selected"
-      :headers="headers"
-      :items="devices"
-      item-key="name"
-      :search="search"
-      class="elevation-1"
-
-    >
-
-      <template v-slot:item.action="{ item }">
-            <v-icon
-
-          @click="deleteIOM-Gerät(item._id, item)"
-        >
-          delete
-        </v-icon>
-
-      </template>
-
-    </v-data-table>
-
-      </v-card>
+    
 
 
 
@@ -124,11 +58,11 @@ export default {
     event: '',
     option:'',
 
-
+  IomCategories:[],
 
     valid: true,
   
-     selectoptions: ['IOM', 'Anästhesie', 'OP-Verlauf', 'Weitere'],
+    selectoptions: ['IOM', 'Anästhesie', 'OP-Verlauf', 'Weitere'],
     selected: [],
     categories: [],
    
@@ -139,31 +73,36 @@ export default {
     fixed: true,
  
     search: '',
-    headers: [{
+   headers: [{
+      text: 'Kategorie',
+      align: 'left',
+      value: 'name',
+    },
+    {
       text: 'Event',
       align: 'left',
-      value: 'device',
+      value: 'options',
     },
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
 
-
   }),
 computed: {
-  filteredCategories() {
-   return this.categories.filter(cat => cat.name == 'IOM');
-  }
+
 },
 
 
   // fetch all devices on pageload
   mounted() {
    this.fetchCategories();
-   
+ 
 
   },
   methods: {
+
+
+  
     // submit method to send the new entry oder update a entry to/in the backend
 
 
@@ -190,7 +129,7 @@ computed: {
            // this.fetchDevices();
 
             this.$refs.form.reset();
-            console.log(this.filteredCategories);
+          
           })
           .catch(() => {
             this.$swal(

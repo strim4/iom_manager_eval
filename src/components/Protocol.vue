@@ -48,7 +48,7 @@
         <v-flex md2 v-model="entry.ts" name="entries[][ts]">{{entry.ts}}</v-flex>
         <v-flex md1></v-flex>
         <v-flex md2>
-           <v-select label="Kategorie"  v-model="entry.entrycat"  :items="categories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
+           <v-select label="Kategorie"  v-model="entry.entrycat"  :items="dbcategories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
         </v-flex>
         <v-flex md1></v-flex>
         <v-flex md2>
@@ -195,7 +195,7 @@ dialog2: false,
     comment:'',
 
 
-
+/*static categories
     categories: [
       {
       name: 'IOM',
@@ -215,7 +215,9 @@ dialog2: false,
       }
 
 
-    ],
+    ], */
+
+    dbcategories: [],
 
 
  
@@ -229,9 +231,11 @@ dialog2: false,
   mounted() {
   
     this.fetchCase(this.id);
+  
 
      this.getNow();
-    
+  
+ this.fetchCategories();  
  this.entries.push( {
       ts: this.entry.ts,
       entrycat: 'IOM',
@@ -239,8 +243,7 @@ dialog2: false,
       comment: 'Test',
  }) ;
 
- console.log(this.entries);
-   
+
 
   },
   // store case id from the routerlink to a local variable on page load
@@ -293,8 +296,32 @@ stopIom: function(){
 //this.status = 'beendet';
 //this.dialog = false;
 //this.dialog2 = true;
+ this.entries.push( {
+      ts: this.entry.ts,
+      entrycat: 'IOM',
+      event: 'IOM gestartet',
+      comment: 'Test',
+ });
 this.submit();
 },
+
+   // fetches all categories from the database
+    async fetchCategories() {
+      return axios({
+        method: 'get',
+        data: {
+          name: this.categories,
+        },
+        url: 'http://localhost:8081/categories',
+      })
+        .then((response) => {
+          this.dbcategories = response.data.categories;
+          console.log(this.categories);
+          
+        
+        })
+        .catch(() => {});
+    },
 
  // submit method to send the new protocol to the backend to store
     submit() {

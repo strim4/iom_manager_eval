@@ -11,7 +11,7 @@
         <v-text-field label="Name" v-model="name" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Geburtsdatum" readonly prepend-icon="event"  v-model="birthdate" :rules="requiredRules" required></v-text-field>
-        <v-date-picker v-model="birthdate" :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
+        <v-date-picker v-model="birthdate" :format="formatDate" :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
 
         </br>
         </br>
@@ -77,6 +77,8 @@ export default {
      
     ],
   }),
+
+  
   // fetches all dropdown values form the database on pageload
   mounted() {
     this.fetchDiagnoses();
@@ -87,6 +89,10 @@ export default {
   },
 
   methods: {
+
+    formatDate: function (date) {
+  return moment(date).format('DD-MM-YYYY')
+},
     // submit method to send the new case to the backend to store
     submit() {
       if (this.$refs.form.validate()) {
@@ -98,11 +104,11 @@ export default {
             fid: this.fid,
             name: this.name,
             surname: this.surname,
-            birthdate: this.birthdate,
+            birthdate: moment(this.birthdate).format('DD-MM-YYYY'),
             diagnose: this.diagnose,
             operation: this.operation,
             isismodality: this.isismodality,
-            opdate: this.opdate,
+            opdate: moment(this.opdate).format('DD-MM-YYYY'),
             surgeon: this.surgeon,
             assistant: this.assistant,
           },

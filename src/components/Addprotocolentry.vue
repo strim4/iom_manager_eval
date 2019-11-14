@@ -18,7 +18,43 @@
 
     <!-- Datatable with the stored protocolentries -->
 
+     
 
+
+        <v-card>
+                <v-card-title>
+                    Erfasste Operationen
+                    <div class="flex-grow-1"></div>
+                    <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
+                </v-card-title>
+      <v-data-table
+      v-model="selected"
+      :headers="headers"
+      :items="IomCategories"
+     
+      :search="search"
+      class="elevation-1"
+
+    >
+
+    
+
+      <template v-slot:item.action="{ item }">
+            <v-icon
+
+          @click="deleteOperation(item._id, item)"
+        >
+          delete
+        </v-icon>
+
+      </template>
+
+    </v-data-table>
+
+      </v-card>
+      </br></br>
+<v-btn @click="sortCategories">Testbutton</v-btn>
+</br> </br> </br> </br> 
  <v-layout row>
         <v-flex md3><b><p>Kategorie</p></b></v-flex>
         <v-flex md1></v-flex>
@@ -73,12 +109,9 @@ export default {
     fixed: true,
  
     search: '',
-   headers: [{
-      text: 'Kategorie',
-      align: 'left',
-      value: 'name',
-    },
-    {
+   operations: [],
+    search: '',
+    headers: [{
       text: 'Event',
       align: 'left',
       value: 'options',
@@ -86,6 +119,7 @@ export default {
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
+
 
   }),
 computed: {
@@ -96,12 +130,21 @@ computed: {
   // fetch all devices on pageload
   mounted() {
    this.fetchCategories();
+  
  
 
   },
   methods: {
 
+    sortCategories: function(){
+      let iomCat = [];
+      iomCat = this.categories.filter(cat => cat.name == 'IOM');
+      console.log(iomCat);
+     let result = iomCat.map(({ options }) => options)
+      console.log(result);
+  this.IomCategories = iomCat;
 
+    },
   
     // submit method to send the new entry oder update a entry to/in the backend
 

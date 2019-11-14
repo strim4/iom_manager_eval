@@ -34,6 +34,7 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 export default {
   data: () => ({
     id: 0,
@@ -103,11 +104,11 @@ export default {
             fid: this.fid,
             name: this.name,
             surname: this.surname,
-            birthdate: this.birthdate,
+            birthdate: moment(this.birthdate).format('DD-MM-YYYY'),
             diagnose: this.diagnose,
             operation: this.operation,
             isismodality: this.isismodality,
-            opdate: this.opdate,
+            opdate: moment(this.opdate).format('DD-MM-YYYY'),
             surgeon: this.surgeon,
             assistant: this.assistant,
           },

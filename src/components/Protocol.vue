@@ -299,7 +299,7 @@ stopIom: function(){
  this.entries.push( {
       ts: this.entry.ts,
       entrycat: 'IOM',
-      event: 'IOM gestartet',
+      event: 'IOM beendet',
       comment: 'Test',
  });
 this.submit();

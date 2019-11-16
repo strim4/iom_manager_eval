@@ -63,17 +63,12 @@ export default {
       headers: [
         { text: 'IOM Starten', value: 'start', sortable: false },
         { text: 'Fall Nr.', value: 'casenr' },
-        { text: 'PID', value: 'pid' },
-        { text: 'FID', value: 'fid' },
         { text: 'Name', value: 'name' },
         { text: 'Vorname', value: 'surname' },
         { text: 'Geburtsdatum', value: 'birthdate' },
         { text: 'Diagnose', value: 'diagnose' },
         { text: 'Operation', value: 'operation' },
-        { text: 'ISIS Mod.', value: 'isismodality' },
         { text: 'OP-Datum', value: 'opdate', },
-        { text: 'Chirurg', value: 'surgeon' },
-        { text: 'Assistent', value: 'assistant' },
         { text: 'Bearbeiten', value: 'edit', sortable: false },
         { text: 'Löschen', value: 'delete', sortable: false },
 

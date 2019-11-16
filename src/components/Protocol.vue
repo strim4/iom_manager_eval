@@ -3,9 +3,10 @@
     <v-container  >
   <v-layout row>
     <v-flex md2 >
+    <!-- Card with patient and op data -->
         <v-card
       class="mx-auto"
-      max-width="200" 
+      max-width="175" 
       style="position: fixed;"
     >
     <v-card-title>Patientendaten</v-card-title>
@@ -21,32 +22,66 @@
       Operateur: {{surgeon}} </br>
       Assistent: {{assistant}}
       </p>
-      
+       </v-card-text>
+      <v-divider></v-divider>
+      <v-card-text class="text-center">
+       <v-btn  color="primary"  @click="dialog3 = true" >Baselines</v-btn>
         
       </v-card-text>
+      
     </v-card>
     
+   
+    
     </v-flex>
+
+    <!-- dialog for baselines  -->
+         <v-dialog v-model="dialog3" persistent max-width="600px">
+        
+        <v-card>
+          <v-card-title>
+            <span class="headline">Baselines:</span>
+          </v-card-title>
+          <v-card-text>
+          <label>Titel:</label>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Platzhalter" ></v-text-field>
+                </v-col>
+               
+              </v-row>
+            </v-container>
+           
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn  depressed  large color="error" @click="dialog3 = false">Speichern</v-btn>
+            <v-btn  depressed  large color="success"  @click="dialog3 = false">Schliessen</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    
     <v-flex md10 >
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
       <v-layout row>
         <v-flex md2><b><p>Uhrzeit</p></b></v-flex>
-        <v-flex md1></v-flex>
+       
         <v-flex md2><b>Kategorie</b></v-flex>
         <v-flex md1></v-flex>
         <v-flex md2><b>Eintrag</b></v-flex>
         <v-flex md1></v-flex>
-        <v-flex md2><b>Bemerkung</b></v-flex>
+        <v-flex md3><b>Bemerkung</b></v-flex>
         <v-flex md1><b>Aktionen</b></v-flex>
       </v-layout >  </br>  
       
  
       <form >
-      <div v-for="(entry, index) in entries" >
-        <v-layout row>
+      <div v-for="(entry, index) in entries" :key="index">
+        <v-layout row v-on:dblclick="highlight()" :class="[isActive ? 'yellow' : 'none']">
           
         <v-flex md2 v-model="entry.ts" name="entries[][ts]">{{entry.ts}}</v-flex>
-        <v-flex md1></v-flex>
+       
         <v-flex md2>
            <v-select label="Kategorie"  v-model="entry.entrycat"  :items="dbcategories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
         </v-flex>
@@ -55,9 +90,9 @@
               <v-select label="Event"  v-model="entry.event" :items="entry.entrycat.options" item-text="options"    return-object  name="entries[][event]" >{{entry.event}}</v-select>
         </v-flex>
         <v-flex md1></v-flex>
-        <v-flex md2> <v-text-field label="Bemerkung" v-model="entry.comment"  name="entries[][comment]"></v-text-field></v-flex>
+        <v-flex md3> <v-textarea label="Bemerkung" v-model="entry.comment"  name="entries[][comment]" :auto-grow="true" :dense="true" :clearable="true" :rows="2"></v-textarea></v-flex>
         <v-flex md1>
-          <v-icon @click="removeEntry(index)">
+          <v-icon @click="dialog4 = true" >
           delete
         </v-icon>
          <v-icon @click="addNewEntry()">
@@ -66,16 +101,53 @@
         </v-flex>
         
       </v-layout > 
-      
+
+       <!-- Dialog for deleting an protocol entry -->
+        <v-dialog
+        v-model="dialog4"
+        max-width="400"
+      >
+     
+        <v-card>
+          <v-card-title class="headline">Eintrag löschen?</v-card-title>
+  
+          <v-card-text>
+            Sind Sie sicher, dass Sie den Eintrag löschen wollen?
+          </v-card-text>
+  
+          <v-card-actions>
+            <v-spacer></v-spacer>
+  
+            <v-btn
+              depressed  large color="success"
+              @click="removeEntry(index)"
+            >
+              Ja, löschen.
+            </v-btn>
+  
+            <v-btn
+             depressed  large color="error"
+              @click="dialog4 = false"
+            >
+              Abbrechen           </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+         <v-divider></v-divider>
       </div>
       <v-layout row>
         <v-flex md10><b></b></v-flex>
         <v-flex md2> <v-btn depressed  large color="success" @click.stop="dialog = true">IOM beenden</v-btn>
+
+
+        
+
+         <!-- Dialog for finishing IOM -->
         <v-dialog
         v-model="dialog"
         max-width="400"
       >
-      <!-- Dialog beim Beenden des IOM -->
+     
         <v-card>
           <v-card-title class="headline">IOM beenden?</v-card-title>
   
@@ -158,8 +230,15 @@ export default {
   
   data: () => ({
 
+
+
 dialog: false,
 dialog2: false,
+dialog3: false,
+dialog4: false,
+del: false,
+
+ isActive: false,
 
     entry: {
       ts: '',
@@ -240,7 +319,7 @@ dialog2: false,
       ts: this.entry.ts,
       entrycat: 'IOM',
       event: 'IOM gestartet',
-      comment: 'Test',
+      comment: '',
  }) ;
 
 
@@ -260,20 +339,24 @@ dialog2: false,
     addNewEntry: function () {
    this.getNow();
  this.entries.push( {
+      index: this.entries.lenght,
       ts: this.entry.ts,
       entrycat: this.entry.entrycat,
       event: this.entry.event,
       comment: this.entry.comment,
  }) ;
 window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+
     },
 
   
     
     //method to delete entry
     removeEntry: function (index) {
-     
-      this.entries.splice(index, 1);
+      this.dialog4 = false;
+    
+     console.log(index);
+      this.entries.splice(index, 1,);
     },
 
    
@@ -293,16 +376,27 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
 
 //method to stop the iom
 stopIom: function(){
-//this.status = 'beendet';
+this.status = 'beendet';
 //this.dialog = false;
 //this.dialog2 = true;
  this.entries.push( {
       ts: this.entry.ts,
       entrycat: 'IOM',
       event: 'IOM beendet',
-      comment: 'Test',
+      comment: '',
  });
 this.submit();
+},
+
+//hilighting entries
+highlight: function(){
+   if(this.isActive){
+         this.isActive = false;
+       }else{
+         this.isActive = true;
+       }
+
+
 },
 
    // fetches all categories from the database
@@ -401,5 +495,8 @@ this.submit();
   },
 };
 </script>
+
+
+
 
 

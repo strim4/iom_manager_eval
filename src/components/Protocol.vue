@@ -41,7 +41,87 @@
     
     </v-flex>
 
-    <!-- dialog for baselines  -->
+    
+    
+    <!-- protocol entries -->
+    <v-flex md10 >
+     <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
+      <v-layout row>
+        <v-flex md2><b><p>Uhrzeit</p></b></v-flex>
+       
+        <v-flex md2><b>Kategorie</b></v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2><b>Eintrag</b></v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md3><b>Bemerkung</b></v-flex>
+        <v-flex md1><b>Aktionen</b></v-flex>
+      </v-layout >  </br>  
+      
+ 
+      <form >
+      <div v-for="(entry, index) in entries">
+        <v-layout row >
+          
+        <v-flex md2 ><v-text-field style="margin-left: 2.3em;" v-model="entry.ts" name="entries[][ts]"  :solo="true" :flat="true" background-color="transparent">{{entry.ts}}</v-text-field></v-flex>
+       
+        <v-flex md2>
+           <v-select label="Kategorie"  v-model="entry.entrycat"  :items="dbcategories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
+        </v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md2>
+              <v-select label="Event"  v-model="entry.event" :items="entry.entrycat.options" item-text="options"    return-object  name="entries[][event]" >{{entry.event}}</v-select>
+        </v-flex>
+        <v-flex md1></v-flex>
+        <v-flex md3> <v-textarea label="Bemerkung" v-model="entry.comment"  name="entries[][comment]" :auto-grow="true" :dense="true" :clearable="true" :rows="2"></v-textarea></v-flex>
+        <v-flex md1>
+          <v-icon @click="removeEntry(index)" >
+          delete
+        </v-icon>
+         <v-icon @click="addNewEntry()">
+          add
+        </v-icon>
+        </v-flex>
+        
+      </v-layout > 
+
+       <!-- Dialog for deleting an protocol entry -->
+        <v-dialog
+        v-model="dialog4"
+        max-width="400"
+      >
+     
+        <v-card>
+          <v-card-title class="headline">Eintrag löschen?</v-card-title>
+  
+          <v-card-text>
+            Sind Sie sicher, dass Sie den Eintrag löschen wollen?
+          </v-card-text>
+  
+          <v-card-actions>
+            <v-spacer></v-spacer>
+  
+            <v-btn
+              depressed  large color="success"
+              @click="removeEntry(index)"
+            >
+              Ja, löschen.
+            </v-btn>
+  
+            <v-btn
+             depressed  large color="error"
+              @click="dialog4 = false"
+            >
+              Abbrechen           </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+         <v-divider></v-divider>
+      </div>
+      <v-layout row>
+        <v-flex md10><b></b></v-flex>
+        <v-flex md2> <v-btn depressed  large color="success" @click.stop="dialog = true">IOM beenden</v-btn>
+
+<!-- dialog for baselines  -->
          <v-dialog v-model="dialog3" persistent max-width="1000px">
         
         <v-card>
@@ -256,86 +336,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    
-    <!-- protocol entries -->
-    <v-flex md10 >
-     <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
-      <v-layout row>
-        <v-flex md2><b><p>Uhrzeit</p></b></v-flex>
-       
-        <v-flex md2><b>Kategorie</b></v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md2><b>Eintrag</b></v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md3><b>Bemerkung</b></v-flex>
-        <v-flex md1><b>Aktionen</b></v-flex>
-      </v-layout >  </br>  
-      
- 
-      <form >
-      <div v-for="(entry, index) in entries" :key="index">
-        <v-layout row v-on:dblclick="highlight()" :class="[isActive ? 'yellow' : 'none']">
-          
-        <v-flex md2 v-model="entry.ts" name="entries[][ts]">{{entry.ts}}</v-flex>
-       
-        <v-flex md2>
-           <v-select label="Kategorie"  v-model="entry.entrycat"  :items="dbcategories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
-        </v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md2>
-              <v-select label="Event"  v-model="entry.event" :items="entry.entrycat.options" item-text="options"    return-object  name="entries[][event]" >{{entry.event}}</v-select>
-        </v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md3> <v-textarea label="Bemerkung" v-model="entry.comment"  name="entries[][comment]" :auto-grow="true" :dense="true" :clearable="true" :rows="2"></v-textarea></v-flex>
-        <v-flex md1>
-          <v-icon @click="dialog4 = true" >
-          delete
-        </v-icon>
-         <v-icon @click="addNewEntry()">
-          add
-        </v-icon>
-        </v-flex>
-        
-      </v-layout > 
-
-       <!-- Dialog for deleting an protocol entry -->
-        <v-dialog
-        v-model="dialog4"
-        max-width="400"
-      >
-     
-        <v-card>
-          <v-card-title class="headline">Eintrag löschen?</v-card-title>
-  
-          <v-card-text>
-            Sind Sie sicher, dass Sie den Eintrag löschen wollen?
-          </v-card-text>
-  
-          <v-card-actions>
-            <v-spacer></v-spacer>
-  
-            <v-btn
-              depressed  large color="success"
-              @click="removeEntry(index)"
-            >
-              Ja, löschen.
-            </v-btn>
-  
-            <v-btn
-             depressed  large color="error"
-              @click="dialog4 = false"
-            >
-              Abbrechen           </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-         <v-divider></v-divider>
-      </div>
-      <v-layout row>
-        <v-flex md10><b></b></v-flex>
-        <v-flex md2> <v-btn depressed  large color="success" @click.stop="dialog = true">IOM beenden</v-btn>
-
-
         
 
          <!-- Dialog for finishing IOM -->
@@ -420,6 +420,7 @@
 <script>
 import axios from 'axios';
 import Qs from 'qs';
+import Vue from 'vue';
 
 
 export default {
@@ -435,9 +436,9 @@ dialog3: false,
 dialogGrid: false,
 dialogDwave: false,
 dialog4: false,
-del: false,
 
- isActive: false,
+
+
 
     entry: {
       ts: '',
@@ -471,6 +472,9 @@ del: false,
     category: '',
     event: '',
     comment:'',
+
+
+    selectedEntry: null,
 
 
 /*static categories
@@ -538,7 +542,7 @@ del: false,
     addNewEntry: function () {
    this.getNow();
  this.entries.push( {
-      index: this.entries.lenght,
+     
       ts: this.entry.ts,
       entrycat: this.entry.entrycat,
       event: this.entry.event,
@@ -552,11 +556,34 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
     
     //method to delete entry
     removeEntry: function (index) {
-      this.dialog4 = false;
-    
+
+
+      swal({
+            title: "Are you sure ??",
+            text: "löschen?", 
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+              this.entries.splice(index, 1,);
+            swal("Poof! Your imaginary file has been deleted!", {
+              icon: "success",
+            });
+        
+          } else {
+            swal("Your imaginary file is safe!");
+          }
+        });
+
+     
+      //this.dialog4 = false;
+      //Vue.delete(this.entries, index);
      console.log(index);
-      this.entries.splice(index, 1,);
+     
     },
+
 
    
 
@@ -587,16 +614,7 @@ this.status = 'beendet';
 this.submit();
 },
 
-//hilighting entries
-highlight: function(){
-   if(this.isActive){
-         this.isActive = false;
-       }else{
-         this.isActive = true;
-       }
 
-
-},
 
    // fetches all categories from the database
     async fetchCategories() {
@@ -694,6 +712,7 @@ highlight: function(){
   },
 };
 </script>
+
 
 
 

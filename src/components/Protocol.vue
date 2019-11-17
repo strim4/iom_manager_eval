@@ -18,15 +18,21 @@
      <v-card-text class="text-left">
      Diagnose: {{diagnose}}</br>
       Operation: {{operation}} </br>
-      Datum: {{opdate}} </br>
+      Datum: {{opdate}}
+      <!-- </br>
       Operateur: {{surgeon}} </br>
-      Assistent: {{assistant}}
+      Assistent: {{assistant}} -->
       </p>
        </v-card-text>
       <v-divider></v-divider>
       <v-card-text class="text-center">
        <v-btn  color="primary"  @click="dialog3 = true" >Baselines</v-btn>
-        
+      </v-card-text>
+      <v-card-text class="text-center">
+       <v-btn  color="primary"  @click="dialogGrid = true" >Grid-MEPs</v-btn>
+      </v-card-text>
+      <v-card-text class="text-center">
+       <v-btn  color="primary"  @click="dialogDwave = true" >D-Welle</v-btn>
       </v-card-text>
       
     </v-card>
@@ -36,11 +42,172 @@
     </v-flex>
 
     <!-- dialog for baselines  -->
-         <v-dialog v-model="dialog3" persistent max-width="600px">
+         <v-dialog v-model="dialog3" persistent max-width="1000px">
         
         <v-card>
           <v-card-title>
             <span class="headline">Baselines:</span>
+          </v-card-title>
+          <v-card-text>
+
+          <label>Baselines SSEPs:</label>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>Medianus L</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="N:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="P:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="Amplitude:" suffix="mA" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>Medianus R</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="N:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="P:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="Amplitude:" suffix="mA" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>Tibialis L</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="N:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="P:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="Amplitude:" suffix="mA" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>Tibialis R</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="N:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="P:" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="Amplitude:" suffix="mA" ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+
+            <label>Baselines MEPs:</label>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Platzhalter" ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+
+            <label>Baselines AEPs:</label>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Platzhalter" ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+
+            <label>Baselines VEPs:</label>
+            <v-container>
+              <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="VEP L"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="VEP R"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              </v-row>
+            </v-container>
+
+            <label>Reflexe:</label>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="BR L"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="BR R"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="LAR L"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="LAR R"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="BCR L"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-select
+                    :items="items"
+                    label="BCR R"
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-container>
+           
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn  depressed  large color="error" @click="dialog3 = false">Speichern</v-btn>
+            <v-btn  depressed  large color="success"  @click="dialog3 = false">Schliessen</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+    <!-- dialog for grid-baselines  -->
+         <v-dialog v-model="dialogGrid" persistent max-width="600px">
+        
+        <v-card>
+          <v-card-title>
+            <span class="headline">Grid-MEPs:</span>
           </v-card-title>
           <v-card-text>
           <label>Titel:</label>
@@ -56,12 +223,41 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="error" @click="dialog3 = false">Speichern</v-btn>
-            <v-btn  depressed  large color="success"  @click="dialog3 = false">Schliessen</v-btn>
+            <v-btn  depressed  large color="error" @click="dialogGrid = false">Speichern</v-btn>
+            <v-btn  depressed  large color="success"  @click="dialogGrid = false">Schliessen</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+    <!-- dialog for d-wave -->
+         <v-dialog v-model="dialogDwave" persistent max-width="600px">
+        
+        <v-card>
+          <v-card-title>
+            <span class="headline">D-Welle:</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Amplitude" suffix="mA" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Latenz" suffix="ms"></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+           
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn  depressed  large color="error" @click="dialogDwave = false">Speichern</v-btn>
+            <v-btn  depressed  large color="success"  @click="dialogDwave = false">Schliessen</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     
+    <!-- protocol entries -->
     <v-flex md10 >
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
       <v-layout row>
@@ -230,11 +426,14 @@ export default {
   
   data: () => ({
 
-
+ /* values for the baselines */
+    items: ['vorhanden', 'mässig', 'schlecht'],
 
 dialog: false,
 dialog2: false,
 dialog3: false,
+dialogGrid: false,
+dialogDwave: false,
 dialog4: false,
 del: false,
 

@@ -130,16 +130,20 @@
           </v-card-title>
           <v-card-text>
 
-          <label>Baselines SSEPs:</label>
-            <v-container>
+
+          <v-expansion-panels focusable>
+            <v-expansion-panel>
+              <v-expansion-panel-header>Baselines SSEPs</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                            <v-container>
               <v-row>
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader>Medianus L</v-subheader>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="N:" ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="P:" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
@@ -150,10 +154,10 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader>Medianus R</v-subheader>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="N:" ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="P:" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
@@ -164,10 +168,10 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader>Tibialis L</v-subheader>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="N:" ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="P:" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
@@ -178,10 +182,10 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader>Tibialis R</v-subheader>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="N:" ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="1">
                   <v-text-field label="P:" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
@@ -189,89 +193,197 @@
                 </v-col>
               </v-row>
             </v-container>
-
-            <label>Baselines MEPs:</label>
-            <v-container>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header>Baselines MEPs</v-expansion-panel-header>
+            <v-expansion-panel-content>
+                          <v-container>
               <v-row>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Platzhalter" ></v-text-field>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="muscles"
+                    label="Kanal 1"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="muscles"
+                    label="Kanal 2"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field label="C3/C4" suffix="mA"></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
-
-            <label>Baselines AEPs:</label>
-            <v-container>
+            </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header>Baselines AEPs</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                            <v-container>
               <v-row>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Platzhalter" ></v-text-field>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>AEP L</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="I" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="II" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="III" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="IV" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="V" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>AEP R</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="I" suffix="ms" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="II" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="III" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="IV" ></v-text-field>
+                </v-col>
+                  <v-col cols="12" sm="6" md="1">
+                  <v-text-field label="V" ></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
-
-            <label>Baselines VEPs:</label>
-            <v-container>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header>Baselines VEPs</v-expansion-panel-header>
+              <v-expansion-panel-content>
+                            <v-container>
               <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                  <v-select
-                    :items="items"
-                    label="VEP L"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-select
-                    :items="items"
-                    label="VEP R"
-                  ></v-select>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>VEP</v-subheader>
                 </v-col>
-              </v-row>
-              </v-row>
-            </v-container>
-
-            <label>Reflexe:</label>
-            <v-container>
-              <v-row>
-                <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="2">
                   <v-select
                     :items="items"
-                    label="BR L"
+                    label="L"
                   ></v-select>
                  </v-col>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="2">
                   <v-select
                     :items="items"
-                    label="BR R"
-                  ></v-select>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" sm="6" md="4">
-                  <v-select
-                    :items="items"
-                    label="LAR L"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-select
-                    :items="items"
-                    label="LAR R"
-                  ></v-select>
-                </v-col>
-              </v-row>
-              <v-row>
-                  <v-col cols="12" sm="6" md="4">
-                  <v-select
-                    :items="items"
-                    label="BCR L"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-select
-                    :items="items"
-                    label="BCR R"
+                    label="R"
                   ></v-select>
                 </v-col>
               </v-row>
             </v-container>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <v-expansion-panel>
+              <v-expansion-panel-header>Reflexe</v-expansion-panel-header>
+              <v-expansion-panel-content>
+              <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>BR</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="items"
+                    label="L"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="items"
+                    label="R"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>LAR</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="items"
+                    label="L"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="items"
+                    label="R"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader>BCR</v-subheader>
+                </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="items"
+                    label="L"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="items"
+                    label="R"
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-container>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
            
           </v-card-text>
           <v-card-actions>
@@ -290,13 +402,146 @@
             <span class="headline">Grid-MEPs:</span>
           </v-card-title>
           <v-card-text>
-          <label>Titel:</label>
             <v-container>
               <v-row>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Platzhalter" ></v-text-field>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Masseter</v-subheader>
                 </v-col>
-               
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Orb oris</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Deltoideus</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Biceps</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Extensor</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Thenar</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Tib ant</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Abd hall</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Thenar</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
+              </v-row>
+                            <v-row>
+                <v-col ols="12" sm="6" md="3">
+                  <v-subheader>Tib ant</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field label="C1/C2" ></v-text-field>
+                </v-col>
               </v-row>
             </v-container>
            
@@ -428,7 +673,9 @@ export default {
   data: () => ({
 
  /* values for the baselines */
-    items: ['vorhanden', 'mässig', 'schlecht'],
+    items: ['vorhanden', 'mässig', 'schlecht', ''],
+    sides: ['L', 'R', ''],
+    muscles: ['Occulomotor', 'Trochlearis', 'Masseter', 'Abduzens', 'Orb occ', 'Labialis', 'Orb oris', 'Mentalis', 'Glosso', 'Vagus', 'Accessorius', 'Hypoglosso', 'Deltoideus', 'Biceps', 'Triceps', 'Extensor', 'Thenar', 'Hypothenar', 'Aductor', 'Ileopsoas', 'Quadri', 'Tib ant', 'Gastro', 'Abd hall', ''],
 
 dialog: false,
 dialog2: false,

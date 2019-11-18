@@ -864,17 +864,17 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
 
       swal({
             title: "Eintrag löschen?",
-            text: "Wolen Sie den Eintrag wirklich löschen?", 
             icon: "warning",
             buttons: true,
             dangerMode: true,
+            buttons: ["Abbrechen", "Löschen"],
+           
+            
         })
         .then((willDelete) => {
           if (willDelete) {
               this.entries.splice(index, 1,);
-            swal("Der Eintrag wurde gelöscht!", {
-              icon: "success",
-            });
+           
         
           } else {
            

@@ -59,7 +59,7 @@
       
  
       <form >
-      <div v-for="(entry, index) in entries">
+      <div v-for="(entry, index) in entries" :class="{active:entry.selected}" @dblclick="$set(entry, 'selected', !entry.selected)">
         <v-layout row >
           
         <v-flex md2 ><v-text-field style="margin-left: 2.3em;" v-model="entry.ts" name="entries[][ts]"  :solo="true" :flat="true" background-color="transparent">{{entry.ts}}</v-text-field></v-flex>
@@ -719,6 +719,8 @@ export default {
   
   data: () => ({
 
+      
+
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
@@ -804,7 +806,7 @@ study: false,
     ], */
 
     dbcategories: [],
-
+ selected: undefined,
 
  
   }),
@@ -841,6 +843,10 @@ study: false,
   },
 
   methods: {
+
+
+
+ 
 
 //method to add a new entry and scroll down to the last entry
     addNewEntry: function () {
@@ -1016,7 +1022,11 @@ this.dialogEval = true;
 </script>
 
 
-
+<style>
+.active {
+  background-color: yellow;
+}
+</style>
 
 
 

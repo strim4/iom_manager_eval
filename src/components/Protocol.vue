@@ -26,7 +26,7 @@
        </v-card-text>
       <v-divider></v-divider>
       <v-card-text class="text-center">
-       <v-btn  class="my-n3" width="180px"  color="primary"  @click="dialog3 = true" >Baselines</v-btn>
+       <v-btn  class="my-n3" width="180px"  color="primary"  @click="dialogBaselines = true" >Baselines</v-btn>
       </v-card-text>
       <v-card-text class="text-center">
        <v-btn   class="my-n3" width="180px"  color="primary"  @click="dialogGrid = true" >Grid-MEPs</v-btn>
@@ -84,45 +84,16 @@
         
       </v-layout > 
 
-       <!-- Dialog for deleting an protocol entry -->
-        <v-dialog
-        v-model="dialog4"
-        max-width="400"
-      >
      
-        <v-card>
-          <v-card-title class="headline">Eintrag löschen?</v-card-title>
-  
-          <v-card-text>
-            Sind Sie sicher, dass Sie den Eintrag löschen wollen?
-          </v-card-text>
-  
-          <v-card-actions>
-            <v-spacer></v-spacer>
-  
-            <v-btn
-              depressed  large color="success"
-              @click="removeEntry(index)"
-            >
-              Ja, löschen.
-            </v-btn>
-  
-            <v-btn
-             depressed  large color="error"
-              @click="dialog4 = false"
-            >
-              Abbrechen           </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+     
          <v-divider></v-divider>
       </div>
       <v-layout row>
         <v-flex md10><b></b></v-flex>
-        <v-flex md2> <v-btn depressed  large color="success" @click.stop="dialog = true">IOM beenden</v-btn>
+        <v-flex md2> <v-btn depressed  large color="success" @click.stop="dialogFinish = true">IOM beenden</v-btn>
 
 <!-- dialog for baselines  -->
-         <v-dialog v-model="dialog3" persistent max-width="1000px">
+         <v-dialog v-model="dialogBaselines" persistent max-width="1000px">
         
         <v-card>
           <v-card-title>
@@ -388,8 +359,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="dialog3 = false">Speichern</v-btn>
-            <v-btn  depressed  large color="normal"  @click="dialog3 = false">Abbrechen</v-btn>
+            <v-btn  depressed  large color="success" @click="dialogBaselines = false">Speichern</v-btn>
+            <v-btn  depressed  large color="normal"  @click="dialogBaselines = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -585,7 +556,7 @@
 
          <!-- Dialog for finishing IOM -->
         <v-dialog
-        v-model="dialog"
+        v-model="dialogFinish"
         max-width="400"
       >
      
@@ -608,7 +579,7 @@
   
             <v-btn
              depressed  large color="normal"
-              @click="dialog = false"
+              @click="dialogFinish = false"
             >
               Nein, nicht beenden            </v-btn>
           </v-card-actions>
@@ -616,7 +587,7 @@
       </v-dialog></v-flex>
 
 <!-- dialog for case evaluation -->
-         <v-dialog v-model="dialog2" persistent max-width="1000px">
+         <v-dialog v-model="dialogEval" persistent max-width="1000px">
         
         <v-card>
           <v-card-title>
@@ -712,8 +683,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="dialog2 = false">Fall beenden</v-btn>
-            <v-btn  depressed  large color="normal"  @click="dialog2 = false">Abbrechen</v-btn>
+            <v-btn  depressed  large color="success" @click="dialogEval = false">Fall beenden</v-btn>
+            <v-btn  depressed  large color="normal"  @click="dialogEval = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -741,7 +712,7 @@
 <script>
 import axios from 'axios';
 import Qs from 'qs';
-import Vue from 'vue';
+
 
 
 export default {
@@ -761,12 +732,12 @@ export default {
   //  study: ['study'],
 
 
-dialog: false,
-dialog2: false,
-dialog3: false,
+dialogFinish: false,
+dialogEval: false,
+dialogBaselines: false,
 dialogGrid: false,
 dialogDwave: false,
-dialog4: false,
+
 
 study: false,
 
@@ -892,8 +863,8 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
 
 
       swal({
-            title: "Are you sure ??",
-            text: "löschen?", 
+            title: "Eintrag löschen?",
+            text: "Wolen Sie den Eintrag wirklich löschen?", 
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -901,19 +872,17 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
         .then((willDelete) => {
           if (willDelete) {
               this.entries.splice(index, 1,);
-            swal("Poof! Your imaginary file has been deleted!", {
+            swal("Der Eintrag wurde gelöscht!", {
               icon: "success",
             });
         
           } else {
-            swal("Your imaginary file is safe!");
+           
           }
         });
 
      
-      //this.dialog4 = false;
-      //Vue.delete(this.entries, index);
-     console.log(index);
+     
      
     },
 
@@ -936,8 +905,8 @@ window.scrollTo(0, document.body.scrollHeight || document.documentElement.scroll
 //method to stop the iom
 stopIom: function(){
 this.status = 'beendet';
-this.dialog = false;
-this.dialog2 = true;
+this.dialogFinish = false;
+this.dialogEval = true;
  this.entries.push( {
       ts: this.entry.ts,
       entrycat: 'IOM',

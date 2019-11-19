@@ -1,17 +1,165 @@
 <template>
   <v-layout>
-    Hier entsteht die Startseite :)
+    
+     <v-container grid-list-md text-xs-center>
+       </br></br></br></br>
+      <v-layout row wrap>
+     
+        <v-flex  xs6>
+            <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Erfasste Fälle</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="green" size="62">
+        <span class="white--text headline">{{CaseCount}}</span>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+         <router-link :to="{ name: 'Casesearch' }">
+          <v-btn color="indigo accent-4" text>Fallsuche</v-btn>
+        </router-link>
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Offene Fälle</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="orange" size="62">
+        <span class="white--text headline">{{OpenCaseCount}}</span>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+        
+          <router-link :to="{ name: 'Opencases' }">
+         <v-btn color="indigo accent-4" text>Offene Fälle</v-btn>
+        </router-link>
+        
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+        
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Handbuch</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="pink" size="62">
+        <v-icon dark>mdi-book</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+        <a href="./../static/handbuch.pdf" target="_blank">
+       <v-btn color="indigo accent-4" text>Handbuch öffnen</v-btn>
+        </a>
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+        
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Kontakt / Info</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="blue" size="62">
+        <v-icon dark>mdi-email</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+          <router-link :to="{ name: 'Contact' }">
+         <v-btn color="indigo accent-4" text>Kontakt öffnen</v-btn>
+        </router-link>
+        
+        
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+      
+      </v-layout>
+    </v-container>
   </v-layout>
 </template>
 
 
 <script>
+import axios from 'axios';
 export default {
-  name: 'HelloWorld',
+  
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+     CaseCount: '3423',
+ 
+     openCases: [],
+    openItems: {}, 
     };
+  },
+
+//Count Cases
+  computed: {
+  OpenCaseCount () {
+      return Object.keys(this.openItems).length
+  }
+},
+
+methods: {
+//fetches all open cases
+    async fetchCases() {
+      return axios({
+        method: 'get',
+        url: 'http://localhost:8081/cases',
+      })
+        .then((response) => {
+          this.openItems = response.data.cases;
+         
+        })
+        .catch(() => {});
+    },
+},
+
+
+//fetches open cases on pageload
+  mounted(){
+
+   this.fetchCases();
+
   },
 };
 </script>

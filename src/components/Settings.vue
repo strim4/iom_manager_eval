@@ -1,57 +1,180 @@
 <!-- This file  contains the structure for the setting page -->
 <template>
-<!-- TNavigation to the different subpages -->
- <v-list   >
-               <h3>Neue Einträge hinzufügen:</h3>
+<!-- Navigation to the different subpages -->
 
-                 <router-link v-bind:to="{ name: 'Adddiagnose' }" class="side_bar_link">
-                    <v-list-item>
-                        <v-list-item-action>
-                            <v-icon>control_point</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>Diagnosen hinzufügen / bearbeiten</v-list-item-content>
-                    </v-list-item>
-                </router-link>
-                  <router-link v-bind:to="{ name: 'Addoperation' }" class="side_bar_link">
-                    <v-list-item>
-                        <v-list-item-action>
-                            <v-icon>control_point</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>Operationen hinzufügen / bearbeiten</v-list-item-content>
-                    </v-list-item>
-                </router-link>
-                  <router-link v-bind:to="{ name: 'Adddevice' }" class="side_bar_link">
-                    <v-list-item>
-                        <v-list-item-action>
-                            <v-icon>control_point</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>ISIS-Geräte hinzufügen / bearbeiten</v-list-item-content>
-                    </v-list-item>
-                </router-link>
-                  <router-link v-bind:to="{ name: 'Addsurgeon' }" class="side_bar_link">
-                    <v-list-item>
-                        <v-list-item-action>
-                            <v-icon>control_point</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>Operateure hinzufügen / bearbeiten</v-list-item-content>
-                    </v-list-item>
-                </router-link>
-                 <router-link v-bind:to="{ name: 'Addassistant' }" class="side_bar_link">
-                    <v-list-item>
-                        <v-list-item-action>
-                            <v-icon>control_point</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>Assistenten hinzufügen / bearbeiten</v-list-item-content>
-                    </v-list-item>
-                </router-link>
-                <router-link v-bind:to="{ name: 'Addprotocolentry' }" class="side_bar_link">
-                    <v-list-item>
-                        <v-list-item-action>
-                            <v-icon>control_point</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>Protokolleintrag hinzufügen / bearbeiten</v-list-item-content>
-                    </v-list-item>
-                </router-link>
+<v-container grid-list-md text-xs-center>
+    
+       </br></br></br></br>
+      <v-layout row wrap>
+     
+        <v-flex  xs6>
+            <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Diagnosen</v-list-item-title>
+          
+        </v-list-item-content>
+  
+       <v-list-item-avatar color="green" size="62">
+        <v-icon dark>mdi-apps</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+         <router-link :to="{ name: 'Adddiagnose' }">
+          <v-btn color="indigo accent-4" text>Hinzufügen / Bearbeiten</v-btn>
+        </router-link>
+      </v-card-actions>
+    </v-card>
+        </v-flex>
 
-            </v-list>
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Operationen</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="orange" size="62">
+        <v-icon dark>mdi-silverware</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+        
+          <router-link :to="{ name: 'Addoperation' }">
+         <v-btn color="indigo accent-4" text>Hinzufügen / Bearbeiten</v-btn>
+        </router-link>
+        
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+        
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">ISIS-Geräte</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="pink" size="62">
+        <v-icon dark>mdi-desktop-mac</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+         <router-link :to="{ name: 'Adddevice' }">
+         <v-btn color="indigo accent-4" text>Hinzufügen / Bearbeiten</v-btn>
+        </router-link>
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+        
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Operateure</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="cyan" size="62">
+        <v-icon dark>mdi-account-outline</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+          <router-link :to="{ name: 'Addsurgeon' }">
+         <v-btn color="indigo accent-4" text>Hinzufügen / Bearbeiten</v-btn>
+        </router-link>
+        
+        
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Assistenten</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="lime" size="62">
+        <v-icon dark>mdi-account</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+          <router-link :to="{ name: 'Addassistant' }">
+         <v-btn color="indigo accent-4" text>Hinzufügen / Bearbeiten</v-btn>
+        </router-link>
+        
+        
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+
+         <v-flex  xs6>
+         <v-card
+      class="mx-auto"
+      max-width="450"
+      outlined
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          
+          <v-list-item-title class="headline mb-1">Protokolleinträge</v-list-item-title>
+          
+        </v-list-item-content>
+  
+      <v-list-item-avatar color="purple" size="62">
+        <v-icon dark>mdi-file-document</v-icon>
+      </v-list-item-avatar>
+      </v-list-item>
+  
+      <v-card-actions>
+          <router-link :to="{ name: 'Addprotocolentry' }">
+         <v-btn color="indigo accent-4" text>Hinzufügen / Bearbeiten</v-btn>
+        </router-link>
+        
+        
+      </v-card-actions>
+    </v-card>
+        </v-flex>
+      
+      </v-layout>
+
+
+     
+    </v-container>
+
 </template>

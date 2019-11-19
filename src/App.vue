@@ -57,7 +57,7 @@
                         <v-list-item-action>
                             <v-icon>contact_mail</v-icon>
                         </v-list-item-action>
-                        <v-list-item-content>Kontakt</v-list-item-content>
+                        <v-list-item-content>Kontakt / Info</v-list-item-content>
                     </v-list-item>
                 </router-link>
             </v-list>
@@ -75,12 +75,7 @@
         
       
 
-         <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-icon   v-on="on">mdi-information</v-icon>
-        </template>
-        <span>Das ist ein Tooltip! Die Unterlagen zum IOM-Manager können hier bezogen werden.</span>
-      </v-tooltip>
+       
         </v-app-bar>
          <!-- End Mainmenu / Navbar-->
         <v-content>

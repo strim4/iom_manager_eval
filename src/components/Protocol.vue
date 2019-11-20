@@ -11,7 +11,7 @@
     >
     <v-card-title>Patientendaten</v-card-title>
       <v-card-text class="text-left">
-     {{name}}, {{surname}}</br> {{birthdate}}</p>
+     {{name}}, {{surname}}</br> {{birthdate}}
      <v-divider></v-divider>
      </v-card-text>
      <v-card-title>Operation</v-card-title>
@@ -22,9 +22,10 @@
       <!-- </br>
       Operateur: {{surgeon}} </br>
       Assistent: {{assistant}} -->
-      </p>
-       </v-card-text>
+      
       <v-divider></v-divider>
+       </v-card-text>
+      
       <v-card-text class="text-center">
        <v-btn  class="my-n3" width="180px"  color="primary"  @click="dialogBaselines = true" >Baselines</v-btn>
       </v-card-text>
@@ -65,11 +66,11 @@
         <v-flex md2 ><v-text-field style="margin-left: 2.3em;" v-model="entry.ts" name="entries[][ts]"  :solo="true" :flat="true" background-color="transparent">{{entry.ts}}</v-text-field></v-flex>
        
         <v-flex md2>
-           <v-select label="Kategorie"  v-model="entry.entrycat"  :items="dbcategories" item-text="name"   return-object name="entries[][entrycat]"></v-select>
+           <v-select label="Kategorie"  v-model="entry.entrycat" item-value="name"  :items="dbcategories" item-text="name" :value="entry.entrycar"   return-object name="entries[][entrycat]"></v-select>
         </v-flex>
         <v-flex md1></v-flex>
         <v-flex md2>
-              <v-select label="Event"  v-model="entry.event" :items="entry.entrycat.options" item-text="options"    return-object  name="entries[][event]" >{{entry.event}}</v-select>
+              <v-select label="Event"  v-model="entry.event" :items="entry.entrycat.options" item-text="options"  :value="entry.event"  return-object  name="entries[][event]" >{{entry.event}}</v-select>
         </v-flex>
         <v-flex md1></v-flex>
         <v-flex md3> <v-textarea label="Bemerkung" v-model="entry.comment"  name="entries[][comment]" :auto-grow="true" :dense="true" :clearable="true" :rows="2"></v-textarea></v-flex>
@@ -597,31 +598,31 @@
             <v-container>
               <v-row>
                 <v-col cols="12" sm="4" md="2">
-                 <v-checkbox v-model="evaluation.sseps" class="my-n3" label="SSEPs" value="sseps"></v-checkbox>
-                 <v-checkbox v-model="evaluation.meps" class="my-n3" label="MEPs" value="meps"></v-checkbox>
-                 <v-checkbox v-model="evaluation.aeps" class="my-n3" label="AEPs" value="aeps"></v-checkbox>
-                 <v-checkbox v-model="evaluation.veps" class="my-n3" label="VEPs" value="veps"></v-checkbox>
-                 <v-checkbox v-model="evaluation.emg" class="my-n3" label="EMG" value="emg"></v-checkbox>
-                 <v-checkbox v-model="evaluation.ecog" class="my-n3" label="ECOG" value="ecog"></v-checkbox>
+                 <v-checkbox v-model="evaluation.sseps" class="my-n3" label="SSEPs" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.meps" class="my-n3" label="MEPs" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.aeps" class="my-n3" label="AEPs" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.veps" class="my-n3" label="VEPs" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.emg" class="my-n3" label="EMG" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.ecog" class="my-n3" label="ECOG" ></v-checkbox>
                 </v-col>
 
                 <v-col cols="12" sm="4" md="4">
-                 <v-checkbox v-model="evaluation.gridmeps" class="my-n3" label="Grid-MEPs" value="grid"></v-checkbox>
-                 <v-checkbox v-model="evaluation.sauger" class="my-n3" label="Dynamischer Sauger" value="sauger"></v-checkbox>
-                 <v-checkbox v-model="evaluation.dns" class="my-n3" label="DNS" value="dns"></v-checkbox>
-                  <v-checkbox v-model="evaluation.dwave" class="my-n3" label="D-Welle" value="dwave"></v-checkbox>
-                  <v-checkbox v-model="evaluation.penfield" class="my-n3" label="Penfield" value="penfield"></v-checkbox>
+                 <v-checkbox v-model="evaluation.gridmeps" class="my-n3" label="Grid-MEPs" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.sauger" class="my-n3" label="Dynamischer Sauger" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.dns" class="my-n3" label="DNS" ></v-checkbox>
+                  <v-checkbox v-model="evaluation.dwave" class="my-n3" label="D-Welle" ></v-checkbox>
+                  <v-checkbox v-model="evaluation.penfield" class="my-n3" label="Penfield"></v-checkbox>
                   <v-text-field v-model="evaluation.mappingsw" class="my-n6" label="tiefste Mapping-Schwelle" suffix="mA"></v-text-field>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.br" class="my-n3" label="BR" value="br"></v-checkbox>
-                 <v-checkbox v-model="evaluation.lar" class="my-n3" label="LAR" value="lar"></v-checkbox>
-                 <v-checkbox v-model="evaluation.bcr" class="my-n3" label="BCR" value="bcr"></v-checkbox>
+                 <v-checkbox v-model="evaluation.br" class="my-n3" label="BR" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.lar" class="my-n3" label="LAR" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.bcr" class="my-n3" label="BCR" ></v-checkbox>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="4">
-                  <v-checkbox v-model="evaluation.stabil" class="my-n3" label="IOM stabil" value="stabil"></v-checkbox>
+                  <v-checkbox v-model="evaluation.stabil" class="my-n3" label="IOM stabil"></v-checkbox>
                   <v-select v-model="evaluation.sseps2" class="my-n3"
                     :items="eventchanges"
                     label="SSEPs"
@@ -647,18 +648,18 @@
               <v-divider></v-divider>
               <v-row>
                  <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.wachop" class="my-n3" label="Wach-OP" value="wachop"></v-checkbox>
-                 <v-checkbox v-model="evaluation.scs" class="my-n3" label="SCS" value="scs"></v-checkbox>
+                 <v-checkbox v-model="evaluation.wachop" class="my-n3" label="Wach-OP" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.scs" class="my-n3" label="SCS" ></v-checkbox>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.dbs" class="my-n3" label="DBS" value="dbs"></v-checkbox>
-                 <v-checkbox v-model="evaluation.ib" class="my-n3" label="IB" value="ib"></v-checkbox>
+                 <v-checkbox v-model="evaluation.dbs" class="my-n3" label="DBS" ></v-checkbox>
+                 <v-checkbox v-model="evaluation.ib" class="my-n3" label="IB" ></v-checkbox>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-checkbox  class="my-n3" v-model="study" label="Studienfall" value="study"></v-checkbox>
+                  <v-checkbox  class="my-n3" v-model="evaluation.studycheck" label="Studienfall" ></v-checkbox>
                 </v-col>
                 <v-col cols="12" sm="6" md="6">
-                  <v-text-field v-model="evaluation.study" class="my-n3"  :disabled="!study" label="Studien eingeben"></v-text-field>
+                  <v-text-field v-model="evaluation.study" class="my-n3"  :disabled="!evaluation.studycheck" label="Studien eingeben"></v-text-field>
                 </v-col>
 
               </v-row>
@@ -725,7 +726,7 @@ export default {
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
     muscles: ['Occulomotor', 'Trochlearis', 'Masseter', 'Abduzens', 'Orb occ', 'Labialis', 'Orb oris', 'Mentalis', 'Glosso', 'Vagus', 'Accessorius', 'Hypoglosso', 'Deltoideus', 'Biceps', 'Triceps', 'Extensor', 'Thenar', 'Hypothenar', 'Aductor', 'Ileopsoas', 'Quadri', 'Tib ant', 'Gastro', 'Abd hall', ''],
-    eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust', ''],
+    eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust'],
 
 
   //  modalities: ['sseps', 'meps', 'aeps', 'veps', 'emg', 'ecog', 'grid', 'sauger', 'dns', 'dwave', 'penfield'],
@@ -741,7 +742,8 @@ dialogGrid: false,
 dialogDwave: false,
 
 
-study: false,
+
+
 
   evaluation: {
 
@@ -775,6 +777,7 @@ study: false,
       dbs:'',
       ib:'',
       study:'',
+      studycheck: false,
 
 
       comment:'',
@@ -821,27 +824,7 @@ study: false,
     selectedEntry: null,
 
 
-/*static categories
-    categories: [
-      {
-      name: 'IOM',
-      options: ['IOM 1', 'IOM 2', 'IOM 3', 'IOM gestartet']
-      },
-        {
-        name: 'Anästhesie',
-        options: ['Medigabe', 'Überdosis', 'Patient aufgewacht']
-      },
-       {
-        name: 'Events',
-        options: ['Event1', 'Event2', 'Event 3']
-      },
-       {
-        name: 'OP-Verlauf',
-        options: ['Schnitt', 'Nath']
-      }
 
-
-    ], */
 
     dbcategories: [],
  selected: undefined,
@@ -868,10 +851,14 @@ study: false,
       event: 'IOM gestartet',
       comment: '',
  }) ;
+ console.log(this.entries);
 
 
 
   },
+
+
+
   // store case id from the routerlink to a local variable on page load
   created() {
     this.id = this.$route.params.id;
@@ -879,6 +866,8 @@ study: false,
     
  
   },
+
+  
 
   methods: {
 
@@ -973,23 +962,23 @@ this.dialogEval = true;
       })
         .then((response) => {
           this.dbcategories = response.data.categories;
-          console.log(this.categories);
+      
           
         
         })
         .catch(() => {});
     },
 
- // submit method to send the new protocol to the backend to store
+ // submit method to send the new protocol to the db and delete the case from opencase db
     submit() {
       this.dialogEval = false;
-      console.log(this.evaluation);
+    
 
         var self = this;
         return axios({
           method: 'post',
           data: {
-           // id: this.id,
+           
             casenr: this.casenr,
             pid: this.pid,
             fid: this.fid,
@@ -1017,7 +1006,9 @@ this.dialogEval = true;
               'Das Protokoll wurde erfolgreich gespeichert!',
               'success',
             );
-            this.$router.push({ name: 'Protocolevaluation' });
+           /* Zum Programmieren deaktivert, muss anschliessend wieder aktiviert werden 
+            this.deleteOpenCase(this.id); */
+            this.$router.push({ name: 'Protocolevaluation', params: { casenr: this.casenr }  });
             
           })
           .catch(() => {
@@ -1028,6 +1019,26 @@ this.dialogEval = true;
             );
           }); 
      
+    },
+
+       // delete the specific case from opencase collection
+    async  deleteOpenCase(id) {
+     
+      return axios({
+        method: 'delete',
+        data: {
+          id,
+        },
+        url: `http://localhost:8081/cases/${id}`,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => {
+          const index = this.ccases.indexOf(item);
+          this.ccases.splice(index, 1);
+        })
+        .catch(() => {});
     },
   
     // fetch a single case from the database

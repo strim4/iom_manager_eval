@@ -100,7 +100,7 @@ export default new Router({
       component: Protocol,
     },
     {
-      path: '/protocolevaluation/:id',
+      path: '/protocolevaluation/:casenr',
       name: 'Protocolevaluation',
       component: Protocolevaluation,
     },

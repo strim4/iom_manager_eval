@@ -2,7 +2,7 @@
 <template>
     <v-app id="inspire">
     <!-- Start Sidemenu-->
-        <v-navigation-drawer fixed v-model="drawer" app>
+        <v-navigation-drawer fixed v-model="drawer" app v-if="['Protocol'].indexOf($route.name) === -1">
             <v-list dense>
                 <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link">
                     <v-list-item>
@@ -66,8 +66,13 @@
           <!-- Start Mainmenu / Navbar-->
         <v-app-bar color="indigo" dark fixed app>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-                <v-toolbar-title>IOM-Manager</v-toolbar-title>
+                <v-toolbar-title>IOM-Manager</router-link></v-toolbar-title>
                 <v-spacer></v-spacer>
+                <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link">
+                 <v-btn icon>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+        </router-link>
     Eingeloggt als xxx
         <v-btn icon>
           <v-icon>mdi-logout</v-icon>

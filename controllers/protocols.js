@@ -14,17 +14,17 @@ app.get('/protocols', (req, res) => {
     });
     });
 
-/*fetch a single case
-app.get('/protocols/:id', (req, res) => {
-    CaseSchema.findOne({_id: req.params.id}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant', (error,
-    cases) => {
+//fetch a single protocol
+app.get('/protocols/:casenr', (req, res) => {
+    ProtocolSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation', (error,
+    protocols) => {
     if (error) { console.log(error); }
     res.send({
-    cases,
+    protocols,
     });
     });
     });
-    */
+    
 
 /* update a  protocol
 app.put('/cases/:id', (req, res) => {

@@ -18,12 +18,8 @@ opdate: String,
 description: String,
 surgeon: String,
 assistant: String,
-entries : [{
-    ts: String,
-    entrycat: Object,
-    event: Object,
-    comment: String,
-     }],
+entries : Object,
+evaluation: Object,
 },
 { typeKey: '$type' }
 );

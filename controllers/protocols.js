@@ -5,7 +5,7 @@ module.exports.controller = (app) => {
 
 // fetch all protocols
 app.get('/protocols', (req, res) => {
-    ProtocolSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries', (error,
+    ProtocolSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({
@@ -85,6 +85,7 @@ const newProtocol = new ProtocolSchema({
     surgeon: req.body.surgeon,
     assistant: req.body.assistant,
     entries: req.body.entries,
+    evaluation: req.body.evaluation,
 
 });
 

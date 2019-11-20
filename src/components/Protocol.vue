@@ -597,48 +597,48 @@
             <v-container>
               <v-row>
                 <v-col cols="12" sm="4" md="2">
-                 <v-checkbox v-model="modalities" class="my-n3" label="SSEPs" value="sseps"></v-checkbox>
-                 <v-checkbox v-model="modalities" class="my-n3" label="MEPs" value="meps"></v-checkbox>
-                 <v-checkbox v-model="modalities" class="my-n3" label="AEPs" value="aeps"></v-checkbox>
-                 <v-checkbox v-model="modalities" class="my-n3" label="VEPs" value="veps"></v-checkbox>
-                 <v-checkbox v-model="modalities" class="my-n3" label="EMG" value="emg"></v-checkbox>
-                 <v-checkbox v-model="modalities" class="my-n3" label="ECOG" value="ecog"></v-checkbox>
+                 <v-checkbox v-model="evaluation.sseps" class="my-n3" label="SSEPs" value="sseps"></v-checkbox>
+                 <v-checkbox v-model="evaluation.meps" class="my-n3" label="MEPs" value="meps"></v-checkbox>
+                 <v-checkbox v-model="evaluation.aeps" class="my-n3" label="AEPs" value="aeps"></v-checkbox>
+                 <v-checkbox v-model="evaluation.veps" class="my-n3" label="VEPs" value="veps"></v-checkbox>
+                 <v-checkbox v-model="evaluation.emg" class="my-n3" label="EMG" value="emg"></v-checkbox>
+                 <v-checkbox v-model="evaluation.ecog" class="my-n3" label="ECOG" value="ecog"></v-checkbox>
                 </v-col>
 
                 <v-col cols="12" sm="4" md="4">
-                 <v-checkbox v-model="modalities" class="my-n3" label="Grid-MEPs" value="grid"></v-checkbox>
-                 <v-checkbox v-model="modalities" class="my-n3" label="Dynamischer Sauger" value="sauger"></v-checkbox>
-                 <v-checkbox v-model="modalities" class="my-n3" label="DNS" value="dns"></v-checkbox>
-                  <v-checkbox v-model="modalities" class="my-n3" label="D-Welle" value="dwave"></v-checkbox>
-                  <v-checkbox v-model="modalities" class="my-n3" label="Penfield" value="penfield"></v-checkbox>
-                  <v-text-field class="my-n6" label="tiefste Mapping-Schwelle" suffix="mA"></v-text-field>
+                 <v-checkbox v-model="evaluation.gridmeps" class="my-n3" label="Grid-MEPs" value="grid"></v-checkbox>
+                 <v-checkbox v-model="evaluation.sauger" class="my-n3" label="Dynamischer Sauger" value="sauger"></v-checkbox>
+                 <v-checkbox v-model="evaluation.dns" class="my-n3" label="DNS" value="dns"></v-checkbox>
+                  <v-checkbox v-model="evaluation.dwave" class="my-n3" label="D-Welle" value="dwave"></v-checkbox>
+                  <v-checkbox v-model="evaluation.penfield" class="my-n3" label="Penfield" value="penfield"></v-checkbox>
+                  <v-text-field v-model="evaluation.mappingsw" class="my-n6" label="tiefste Mapping-Schwelle" suffix="mA"></v-text-field>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="reflexes" class="my-n3" label="BR" value="br"></v-checkbox>
-                 <v-checkbox v-model="reflexes" class="my-n3" label="LAR" value="lar"></v-checkbox>
-                 <v-checkbox v-model="reflexes" class="my-n3" label="BCR" value="bcr"></v-checkbox>
+                 <v-checkbox v-model="evaluation.br" class="my-n3" label="BR" value="br"></v-checkbox>
+                 <v-checkbox v-model="evaluation.lar" class="my-n3" label="LAR" value="lar"></v-checkbox>
+                 <v-checkbox v-model="evaluation.bcr" class="my-n3" label="BCR" value="bcr"></v-checkbox>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="4">
-                  <v-checkbox v-model="summary" class="my-n3" label="IOM stabil" value="stabil"></v-checkbox>
-                  <v-select class="my-n3"
+                  <v-checkbox v-model="evaluation.stabil" class="my-n3" label="IOM stabil" value="stabil"></v-checkbox>
+                  <v-select v-model="evaluation.sseps2" class="my-n3"
                     :items="eventchanges"
                     label="SSEPs"
                   ></v-select>
-                  <v-select class="my-n3"
+                  <v-select v-model="evaluation.meps2" class="my-n3"
                     :items="eventchanges"
                     label="MEPs"
                   ></v-select>
-                  <v-select class="my-n3"
+                  <v-select v-model="evaluation.aeps2" class="my-n3"
                     :items="eventchanges"
                     label="AEPs"
                   ></v-select>
-                  <v-select class="my-n3"
+                  <v-select v-model="evaluation.veps2"class="my-n3"
                     :items="eventchanges"
                     label="VEPs"
                   ></v-select>
-                  <v-select class="my-n3"
+                  <v-select v-model="evaluation.gripdmeps2" class="my-n3"
                     :items="eventchanges"
                     label="Grid-MEPs"
                   ></v-select>
@@ -647,18 +647,18 @@
               <v-divider></v-divider>
               <v-row>
                  <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="summary" class="my-n3" label="Wach-OP" value="wachop"></v-checkbox>
-                 <v-checkbox v-model="summary" class="my-n3" label="SCS" value="scs"></v-checkbox>
+                 <v-checkbox v-model="evaluation.wachop" class="my-n3" label="Wach-OP" value="wachop"></v-checkbox>
+                 <v-checkbox v-model="evaluation.scs" class="my-n3" label="SCS" value="scs"></v-checkbox>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="summary" class="my-n3" label="DBS" value="dbs"></v-checkbox>
-                 <v-checkbox v-model="summary" class="my-n3" label="IB" value="ib"></v-checkbox>
+                 <v-checkbox v-model="evaluation.dbs" class="my-n3" label="DBS" value="dbs"></v-checkbox>
+                 <v-checkbox v-model="evaluation.ib" class="my-n3" label="IB" value="ib"></v-checkbox>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-checkbox v-model="study" class="my-n3" label="Studienfall" value="study"></v-checkbox>
+                  <v-checkbox  class="my-n3" v-model="study" label="Studienfall" value="study"></v-checkbox>
                 </v-col>
                 <v-col cols="12" sm="6" md="6">
-                  <v-text-field class="my-n3" :disabled="!study" label="Studien eingeben"></v-text-field>
+                  <v-text-field v-model="evaluation.study" class="my-n3"  :disabled="!study" label="Studien eingeben"></v-text-field>
                 </v-col>
 
               </v-row>
@@ -667,7 +667,7 @@
               </v-row>
               <v-row>
                 <v-col cols="12" md="12">
-                  <v-textarea
+                  <v-textarea v-model="evaluation.comment"
                   outlined
                   name="Bemerkungen"
                  label="Bemerkungen"
@@ -683,7 +683,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="dialogEval = false">Fall beenden</v-btn>
+            <v-btn  depressed  large color="success" @click="submit()">Fall beenden</v-btn>
             <v-btn  depressed  large color="normal"  @click="dialogEval = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
@@ -743,6 +743,44 @@ dialogDwave: false,
 
 study: false,
 
+  evaluation: {
+
+      sseps:'',
+      meps:'',
+      aeps:'',	
+      veps:'',
+      emg:'',
+      ecog:'',
+
+      gridmeps:'',
+      sauger:'',
+      dns:'',
+      dwave:'',
+      penfield:'',
+      mappingsw:'',
+
+      br:'',
+      lar:'',
+      bcr:'',
+
+      stabil:'',
+      sseps2:'',
+      meps2:'',
+      aeps2:'',
+      veps2:'',
+      gridmeps2:'',
+
+      wachop:'',
+      scs:'',
+      dbs:'',
+      ib:'',
+      study:'',
+
+
+      comment:'',
+
+
+    },
 
 
 
@@ -919,7 +957,7 @@ this.dialogEval = true;
       event: 'IOM beendet',
       comment: '',
  });
-//this.submit();
+
 },
 
 
@@ -944,7 +982,9 @@ this.dialogEval = true;
 
  // submit method to send the new protocol to the backend to store
     submit() {
-      
+      this.dialogEval = false;
+      console.log(this.evaluation);
+
         var self = this;
         return axios({
           method: 'post',
@@ -963,6 +1003,7 @@ this.dialogEval = true;
             surgeon: this.surgeon,
             assistant: this.assistant,
             entries: this.entries,
+            evaluation: this.evaluation,
           },
           url: 'http://localhost:8081/protocols',
           headers: {
@@ -985,7 +1026,7 @@ this.dialogEval = true;
               'Das Protokoll konnte nicht gespeichert werden!',
               'error',
             );
-          });
+          }); 
      
     },
   

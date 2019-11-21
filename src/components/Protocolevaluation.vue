@@ -37,6 +37,7 @@
       </v-card-text>
       <v-card-text class="text-center">
        <v-btn   class="my-n3" width="180px" color="primary"  @click="dialogDwave = true" >D-Welle</v-btn>
+        </br></br>
       </v-card-text>
       
     </v-card>
@@ -77,13 +78,21 @@
         <v-flex md1></v-flex>
        <v-flex md2 >{{entry.event}}</v-flex>
         <v-flex md1></v-flex>
-        <v-flex md3> <v-textarea v-model="entry.comment"  :auto-grow="true" :dense="true" :readonly="true" :rows="2"></v-textarea></v-flex>
-       
-        
+        <v-flex md3> <v-textarea v-model="entry.comment"  :auto-grow="true" :dense="true" :readonly="true" :rows="2"></v-textarea></v-flex>        
       </v-layout > 
        <v-divider></v-divider>
       </div>
         </v-flex> 
+
+
+      
+
+        
+
+        
+
+
+      
 
   
 <!-- dialog for case evaluation -->
@@ -176,6 +185,7 @@
                   ></v-textarea>
                  </v-col>
              </v-row>    
+             
 
             </v-container>
 
@@ -190,9 +200,48 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-           --> 
+           
   </v-layout> 
- 
+  </br></br>
+  <v-layout row>
+               <v-flex md2></v-flex>
+               <v-flex md10>
+                 <v-layout row>
+                   <v-flex md0.5></v-flex>
+                    <v-flex md2> <v-btn    color="primary"  @click="">PDF genereiren</v-btn></v-flex>
+                    <v-flex md0.5></v-flex>
+                    <v-flex md2> <v-btn    color="primary"  @click="">EDF hinzufügen</v-btn></v-flex>
+                    <v-flex md0.5></v-flex>
+                    <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation hinzufügen</v-btn></v-flex>
+                    
+                    <v-flex md3><b><v-btn    color="success"  @click="">Fall abschliessen</v-btn></b></v-flex>
+                </v-layout>
+               </v-flex>
+    </v-layout> 
+
+
+    <!-- dialog for interpretation -->
+         <v-dialog v-model="dialogInterpret" persistent max-width="600px">
+        
+        <v-card>
+          <v-card-title>
+            <span class="headline">Interpretation:</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                  <v-textarea  v-model="interp" :outlined="true" :auto-grow="true" ></v-textarea>
+              </v-row>
+            </v-container>
+           
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn  depressed  large color="success" @click="">Speichern</v-btn>
+            <v-btn  depressed  large color="normal"  @click="dialogInterpret = false">Abbrechen</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
   
 </v-container>
 
@@ -214,10 +263,10 @@ export default {
 
 
 dialogEval: false,
-
+dialogInterpret: false,
     
     
-  
+ interp: '', 
     
     casenr: 0,
     pid: '',
@@ -297,7 +346,7 @@ study: '',
           this.assistant = response.data.protocols.assistant;
           this.entries = response.data.protocols.entries;
           this.evaluation = response.data.protocols.evaluation;
-          console.log(response.data.protocols);
+          console.log(response.data.protocols.entries);
          
         })
         .catch(() => { console.log('error'); });

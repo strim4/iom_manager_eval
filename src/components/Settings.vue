@@ -4,7 +4,7 @@
 
 <v-container grid-list-md text-xs-center>
     
-       </br></br></br></br>
+       </br></br>
       <v-layout row wrap>
      
         <v-flex  xs6>

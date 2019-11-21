@@ -34,6 +34,7 @@
       </v-card-text>
       <v-card-text class="text-center">
        <v-btn   class="my-n3" width="180px" color="primary"  @click="dialogDwave = true" >D-Welle</v-btn>
+       </br></br>
       </v-card-text>
       
     </v-card>
@@ -66,7 +67,7 @@
         <v-flex md2 ><v-text-field style="margin-left: 2.3em;" v-model="entry.ts" name="entries[][ts]"  :solo="true" :flat="true" background-color="transparent">{{entry.ts}}</v-text-field></v-flex>
        
         <v-flex md2>
-           <v-select label="Kategorie"  v-model="entry.entrycat" item-value="name"  :items="dbcategories" item-text="name" :value="entry.entrycar"   return-object name="entries[][entrycat]"></v-select>
+           <v-select label="Kategorie"  v-model="entry.entrycat"  :items="dbcategories" item-text="name" item-value="entry.entrycat.name"   return-object name="entrycat"></v-select>
         </v-flex>
         <v-flex md1></v-flex>
         <v-flex md2>
@@ -847,7 +848,7 @@ dialogDwave: false,
  this.fetchCategories();  
  this.entries.push( {
       ts: this.entry.ts,
-      entrycat: 'IOM',
+      entrycat: { "options": [ "IOM gestartet", "IOM beendet", "Kalibrierung" ], "_id": "5dce9280026fa6fcc7f8653e", "name": "IOM" },
       event: 'IOM gestartet',
       comment: '',
  }) ;
@@ -886,7 +887,7 @@ dialogDwave: false,
       comment: this.entry.comment,
  }) ;
 window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
-
+console.log(this.entries);
     },
 
   
@@ -942,7 +943,7 @@ this.dialogFinish = false;
 this.dialogEval = true;
  this.entries.push( {
       ts: this.entry.ts,
-      entrycat: 'IOM',
+      entrycat: { "options": [ "IOM gestartet", "IOM beendet", "Kalibrierung" ], "_id": "5dce9280026fa6fcc7f8653e", "name": "IOM" },
       event: 'IOM beendet',
       comment: '',
  });

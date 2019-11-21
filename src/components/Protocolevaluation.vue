@@ -208,9 +208,9 @@
                <v-flex md10>
                  <v-layout row>
                    <v-flex md0.5></v-flex>
-                    <v-flex md2> <v-btn    color="primary"  @click="">PDF genereiren</v-btn></v-flex>
+                    <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF genereiren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
-                    <v-flex md2> <v-btn    color="primary"  @click="">EDF hinzufügen</v-btn></v-flex>
+                    <v-flex md2> <v-btn    color="primary"  @click="dialogUpload = true">EDF hinzufügen</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation hinzufügen</v-btn></v-flex>
                     
@@ -242,6 +242,36 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+
+
+      <!-- dialog for fileupload -->
+         <v-dialog v-model="dialogUpload" persistent max-width="600px">
+        
+        <v-card>
+          <v-card-title>
+            <span class="headline">EDF-Datei hochladen:</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                  <v-file-input v-model="file" show-size label="Datei auswählen" ></v-file-input>
+              </v-row>
+              <v-row>
+               
+       <v-btn color="indigo accent-4" text @click="forceFileDownload(this.file)"> öffnen</v-btn>
+       
+              </v-row>
+              
+            </v-container>
+           
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn  depressed  large color="success" @click="saveFile()">Speichern</v-btn>
+            <v-btn  depressed  large color="normal"  @click="dialogUpload = false">Abbrechen</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
   
 </v-container>
 
@@ -253,6 +283,9 @@
 
 <script>
 import axios from 'axios';
+import pdfmake from 'pdfmake';
+import moment from 'moment';
+
 
 
 
@@ -264,6 +297,10 @@ export default {
 
 dialogEval: false,
 dialogInterpret: false,
+dialogUpload: false,
+
+file: null,
+
     
     
  interp: '', 
@@ -283,7 +320,7 @@ dialogInterpret: false,
     entries: [],
     evaluation: {},
 
-  
+  timestamps: [],
 
 study: '',
  
@@ -319,6 +356,12 @@ study: '',
   methods: {
 
 
+     forceFileDownload: function(response){
+      
+    },
+    
+
+
   // fetch a single protocol from the database
     async  fetchProtocol(casenr) {
       return axios({
@@ -346,41 +389,99 @@ study: '',
           this.assistant = response.data.protocols.assistant;
           this.entries = response.data.protocols.entries;
           this.evaluation = response.data.protocols.evaluation;
-          console.log(response.data.protocols.entries);
+         
          
         })
         .catch(() => { console.log('error'); });
     },
 
- 
-    // fetch a single case from the database
-    async  fetchCase(id) {
-      return axios({
-        method: 'get',
-        data: {
-          id,
-        },
-        url: `http://localhost:8081/cases/${id}`,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => {
-          this.casenr = response.data.cases.casenr;
-          this.pid = response.data.cases.pid;
-          this.fid = response.data.cases.fid;
-          this.name = response.data.cases.name;
-          this.surname = response.data.cases.surname;
-          this.birthdate = response.data.cases.birthdate;
-          this.diagnose = response.data.cases.diagnose;
-          this.operation = response.data.cases.operation;
-          this.isismodality = response.data.cases.isismodality;
-          this.opdate = response.data.cases.opdate;
-          this.surgeon = response.data.cases.surgeon;
-          this.assistant = response.data.cases.assistant;
-        })
-        .catch(() => { console.log('error'); });
+//method to upload file
+saveFile: function(){
+console.log(this.file);
+this.dialogUpload = false;
+
+},
+
+
+
+//generate PDF Export
+createPDF() {
+
+
+
+  
+	let documentDefinition = {
+  	content: 
+    [
+        { text: moment(new Date()).format('DD-MM-YYYY'), alignment: 'right' },
+       { text: 'IM Protokoll Fall Nr. ' + this.casenr, style: 'header' },
+
+        { text: 'Angaben zu Patient / Operation', style: 'subheader' },
+      { text: '', style: 'subheader' },
+
+       
+      {  
+        table: 
+        {
+            headerRows: 0,                            
+            body: 
+            [   
+              ["Vorname" ,  "Name", "Diagnose", "Opeartion", 'OP-Datum']   , 
+              [this.surname, this.name, this.diagnose, this.operation, this.opdate ],                
+              
+            ]
+        }
+    }, 
+       
+       { text: 'Protokolleinträge', style: 'subheader' },
+      { text: '', style: 'subheader' },
+    
+      
+      {  
+        table: 
+        {
+            headerRows: 0,                            
+            body: 
+            [   
+              ["Uhrzeit" ,  "Kategorie", "Event", "Bemerkung"]   , 
+              [, '','','' ],                
+              
+            ]
+        }
     },
+       
+      
+      
+      
+    
+  	],
+    styles: 
+    {
+    	header: 
+      {
+				fontSize: 18,
+				bold: true,
+        margin: [0, 10, 0, 10],
+        alignment: 'center'
+			},
+    	tableHeader: 
+      {
+      	fillColor: '#4CAF50',
+    		color: 'white'
+      }
+    }
+  };
+  
+  pdfmake.createPdf(documentDefinition).download('IOM-Fall Nr. ' + this.casenr +'.pdf');
+}
+
+
+
+
+
+
+ 
+ 
   },
 };
 </script>

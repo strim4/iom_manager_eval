@@ -214,7 +214,7 @@
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation hinzufügen</v-btn></v-flex>
                     
-                    <v-flex md3><b><v-btn    color="success"  @click="">Fall abschliessen</v-btn></b></v-flex>
+                    <v-flex md3><b><v-btn    color="success"  @click="">Fall abschliessen</v-btn></b> <div id="linc"></div></v-flex>
                 </v-layout>
                </v-flex>
     </v-layout> 
@@ -258,7 +258,7 @@
               </v-row>
               <v-row>
                
-       <v-btn color="indigo accent-4" text @click="forceFileDownload(this.file)"> öffnen</v-btn>
+       <v-btn color="indigo accent-4" text @click="openFile()"> öffnen</v-btn>
        
               </v-row>
               
@@ -357,6 +357,7 @@ study: '',
 
 
      forceFileDownload: function(response){
+       console.log(this.file);
       
     },
     
@@ -395,11 +396,33 @@ study: '',
         .catch(() => { console.log('error'); });
     },
 
-//method to upload file
-saveFile: function(){
-console.log(this.file);
-this.dialogUpload = false;
+//method to open the uploaded file in browser or to download it
 
+openFile: function(){
+
+  let reader = new FileReader()
+  reader.readAsDataURL(this.file);
+
+     reader.onloadend = (e) => {
+
+                let anchor = document.createElement('a')
+                anchor.setAttribute('class', 'q-attached-file', 'download')
+                anchor.setAttribute('title', this.file.name)
+                anchor.setAttribute('href', reader.result)
+                anchor.innerText = this.file.name
+               
+                var win = window.open();
+    win.document.write('<iframe src="' + anchor  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
+              
+       
+        
+    }
+  
+},
+
+//pseudo method to simulate file saving
+saveFile: function(){
+this.dialogUpload = false;
 },
 
 

@@ -20,6 +20,8 @@ surgeon: String,
 assistant: String,
 entries : Object,
 evaluation: Object,
+baselines: Object,
+extras: Object,
 },
 { typeKey: '$type' }
 );

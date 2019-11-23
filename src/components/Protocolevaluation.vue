@@ -214,7 +214,7 @@
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation hinzufügen</v-btn></v-flex>
                     
-                    <v-flex md3><b><v-btn    color="success"  @click="">Fall abschliessen</v-btn></b> <div id="linc"></div></v-flex>
+                    <v-flex md3><b><v-btn    color="success"  @click="">Fall abschliessen</v-btn></b></v-flex>
                 </v-layout>
                </v-flex>
     </v-layout> 
@@ -258,7 +258,7 @@
               </v-row>
               <v-row>
                
-       <v-btn color="indigo accent-4" text @click="openFile()"> öffnen</v-btn>
+       <v-btn color="indigo accent-4" text @click="openFile()"> Anzeigen / Herunterladen</v-btn>
        
               </v-row>
               
@@ -356,11 +356,7 @@ study: '',
   methods: {
 
 
-     forceFileDownload: function(response){
-       console.log(this.file);
-      
-    },
-    
+
 
 
   // fetch a single protocol from the database

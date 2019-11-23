@@ -30,11 +30,7 @@
        <v-btn  class="my-n3" width="180px"  color="primary"  @click="dialogBaselines = true" >Baselines</v-btn>
       </v-card-text>
       <v-card-text class="text-center">
-       <v-btn   class="my-n3" width="180px"  color="primary"  @click="dialogGrid = true" >Grid-MEPs</v-btn>
-      </v-card-text>
-      <v-card-text class="text-center">
-       <v-btn   class="my-n3" width="180px" color="primary"  @click="dialogDwave = true" >D-Welle</v-btn>
-       </br></br>
+       <v-btn   class="my-n3" width="180px" color="primary"  @click="dialogExtras = true" >Extras</v-btn>
       </v-card-text>
       
     </v-card>
@@ -168,10 +164,12 @@
             </v-container>
               </v-expansion-panel-content>
             </v-expansion-panel>
+
+
             <v-expansion-panel>
-              <v-expansion-panel-header>Baselines MEPs</v-expansion-panel-header>
+              <v-expansion-panel-header>Baselines TES MEPs</v-expansion-panel-header>
             <v-expansion-panel-content>
-                          <v-container>
+              <v-container>
               <v-row>
                   <v-col cols="12" sm="6" md="2">
                   <v-select class="my-n5" 
@@ -189,13 +187,13 @@
                    <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                    <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
                 </v-col>
               </v-row>
                <v-row>
@@ -215,22 +213,636 @@
                    <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                    <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 3"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 4"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 5"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 6"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 7"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 8"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 9"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 10"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+                             <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 11"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 12"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+                             <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 13"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+                             <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 14"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 15"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="muscles"
+                    label="Kanal 16"
+                  ></v-select>
+                 </v-col>
+                  <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C1/C2" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/C4" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C3/Cz" suffix="mA"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                   <v-text-field  class="my-n5" label="C4/Cz" suffix="mA"></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
             </v-expansion-panel-content>
             </v-expansion-panel>
+
+
+            <v-expansion-panel>
+              <v-expansion-panel-header>Baselines DCS MEPs</v-expansion-panel-header>
+              <v-expansion-panel-content>
+              <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Masseter</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Orb oris</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Deltoideus</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Biceps</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col ols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Extensor</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col ols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Thenar</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col ols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Tib ant</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col ols="12" sm="6" md="2">
+                  <v-subheader class="my-n5" >Abd hall</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-subheader  class="my-n5" >Thenar</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="2" >
+                  <v-subheader  class="my-n5" >Tib ant</v-subheader>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-select  class="my-n5" 
+                    :items="sides"
+                    label="Seite"
+                  ></v-select>
+                 </v-col>
+                 </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#1" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#2" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#3" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-text-field  class="my-n5" label="#4" ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines AEPs</v-expansion-panel-header>
               <v-expansion-panel-content>
-                            <v-container>
+                <v-container>
               <v-row>
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader class="my-n5" >AEP L</v-subheader>
@@ -274,6 +886,8 @@
             </v-container>
               </v-expansion-panel-content>
             </v-expansion-panel>
+
+
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines VEPs</v-expansion-panel-header>
               <v-expansion-panel-content>
@@ -298,6 +912,8 @@
             </v-container>
               </v-expansion-panel-content>
             </v-expansion-panel>
+
+
             <v-expansion-panel>
               <v-expansion-panel-header>Reflexe</v-expansion-panel-header>
               <v-expansion-panel-content>
@@ -367,180 +983,46 @@
         </v-card>
       </v-dialog>
 
-    <!-- dialog for grid-baselines  -->
-         <v-dialog v-model="dialogGrid" persistent max-width="600px">
+
+    <!-- dialog for d-wave -->
+         <v-dialog v-model="dialogExtras" persistent max-width="600px">
         
         <v-card>
           <v-card-title>
-            <span class="headline">Grid-MEPs:</span>
+            <span class="headline">Extras:</span>
           </v-card-title>
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Masseter</v-subheader>
+                <v-col cols="12" sm="6" md="3">
+                  <v-subheader class="my-n5" >D-Welle:</v-subheader>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
+                <v-col cols="12" sm="6" md="3">
+                  <v-text-field  class="my-n5" label="Amplitude" suffix="mA" ></v-text-field>
                 </v-col>
-              </v-row>
-              <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Orb oris</v-subheader>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Deltoideus</v-subheader>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Biceps</v-subheader>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Extensor</v-subheader>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Thenar</v-subheader>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Tib ant</v-subheader>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col ols="12" sm="6" md="3">
-                  <v-subheader class="my-n5" >Abd hall</v-subheader>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
+                <v-col cols="12" sm="6" md="3">
+                  <v-text-field  class="my-n5" label="Latenz" suffix="ms"></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
                 <v-col cols="12" sm="6" md="3">
-                  <v-subheader  class="my-n5" >Thenar</v-subheader>
+                  <v-text-field class="my-n5" label="Weitere"></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
+                <v-col cols="12" sm="6" md="3">
+                  <v-text-field  class="my-n5" label="Amplitude" suffix="mA" ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <v-text-field  class="my-n5" label="Latenz" suffix="ms"></v-text-field>
                 </v-col>
               </v-row>
                             <v-row>
-                <v-col cols="12" sm="6" md="3" >
-                  <v-subheader  class="my-n5" >Tib ant</v-subheader>
+                <v-col cols="12" sm="6" md="3">
+                  <v-text-field class="my-n5" label="Weitere"></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-select  class="my-n5" 
-                    :items="sides"
-                    label="Seite"
-                  ></v-select>
-                 </v-col>
-                <v-col cols="12" sm="6" md="2">
-                  <v-text-field  class="my-n5" label="C1/C2" ></v-text-field>
-                </v-col>
-              </v-row>
-            </v-container>
-           
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="dialogGrid = false">Speichern</v-btn>
-            <v-btn  depressed  large color="normal"  @click="dialogGrid = false">Abbrechen</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-    <!-- dialog for d-wave -->
-         <v-dialog v-model="dialogDwave" persistent max-width="600px">
-        
-        <v-card>
-          <v-card-title>
-            <span class="headline">D-Welle:</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="3">
                   <v-text-field  class="my-n5" label="Amplitude" suffix="mA" ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="6" md="4">
+                <v-col cols="12" sm="6" md="3">
                   <v-text-field  class="my-n5" label="Latenz" suffix="ms"></v-text-field>
                 </v-col>
               </v-row>
@@ -549,8 +1031,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="dialogDwave = false">Speichern</v-btn>
-            <v-btn  depressed  large color="normal"  @click="dialogDwave = false">Abbrechen</v-btn>
+            <v-btn  depressed  large color="success" @click="dialogExtras = false">Speichern</v-btn>
+            <v-btn  depressed  large color="normal"  @click="dialogExtras = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -636,7 +1118,7 @@
                     :items="eventchanges"
                     label="AEPs"
                   ></v-select>
-                  <v-select v-model="evaluation.veps2"class="my-n3"
+                  <v-select v-model="evaluation.veps2" class="my-n3"
                     :items="eventchanges"
                     label="VEPs"
                   ></v-select>
@@ -739,10 +1221,7 @@ export default {
 dialogFinish: false,
 dialogEval: false,
 dialogBaselines: false,
-dialogGrid: false,
-dialogDwave: false,
-
-
+dialogExtras: false,
 
 
 

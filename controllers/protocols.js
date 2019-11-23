@@ -5,7 +5,7 @@ module.exports.controller = (app) => {
 
 // fetch all protocols
 app.get('/protocols', (req, res) => {
-    ProtocolSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation', (error,
+    ProtocolSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({
@@ -16,7 +16,7 @@ app.get('/protocols', (req, res) => {
 
 //fetch a single protocol
 app.get('/protocols/:casenr', (req, res) => {
-    ProtocolSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation', (error,
+    ProtocolSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({

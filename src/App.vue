@@ -100,6 +100,8 @@
 </template>
 
 <script>
+
+
 // Import main stylesheet
 import './assets/stylesheets/main.css';
 

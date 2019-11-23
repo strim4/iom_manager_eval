@@ -23,14 +23,14 @@
 
         <v-card>
                 <v-card-title>
-                    Erfasste Operationen
+                    Erfasste Einträge
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" single-line hide-details></v-text-field>
                 </v-card-title>
       <v-data-table
       v-model="selected"
       :headers="headers"
-      :items="IomCategories"
+      :items="categories"
      
       :search="search"
       class="elevation-1"
@@ -42,7 +42,7 @@
       <template v-slot:item.action="{ item }">
             <v-icon
 
-          @click="deleteOperation(item._id, item)"
+          @click="deleteCategory(item._id, item)"
         >
           delete
         </v-icon>
@@ -53,30 +53,7 @@
 
       </v-card>
       </br></br>
-<v-btn @click="sortCategories">Testbutton</v-btn>
-</br> </br> </br> </br> 
- <v-layout row>
-        <v-flex md3><b><p>Kategorie</p></b></v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md3><b>Event</b></v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md1><b>Löschen</b></v-flex>
-      </v-layout >  </br> 
-      <div v-for="(category, index) in categories" >
 
-<div v-for="(option, index) in category.options" >
-
- <v-layout row>
-  <v-flex md3>{{category.name}}</v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md3>{{option}}</v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md1><b> <v-icon @click="removeEntry(index)">
-          delete
-        </v-icon></b></v-flex>
-          </v-layout > 
-</div>
-      </div>
 </br></br>
     
 
@@ -116,6 +93,7 @@ export default {
       align: 'left',
       value: 'options',
     },
+  
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
@@ -138,11 +116,9 @@ computed: {
 
     sortCategories: function(){
       let iomCat = [];
-      iomCat = this.categories.filter(cat => cat.name == 'IOM');
-      console.log(iomCat);
-     let result = iomCat.map(({ options }) => options)
-      console.log(result);
-  this.IomCategories = iomCat;
+      this.IomCategories = this.categories.filter(cat => cat.name == 'IOM');
+      console.log(this.IomCategories);
+   
 
     },
   
@@ -206,21 +182,21 @@ computed: {
         .catch(() => {});
     },
     // delete a device from the database
-    async  deleteDevice(id, item) {
-      console.log(id);
+    async  deleteCategory(id, item) {
+      
       return axios({
         method: 'delete',
         data: {
           id,
         },
-        url: `http://localhost:8081/devices/${id}`,
+        url: `http://localhost:8081/categories/${id}`,
         headers: {
           'Content-Type': 'application/json',
         },
       })
         .then((response) => {
-          const index = this.devices.indexOf(item);
-          this.devices.splice(index, 1);
+          const index = this.categories.indexOf(item);
+          this.categories.splice(index, 1);
         })
         .catch(() => {});
     },

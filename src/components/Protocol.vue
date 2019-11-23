@@ -902,7 +902,6 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
 
-
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines VEPs</v-expansion-panel-header>
               <v-expansion-panel-content>

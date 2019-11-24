@@ -210,7 +210,7 @@
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation hinzufügen</v-btn></v-flex>
                     
-                    <v-flex md3><b><v-btn    color="success"  @click="">Fall abschliessen</v-btn></b></v-flex>
+                    <v-flex md3><b><v-btn    color="success"  @click="submit()">Fall abschliessen</v-btn></b></v-flex>
                 </v-layout>
                </v-flex>
     </v-layout> 
@@ -1603,6 +1603,64 @@ study: '',
         })
         .catch(() => { console.log('error'); });
     },
+
+
+
+  // submit method to send the new protocol to the db and delete the case from opencase db
+    submit() {
+      
+    
+
+        var self = this;
+        return axios({
+          method: 'post',
+          data: {
+           
+            casenr: this.casenr,
+            pid: this.pid,
+            fid: this.fid,
+            name: this.name,
+            surname: this.surname,
+            birthdate: this.birthdate,
+            diagnose: this.diagnose,
+            operation: this.operation,
+            isismodality: this.isismodality,
+            opdate: this.opdate,
+            surgeon: this.surgeon,
+            assistant: this.assistant,
+            entries: this.entries,
+            evaluation: this.evaluation,
+            baselines: this.baselines,
+            extras: this.extras,
+            interpretation: this.interp,
+            edf: this.file,
+          },
+          url: 'http://localhost:8081/completcase',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          
+        })
+          .then(() => {
+            this.$swal(
+              'Erfolgreich!',
+              'Das Fall wurde erfolgreich abgeschlossen!',
+              'success',
+            );
+      
+            this.$router.push({ name: 'Casesearch' });
+            
+          })
+          .catch(() => {
+            this.$swal(
+              'Fehler!',
+              'Der Fall konnte nicht abgesclossen werden!',
+              'error',
+            );
+          }); 
+     
+    },
+
 
 //method to open the uploaded file in browser or to download it
 

@@ -5,7 +5,7 @@ module.exports.controller = (app) => {
 
 // fetch all completed cases
 app.get('/completcase', (req, res) => {
-    CompletcaseSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
+    CompletcaseSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras interpretation edf', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({
@@ -47,8 +47,8 @@ app.post('/completcase', (req, res) => {
         evaluation: req.body.evaluation,
         baselines: req.body.baselines,
         extras: req.body.extras,
-        interpretation: req.body.interpretation,
-        edf: req.body.edf,
+        interpretation: req.body.interp,
+        edf: req.body.file,
     
     });
     
@@ -74,7 +74,7 @@ app.delete('/cases/:id', (req, res) => {
     });
 */
 
-// add a new completed case
+/*
 app.post('/completcase', (req, res) => {
 const newCompletCase = new CompletcaseSchema({
     
@@ -104,5 +104,5 @@ newCompletCase.save((error, protocol) => {
 if (error) { console.log(error); }
 res.send(protocol);
 });
-});
-};
+});*/
+}; 

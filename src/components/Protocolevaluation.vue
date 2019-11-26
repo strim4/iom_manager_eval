@@ -1216,7 +1216,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="">Speichern</v-btn>
+            <v-btn  depressed  large color="success" @click="dialogInterpret = false">Speichern</v-btn>
             <v-btn  depressed  large color="normal"  @click="dialogInterpret = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
@@ -1632,8 +1632,8 @@ study: '',
             evaluation: this.evaluation,
             baselines: this.baselines,
             extras: this.extras,
-            interpretation: this.interp,
-            edf: this.file,
+            interp: this.interp,
+            file: this.file,
           },
           url: 'http://localhost:8081/completcase',
           headers: {

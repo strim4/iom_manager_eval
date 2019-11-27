@@ -92,7 +92,7 @@
         </v-content>
          <!-- Start Footer-->
         <v-footer color="indigo" app>
-            <span class="white--text">IOM Manager &copy; 2019 Chantal Zbinden,
+            <span class="white--text">IOM Manager &copy; 2019 / 2020 Chantal Zbinden,
              Moritz Strickler</span>
         </v-footer>
          <!-- Ende Footer -->

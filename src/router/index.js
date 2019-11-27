@@ -17,6 +17,7 @@ import Editopencase from '@/components/Editopencase';
 import Protocol from '@/components/Protocol';
 import Addprotocolentry from '@/components/Addprotocolentry';
 import Protocolevaluation from '@/components/Protocolevaluation';
+import Protocoloverview from '@/components/Protocoloverview';
 
 Vue.use(Router);
 
@@ -103,6 +104,11 @@ export default new Router({
       path: '/protocolevaluation/:casenr',
       name: 'Protocolevaluation',
       component: Protocolevaluation,
+    },
+    {
+      path: '/protocoloverview/:casenr',
+      name: 'Protocoloverview',
+      component: Protocoloverview,
     },
     
   ],

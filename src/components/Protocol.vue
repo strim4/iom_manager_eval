@@ -1713,13 +1713,14 @@ this.dialogEval = true;
           
         })
           .then(() => {
+            console.log(this.evaluation);
             this.$swal(
               'Erfolgreich!',
               'Das Protokoll wurde erfolgreich gespeichert!',
               'success',
             );
-           /* Zum Programmieren deaktivert, muss anschliessend wieder aktiviert werden 
-            this.deleteOpenCase(this.id); */
+           
+            this.deleteOpenCase(this.id); 
             this.$router.push({ name: 'Protocolevaluation', params: { casenr: this.casenr }  });
             
           })

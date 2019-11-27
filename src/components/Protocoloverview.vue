@@ -206,11 +206,11 @@
                    <v-flex md0.5></v-flex>
                     <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF genereiren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
-                    <v-flex md2> <v-btn    color="primary"  @click="dialogUpload = true">EDF hinzufügen</v-btn></v-flex>
+                    <v-flex md2.5> <v-btn    color="primary"  @click="openFile">EDF herunterladen</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
-                    <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation hinzufügen</v-btn></v-flex>
+                    <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation anzeigen</v-btn></v-flex>
                     
-                    <v-flex md3><b><v-btn    color="success"  @click="submit()">Fall abschliessen</v-btn></b></v-flex>
+                    
                 </v-layout>
                </v-flex>
     </v-layout> 
@@ -1131,15 +1131,15 @@
           <v-card-text>
             <v-container>
               <v-row>
-                  <v-textarea  v-model="interp" :outlined="true" :auto-grow="true" ></v-textarea>
+                  <v-textarea  v-model="interp" :outlined="true" :auto-grow="true" :disabled="true" ></v-textarea>
               </v-row>
             </v-container>
            
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="dialogInterpret= false">Speichern</v-btn>
-            <v-btn  depressed  large color="normal"  @click="dialogInterpret = false">Abbrechen</v-btn>
+            
+            <v-btn  depressed  large color="primary"  @click="dialogInterpret = false">Schliessen</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -1199,29 +1199,7 @@
 
 
 
-    <!-- dialog for interpretation -->
-         <v-dialog v-model="dialogInterpret" persistent max-width="600px">
-        
-        <v-card>
-          <v-card-title>
-            <span class="headline">Interpretation:</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                  <v-textarea  v-model="interp" :outlined="true" :auto-grow="true" ></v-textarea>
-              </v-row>
-            </v-container>
-           
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="dialogInterpret = false">Speichern</v-btn>
-            <v-btn  depressed  large color="normal"  @click="dialogInterpret = false">Abbrechen</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
+    
 
       <!-- dialog for fileupload -->
          <v-dialog v-model="dialogUpload" persistent max-width="600px">
@@ -1608,61 +1586,6 @@ study: '',
 
 
 
-  // submit method to send the new protocol to the db and delete the case from opencase db
-    submit() {
-      
-    
-
-        var self = this;
-        return axios({
-          method: 'post',
-          data: {
-           
-            casenr: this.casenr,
-            pid: this.pid,
-            fid: this.fid,
-            name: this.name,
-            surname: this.surname,
-            birthdate: this.birthdate,
-            diagnose: this.diagnose,
-            operation: this.operation,
-            isismodality: this.isismodality,
-            opdate: this.opdate,
-            surgeon: this.surgeon,
-            assistant: this.assistant,
-            entries: this.entries,
-            evaluation: this.evaluation,
-            baselines: this.baselines,
-            extras: this.extras,
-            interp: this.interp,
-            file: this.file,
-          },
-          url: 'http://localhost:8081/completcase',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          
-        })
-          .then(() => {
-            this.$swal(
-              'Erfolgreich!',
-              'Das Fall wurde erfolgreich abgeschlossen!',
-              'success',
-            );
-      
-            this.$router.push({ name: 'Casesearch' });
-            
-          })
-          .catch(() => {
-            this.$swal(
-              'Fehler!',
-              'Der Fall konnte nicht abgesclossen werden!',
-              'error',
-            );
-          }); 
-     
-    },
-
 
 //method to open the uploaded file in browser or to download it
 
@@ -1686,11 +1609,6 @@ openFile: function(){
         
     }
   
-},
-
-//pseudo method to simulate file saving
-saveFile: function(){
-this.dialogUpload = false;
 },
 
 

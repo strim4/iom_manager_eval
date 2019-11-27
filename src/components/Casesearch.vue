@@ -20,7 +20,7 @@
       class="elevation-1"  
     >
       <template v-slot:item.start="{ item }">
-       <router-link :to="{ name: 'Protocolevaluation',  params: { casenr: item.casenr }  }">
+       <router-link :to="{ name: 'Protocoloverview',  params: { casenr: item.casenr }  }">
             <v-icon :color="color">
         mdi-file-document
         </v-icon>
@@ -50,12 +50,17 @@ export default {
       headers: [
         { text: 'Fall öffnen', value: 'start', sortable: false },
         { text: 'Fall Nr.', value: 'casenr' },
+        { text: 'FID.', value: 'fid' },
+        { text: 'PID', value: 'pid' },
         { text: 'Name', value: 'name' },
         { text: 'Vorname', value: 'surname' },
         { text: 'Geburtsdatum', value: 'birthdate' },
         { text: 'Diagnose', value: 'diagnose' },
         { text: 'Operation', value: 'operation' },
         { text: 'OP-Datum', value: 'opdate', },
+        { text: 'Operateur', value: 'surgeon', },
+        { text: 'Assistent', value: 'assistant', },
+        { text: 'Studie', value: 'evaluation.study', },
       
 
       ],
@@ -72,10 +77,11 @@ export default {
     async fetchCases() {
       return axios({
         method: 'get',
-        url: 'http://localhost:8081/cases',
+        url: 'http://localhost:8081/completcase',
       })
         .then((response) => {
-          this.completcases = response.data.cases;
+          console.log(response.data.protocols);
+          this.completcases = response.data.protocols;
         })
         .catch(() => {});
     },

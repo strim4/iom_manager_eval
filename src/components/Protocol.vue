@@ -621,7 +621,6 @@
                     label="Seite"
                   ></v-select>
                  </v-col>
-                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-text-field v-model="baselines.masseter1" class="my-n5" label="#1" ></v-text-field>
                 </v-col>
@@ -669,7 +668,6 @@
                     label="Seite"
                   ></v-select>
                  </v-col>
-                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-text-field v-model="baselines.deltoideus1" class="my-n5" label="#1" ></v-text-field>
                 </v-col>
@@ -715,7 +713,6 @@
                     :items="sides"
                     label="Seite"
                   ></v-select>
-                 </v-col>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-text-field v-model="baselines.extensor1" class="my-n5" label="#1" ></v-text-field>
@@ -763,7 +760,6 @@
                     label="Seite"
                   ></v-select>
                  </v-col>
-                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-text-field v-model="baselines.tib1" class="my-n5" label="#1" ></v-text-field>
                 </v-col>
@@ -786,7 +782,6 @@
                     :items="sides"
                     label="Seite"
                   ></v-select>
-                 </v-col>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-text-field v-model="baselines.abd1" class="my-n5" label="#1" ></v-text-field>
@@ -811,7 +806,6 @@
                     label="Seite"
                   ></v-select>
                  </v-col>
-                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-text-field v-model="baselines.thenar21" class="my-n5" label="#1" ></v-text-field>
                 </v-col>
@@ -834,7 +828,6 @@
                     :items="sides"
                     label="Seite"
                   ></v-select>
-                 </v-col>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-text-field v-model="baselines.tib21" class="my-n5" label="#1" ></v-text-field>
@@ -991,7 +984,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="primary"  @click="dialogBaselines = false">Schliessen</v-btn>
+            <v-btn  depressed  large color="success"  @click="dialogBaselines = false">Speichern</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -1044,7 +1037,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn  depressed  large color="primary"  @click="dialogExtras = false">Schliessen</v-btn>
+            <v-btn  depressed  large color="success"  @click="dialogExtras = false">Speichern</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

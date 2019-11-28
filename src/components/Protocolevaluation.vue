@@ -1262,8 +1262,14 @@
 
 <script>
 import axios from 'axios';
-import pdfmake from 'pdfmake';
+//import pdfmake from 'pdfmake';
 import moment from 'moment';
+
+import pdfmake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 
 
 
@@ -1713,9 +1719,7 @@ openFile: function(){
 //pseudo method to simulate file saving
 saveFile: function(){
 this.dialogUpload = false;
-console.log(this.base64);
-this.convert();
-console.log(this.base);
+
 },
 
 
@@ -1754,18 +1758,7 @@ createPDF() {
       { text: '', style: 'subheader' },
     
       
-      {  
-        table: 
-        {
-            headerRows: 0,                            
-            body: 
-            [   
-              ["Uhrzeit" ,  "Kategorie", "Event", "Bemerkung"]   , 
-              [, '','','' ],                
-              
-            ]
-        }
-    },
+     
        
       
       

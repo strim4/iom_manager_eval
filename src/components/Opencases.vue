@@ -19,7 +19,7 @@
       item-key="name"
       :search="search"
       class="elevation-1"  
-      no-data-text="keine offenen Fälle gefunden"
+      no-data-text="keine offenen Fälle gefunden - Legen Sie eine neuen Fall an"
     >
       <template v-slot:item.start="{ item }">
        <router-link :to="{ name: 'Protocol', params: { id: item._id } }">

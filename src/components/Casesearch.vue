@@ -15,7 +15,7 @@
       <v-data-table
       :headers="headers"
       :items="completcases"
-      item-key="name"
+      item-key="casenr"
       :search="search"
       class="elevation-1"  
     >

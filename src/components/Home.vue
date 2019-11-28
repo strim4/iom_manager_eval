@@ -19,7 +19,7 @@
         </v-list-item-content>
   
       <v-list-item-avatar color="green" size="62">
-        <span class="white--text headline">{{CaseCount}}</span>
+        <span class="white--text headline">{{ CompletCaseCount}}</span>
       </v-list-item-avatar>
       </v-list-item>
   
@@ -125,10 +125,10 @@ export default {
   
   data() {
     return {
-     CaseCount: '3423',
+     
  
-     openCases: [],
     openItems: {}, 
+    completCases: {},
     };
   },
 
@@ -136,12 +136,15 @@ export default {
   computed: {
   OpenCaseCount () {
       return Object.keys(this.openItems).length
+  },
+   CompletCaseCount () {
+      return Object.keys(this.completCases).length
   }
 },
 
 methods: {
 //fetches all open cases
-    async fetchCases() {
+    async fetchOpenCases() {
       return axios({
         method: 'get',
         url: 'http://localhost:8081/cases',
@@ -152,13 +155,30 @@ methods: {
         })
         .catch(() => {});
     },
+
+
+     async fetchAllCases() {
+      return axios({
+        method: 'get',
+        url: 'http://localhost:8081/completcase',
+      })
+        .then((response) => {
+          console.log(response.data.protocols);
+          this.completCases = response.data.protocols;
+        })
+        .catch(() => {});
+    },
 },
+
+
+   
 
 
 //fetches open cases on pageload
   mounted(){
 
-   this.fetchCases();
+   this.fetchOpenCases();
+   this.fetchAllCases();
 
   },
 };

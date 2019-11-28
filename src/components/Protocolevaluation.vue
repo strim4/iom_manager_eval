@@ -1534,6 +1534,7 @@ study: '',
 
   },
  
+ base: '',
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
@@ -1541,6 +1542,27 @@ study: '',
     eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust'],
 
   }),
+
+  computed: {
+base64(){
+
+
+
+  const temporaryFileReader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    temporaryFileReader.onerror = () => {
+      temporaryFileReader.abort();
+      reject(new DOMException("Problem parsing input file."));
+    };
+
+    temporaryFileReader.onload = () => {
+      resolve(temporaryFileReader.result);
+    };
+    temporaryFileReader.readAsDataURL(this.file);
+  });
+},
+  },
 
   // store case id from the routerlink to a local variable on page load
   created() {
@@ -1635,7 +1657,7 @@ study: '',
             baselines: this.baselines,
             extras: this.extras,
             interp: this.interp,
-            file: this.file,
+            file: Buffer.from(this.file).toString('base64')
           },
           url: 'http://localhost:8081/completcase',
           headers: {
@@ -1691,7 +1713,11 @@ openFile: function(){
 //pseudo method to simulate file saving
 saveFile: function(){
 this.dialogUpload = false;
+console.log(this.base64);
+this.convert();
+console.log(this.base);
 },
+
 
 
 

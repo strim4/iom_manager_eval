@@ -45,7 +45,12 @@
 
     </v-data-table>
 
-      </v-card>
+      </v-card> </br>
+      <div class="text-right">
+         <router-link :to="{ name: 'Newcase' }">
+       <v-btn    color="success"  :left="true" @click="" >Neuer Fall +</v-btn>
+       </router-link>
+       </div>
     </v-container>
      
 </template>

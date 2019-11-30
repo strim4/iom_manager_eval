@@ -1526,6 +1526,7 @@ study: '',
     bcrR:'',
 
   },
+  
 
     extras: {
 
@@ -1540,7 +1541,7 @@ study: '',
 
   },
  
- base: '',
+
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
@@ -1549,26 +1550,7 @@ study: '',
 
   }),
 
-  computed: {
-base64(){
 
-
-
-  const temporaryFileReader = new FileReader();
-
-  return new Promise((resolve, reject) => {
-    temporaryFileReader.onerror = () => {
-      temporaryFileReader.abort();
-      reject(new DOMException("Problem parsing input file."));
-    };
-
-    temporaryFileReader.onload = () => {
-      resolve(temporaryFileReader.result);
-    };
-    temporaryFileReader.readAsDataURL(this.file);
-  });
-},
-  },
 
   // store case id from the routerlink to a local variable on page load
   created() {
@@ -1663,7 +1645,7 @@ base64(){
             baselines: this.baselines,
             extras: this.extras,
             interp: this.interp,
-            file: Buffer.from(this.file).toString('base64')
+            file: this.file,
           },
           url: 'http://localhost:8081/completcase',
           headers: {
@@ -1692,6 +1674,11 @@ base64(){
     },
 
 
+ 
+
+
+
+
 //method to open the uploaded file in browser or to download it
 
 openFile: function(){
@@ -1716,9 +1703,34 @@ openFile: function(){
   
 },
 
+
+
 //pseudo method to simulate file saving
 saveFile: function(){
 this.dialogUpload = false;
+console.log(this.file);
+this.submitFile();
+
+
+},
+
+submitFile(){
+  let formData = new FormData();
+  formData.append('file', this.file);
+
+  axios.post( '/single-file',
+  formData,
+  {
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+  }
+).then(function(){
+  console.log('SUCCESS!!');
+})
+.catch(function(){
+  console.log('FAILURE!!');
+});
 
 },
 

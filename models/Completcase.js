@@ -23,7 +23,7 @@ evaluation: Object,
 baselines: Object,
 extras: Object,
 interpretation: String,
-edf: String,
+edf: Buffer,
 
 },
 { typeKey: '$type' }

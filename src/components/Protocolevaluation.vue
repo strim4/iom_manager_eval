@@ -1718,14 +1718,15 @@ submitFile(){
   let formData = new FormData();
   formData.append('file', this.file);
 
-  axios.post( '/single-file',
+  axios.post( 'http://localhost:8081/upload',
   formData,
   {
     headers: {
         'Content-Type': 'multipart/form-data'
     }
   }
-).then(function(){
+).then(resp =>{
+  
   console.log('SUCCESS!!');
 })
 .catch(function(){

@@ -11,6 +11,9 @@ const cors = require('cors');
 //HTTP request logger
 const morgan = require('morgan');
 const fs = require('fs');
+const multer = require('multer');
+
+
 
 
 const app = express();
@@ -20,7 +23,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
 
-
+const upload = multer({ dest: './uploads,'});
+app.post('/upload', upload.single('file'), (req, res) => {res.json({file: req.file})});
 
 //connect to mongodb
 mongoose.connect('mongodb://localhost/iom_manager', function() {

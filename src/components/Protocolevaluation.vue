@@ -1645,7 +1645,7 @@ study: '',
             baselines: this.baselines,
             extras: this.extras,
             interp: this.interp,
-            file: this.file,
+            file: this.file.name,
           },
           url: 'http://localhost:8081/completcase',
           headers: {
@@ -1705,7 +1705,7 @@ openFile: function(){
 
 
 
-//pseudo method to simulate file saving
+// method to save file to server
 saveFile: function(){
 this.dialogUpload = false;
 console.log(this.file);
@@ -1714,6 +1714,7 @@ this.submitFile();
 
 },
 
+//Upload file to server
 submitFile(){
   let formData = new FormData();
   formData.append('file', this.file);

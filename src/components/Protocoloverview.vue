@@ -206,7 +206,7 @@
                    <v-flex md0.5></v-flex>
                     <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF genereiren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
-                    <v-flex md2.5> <v-btn    color="primary"  @click="openFile">EDF herunterladen</v-btn></v-flex>
+                    <v-flex md2.5> <a :href="this.link"  target="_blank"><v-btn    color="primary"  @click="console.log(this.link)">EDF herunterladen</v-btn></a></v-flex>
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation anzeigen</v-btn></v-flex>
                     
@@ -1201,34 +1201,6 @@
 
     
 
-      <!-- dialog for fileupload -->
-         <v-dialog v-model="dialogUpload" persistent max-width="600px">
-        
-        <v-card>
-          <v-card-title>
-            <span class="headline">EDF-Datei hochladen:</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                  <v-file-input v-model="file" show-size label="Datei auswählen" ></v-file-input>
-              </v-row>
-              <v-row>
-               
-       <v-btn color="indigo accent-4" text @click="openFile()"> Anzeigen / Herunterladen</v-btn>
-       
-              </v-row>
-              
-            </v-container>
-           
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn  depressed  large color="success" @click="saveFile()">Speichern</v-btn>
-            <v-btn  depressed  large color="normal"  @click="dialogUpload = false">Abbrechen</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
   
 </v-container>
 
@@ -1257,8 +1229,9 @@ dialogInterpret: false,
 dialogUpload: false,
 dialogBaselines: false,
 dialogExtras: false,
+  filename: '',
 
-file: null,
+link: "./../static/vertrag_1031.pdf",
 
     
     
@@ -1511,6 +1484,9 @@ study: '',
     additional2Lat: '',
 
   },
+
+
+  file: null,
  
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
@@ -1555,7 +1531,7 @@ study: '',
         data: {
           
         },
-        url: `http://localhost:8081/protocols/${casenr}`,
+        url: `http://localhost:8081/completcase/${casenr}`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -1577,6 +1553,30 @@ study: '',
           this.evaluation = response.data.protocols.evaluation;
            this.baselines = response.data.protocols.baselines;
           this.extras = response.data.protocols.extras;
+          this.filename = response.data.protocols.edf;
+         console.log(this.filename);
+         
+        })
+        .catch(() => { console.log('error'); });
+    },
+
+
+
+      // fetch a single protocol from the database
+    async  fetchFile(filename) {
+      return axios({
+        method: 'get',
+        data: {
+          
+        },
+        url: `http://localhost:8081/upload/${filename}`,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+        .then((response) => {
+         
+          this.file = response.data.complet.extras;
           console.log(response.data.protocols);
          
          

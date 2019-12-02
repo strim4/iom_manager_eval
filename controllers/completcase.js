@@ -16,7 +16,7 @@ app.get('/completcase', (req, res) => {
 
 //fetch a single case
 app.get('/completcase/:casenr', (req, res) => {
-    CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
+    CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras edf', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({

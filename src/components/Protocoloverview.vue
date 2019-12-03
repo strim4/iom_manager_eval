@@ -206,7 +206,7 @@
                    <v-flex md0.5></v-flex>
                     <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF genereiren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
-                    <v-flex md2.5> <a :href="this.link"  target="_blank"><v-btn    color="primary"  @click="console.log(this.link)">EDF herunterladen</v-btn></a></v-flex>
+                    <v-flex md2.5> <a :href="link"  target="_blank"><v-btn    color="primary"  @click="">EDF herunterladen</v-btn></a></v-flex>
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation anzeigen</v-btn></v-flex>
                     
@@ -1229,9 +1229,9 @@ dialogInterpret: false,
 dialogUpload: false,
 dialogBaselines: false,
 dialogExtras: false,
-  filename: '',
+  
 
-link: "./../static/vertrag_1031.pdf",
+
 
     
     
@@ -1472,6 +1472,8 @@ study: '',
 
   },
 
+  filename: '',
+
     extras: {
 
     dWaveAmp: '',
@@ -1494,8 +1496,18 @@ study: '',
     muscles: ['Occulomotor', 'Trochlearis', 'Masseter', 'Abduzens', 'Orb occ', 'Labialis', 'Orb oris', 'Mentalis', 'Glosso', 'Vagus', 'Accessorius', 'Hypoglosso', 'Deltoideus', 'Biceps', 'Triceps', 'Extensor', 'Thenar', 'Hypothenar', 'Aductor', 'Ileopsoas', 'Quadri', 'Tib ant', 'Gastro', 'Abd hall', ''],
     eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust'],
 
+   
+
   }),
 
+
+computed: {
+    // a computed getter
+    link: function () {
+      // `this` points to the vm instance
+       return "./../static/"+this.filename;
+    }
+  },
   // store case id from the routerlink to a local variable on page load
   created() {
     this.casenr = this.$route.params.casenr;

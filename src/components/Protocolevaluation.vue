@@ -1262,9 +1262,7 @@
 
 <script>
 import axios from 'axios';
-//import pdfmake from 'pdfmake';
 import moment from 'moment';
-
 import pdfmake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -1742,42 +1740,161 @@ submitFile(){
 //generate PDF Export
 createPDF() {
 
+var sourceData = this.entries
+var bodyData = [];
 
 
-  
+
+sourceData.forEach(function(sourceRow) {
+  var dataRow = [];
+
+
+
+  dataRow.push(sourceRow.ts);
+  dataRow.push(sourceRow.entrycat.name);
+  dataRow.push(sourceRow.event);
+  dataRow.push(sourceRow.comment);
+ 
+ 
+  bodyData.push(dataRow)
+});
+
+
+  //Documentstructure for export
 	let documentDefinition = {
+
+     pageMargins: [ 10, 70, 10, 20 ],
+    pageSize: 'A4',
+
+    header: [
+
+        { canvas: [{ type: 'line', x1: 10, y1: 10, x2: 595-10, y2: 10, lineWidth: 0.5 }] },
+
+        {
+           fontSize: 8,
+           columns : [
+               {
+                   text : 'IOM-Manager', margin : [ 10, 0, 0, 0 ], width : 100 
+               }     
+           ]
+
+        },
+
+        {
+           fontSize: 8,
+           columns : [
+               {
+                   text : 'Fall Nr. ' + this.casenr, margin : [ 10,0,0,0 ], width : 100
+               }     
+           ]
+
+        },
+
+        { 
+            canvas: [
+                { type: 'line', x1: 10, y1: 0, x2: 595-10, y2: 0, lineWidth: 0.5 }
+            ] 
+
+        }
+
+    ],
   	content: 
     [
         { text: moment(new Date()).format('DD-MM-YYYY'), alignment: 'right' },
-       { text: 'IM Protokoll Fall Nr. ' + this.casenr, style: 'header' },
+       { text: 'IOM Protokoll Fall Nr. ' + this.casenr, style: 'header' },
 
-        { text: 'Angaben zu Patient / Operation', style: 'subheader' },
-      { text: '', style: 'subheader' },
+        { text: 'Patientenangaben', style: 'subheader' },
+      
+      { text: "Vorname: " + this.surname, style: 'plaintext'},
+      { text: "Name: " + this.name, style: 'plaintext'},
+       { text: "Geburtsdatum: " + this.birthdate, style: 'plaintext'},
+
+      { text: '\n\n Angaben zur Operation', style: 'subheader' },
+
+      { text: "Diagnose: " + this.diagnose, style: 'plaintext'},
+      { text: "Operation: " + this.operation, style: 'plaintext'},
+       { text: "OP-Datum: " + this.opdate, style: 'plaintext'},
 
        
-      {  
+       { text: '\n\nProtokolleinträge\n', style: 'subheader' },
+        {  
         table: 
         {
-            headerRows: 0,                            
-            body: 
-            [   
-              ["Vorname" ,  "Name", "Diagnose", "Opeartion", 'OP-Datum']   , 
-              [this.surname, this.name, this.diagnose, this.operation, this.opdate ],                
-              
-            ]
+            body: bodyData   	    
         }
     }, 
-       
-       { text: 'Protokolleinträge', style: 'subheader' },
-      { text: '', style: 'subheader' },
-    
-      
+
+      { text: '\n\nAuswertung Monitorist', style: 'subheader' },
+      { text: '* true = ja, kein Wert = nein', style: 'plaintext' },
+      	{
      
-       
+			table: {
+			
+				body: [
+				
+					['SSEPS: ' + this.evaluation.sseps, 'MEPs: ' + this.evaluation.meps, 'AEPs: ' + this.evaluation.aeps, 'VEPs: ' + this.evaluation.veps, 'EMG: ' + this.evaluation.emg, 'OCOG: ' + this.evaluation.ecog,],
+          ['Gridmeps: ' + this.evaluation.gridmeps, 'Sauger: ' + this.evaluation.sauger, 'DNS: ' + this.evaluation.dns, 'DWave: ' + this.evaluation.dwave, 'Penfield: ' + this.evaluation.penfield, 'Mappingschwelle: ' + this.evaluation.mappingsw,],
+          ['BR: ' + this.evaluation.br, 'LAR: ' + this.evaluation.lar, 'BCR: ' + this.evaluation.bcr, 'IOM stabil: ' + this.evaluation.stabil, 'SSEPs: ' + this.evaluation.sseps2, 'MEPs: ' + this.evaluation.meps2,],
+          ['AEPs: ' + this.evaluation.aeps2, 'VEPs: ' + this.evaluation.veps2, 'Grid-MEPs: ' + this.evaluation.gripdmeps2, 'Wachop: ' + this.evaluation.wachop, 'SCS: ' + this.evaluation.scs, 'DBS: ' + this.evaluation.dbs,],
+          ['IB: ' + this.evaluation.ib, 'Studie: ' + this.evaluation.studycheck, 'Studienname: ' + this.evaluation.study, '', '', '',],
+
+				]      
+			},
+ 		},
+
+     { text: '\n\nBaselines SSEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+				
+					['Medianus L', 'N: ' + this.baselines.ssepsMedianusLN, 'P: ' + this.baselines.ssepsMedianusLP, 'Amplitude: ' + this.baselines.ssepsMedianusLAmp + ' mA',],
+          ['Medianus R', 'N: ' + this.baselines.ssepsMedianusRN, 'P: ' + this.baselines.ssepsMedianusRP, 'Amplitude: ' + this.baselines.ssepsMedianusRAmp + ' mA',],
+          ['Tibialis L', 'N: ' + this.baselines.ssepsTibialisLN, 'P: ' + this.baselines.ssepsTibialisLP, 'Amplitude: ' + this.baselines.ssepsTibialisLAmp + ' mA',],
+          ['Tibialis R', 'N: ' + this.baselines.ssepsTibialisRN, 'P: ' + this.baselines.ssepsTibialisRP, 'Amplitude: ' + this.baselines.ssepsTibialisRAmp + ' mA',],
       
-      
-      
+				]
+        
+			},
+        
+		},
+
+    { text: '\n\n\n\nBaselines TES MEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+				
+					['Kanal1: ' + this.baselines.mepChannel1, 'Seite: ' + this.baselines.mepChannel1Side , this.baselines.mepChannel1C1C2 + 'mA', this.baselines.mepChannel1C3C4 + 'mA',this.baselines.mepChannel1C3CZ +'mA',this.baselines.mepChannel1C4CZ +'mA',],
+      		['Kanal2: ' + this.baselines.mepChannel2, 'Seite: ' + this.baselines.mepChannel2Side , this.baselines.mepChannel2C1C2 + 'mA', this.baselines.mepChannel2C3C4 + 'mA',this.baselines.mepChannel2C3CZ +'mA',this.baselines.mepChannel2C4CZ +'mA',],
+          ['Kanal3: ' + this.baselines.mepChannel3, 'Seite: ' + this.baselines.mepChannel3Side , this.baselines.mepChannel3C1C2 + 'mA', this.baselines.mepChannel3C3C4 + 'mA',this.baselines.mepChannel3C3CZ +'mA',this.baselines.mepChannel3C4CZ +'mA',],
+				  ['Kanal4: ' + this.baselines.mepChannel4, 'Seite: ' + this.baselines.mepChannel4Side , this.baselines.mepChannel4C1C2 + 'mA', this.baselines.mepChannel4C3C4 + 'mA',this.baselines.mepChannel4C3CZ +'mA',this.baselines.mepChannel4C4CZ +'mA',],
+          ['Kanal5: ' + this.baselines.mepChannel5, 'Seite: ' + this.baselines.mepChannel5Side , this.baselines.mepChannel5C1C2 + 'mA', this.baselines.mepChannel5C3C4 + 'mA',this.baselines.mepChannel5C3CZ +'mA',this.baselines.mepChannel5C4CZ +'mA',],
+          ['Kanal6: ' + this.baselines.mepChannel6, 'Seite: ' + this.baselines.mepChannel6Side , this.baselines.mepChannel6C1C2 + 'mA', this.baselines.mepChannel6C3C4 + 'mA',this.baselines.mepChannel6C3CZ +'mA',this.baselines.mepChannel6C4CZ +'mA',],
+          ['Kanal7: ' + this.baselines.mepChannel7, 'Seite: ' + this.baselines.mepChannel7Side , this.baselines.mepChannel7C1C2 + 'mA', this.baselines.mepChannel7C3C4 + 'mA',this.baselines.mepChannel7C3CZ +'mA',this.baselines.mepChannel7C4CZ +'mA',],
+          ['Kanal8: ' + this.baselines.mepChannel8, 'Seite: ' + this.baselines.mepChannel8Side , this.baselines.mepChannel8C1C2 + 'mA', this.baselines.mepChannel8C3C4 + 'mA',this.baselines.mepChannel8C3CZ +'mA',this.baselines.mepChannel8C4CZ +'mA',],
+      		['Kanal9: ' + this.baselines.mepChannel9, 'Seite: ' + this.baselines.mepChannel9Side , this.baselines.mepChannel9C1C2 + 'mA', this.baselines.mepChannel9C3C4 + 'mA',this.baselines.mepChannel9C3CZ +'mA',this.baselines.mepChannel9C4CZ +'mA',],
+      		['Kanal10: ' + this.baselines.mepChannel10, 'Seite: ' + this.baselines.mepChannel10Side , this.baselines.mepChannel10C1C2 + 'mA', this.baselines.mepChannel10C3C4 + 'mA',this.baselines.mepChannel10C3CZ +'mA',this.baselines.mepChannel10C4CZ +'mA',],
+      		['Kanal11: ' + this.baselines.mepChannel11, 'Seite: ' + this.baselines.mepChannel11Side , this.baselines.mepChannel11C1C2 + 'mA', this.baselines.mepChannel11C3C4 + 'mA',this.baselines.mepChannel11C3CZ +'mA',this.baselines.mepChannel11C4CZ +'mA',],
+      		['Kanal12: ' + this.baselines.mepChannel12, 'Seite: ' + this.baselines.mepChannel12Side , this.baselines.mepChannel12C1C2 + 'mA', this.baselines.mepChannel12C3C4 + 'mA',this.baselines.mepChannel12C3CZ +'mA',this.baselines.mepChannel12C4CZ +'mA',],
+      		['Kanal13: ' + this.baselines.mepChannel13, 'Seite: ' + this.baselines.mepChannel13Side , this.baselines.mepChannel13C1C2 + 'mA', this.baselines.mepChannel13C3C4 + 'mA',this.baselines.mepChannel13C3CZ +'mA',this.baselines.mepChannel13C4CZ +'mA',],      
+       		['Kanal14: ' + this.baselines.mepChannel14, 'Seite: ' + this.baselines.mepChannel14Side , this.baselines.mepChannel14C1C2 + 'mA', this.baselines.mepChannel14C3C4 + 'mA',this.baselines.mepChannel14C3CZ +'mA',this.baselines.mepChannel14C4CZ +'mA',],      
+      		['Kanal15: ' + this.baselines.mepChannel15, 'Seite: ' + this.baselines.mepChannel15Side , this.baselines.mepChannel15C1C2 + 'mA', this.baselines.mepChannel15C3C4 + 'mA',this.baselines.mepChannel15C3CZ +'mA',this.baselines.mepChannel15C4CZ +'mA',],       
+      		['Kanal16: ' + this.baselines.mepChannel16, 'Seite: ' + this.baselines.mepChannel16Side , this.baselines.mepChannel16C1C2 + 'mA', this.baselines.mepChannel16C3C4 + 'mA',this.baselines.mepChannel16C3CZ +'mA',this.baselines.mepChannel16C4CZ +'mA',],
+        ]
+        
+			},
+        
+		},
+
+ 
+  
     
+
   	],
     styles: 
     {
@@ -1788,10 +1905,24 @@ createPDF() {
         margin: [0, 10, 0, 10],
         alignment: 'center'
 			},
+      	subheader: 
+      {
+				fontSize: 14,
+				bold: true,
+        
+			},
+      	plaintext: 
+      {
+				fontSize: 12,
+				bold: false,
+        
+			},
+
     	tableHeader: 
       {
       	fillColor: '#4CAF50',
     		color: 'white'
+        
       }
     }
   };

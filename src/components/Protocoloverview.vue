@@ -1500,11 +1500,11 @@ study: '',
 
   }),
 
-
+//Link to edf 
 computed: {
-    // a computed getter
+    
     link: function () {
-      // `this` points to the vm instance
+      
        return "./../static/"+this.filename;
     }
   },

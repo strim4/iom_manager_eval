@@ -1286,6 +1286,8 @@ dialogExtras: false,
 
 file: null,
 
+
+
     
     
  interp: '', 
@@ -1619,7 +1621,10 @@ study: '',
   // submit method to send the new protocol to the db and delete the case from opencase db
     submit() {
       
-    
+      if(this.file == null){
+        this.file = {};
+        this.file.name = 'nofile.pdf'
+      };
 
         var self = this;
         return axios({
@@ -1891,9 +1896,88 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
- 
-  
-    
+
+     { text: '\n\n\n\nBaselines DCS MEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+				
+					['Masseter' , 'Seite: ' + this.baselines.masseterSide , '#1: ' + this.baselines.masseter1, '#2: ' +this.baselines.masseter2, '#3: ' + this.baselines.masseter3, '#4: ' +this.baselines.masseter4,],
+					['Orb oris' , 'Seite: ' + this.baselines.orisSide , '#1: ' + this.baselines.oris1, '#2: ' +this.baselines.oris2, '#3: ' + this.baselines.oris3, '#4: ' +this.baselines.oris4,],
+          ['Deltoideus' , 'Seite: ' + this.baselines.deltoideusSide , '#1: ' + this.baselines.deltoideus1, '#2: ' +this.baselines.deltoideus2, '#3: ' + this.baselines.deltoideus3, '#4: ' +this.baselines.deltoideus4,],
+          ['Biceps' , 'Seite: ' + this.baselines.bicepsSide , '#1: ' + this.baselines.biceps1, '#2: ' +this.baselines.biceps2, '#3: ' + this.baselines.biceps3, '#4: ' +this.baselines.biceps4,],
+          ['Extensor' , 'Seite: ' + this.baselines.extensorSide , '#1: ' + this.baselines.extensor1, '#2: ' +this.baselines.extensor2, '#3: ' + this.baselines.extensor3, '#4: ' +this.baselines.extensor4,],
+          ['Thenar' , 'Seite: ' + this.baselines.thenarSide , '#1: ' + this.baselines.thenar1, '#2: ' +this.baselines.thenar2, '#3: ' + this.baselines.thenar3, '#4: ' +this.baselines.thenar4,],
+          ['Tib ant' , 'Seite: ' + this.baselines.tibSide , '#1: ' + this.baselines.tib1, '#2: ' +this.baselines.tib2, '#3: ' + this.baselines.tib3, '#4: ' +this.baselines.tib4,],
+          ['Abd hall' , 'Seite: ' + this.baselines.abdSide , '#1: ' + this.baselines.abd1, '#2: ' +this.baselines.abd2, '#3: ' + this.baselines.abd3, '#4: ' +this.baselines.abd4,],
+          ['Thenar' , 'Seite: ' + this.baselines.thenar2Side , '#1: ' + this.baselines.thenar21, '#2: ' +this.baselines.thenar22, '#3: ' + this.baselines.thenar23, '#4: ' +this.baselines.thenar24,],
+          ['Tib ant' , 'Seite: ' + this.baselines.tib2Side , '#1: ' + this.baselines.tib21, '#2: ' +this.baselines.tib22, '#3: ' + this.baselines.tib23, '#4: ' +this.baselines.tib24,],
+
+      	
+        ],
+        
+        
+			},
+        
+		},
+
+     { text: '\n\n\n\nBaselines AEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+				
+					['AEP L' , 'I: ' + this.baselines.aepLI, 'II: ' + this.baselines.aepLII, 'III: ' +this.baselines.aepLIII, 'IV: ' + this.baselines.aepLIV, 'V: ' +this.baselines.aepLV,],
+          ['AEP R' , 'I: ' + this.baselines.aepRI, 'II: ' + this.baselines.aepRII, 'III: ' +this.baselines.aepRIII, 'IV: ' + this.baselines.aepRIV, 'V: ' +this.baselines.aepRV,],
+
+        ],
+
+			},
+        
+		},
+
+     { text: '\n\n\n\nBaselines VEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+				
+					['VEP' , 'L: ' + this.baselines.vepL, 'R: ' + this.baselines.vepR, ],
+          
+
+        ],
+
+			},
+        
+		},
+
+        { text: '\n\n\n\nReflexe', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+				
+					['BR' , 'L: ' + this.baselines.brL, 'R: ' + this.baselines.brR, ],
+          ['LAR' , 'L: ' + this.baselines.larL, 'R: ' + this.baselines.larR, ],
+          ['BCR' , 'L: ' + this.baselines.bcrL, 'R: ' + this.baselines.bcrR, ],
+          
+
+        ],
+
+			},
+        
+		},
+
+   
 
   	],
     styles: 

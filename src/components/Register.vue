@@ -5,9 +5,9 @@
          </br>
         <v-row   align="center" justify="center">
          <v-img
-        src="./../static/insellogo.png"
+        src="./../static/logo.png"
         position='center center'
-        max-width="130"
+        max-width="160"
         max-height="160"
       ></v-img>
       </v-row>

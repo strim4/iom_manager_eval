@@ -11,6 +11,14 @@ const cors = require('cors');
 //HTTP request logger
 const morgan = require('morgan');
 const fs = require('fs');
+//login passport configuration
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
+const ExtractJwt = passportJWT.ExtractJwt;
+const JwtStrategy = passportJWT.Strategy;
+const jwtOptions = {}
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+jwtOptions.secretOrKey = 'iomapplicationsecretkey';
 
 
 
@@ -22,6 +30,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('public'));
+app.use(passport.initialize());
 
 
 

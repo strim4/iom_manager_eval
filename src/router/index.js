@@ -18,6 +18,8 @@ import Protocol from '@/components/Protocol';
 import Addprotocolentry from '@/components/Addprotocolentry';
 import Protocolevaluation from '@/components/Protocolevaluation';
 import Protocoloverview from '@/components/Protocoloverview';
+import Register from '@/components/Register';
+import Login from '@/components/Login';
 
 Vue.use(Router);
 
@@ -26,7 +28,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'Home',
       component: Home,
     },
@@ -110,6 +112,17 @@ export default new Router({
       name: 'Protocoloverview',
       component: Protocoloverview,
     },
+    {
+      path: '/users/register',
+      name: 'Register',
+      component: Register,
+      },
+      {
+        path: '/',
+        name: 'Login',
+        component: Login,
+        },
+        
     
   ],
 });

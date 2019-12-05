@@ -2,7 +2,7 @@
 <template>
     <v-app id="inspire">
     <!-- Start Sidemenu-->
-        <v-navigation-drawer fixed v-model="drawer" app v-if="['Protocol'].indexOf($route.name) === -1">
+        <v-navigation-drawer fixed v-model="drawer" app v-if="['Protocol', 'Login', 'Register'].indexOf($route.name) === -1">
             <v-list dense>
                 <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link">
                     <v-list-item>
@@ -68,15 +68,20 @@
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>IOM-Manager</router-link></v-toolbar-title>
                 <v-spacer></v-spacer>
-                <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link">
+                <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link" v-show="$route.path==='/users/register' || $route.path==='/users/login' || $route.path==='/'  ? false : true">
                  <v-btn icon>
           <v-icon>mdi-home</v-icon>
         </v-btn>
         </router-link>
-    Eingeloggt als xxx
+         
+  <div  v-show="$route.path==='/users/register' || $route.path==='/users/login' || $route.path==='/' ? false : true">  Eingeloggt als xxx
         <v-btn icon>
+            <router-link v-bind:to="{ name: 'Login' }" class="side_bar_link">
+                <v-btn icon>
           <v-icon>mdi-logout</v-icon>
-        </v-btn>
+          </v-btn>
+          </router-link>
+        </v-btn> </div>
         
       
 

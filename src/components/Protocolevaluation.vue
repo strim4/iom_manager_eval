@@ -1844,7 +1844,7 @@ sourceData.forEach(function(sourceRow) {
           [this.evaluation.emg + ': EMG', this.evaluation.penfield + ': Penfield', '',  'VEPs: ' + this.evaluation.aeps2],
           [this.evaluation.ecog + ': ECOG', this.evaluation.mappingsw + ': Tiefste Schwelle', '',  'Grid-MEPs: ' + this.evaluation.gripdmeps2],
           [this.evaluation.wachop + ': Wach-OP', this.evaluation.dbs + ': DBS', this.evaluation.scs + ': SCS', this.evaluation.ib + ': IB'],
-          [this.studycheck + ': Studie', 'Studienname: ' + this.evaluation.study, '', ''],
+          [this.evaluation.studycheck + ': Studie', 'Studienname: ' + this.evaluation.study, '', ''],
 				
 					// ['SSEPS: ' + this.evaluation.sseps, 'MEPs: ' + this.evaluation.meps, 'AEPs: ' + this.evaluation.aeps, 'VEPs: ' + this.evaluation.veps, 'EMG: ' + this.evaluation.emg, 'OCOG: ' + this.evaluation.ecog,],
           // ['Gridmeps: ' + this.evaluation.gridmeps, 'Sauger: ' + this.evaluation.sauger, 'DNS: ' + this.evaluation.dns, 'DWave: ' + this.evaluation.dwave, 'Penfield: ' + this.evaluation.penfield, 'Mappingschwelle: ' + this.evaluation.mappingsw,],

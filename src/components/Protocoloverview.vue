@@ -204,7 +204,7 @@
                <v-flex md10>
                  <v-layout row>
                    <v-flex md0.5></v-flex>
-                    <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF genereiren</v-btn></v-flex>
+                    <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF generieren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5> <a :href="link"  target="_blank"><v-btn    color="primary"  @click="">EDF herunterladen</v-btn></a></v-flex>
                     <v-flex md0.5></v-flex>

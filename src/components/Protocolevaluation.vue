@@ -204,7 +204,7 @@
                <v-flex md10>
                  <v-layout row>
                    <v-flex md0.5></v-flex>
-                    <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF genereiren</v-btn></v-flex>
+                    <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF generieren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
                     <v-flex md2> <v-btn    color="primary"  @click="dialogUpload = true">EDF hinzufügen</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
@@ -1814,14 +1814,14 @@ sourceData.forEach(function(sourceRow) {
       { text: "Name: " + this.name, style: 'plaintext'},
        { text: "Geburtsdatum: " + this.birthdate, style: 'plaintext'},
 
-      { text: '\n\n Angaben zur Operation', style: 'subheader' },
+      { text: '\n Angaben zur Operation', style: 'subheader' },
 
       { text: "Diagnose: " + this.diagnose, style: 'plaintext'},
       { text: "Operation: " + this.operation, style: 'plaintext'},
        { text: "OP-Datum: " + this.opdate, style: 'plaintext'},
 
        
-       { text: '\n\nProtokolleinträge\n', style: 'subheader' },
+       { text: '\nProtokolleinträge\n', style: 'subheader' },
         {  
         table: 
         {
@@ -1829,25 +1829,35 @@ sourceData.forEach(function(sourceRow) {
         }
     }, 
 
-      { text: '\n\nAuswertung Monitorist', style: 'subheader' },
+      { text: '\nAuswertung Monitorist', style: 'subheader' },
       { text: '* true = ja, kein Wert = nein', style: 'plaintext' },
       	{
      
 			table: {
 			
 				body: [
+
+          [this.evaluation.sseps + ': SSEPs', this.evaluation.gridmeps + ': Grid-MEPs', this.evaluation.br + ': BR', this.evaluation.stabil + ': IOM stabil'],
+          [this.evaluation.meps + ': MEPs', this.evaluation.sauger + ': Dyn. Sauger', this.evaluation.lar + ': LAR', 'SSEPs: ' + this.evaluation.sseps2],
+          [this.evaluation.aeps + ': AEPs', this.evaluation.dns + ': DNS', this.evaluation.bcr + ': BCR',  'MEPs: ' + this.evaluation.meps2],
+          [this.evaluation.veps + ': VEPs', this.evaluation.dwave + ': D-Wave', '',  'AEPs: ' + this.evaluation.aeps2],
+          [this.evaluation.emg + ': EMG', this.evaluation.penfield + ': Penfield', '',  'VEPs: ' + this.evaluation.aeps2],
+          [this.evaluation.ecog + ': ECOG', this.evaluation.mappingsw + ': Tiefste Schwelle', '',  'Grid-MEPs: ' + this.evaluation.gripdmeps2],
+          [this.evaluation.wachop + ': Wach-OP', this.evaluation.dbs + ': DBS', this.evaluation.scs + ': SCS', this.evaluation.ib + ': IB'],
+          [this.studycheck + ': Studie', 'Studienname: ' + this.evaluation.study, '', ''],
 				
-					['SSEPS: ' + this.evaluation.sseps, 'MEPs: ' + this.evaluation.meps, 'AEPs: ' + this.evaluation.aeps, 'VEPs: ' + this.evaluation.veps, 'EMG: ' + this.evaluation.emg, 'OCOG: ' + this.evaluation.ecog,],
-          ['Gridmeps: ' + this.evaluation.gridmeps, 'Sauger: ' + this.evaluation.sauger, 'DNS: ' + this.evaluation.dns, 'DWave: ' + this.evaluation.dwave, 'Penfield: ' + this.evaluation.penfield, 'Mappingschwelle: ' + this.evaluation.mappingsw,],
-          ['BR: ' + this.evaluation.br, 'LAR: ' + this.evaluation.lar, 'BCR: ' + this.evaluation.bcr, 'IOM stabil: ' + this.evaluation.stabil, 'SSEPs: ' + this.evaluation.sseps2, 'MEPs: ' + this.evaluation.meps2,],
-          ['AEPs: ' + this.evaluation.aeps2, 'VEPs: ' + this.evaluation.veps2, 'Grid-MEPs: ' + this.evaluation.gripdmeps2, 'Wachop: ' + this.evaluation.wachop, 'SCS: ' + this.evaluation.scs, 'DBS: ' + this.evaluation.dbs,],
-          ['IB: ' + this.evaluation.ib, 'Studie: ' + this.evaluation.studycheck, 'Studienname: ' + this.evaluation.study, '', '', '',],
+					// ['SSEPS: ' + this.evaluation.sseps, 'MEPs: ' + this.evaluation.meps, 'AEPs: ' + this.evaluation.aeps, 'VEPs: ' + this.evaluation.veps, 'EMG: ' + this.evaluation.emg, 'OCOG: ' + this.evaluation.ecog,],
+          // ['Gridmeps: ' + this.evaluation.gridmeps, 'Sauger: ' + this.evaluation.sauger, 'DNS: ' + this.evaluation.dns, 'DWave: ' + this.evaluation.dwave, 'Penfield: ' + this.evaluation.penfield, 'Mappingschwelle: ' + this.evaluation.mappingsw,],
+          // ['BR: ' + this.evaluation.br, 'LAR: ' + this.evaluation.lar, 'BCR: ' + this.evaluation.bcr, 'IOM stabil: ' + this.evaluation.stabil, 'SSEPs: ' + this.evaluation.sseps2, 'MEPs: ' + this.evaluation.meps2,],
+          // ['AEPs: ' + this.evaluation.aeps2, 'VEPs: ' + this.evaluation.veps2, 'Grid-MEPs: ' + this.evaluation.gripdmeps2, 'Wachop: ' + this.evaluation.wachop, 'SCS: ' + this.evaluation.scs, 'DBS: ' + this.evaluation.dbs,],
+          // ['IB: ' + this.evaluation.ib, 'Studie: ' + this.evaluation.studycheck, 'Studienname: ' + this.evaluation.study, '', '', '',],
 
 				]      
-			},
+      },
+
  		},
 
-     { text: '\n\nBaselines SSEPs', style: 'subheader' },
+     { text: '\nBaselines SSEPs', style: 'subheader' },
      
       	{
      
@@ -1855,10 +1865,10 @@ sourceData.forEach(function(sourceRow) {
 			
 				body: [
 				
-					['Medianus L', 'N: ' + this.baselines.ssepsMedianusLN, 'P: ' + this.baselines.ssepsMedianusLP, 'Amplitude: ' + this.baselines.ssepsMedianusLAmp + ' mA',],
-          ['Medianus R', 'N: ' + this.baselines.ssepsMedianusRN, 'P: ' + this.baselines.ssepsMedianusRP, 'Amplitude: ' + this.baselines.ssepsMedianusRAmp + ' mA',],
-          ['Tibialis L', 'N: ' + this.baselines.ssepsTibialisLN, 'P: ' + this.baselines.ssepsTibialisLP, 'Amplitude: ' + this.baselines.ssepsTibialisLAmp + ' mA',],
-          ['Tibialis R', 'N: ' + this.baselines.ssepsTibialisRN, 'P: ' + this.baselines.ssepsTibialisRP, 'Amplitude: ' + this.baselines.ssepsTibialisRAmp + ' mA',],
+					['Medianus L', 'N: ' + this.baselines.ssepsMedianusLN, 'P: ' + this.baselines.ssepsMedianusLP, this.baselines.ssepsMedianusLAmp + ' mA',],
+          ['Medianus R', 'N: ' + this.baselines.ssepsMedianusRN, 'P: ' + this.baselines.ssepsMedianusRP, this.baselines.ssepsMedianusRAmp + ' mA',],
+          ['Tibialis L', 'N: ' + this.baselines.ssepsTibialisLN, 'P: ' + this.baselines.ssepsTibialisLP, this.baselines.ssepsTibialisLAmp + ' mA',],
+          ['Tibialis R', 'N: ' + this.baselines.ssepsTibialisRN, 'P: ' + this.baselines.ssepsTibialisRP, this.baselines.ssepsTibialisRAmp + ' mA',],
       
 				]
         
@@ -1866,7 +1876,7 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-    { text: '\n\n\n\nBaselines TES MEPs', style: 'subheader' },
+    { text: '\nBaselines TES MEPs', style: 'subheader' },
      
       	{
      
@@ -1874,22 +1884,22 @@ sourceData.forEach(function(sourceRow) {
 			
 				body: [
 				
-					['Kanal1: ' + this.baselines.mepChannel1, 'Seite: ' + this.baselines.mepChannel1Side , this.baselines.mepChannel1C1C2 + 'mA', this.baselines.mepChannel1C3C4 + 'mA',this.baselines.mepChannel1C3CZ +'mA',this.baselines.mepChannel1C4CZ +'mA',],
-      		['Kanal2: ' + this.baselines.mepChannel2, 'Seite: ' + this.baselines.mepChannel2Side , this.baselines.mepChannel2C1C2 + 'mA', this.baselines.mepChannel2C3C4 + 'mA',this.baselines.mepChannel2C3CZ +'mA',this.baselines.mepChannel2C4CZ +'mA',],
-          ['Kanal3: ' + this.baselines.mepChannel3, 'Seite: ' + this.baselines.mepChannel3Side , this.baselines.mepChannel3C1C2 + 'mA', this.baselines.mepChannel3C3C4 + 'mA',this.baselines.mepChannel3C3CZ +'mA',this.baselines.mepChannel3C4CZ +'mA',],
-				  ['Kanal4: ' + this.baselines.mepChannel4, 'Seite: ' + this.baselines.mepChannel4Side , this.baselines.mepChannel4C1C2 + 'mA', this.baselines.mepChannel4C3C4 + 'mA',this.baselines.mepChannel4C3CZ +'mA',this.baselines.mepChannel4C4CZ +'mA',],
-          ['Kanal5: ' + this.baselines.mepChannel5, 'Seite: ' + this.baselines.mepChannel5Side , this.baselines.mepChannel5C1C2 + 'mA', this.baselines.mepChannel5C3C4 + 'mA',this.baselines.mepChannel5C3CZ +'mA',this.baselines.mepChannel5C4CZ +'mA',],
-          ['Kanal6: ' + this.baselines.mepChannel6, 'Seite: ' + this.baselines.mepChannel6Side , this.baselines.mepChannel6C1C2 + 'mA', this.baselines.mepChannel6C3C4 + 'mA',this.baselines.mepChannel6C3CZ +'mA',this.baselines.mepChannel6C4CZ +'mA',],
-          ['Kanal7: ' + this.baselines.mepChannel7, 'Seite: ' + this.baselines.mepChannel7Side , this.baselines.mepChannel7C1C2 + 'mA', this.baselines.mepChannel7C3C4 + 'mA',this.baselines.mepChannel7C3CZ +'mA',this.baselines.mepChannel7C4CZ +'mA',],
-          ['Kanal8: ' + this.baselines.mepChannel8, 'Seite: ' + this.baselines.mepChannel8Side , this.baselines.mepChannel8C1C2 + 'mA', this.baselines.mepChannel8C3C4 + 'mA',this.baselines.mepChannel8C3CZ +'mA',this.baselines.mepChannel8C4CZ +'mA',],
-      		['Kanal9: ' + this.baselines.mepChannel9, 'Seite: ' + this.baselines.mepChannel9Side , this.baselines.mepChannel9C1C2 + 'mA', this.baselines.mepChannel9C3C4 + 'mA',this.baselines.mepChannel9C3CZ +'mA',this.baselines.mepChannel9C4CZ +'mA',],
-      		['Kanal10: ' + this.baselines.mepChannel10, 'Seite: ' + this.baselines.mepChannel10Side , this.baselines.mepChannel10C1C2 + 'mA', this.baselines.mepChannel10C3C4 + 'mA',this.baselines.mepChannel10C3CZ +'mA',this.baselines.mepChannel10C4CZ +'mA',],
-      		['Kanal11: ' + this.baselines.mepChannel11, 'Seite: ' + this.baselines.mepChannel11Side , this.baselines.mepChannel11C1C2 + 'mA', this.baselines.mepChannel11C3C4 + 'mA',this.baselines.mepChannel11C3CZ +'mA',this.baselines.mepChannel11C4CZ +'mA',],
-      		['Kanal12: ' + this.baselines.mepChannel12, 'Seite: ' + this.baselines.mepChannel12Side , this.baselines.mepChannel12C1C2 + 'mA', this.baselines.mepChannel12C3C4 + 'mA',this.baselines.mepChannel12C3CZ +'mA',this.baselines.mepChannel12C4CZ +'mA',],
-      		['Kanal13: ' + this.baselines.mepChannel13, 'Seite: ' + this.baselines.mepChannel13Side , this.baselines.mepChannel13C1C2 + 'mA', this.baselines.mepChannel13C3C4 + 'mA',this.baselines.mepChannel13C3CZ +'mA',this.baselines.mepChannel13C4CZ +'mA',],      
-       		['Kanal14: ' + this.baselines.mepChannel14, 'Seite: ' + this.baselines.mepChannel14Side , this.baselines.mepChannel14C1C2 + 'mA', this.baselines.mepChannel14C3C4 + 'mA',this.baselines.mepChannel14C3CZ +'mA',this.baselines.mepChannel14C4CZ +'mA',],      
-      		['Kanal15: ' + this.baselines.mepChannel15, 'Seite: ' + this.baselines.mepChannel15Side , this.baselines.mepChannel15C1C2 + 'mA', this.baselines.mepChannel15C3C4 + 'mA',this.baselines.mepChannel15C3CZ +'mA',this.baselines.mepChannel15C4CZ +'mA',],       
-      		['Kanal16: ' + this.baselines.mepChannel16, 'Seite: ' + this.baselines.mepChannel16Side , this.baselines.mepChannel16C1C2 + 'mA', this.baselines.mepChannel16C3C4 + 'mA',this.baselines.mepChannel16C3CZ +'mA',this.baselines.mepChannel16C4CZ +'mA',],
+					['Kanal1: ' + this.baselines.mepChannel1, this.baselines.mepChannel1Side , this.baselines.mepChannel1C1C2 + 'mA', this.baselines.mepChannel1C3C4 + 'mA',this.baselines.mepChannel1C3CZ +'mA',this.baselines.mepChannel1C4CZ +'mA',],
+      		['Kanal2: ' + this.baselines.mepChannel2, this.baselines.mepChannel2Side , this.baselines.mepChannel2C1C2 + 'mA', this.baselines.mepChannel2C3C4 + 'mA',this.baselines.mepChannel2C3CZ +'mA',this.baselines.mepChannel2C4CZ +'mA',],
+          ['Kanal3: ' + this.baselines.mepChannel3, this.baselines.mepChannel3Side , this.baselines.mepChannel3C1C2 + 'mA', this.baselines.mepChannel3C3C4 + 'mA',this.baselines.mepChannel3C3CZ +'mA',this.baselines.mepChannel3C4CZ +'mA',],
+				  ['Kanal4: ' + this.baselines.mepChannel4, this.baselines.mepChannel4Side , this.baselines.mepChannel4C1C2 + 'mA', this.baselines.mepChannel4C3C4 + 'mA',this.baselines.mepChannel4C3CZ +'mA',this.baselines.mepChannel4C4CZ +'mA',],
+          ['Kanal5: ' + this.baselines.mepChannel5, this.baselines.mepChannel5Side , this.baselines.mepChannel5C1C2 + 'mA', this.baselines.mepChannel5C3C4 + 'mA',this.baselines.mepChannel5C3CZ +'mA',this.baselines.mepChannel5C4CZ +'mA',],
+          ['Kanal6: ' + this.baselines.mepChannel6, this.baselines.mepChannel6Side , this.baselines.mepChannel6C1C2 + 'mA', this.baselines.mepChannel6C3C4 + 'mA',this.baselines.mepChannel6C3CZ +'mA',this.baselines.mepChannel6C4CZ +'mA',],
+          ['Kanal7: ' + this.baselines.mepChannel7, this.baselines.mepChannel7Side , this.baselines.mepChannel7C1C2 + 'mA', this.baselines.mepChannel7C3C4 + 'mA',this.baselines.mepChannel7C3CZ +'mA',this.baselines.mepChannel7C4CZ +'mA',],
+          ['Kanal8: ' + this.baselines.mepChannel8, this.baselines.mepChannel8Side , this.baselines.mepChannel8C1C2 + 'mA', this.baselines.mepChannel8C3C4 + 'mA',this.baselines.mepChannel8C3CZ +'mA',this.baselines.mepChannel8C4CZ +'mA',],
+      		['Kanal9: ' + this.baselines.mepChannel9, this.baselines.mepChannel9Side , this.baselines.mepChannel9C1C2 + 'mA', this.baselines.mepChannel9C3C4 + 'mA',this.baselines.mepChannel9C3CZ +'mA',this.baselines.mepChannel9C4CZ +'mA',],
+      		['Kanal10: ' + this.baselines.mepChannel10, this.baselines.mepChannel10Side , this.baselines.mepChannel10C1C2 + 'mA', this.baselines.mepChannel10C3C4 + 'mA',this.baselines.mepChannel10C3CZ +'mA',this.baselines.mepChannel10C4CZ +'mA',],
+      		['Kanal11: ' + this.baselines.mepChannel11, this.baselines.mepChannel11Side , this.baselines.mepChannel11C1C2 + 'mA', this.baselines.mepChannel11C3C4 + 'mA',this.baselines.mepChannel11C3CZ +'mA',this.baselines.mepChannel11C4CZ +'mA',],
+      		['Kanal12: ' + this.baselines.mepChannel12, this.baselines.mepChannel12Side , this.baselines.mepChannel12C1C2 + 'mA', this.baselines.mepChannel12C3C4 + 'mA',this.baselines.mepChannel12C3CZ +'mA',this.baselines.mepChannel12C4CZ +'mA',],
+      		['Kanal13: ' + this.baselines.mepChannel13, this.baselines.mepChannel13Side , this.baselines.mepChannel13C1C2 + 'mA', this.baselines.mepChannel13C3C4 + 'mA',this.baselines.mepChannel13C3CZ +'mA',this.baselines.mepChannel13C4CZ +'mA',],      
+       		['Kanal14: ' + this.baselines.mepChannel14, this.baselines.mepChannel14Side , this.baselines.mepChannel14C1C2 + 'mA', this.baselines.mepChannel14C3C4 + 'mA',this.baselines.mepChannel14C3CZ +'mA',this.baselines.mepChannel14C4CZ +'mA',],      
+      		['Kanal15: ' + this.baselines.mepChannel15, this.baselines.mepChannel15Side , this.baselines.mepChannel15C1C2 + 'mA', this.baselines.mepChannel15C3C4 + 'mA',this.baselines.mepChannel15C3CZ +'mA',this.baselines.mepChannel15C4CZ +'mA',],       
+      		['Kanal16: ' + this.baselines.mepChannel16, this.baselines.mepChannel16Side , this.baselines.mepChannel16C1C2 + 'mA', this.baselines.mepChannel16C3C4 + 'mA',this.baselines.mepChannel16C3CZ +'mA',this.baselines.mepChannel16C4CZ +'mA',],
         ]
         
 			},
@@ -1897,7 +1907,7 @@ sourceData.forEach(function(sourceRow) {
 		},
 
 
-     { text: '\n\n\n\nBaselines DCS MEPs', style: 'subheader' },
+     { text: '\nBaselines DCS MEPs', style: 'subheader' },
      
       	{
      
@@ -1905,16 +1915,16 @@ sourceData.forEach(function(sourceRow) {
 			
 				body: [
 				
-					['Masseter' , 'Seite: ' + this.baselines.masseterSide , '#1: ' + this.baselines.masseter1, '#2: ' +this.baselines.masseter2, '#3: ' + this.baselines.masseter3, '#4: ' +this.baselines.masseter4,],
-					['Orb oris' , 'Seite: ' + this.baselines.orisSide , '#1: ' + this.baselines.oris1, '#2: ' +this.baselines.oris2, '#3: ' + this.baselines.oris3, '#4: ' +this.baselines.oris4,],
-          ['Deltoideus' , 'Seite: ' + this.baselines.deltoideusSide , '#1: ' + this.baselines.deltoideus1, '#2: ' +this.baselines.deltoideus2, '#3: ' + this.baselines.deltoideus3, '#4: ' +this.baselines.deltoideus4,],
-          ['Biceps' , 'Seite: ' + this.baselines.bicepsSide , '#1: ' + this.baselines.biceps1, '#2: ' +this.baselines.biceps2, '#3: ' + this.baselines.biceps3, '#4: ' +this.baselines.biceps4,],
-          ['Extensor' , 'Seite: ' + this.baselines.extensorSide , '#1: ' + this.baselines.extensor1, '#2: ' +this.baselines.extensor2, '#3: ' + this.baselines.extensor3, '#4: ' +this.baselines.extensor4,],
-          ['Thenar' , 'Seite: ' + this.baselines.thenarSide , '#1: ' + this.baselines.thenar1, '#2: ' +this.baselines.thenar2, '#3: ' + this.baselines.thenar3, '#4: ' +this.baselines.thenar4,],
-          ['Tib ant' , 'Seite: ' + this.baselines.tibSide , '#1: ' + this.baselines.tib1, '#2: ' +this.baselines.tib2, '#3: ' + this.baselines.tib3, '#4: ' +this.baselines.tib4,],
-          ['Abd hall' , 'Seite: ' + this.baselines.abdSide , '#1: ' + this.baselines.abd1, '#2: ' +this.baselines.abd2, '#3: ' + this.baselines.abd3, '#4: ' +this.baselines.abd4,],
-          ['Thenar' , 'Seite: ' + this.baselines.thenar2Side , '#1: ' + this.baselines.thenar21, '#2: ' +this.baselines.thenar22, '#3: ' + this.baselines.thenar23, '#4: ' +this.baselines.thenar24,],
-          ['Tib ant' , 'Seite: ' + this.baselines.tib2Side , '#1: ' + this.baselines.tib21, '#2: ' +this.baselines.tib22, '#3: ' + this.baselines.tib23, '#4: ' +this.baselines.tib24,],
+					['Masseter' , this.baselines.masseterSide , '#1: ' + this.baselines.masseter1, '#2: ' +this.baselines.masseter2, '#3: ' + this.baselines.masseter3, '#4: ' +this.baselines.masseter4,],
+					['Orb oris' , this.baselines.orisSide , '#1: ' + this.baselines.oris1, '#2: ' +this.baselines.oris2, '#3: ' + this.baselines.oris3, '#4: ' +this.baselines.oris4,],
+          ['Deltoideus' , this.baselines.deltoideusSide , '#1: ' + this.baselines.deltoideus1, '#2: ' +this.baselines.deltoideus2, '#3: ' + this.baselines.deltoideus3, '#4: ' +this.baselines.deltoideus4,],
+          ['Biceps' , this.baselines.bicepsSide , '#1: ' + this.baselines.biceps1, '#2: ' +this.baselines.biceps2, '#3: ' + this.baselines.biceps3, '#4: ' +this.baselines.biceps4,],
+          ['Extensor' , this.baselines.extensorSide , '#1: ' + this.baselines.extensor1, '#2: ' +this.baselines.extensor2, '#3: ' + this.baselines.extensor3, '#4: ' +this.baselines.extensor4,],
+          ['Thenar' , this.baselines.thenarSide , '#1: ' + this.baselines.thenar1, '#2: ' +this.baselines.thenar2, '#3: ' + this.baselines.thenar3, '#4: ' +this.baselines.thenar4,],
+          ['Tib ant' , this.baselines.tibSide , '#1: ' + this.baselines.tib1, '#2: ' +this.baselines.tib2, '#3: ' + this.baselines.tib3, '#4: ' +this.baselines.tib4,],
+          ['Abd hall' , this.baselines.abdSide , '#1: ' + this.baselines.abd1, '#2: ' +this.baselines.abd2, '#3: ' + this.baselines.abd3, '#4: ' +this.baselines.abd4,],
+          ['Thenar' , this.baselines.thenar2Side , '#1: ' + this.baselines.thenar21, '#2: ' +this.baselines.thenar22, '#3: ' + this.baselines.thenar23, '#4: ' +this.baselines.thenar24,],
+          ['Tib ant' , this.baselines.tib2Side , '#1: ' + this.baselines.tib21, '#2: ' +this.baselines.tib22, '#3: ' + this.baselines.tib23, '#4: ' +this.baselines.tib24,],
 
       	
         ],
@@ -1924,7 +1934,7 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-     { text: '\n\n\n\nBaselines AEPs', style: 'subheader' },
+     { text: '\nBaselines AEPs', style: 'subheader' },
      
       	{
      
@@ -1941,7 +1951,7 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-     { text: '\n\n\n\nBaselines VEPs', style: 'subheader' },
+     { text: '\nBaselines VEPs', style: 'subheader' },
      
       	{
      
@@ -1958,7 +1968,7 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-        { text: '\n\n\n\nReflexe', style: 'subheader' },
+        { text: '\nReflexe', style: 'subheader' },
      
       	{
      
@@ -2024,5 +2034,4 @@ sourceData.forEach(function(sourceRow) {
   },
 };
 </script>
-
 

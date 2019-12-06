@@ -2,7 +2,7 @@
 
 
     <v-form v-model="valid" ref="form" lazy-validation>
-        </br> </br>
+        </br>
         <h1>IOM-Manager - Login:</h1>
         </br>
         <v-row   align="center" justify="center">
@@ -15,7 +15,7 @@
       </v-row>
        
    
-        <v-text-field label="E-mail" v-model="email" :rules="emailRules" required></v-text-field>
+        <v-text-field label="E-Mail" v-model="email" :rules="emailRules" required></v-text-field>
 
         
         <v-text-field

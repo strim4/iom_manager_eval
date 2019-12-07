@@ -6,8 +6,8 @@
         <h1>Neuer Fall</h1>
         <label>Angaben zum Patienten</label>
         <v-text-field label="Fall Nr." v-model="casenr" :rules="requiredRules" required></v-text-field>
-        <v-text-field label="PID" v-model="pid" :rules="requiredRules" required></v-text-field>
-        <v-text-field label="FID" v-model="fid" :rules="requiredRules" required></v-text-field>
+        <v-text-field label="PID" v-model="pid"></v-text-field>
+        <v-text-field label="FID" v-model="fid"></v-text-field>
         <v-text-field label="Name" v-model="name" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Geburtsdatum" readonly prepend-icon="event"  v-model="birthdate" :rules="requiredRules" required></v-text-field>

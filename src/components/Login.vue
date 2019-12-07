@@ -2,10 +2,8 @@
 
 
     <v-form v-model="valid" ref="form" lazy-validation>
-        </br>
-        <h1>IOM-Manager - Login:</h1>
-        </br>
-        <v-row   align="center" justify="center">
+        <h1 class="my-5">IOM-Manager - Login:</h1>
+        <v-row class="my-5" align="center" justify="center">
          <v-img
         src="./../static/logo.png"
         position='center center'
@@ -13,29 +11,32 @@
         max-height="160"
       ></v-img>
       </v-row>
-       
-   
-        <v-text-field label="E-Mail" v-model="email" :rules="emailRules" required></v-text-field>
-
-        
-        <v-text-field
-              v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            
-              :type="show1 ? 'text' : 'password'"
-              
-             label="Passwort" 
+      <v-row>
+          <v-col cols="12" sm="6" md="3"></v-col>
+          <v-col align="center" cols="12" sm="-10" md="6">
+              <v-text-field class="my-n5" label="E-Mail" v-model="email" :rules="emailRules" required></v-text-field>
+          </v-col>
+      </v-row>
+        <v-row>
+            <v-col cols="12" sm="6" md="3"></v-col>
+            <v-col cols="12" sm="6" md="6">
+                 <v-text-field class="my-n2" 
+                 v-model="password"
+                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                 :type="show1 ? 'text' : 'password'"
+                 label="Passwort" 
               
               counter
               @click:append="show1 = !show1"
               required
             ></v-text-field>
-
+        </v-col>
+        <v-col cols="12" sm="6" md="3"></v-col>
+      </v-row>
         <v-btn @click="submit" :disabled="!valid" color="success"> Anmelden</v-btn>
 
         <v-btn @click="clear">Zurücksetzen</v-btn>
-        </br> </br> </br>
-        <h3>Noch nicht registriert?</h3>
+        <h3 class="mt-12">Noch nicht registriert?</h3>
         <router-link v-bind:to="{ name: 'Register' }" >
         <v-btn  color="primary"> Registrieren</v-btn>
         </router-link>

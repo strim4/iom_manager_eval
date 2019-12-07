@@ -75,12 +75,12 @@
         </router-link>
          
   <div  v-show="$route.path==='/users/register' || $route.path==='/users/login' || $route.path==='/' ? false : true">  Eingeloggt als xxx
-        <v-btn icon>
-            <router-link v-bind:to="{ name: 'Login' }" class="side_bar_link">
+        <v-btn icon @click="logout">
+           
                 <v-btn icon>
           <v-icon>mdi-logout</v-icon>
           </v-btn>
-          </router-link>
+         
         </v-btn> </div>
         
       
@@ -110,10 +110,42 @@
 // Import main stylesheet
 import './assets/stylesheets/main.css';
 
+import axios from 'axios';
 export default {
   data: () => ({
     drawer: null,
+    current_user: null,
   }),
+  mounted(){
+      this.fetchUser();
+  },
+  methods: {
+    logout() {
+        return axios({
+        method: 'get',
+        url: 'http://localhost:8081/logout',
+        })
+        .then(() => {
+
+        this.$router.push({ name: 'Login' });
+        })
+        .catch(() => {
+        });
+},
+
+    async fetchUser() {
+return axios({
+method: 'get',
+url: 'http://localhost:8081/current_user',
+})
+.then((response) => {
+this.current_user = response.data.current_user;
+
+})
+.catch(() => {
+});
+},
+  },
   props: {
     source: String,
   },

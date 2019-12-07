@@ -1,10 +1,12 @@
 //this file contains the endpoint to CRUD completed cases in the database
 const CompletcaseSchema = require('../models/Completcase.js');
+const passport = require('passport');
+
 
 module.exports.controller = (app) => {
 
 // fetch all completed cases
-app.get('/completcase', (req, res) => {
+app.get('/completcase', passport.authenticate('jwt', { session: false }),(req, res) => {
     CompletcaseSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras interpretation edf', (error,
     protocols) => {
     if (error) { console.log(error); }
@@ -15,7 +17,7 @@ app.get('/completcase', (req, res) => {
     });
 
 //fetch a single case
-app.get('/completcase/:casenr', (req, res) => {
+app.get('/completcase/:casenr',  passport.authenticate('jwt', { session: false }),(req, res) => {
     CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras edf', (error,
     protocols) => {
     if (error) { console.log(error); }
@@ -27,7 +29,7 @@ app.get('/completcase/:casenr', (req, res) => {
     
 
 // add a new completed case
-app.post('/completcase', (req, res) => {
+app.post('/completcase', passport.authenticate('jwt', { session: false }), (req, res) => {
     const newCompletCase = new CompletcaseSchema({
         
        // id: req.body.id,

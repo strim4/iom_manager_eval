@@ -1,9 +1,11 @@
 //this file contains the endpoint to CRUD assistants in the database
 const AssistantSchema = require('../models/Assistant.js');
 
+const passport = require('passport');
+
 module.exports.controller = (app) => {
 // fetch all assistants
-app.get('/assistants', (req, res) => {
+app.get('/assistants', passport.authenticate('jwt', { session: false }),(req, res) => {
     AssistantSchema.find({}, 'assistant', (error,
     assistants) => {
     if (error) { console.log(error); }
@@ -15,7 +17,7 @@ app.get('/assistants', (req, res) => {
 
 //delete assistant from the database
 
-app.delete('/assistants/:id', (req, res) => {
+app.delete('/assistants/:id', passport.authenticate('jwt', { session: false }),(req, res) => {
   AssistantSchema.remove({
       _id: req.params.id 
   }, function(error, assistant){
@@ -29,7 +31,7 @@ app.delete('/assistants/:id', (req, res) => {
 
 
 // add a new assistant
-app.post('/assistants', (req, res) => {
+app.post('/assistants', passport.authenticate('jwt', { session: false }),(req, res) => {
 const newAssistant = new AssistantSchema({
         assistant: req.body.assistant,
 

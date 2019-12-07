@@ -8,9 +8,29 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'thisisthesecretkey';
+const passport = require('passport');
+const JwtStrategy = passportJWT.Strategy;
 
 
 module.exports.controller = (app) => {
+
+
+    passport.use(new JwtStrategy(jwtOptions, function (jwtPayload, done) {
+        //If the token has expiration, raise unauthorized
+        var expirationDate = new Date(jwtPayload.exp * 1000)
+        if(expirationDate < new Date()) {
+          return done(null, false);
+        }
+        var user = jwtPayload
+        done(null, user)
+        console.log(user);
+      }));
+
+
+
+
+
+
     // register a user
     app.post('/users/register', (req, res) => {
         const name = req.body.name;

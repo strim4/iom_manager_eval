@@ -1,9 +1,10 @@
 //this file contains the endpoint to CRUD cases in the database
 const CaseSchema = require('../models/Case.js');
+const passport = require('passport');
 
 module.exports.controller = (app) => {
 // fetch all cases
-app.get('/cases', (req, res) => {
+app.get('/cases', passport.authenticate('jwt', { session: false }),(req, res) => {
     CaseSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant', (error,
     cases) => {
     if (error) { console.log(error); }
@@ -14,7 +15,7 @@ app.get('/cases', (req, res) => {
     });
 
 // fetch a single case
-app.get('/cases/:id', (req, res) => {
+app.get('/cases/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     CaseSchema.findOne({_id: req.params.id}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant', (error,
     cases) => {
     if (error) { console.log(error); }
@@ -25,7 +26,7 @@ app.get('/cases/:id', (req, res) => {
     });
 
 // update a  case
-app.put('/cases/:id', (req, res) => {
+app.put('/cases/:id',  passport.authenticate('jwt', { session: false }),(req, res) => {
     CaseSchema.findById(req.params.id, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant', (error,
     ccase) => {
     if (error) { console.log(error); }
@@ -54,7 +55,7 @@ app.put('/cases/:id', (req, res) => {
 
     //delete a case from the database
 
-app.delete('/cases/:id', (req, res) => {
+app.delete('/cases/:id',  passport.authenticate('jwt', { session: false }), (req, res) => {
     CaseSchema.remove({
         _id: req.params.id 
     }, function(error, ccase){
@@ -65,7 +66,7 @@ app.delete('/cases/:id', (req, res) => {
 
 
 // add a new case
-app.post('/cases', (req, res) => {
+app.post('/cases',  passport.authenticate('jwt', { session: false }),(req, res) => {
 const newCase = new CaseSchema({
     casenr: req.body.casenr,
     pid: req.body.pid,

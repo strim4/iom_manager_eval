@@ -128,6 +128,7 @@ computed: {
 
       submit() {
       if (this.$refs.form.validate()) {
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'put',
           data: {
@@ -136,6 +137,7 @@ computed: {
           },
           url: 'http://localhost:8081/categories',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -166,12 +168,18 @@ computed: {
     },
     // fetches all categories from the database
     async fetchCategories() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
           name: this.categories,
         },
         url: 'http://localhost:8081/categories',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.categories = response.data.categories;
@@ -183,7 +191,7 @@ computed: {
     },
     // delete a device from the database
     async  deleteCategory(id, item) {
-      
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'delete',
         data: {
@@ -191,6 +199,7 @@ computed: {
         },
         url: `http://localhost:8081/categories/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

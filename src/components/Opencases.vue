@@ -89,9 +89,15 @@ export default {
   // method to fetch all cases from the database
   methods: {
     async fetchCases() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/cases',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.ccases = response.data.cases;
@@ -101,6 +107,7 @@ export default {
 
     // delete a opencase from the database
     async  deleteOpenCase(id, item) {
+      const token = window.localStorage.getItem('auth');
       console.log(id);
       return axios({
         method: 'delete',
@@ -109,6 +116,7 @@ export default {
         },
         url: `http://localhost:8081/cases/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

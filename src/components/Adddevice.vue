@@ -86,6 +86,7 @@ export default {
 
     submit() {
       if (this.$refs.form.validate()) {
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -93,6 +94,7 @@ export default {
           },
           url: 'http://localhost:8081/devices',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -122,12 +124,18 @@ export default {
     },
     // fetches all devices from the database
     async fetchDevices() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
           device: this.device,
         },
         url: 'http://localhost:8081/devices',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.devices = response.data.devices;
@@ -136,6 +144,7 @@ export default {
     },
     // delete a device from the database
     async  deleteDevice(id, item) {
+      const token = window.localStorage.getItem('auth');
       console.log(id);
       return axios({
         method: 'delete',
@@ -144,6 +153,7 @@ export default {
         },
         url: `http://localhost:8081/devices/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

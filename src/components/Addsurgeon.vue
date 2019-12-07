@@ -87,6 +87,7 @@ export default {
 
     submit() {
       if (this.$refs.form.validate()) {
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -94,6 +95,7 @@ export default {
           },
           url: 'http://localhost:8081/surgeons',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -123,12 +125,18 @@ export default {
     },
     // fetches all surgeons from the database
     async fetchSurgeons() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
           surgeon: this.surgeon,
         },
         url: 'http://localhost:8081/surgeons',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.surgeons = response.data.surgeons;
@@ -137,6 +145,7 @@ export default {
     },
     // delete a surgeon from the database
     async  deleteSurgeon(id, item) {
+      const token = window.localStorage.getItem('auth');
       console.log(id);
       return axios({
         method: 'delete',
@@ -145,6 +154,7 @@ export default {
         },
         url: `http://localhost:8081/surgeons/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

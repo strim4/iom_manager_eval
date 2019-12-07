@@ -96,6 +96,7 @@ export default {
     // submit method to send the new case to the backend to store
     submit() {
       if (this.$refs.form.validate()) {
+         const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -114,6 +115,7 @@ export default {
           },
           url: 'http://localhost:8081/cases',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -143,9 +145,15 @@ export default {
 
     // method to fetch all diagnoses from the database
     async fetchDiagnoses() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/diagnoses',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.diagnoses = response.data.diagnoses;
@@ -155,9 +163,14 @@ export default {
 
     // method to fetch all operations from the database
     async fetchOperations() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/operations',
+          headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
       })
         .then((response) => {
           this.operations = response.data.operations;
@@ -167,9 +180,14 @@ export default {
 
     // method to fetch all isismodalities from the database
     async fetchDevices() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/devices',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
       })
         .then((response) => {
           this.isismodalities = response.data.devices;
@@ -179,9 +197,14 @@ export default {
 
     // method to fetch all surgeons from the database
     async fetchSurgeons() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/surgeons',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
       })
         .then((response) => {
           this.surgeons = response.data.surgeons;
@@ -191,9 +214,14 @@ export default {
 
     // method to fetch all assistants from the database
     async fetchAssistans() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/assistants',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
       })
         .then((response) => {
           this.assistants = response.data.assistants;

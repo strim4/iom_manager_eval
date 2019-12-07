@@ -86,6 +86,7 @@ export default {
 
     submit() {
       if (this.$refs.form.validate()) {
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -93,6 +94,7 @@ export default {
           },
           url: 'http://localhost:8081/assistants',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -122,12 +124,18 @@ export default {
     },
     // fetches all assistants from the database
     async fetchAssistants() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
           assistant: this.assistant,
         },
         url: 'http://localhost:8081/assistants',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.assistants = response.data.assistants;
@@ -136,6 +144,7 @@ export default {
     },
     // delete a assistant from the database
     async  deleteAssistant(id, item) {
+      const token = window.localStorage.getItem('auth');
       console.log(id);
       return axios({
         method: 'delete',
@@ -144,6 +153,7 @@ export default {
         },
         url: `http://localhost:8081/assistants/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

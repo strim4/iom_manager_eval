@@ -1663,12 +1663,18 @@ this.dialogEval = true;
 
    // fetches all categories from the database
     async fetchCategories() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
           name: this.categories,
         },
         url: 'http://localhost:8081/categories',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.dbcategories = response.data.categories;
@@ -1685,6 +1691,7 @@ this.dialogEval = true;
     
 
         var self = this;
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -1708,6 +1715,7 @@ this.dialogEval = true;
           },
           url: 'http://localhost:8081/protocols',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
           
@@ -1736,7 +1744,7 @@ this.dialogEval = true;
 
        // delete the specific case from opencase collection
     async  deleteOpenCase(id) {
-     
+     const token = window.localStorage.getItem('auth');
       return axios({
         method: 'delete',
         data: {
@@ -1744,6 +1752,7 @@ this.dialogEval = true;
         },
         url: `http://localhost:8081/cases/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })
@@ -1756,6 +1765,7 @@ this.dialogEval = true;
   
     // fetch a single case from the database
     async  fetchCase(id) {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
@@ -1763,6 +1773,7 @@ this.dialogEval = true;
         },
         url: `http://localhost:8081/cases/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

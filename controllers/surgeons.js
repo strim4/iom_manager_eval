@@ -1,9 +1,10 @@
 //this file contains the endpoint to CRUD surgeons in the database
 const SurgeonSchema = require('../models/Surgeon.js');
+const passport = require('passport');
 
 module.exports.controller = (app) => {
 // fetch all surgeons
-app.get('/surgeons', (req, res) => {
+app.get('/surgeons', passport.authenticate('jwt', { session: false }), (req, res) => {
     SurgeonSchema.find({}, 'surgeon', (error,
     surgeons) => {
     if (error) { console.log(error); }
@@ -15,7 +16,7 @@ app.get('/surgeons', (req, res) => {
 
 //delete surgeon from the database
 
-app.delete('/surgeons/:id', (req, res) => {
+app.delete('/surgeons/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   SurgeonSchema.remove({
       _id: req.params.id 
   }, function(error, surgeon){
@@ -29,7 +30,7 @@ app.delete('/surgeons/:id', (req, res) => {
 
 
 // add a new surgeon
-app.post('/surgeons', (req, res) => {
+app.post('/surgeons', passport.authenticate('jwt', { session: false }),(req, res) => {
 const newSurgeon = new SurgeonSchema({
         surgeon: req.body.surgeon,
 

@@ -1538,6 +1538,7 @@ computed: {
 
   // fetch a single protocol from the database
     async  fetchProtocol(casenr) {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
@@ -1545,6 +1546,7 @@ computed: {
         },
         url: `http://localhost:8081/completcase/${casenr}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })
@@ -1576,6 +1578,7 @@ computed: {
 
       // fetch a single protocol from the database
     async  fetchFile(filename) {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
@@ -1583,6 +1586,7 @@ computed: {
         },
         url: `http://localhost:8081/upload/${filename}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       })

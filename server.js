@@ -24,6 +24,7 @@ jwtOptions.secretOrKey = 'iomapplicationsecretkey';
 
 
 
+
 const app = express();
 const router = express.Router();
 app.use(morgan('combined'));
@@ -54,6 +55,28 @@ fs.readdirSync("controllers").forEach(function (file) {
 router.get('/', function(req, res) {
 res.json({ message: 'API Initialized!'});
 });
+
+//user management
+router.get('/logout', function(req, res){
+    req.logout();
+    res.send();
+    });
+
+
+    router.get('/current_user', isLoggedIn, function(req, res) {
+        if(req.user) {
+        res.send({ current_user: req.user })
+        } else {
+        res.status(403).send({ success: false, msg: 'Unauthorized.' });
+        }
+        });
+
+        function isLoggedIn(req, res, next) {
+        if (req.isAuthenticated())
+        return next();
+        res.redirect('/');
+        console.log('error! auth failed')
+        };
 
 //Tell express server to use port 8081
 const port = process.env.API_PORT || 8081;

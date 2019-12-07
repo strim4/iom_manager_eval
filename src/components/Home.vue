@@ -145,12 +145,19 @@ export default {
 methods: {
 //fetches all open cases
     async fetchOpenCases() {
+       const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/cases',
+         headers: {
+        Authorization: `JWT ${token}`,
+        'Content-Type': 'application/json',
+        
+},
       })
         .then((response) => {
           this.openItems = response.data.cases;
+           this.current_user = response.data.current_user;
          
         })
         .catch(() => {});
@@ -158,16 +165,24 @@ methods: {
 
 
      async fetchAllCases() {
+       const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         url: 'http://localhost:8081/completcase',
+        headers: {
+        Authorization: `JWT ${token}`,
+        'Content-Type': 'application/json',
+},
       })
         .then((response) => {
-          console.log(response.data.protocols);
+          
           this.completCases = response.data.protocols;
+          this.current_user = response.data.current_user;
+          
         })
         .catch(() => {});
     },
+    
 },
 
 

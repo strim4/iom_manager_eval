@@ -1,9 +1,10 @@
 //this file contains the endpoint to CRUD devices in the database
 const DeviceSchema = require('../models/Device.js');
+const passport = require('passport');
 
 module.exports.controller = (app) => {
 // fetch all devices
-app.get('/devices', (req, res) => {
+app.get('/devices', passport.authenticate('jwt', { session: false }),(req, res) => {
     DeviceSchema.find({}, 'device', (error,
     devices) => {
     if (error) { console.log(error); }
@@ -15,7 +16,7 @@ app.get('/devices', (req, res) => {
 
 //delete device from the database
 
-app.delete('/devices/:id', (req, res) => {
+app.delete('/devices/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   DeviceSchema.remove({
       _id: req.params.id 
   }, function(error, device){
@@ -29,7 +30,7 @@ app.delete('/devices/:id', (req, res) => {
 
 
 // add a new device
-app.post('/devices', (req, res) => {
+app.post('/devices', passport.authenticate('jwt', { session: false }), (req, res) => {
 const newDevice = new DeviceSchema({
         device: req.body.device,
 

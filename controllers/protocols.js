@@ -1,10 +1,11 @@
 //this file contains the endpoint to CRUD protocols in the database
 const ProtocolSchema = require('../models/Protocol.js');
+const passport = require('passport');
 
 module.exports.controller = (app) => {
 
 // fetch all protocols
-app.get('/protocols', (req, res) => {
+app.get('/protocols', passport.authenticate('jwt', { session: false }),(req, res) => {
     ProtocolSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
     protocols) => {
     if (error) { console.log(error); }
@@ -15,7 +16,7 @@ app.get('/protocols', (req, res) => {
     });
 
 //fetch a single protocol
-app.get('/protocols/:casenr', (req, res) => {
+app.get('/protocols/:casenr',passport.authenticate('jwt', { session: false }), (req, res) => {
     ProtocolSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
     protocols) => {
     if (error) { console.log(error); }
@@ -68,7 +69,7 @@ app.delete('/cases/:id', (req, res) => {
 */
 
 // add a new protocol
-app.post('/protocols', (req, res) => {
+app.post('/protocols', passport.authenticate('jwt', { session: false }),(req, res) => {
 const newProtocol = new ProtocolSchema({
     
    // id: req.body.id,

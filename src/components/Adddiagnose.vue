@@ -86,6 +86,7 @@ export default {
 
     submit() {
       if (this.$refs.form.validate()) {
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -93,6 +94,7 @@ export default {
           },
           url: 'http://localhost:8081/diagnoses',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -122,12 +124,18 @@ export default {
     },
     // fetches all diagnoses from the database
     async fetchDiagnoses() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
           diagnose: this.diagnose,
         },
         url: 'http://localhost:8081/diagnoses',
+        headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.diagnoses = response.data.diagnoses;
@@ -136,6 +144,7 @@ export default {
     },
     // delete a diagnose from the database
     async  deleteDiagnose(id, item) {
+      const token = window.localStorage.getItem('auth');
       console.log(id);
       return axios({
         method: 'delete',
@@ -144,6 +153,7 @@ export default {
         },
         url: `http://localhost:8081/diagnoses/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

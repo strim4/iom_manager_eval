@@ -3,6 +3,7 @@ const multer = require('multer');
 const crypto = require('crypto');
 const mime = require('mime');
 const path = require('path');
+const passport = require('passport');
 
 module.exports.controller = (app) => {
 
@@ -25,7 +26,7 @@ module.exports.controller = (app) => {
     
     
     //Upload File
-    app.post('/upload', upload.single('file'), (req, res) => {res.json({file: req.file})});
+    app.post('/upload', upload.single('file'), passport.authenticate('jwt', { session: false }),(req, res) => {res.json({file: req.file})});
 
    
   

@@ -86,6 +86,7 @@ export default {
 
     submit() {
       if (this.$refs.form.validate()) {
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -93,6 +94,7 @@ export default {
           },
           url: 'http://localhost:8081/operations',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -122,12 +124,18 @@ export default {
     },
     // fetches all operations from the database
     async fetchOperations() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
           operation: this.operation,
         },
         url: 'http://localhost:8081/operations',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
       })
         .then((response) => {
           this.operations = response.data.operations;
@@ -136,6 +144,7 @@ export default {
     },
     // delete a operation from the database
     async  deleteOperation(id, item) {
+      const token = window.localStorage.getItem('auth');
       console.log(id);
       return axios({
         method: 'delete',
@@ -144,6 +153,7 @@ export default {
         },
         url: `http://localhost:8081/operations/${id}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })

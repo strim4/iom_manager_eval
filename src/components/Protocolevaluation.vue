@@ -1582,6 +1582,7 @@ study: '',
 
   // fetch a single protocol from the database
     async  fetchProtocol(casenr) {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
         data: {
@@ -1589,6 +1590,7 @@ study: '',
         },
         url: `http://localhost:8081/protocols/${casenr}`,
         headers: {
+          Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
         },
       })
@@ -1627,6 +1629,7 @@ study: '',
       };
 
         var self = this;
+        const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -1652,6 +1655,7 @@ study: '',
           },
           url: 'http://localhost:8081/completcase',
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
           
@@ -1721,11 +1725,12 @@ this.submitFile();
 submitFile(){
   let formData = new FormData();
   formData.append('file', this.file);
-
+const token = window.localStorage.getItem('auth');
   axios.post( 'http://localhost:8081/upload',
   formData,
   {
     headers: {
+      Authorization: `JWT ${token}`,
         'Content-Type': 'multipart/form-data'
     }
   }

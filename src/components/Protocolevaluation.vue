@@ -1768,18 +1768,18 @@ sourceData.forEach(function(sourceRow) {
   //Documentstructure for export
 	let documentDefinition = {
 
-     pageMargins: [ 10, 70, 10, 20 ],
+    pageMargins: [ 20, 70, 20, 20 ],
     pageSize: 'A4',
 
     header: [
 
-        { canvas: [{ type: 'line', x1: 10, y1: 10, x2: 595-10, y2: 10, lineWidth: 0.5 }] },
+        { canvas: [{ type: 'line', color:'#3F51B5', x1: 20, y1: 10, x2: 595-20, y2: 10, lineWidth: 0.5 }] },
 
         {
            fontSize: 8,
            columns : [
                {
-                   text : 'IOM-Manager', margin : [ 10, 0, 0, 0 ], width : 100 
+                   text : 'IOM-Manager', margin : [ 20, 0, 0, 0 ], width : 100 
                }     
            ]
 
@@ -1789,7 +1789,7 @@ sourceData.forEach(function(sourceRow) {
            fontSize: 8,
            columns : [
                {
-                   text : 'Fall Nr. ' + this.casenr, margin : [ 10,0,0,0 ], width : 100
+                   text : 'Fall Nr. ' + this.casenr, margin : [ 20,0,0,0 ], width : 100
                }     
            ]
 
@@ -1797,56 +1797,59 @@ sourceData.forEach(function(sourceRow) {
 
         { 
             canvas: [
-                { type: 'line', x1: 10, y1: 0, x2: 595-10, y2: 0, lineWidth: 0.5 }
+                { type: 'line', color:'#3F51B5', x1: 20, y1: 0, x2: 595-20, y2: 0, lineWidth: 0.5 }
             ] 
 
-        }
+        },
+
+
 
     ],
   	content: 
     [
-        { text: moment(new Date()).format('DD-MM-YYYY'), alignment: 'right' },
-       { text: 'IOM Protokoll Fall Nr. ' + this.casenr, style: 'header' },
+      { text: moment(new Date()).format('DD-MM-YYYY'), alignment: 'right' },
+      { text: 'IOM Protokoll Fall Nr. ' + this.casenr, style: 'header' },
 
-        { text: 'Patientenangaben', style: 'subheader' },
+      { text: 'Patientenangaben', style: 'subheader' },
       
       { text: "Vorname: " + this.surname, style: 'plaintext'},
       { text: "Name: " + this.name, style: 'plaintext'},
-       { text: "Geburtsdatum: " + this.birthdate, style: 'plaintext'},
+      { text: "Geburtsdatum: " + this.birthdate, style: 'plaintext'},
 
-      { text: '\n Angaben zur Operation', style: 'subheader' },
+      { text: 'Angaben zur Operation', style: 'subheader' },
 
       { text: "Diagnose: " + this.diagnose, style: 'plaintext'},
       { text: "Operation: " + this.operation, style: 'plaintext'},
-       { text: "OP-Datum: " + this.opdate, style: 'plaintext'},
+      { text: "OP-Datum: " + this.opdate, style: 'plaintext'},
 
        
-       { text: '\nProtokolleinträge\n', style: 'subheader' },
+       { text: 'Protokolleinträge\n', style: 'subheader' },
         {  
         table: 
         {
             body: bodyData   	    
         }
-    }, 
+        }, 
 
-      { text: '\nAuswertung Monitorist', style: 'subheader' },
-      { text: '* true = ja, kein Wert = nein', style: 'plaintext' },
+      { text: 'Auswertung Monitorist', style: 'subheader' },
+      
+      { text: '* true = ja, kein Wert = nein', style: 'value' },
       	{
      
 			table: {
 			
 				body: [
 
-          [this.evaluation.sseps + ': SSEPs', this.evaluation.gridmeps + ': Grid-MEPs', this.evaluation.br + ': BR', this.evaluation.stabil + ': IOM stabil'],
-          [this.evaluation.meps + ': MEPs', this.evaluation.sauger + ': Dyn. Sauger', this.evaluation.lar + ': LAR', 'SSEPs: ' + this.evaluation.sseps2],
-          [this.evaluation.aeps + ': AEPs', this.evaluation.dns + ': DNS', this.evaluation.bcr + ': BCR',  'MEPs: ' + this.evaluation.meps2],
-          [this.evaluation.veps + ': VEPs', this.evaluation.dwave + ': D-Wave', '',  'AEPs: ' + this.evaluation.aeps2],
-          [this.evaluation.emg + ': EMG', this.evaluation.penfield + ': Penfield', '',  'VEPs: ' + this.evaluation.aeps2],
-          [this.evaluation.ecog + ': ECOG', this.evaluation.mappingsw + ': Tiefste Schwelle', '',  'Grid-MEPs: ' + this.evaluation.gripdmeps2],
-          [this.evaluation.wachop + ': Wach-OP', this.evaluation.dbs + ': DBS', this.evaluation.scs + ': SCS', this.evaluation.ib + ': IB'],
-          [this.evaluation.studycheck + ': Studie', 'Studienname: ' + this.evaluation.study, '', ''],
+          ['SSEPS:', {text: this.evaluation.sseps, style: 'value'} , 'Grid-MEPs: ', {text: this.evaluation.gridmeps, style: 'value'}, 'BR: ', {text: this.evaluation.br, style: 'value'}, 'IOM stabil: ', {text: this.evaluation.stabil, style: 'value'}],
+          ['MEPs:', {text: this.evaluation.meps, style: 'value'}, 'Dyn. Sauger:', {text: this.evaluation.sauger, style:'value'}, 'LAR:', {text: this.evaluation.lar, style:'value'}, 'SSEPs:', {text: this.evaluation.sseps2, style:'value'}],
+          ['AEPs:', {text: this.evaluation.aeps, style: 'value'}, 'DNS:', {text: this.evaluation.dns, style: 'value'}, 'BCR:', {text: this.evaluation.bcr, style: 'value'}, 'MEPs:', {text: this.evaluation.meps2, style: 'value'}],
+          ['VEPs:', {text: this.evaluation.veps, style: 'value'}, 'D-Wave:', {text: this.evaluation.dwave, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'AEPs:', {text: this.evaluation.aeps2, style: 'value'}],
+          ['EMG:', {text: this.evaluation.emg, style: 'value'}, 'Penfield:', {text: this.evaluation.penfield, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'VEPs:', {text: this.evaluation.veps2, style: 'value'}],
+          ['ECOG:', {text: this.evaluation.ecog, style: 'value'}, 'Tiefste Schwelle:', {text: this.evaluation.mappingsw, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'Grid-MEPs:', {text: this.evaluation.gripdmeps2, style: 'value'}],
+          ['Wachop:', {text: this.evaluation.wachop, style: 'value'}, 'DBS:', {text: this.evaluation.dbs, style: 'value'}, 'SCS:', {text: this.evaluation.scs, style: 'value'}, 'IB:', {text: this.evaluation.ib, style: 'value'}],
+          ['Studie:', {text: this.evaluation.studycheck , style: 'value'}, {text: this.evaluation.study, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}],
 				
-					// ['SSEPS: ' + this.evaluation.sseps, 'MEPs: ' + this.evaluation.meps, 'AEPs: ' + this.evaluation.aeps, 'VEPs: ' + this.evaluation.veps, 'EMG: ' + this.evaluation.emg, 'OCOG: ' + this.evaluation.ecog,],
+					// ['SSEPS: ' , {text: this.evaluation.sseps, style: 'value'}, 'MEPs: ', {text: this.evaluation.meps, style: 'value'}, 'AEPs: ', {text: this.evaluation.aeps, style: 'value'}, 'VEPs: ', {text: this.evaluation.veps, style: 'value'}, 'EMG: ', {text: this.evaluation.emg, style: 'value'}, 'ECOG: ', {text: this.evaluation.ecog, style: 'value'}],
           // ['Gridmeps: ' + this.evaluation.gridmeps, 'Sauger: ' + this.evaluation.sauger, 'DNS: ' + this.evaluation.dns, 'DWave: ' + this.evaluation.dwave, 'Penfield: ' + this.evaluation.penfield, 'Mappingschwelle: ' + this.evaluation.mappingsw,],
           // ['BR: ' + this.evaluation.br, 'LAR: ' + this.evaluation.lar, 'BCR: ' + this.evaluation.bcr, 'IOM stabil: ' + this.evaluation.stabil, 'SSEPs: ' + this.evaluation.sseps2, 'MEPs: ' + this.evaluation.meps2,],
           // ['AEPs: ' + this.evaluation.aeps2, 'VEPs: ' + this.evaluation.veps2, 'Grid-MEPs: ' + this.evaluation.gripdmeps2, 'Wachop: ' + this.evaluation.wachop, 'SCS: ' + this.evaluation.scs, 'DBS: ' + this.evaluation.dbs,],
@@ -1855,20 +1858,22 @@ sourceData.forEach(function(sourceRow) {
 				]      
       },
 
- 		},
+     },
+     { text: 'Bemerkungen: ' + this.evaluation.comment},
 
-     { text: '\nBaselines SSEPs', style: 'subheader' },
+     { text: 'Baselines SSEPs', style: 'subheader' },
      
       	{
      
 			table: {
 			
 				body: [
-				
-					['Medianus L', 'N: ' + this.baselines.ssepsMedianusLN, 'P: ' + this.baselines.ssepsMedianusLP, this.baselines.ssepsMedianusLAmp + ' mA',],
-          ['Medianus R', 'N: ' + this.baselines.ssepsMedianusRN, 'P: ' + this.baselines.ssepsMedianusRP, this.baselines.ssepsMedianusRAmp + ' mA',],
-          ['Tibialis L', 'N: ' + this.baselines.ssepsTibialisLN, 'P: ' + this.baselines.ssepsTibialisLP, this.baselines.ssepsTibialisLAmp + ' mA',],
-          ['Tibialis R', 'N: ' + this.baselines.ssepsTibialisRN, 'P: ' + this.baselines.ssepsTibialisRP, this.baselines.ssepsTibialisRAmp + ' mA',],
+        
+          [{text:'', style: 'tableHeader'}, {text:'N', style: 'tableHeader'}, {text:'P', style: 'tableHeader'}, {text:'Amplitude', style: 'tableHeader'}],
+					['Medianus L', this.baselines.ssepsMedianusLN, this.baselines.ssepsMedianusLP, this.baselines.ssepsMedianusLAmp + 'mA',],
+          ['Medianus R', this.baselines.ssepsMedianusRN, this.baselines.ssepsMedianusRP, this.baselines.ssepsMedianusRAmp + 'mA',],
+          ['Tibialis L', this.baselines.ssepsTibialisLN, this.baselines.ssepsTibialisLP, this.baselines.ssepsTibialisLAmp + 'mA',],
+          ['Tibialis R', this.baselines.ssepsTibialisRN, this.baselines.ssepsTibialisRP, this.baselines.ssepsTibialisRAmp + 'mA',],
       
 				]
         
@@ -1876,30 +1881,31 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-    { text: '\nBaselines TES MEPs', style: 'subheader' },
+    { text: 'Baselines TES-MEPs', style: 'subheader' },
      
       	{
      
 			table: {
 			
 				body: [
-				
-					['Kanal1: ' + this.baselines.mepChannel1, this.baselines.mepChannel1Side , this.baselines.mepChannel1C1C2 + 'mA', this.baselines.mepChannel1C3C4 + 'mA',this.baselines.mepChannel1C3CZ +'mA',this.baselines.mepChannel1C4CZ +'mA',],
-      		['Kanal2: ' + this.baselines.mepChannel2, this.baselines.mepChannel2Side , this.baselines.mepChannel2C1C2 + 'mA', this.baselines.mepChannel2C3C4 + 'mA',this.baselines.mepChannel2C3CZ +'mA',this.baselines.mepChannel2C4CZ +'mA',],
-          ['Kanal3: ' + this.baselines.mepChannel3, this.baselines.mepChannel3Side , this.baselines.mepChannel3C1C2 + 'mA', this.baselines.mepChannel3C3C4 + 'mA',this.baselines.mepChannel3C3CZ +'mA',this.baselines.mepChannel3C4CZ +'mA',],
-				  ['Kanal4: ' + this.baselines.mepChannel4, this.baselines.mepChannel4Side , this.baselines.mepChannel4C1C2 + 'mA', this.baselines.mepChannel4C3C4 + 'mA',this.baselines.mepChannel4C3CZ +'mA',this.baselines.mepChannel4C4CZ +'mA',],
-          ['Kanal5: ' + this.baselines.mepChannel5, this.baselines.mepChannel5Side , this.baselines.mepChannel5C1C2 + 'mA', this.baselines.mepChannel5C3C4 + 'mA',this.baselines.mepChannel5C3CZ +'mA',this.baselines.mepChannel5C4CZ +'mA',],
-          ['Kanal6: ' + this.baselines.mepChannel6, this.baselines.mepChannel6Side , this.baselines.mepChannel6C1C2 + 'mA', this.baselines.mepChannel6C3C4 + 'mA',this.baselines.mepChannel6C3CZ +'mA',this.baselines.mepChannel6C4CZ +'mA',],
-          ['Kanal7: ' + this.baselines.mepChannel7, this.baselines.mepChannel7Side , this.baselines.mepChannel7C1C2 + 'mA', this.baselines.mepChannel7C3C4 + 'mA',this.baselines.mepChannel7C3CZ +'mA',this.baselines.mepChannel7C4CZ +'mA',],
-          ['Kanal8: ' + this.baselines.mepChannel8, this.baselines.mepChannel8Side , this.baselines.mepChannel8C1C2 + 'mA', this.baselines.mepChannel8C3C4 + 'mA',this.baselines.mepChannel8C3CZ +'mA',this.baselines.mepChannel8C4CZ +'mA',],
-      		['Kanal9: ' + this.baselines.mepChannel9, this.baselines.mepChannel9Side , this.baselines.mepChannel9C1C2 + 'mA', this.baselines.mepChannel9C3C4 + 'mA',this.baselines.mepChannel9C3CZ +'mA',this.baselines.mepChannel9C4CZ +'mA',],
-      		['Kanal10: ' + this.baselines.mepChannel10, this.baselines.mepChannel10Side , this.baselines.mepChannel10C1C2 + 'mA', this.baselines.mepChannel10C3C4 + 'mA',this.baselines.mepChannel10C3CZ +'mA',this.baselines.mepChannel10C4CZ +'mA',],
-      		['Kanal11: ' + this.baselines.mepChannel11, this.baselines.mepChannel11Side , this.baselines.mepChannel11C1C2 + 'mA', this.baselines.mepChannel11C3C4 + 'mA',this.baselines.mepChannel11C3CZ +'mA',this.baselines.mepChannel11C4CZ +'mA',],
-      		['Kanal12: ' + this.baselines.mepChannel12, this.baselines.mepChannel12Side , this.baselines.mepChannel12C1C2 + 'mA', this.baselines.mepChannel12C3C4 + 'mA',this.baselines.mepChannel12C3CZ +'mA',this.baselines.mepChannel12C4CZ +'mA',],
-      		['Kanal13: ' + this.baselines.mepChannel13, this.baselines.mepChannel13Side , this.baselines.mepChannel13C1C2 + 'mA', this.baselines.mepChannel13C3C4 + 'mA',this.baselines.mepChannel13C3CZ +'mA',this.baselines.mepChannel13C4CZ +'mA',],      
-       		['Kanal14: ' + this.baselines.mepChannel14, this.baselines.mepChannel14Side , this.baselines.mepChannel14C1C2 + 'mA', this.baselines.mepChannel14C3C4 + 'mA',this.baselines.mepChannel14C3CZ +'mA',this.baselines.mepChannel14C4CZ +'mA',],      
-      		['Kanal15: ' + this.baselines.mepChannel15, this.baselines.mepChannel15Side , this.baselines.mepChannel15C1C2 + 'mA', this.baselines.mepChannel15C3C4 + 'mA',this.baselines.mepChannel15C3CZ +'mA',this.baselines.mepChannel15C4CZ +'mA',],       
-      		['Kanal16: ' + this.baselines.mepChannel16, this.baselines.mepChannel16Side , this.baselines.mepChannel16C1C2 + 'mA', this.baselines.mepChannel16C3C4 + 'mA',this.baselines.mepChannel16C3CZ +'mA',this.baselines.mepChannel16C4CZ +'mA',],
+        
+          [{text:'Ableitung', style: 'tableHeader'}, {text:'Seite', style: 'tableHeader'}, {text:'C1/C2', style: 'tableHeader'}, {text:'C3/C4', style: 'tableHeader'}, {text:'C3/Cz', style: 'tableHeader'}, {text:'C4/Cz', style: 'tableHeader'}],
+					[this.baselines.mepChannel1, this.baselines.mepChannel1Side , this.baselines.mepChannel1C1C2 + 'mA', this.baselines.mepChannel1C3C4 + 'mA',this.baselines.mepChannel1C3CZ +'mA',this.baselines.mepChannel1C4CZ +'mA',],
+      		[this.baselines.mepChannel2, this.baselines.mepChannel2Side , this.baselines.mepChannel2C1C2 + 'mA', this.baselines.mepChannel2C3C4 + 'mA',this.baselines.mepChannel2C3CZ +'mA',this.baselines.mepChannel2C4CZ +'mA',],
+          [this.baselines.mepChannel3, this.baselines.mepChannel3Side , this.baselines.mepChannel3C1C2 + 'mA', this.baselines.mepChannel3C3C4 + 'mA',this.baselines.mepChannel3C3CZ +'mA',this.baselines.mepChannel3C4CZ +'mA',],
+				  [this.baselines.mepChannel4, this.baselines.mepChannel4Side , this.baselines.mepChannel4C1C2 + 'mA', this.baselines.mepChannel4C3C4 + 'mA',this.baselines.mepChannel4C3CZ +'mA',this.baselines.mepChannel4C4CZ +'mA',],
+          [this.baselines.mepChannel5, this.baselines.mepChannel5Side , this.baselines.mepChannel5C1C2 + 'mA', this.baselines.mepChannel5C3C4 + 'mA',this.baselines.mepChannel5C3CZ +'mA',this.baselines.mepChannel5C4CZ +'mA',],
+          [this.baselines.mepChannel6, this.baselines.mepChannel6Side , this.baselines.mepChannel6C1C2 + 'mA', this.baselines.mepChannel6C3C4 + 'mA',this.baselines.mepChannel6C3CZ +'mA',this.baselines.mepChannel6C4CZ +'mA',],
+          [this.baselines.mepChannel7, this.baselines.mepChannel7Side , this.baselines.mepChannel7C1C2 + 'mA', this.baselines.mepChannel7C3C4 + 'mA',this.baselines.mepChannel7C3CZ +'mA',this.baselines.mepChannel7C4CZ +'mA',],
+          [this.baselines.mepChannel8, this.baselines.mepChannel8Side , this.baselines.mepChannel8C1C2 + 'mA', this.baselines.mepChannel8C3C4 + 'mA',this.baselines.mepChannel8C3CZ +'mA',this.baselines.mepChannel8C4CZ +'mA',],
+      		[this.baselines.mepChannel9, this.baselines.mepChannel9Side , this.baselines.mepChannel9C1C2 + 'mA', this.baselines.mepChannel9C3C4 + 'mA',this.baselines.mepChannel9C3CZ +'mA',this.baselines.mepChannel9C4CZ +'mA',],
+      		[this.baselines.mepChannel10, this.baselines.mepChannel10Side , this.baselines.mepChannel10C1C2 + 'mA', this.baselines.mepChannel10C3C4 + 'mA',this.baselines.mepChannel10C3CZ +'mA',this.baselines.mepChannel10C4CZ +'mA',],
+      		[this.baselines.mepChannel11, this.baselines.mepChannel11Side , this.baselines.mepChannel11C1C2 + 'mA', this.baselines.mepChannel11C3C4 + 'mA',this.baselines.mepChannel11C3CZ +'mA',this.baselines.mepChannel11C4CZ +'mA',],
+      		[this.baselines.mepChannel12, this.baselines.mepChannel12Side , this.baselines.mepChannel12C1C2 + 'mA', this.baselines.mepChannel12C3C4 + 'mA',this.baselines.mepChannel12C3CZ +'mA',this.baselines.mepChannel12C4CZ +'mA',],
+      		[this.baselines.mepChannel13, this.baselines.mepChannel13Side , this.baselines.mepChannel13C1C2 + 'mA', this.baselines.mepChannel13C3C4 + 'mA',this.baselines.mepChannel13C3CZ +'mA',this.baselines.mepChannel13C4CZ +'mA',],      
+       		[this.baselines.mepChannel14, this.baselines.mepChannel14Side , this.baselines.mepChannel14C1C2 + 'mA', this.baselines.mepChannel14C3C4 + 'mA',this.baselines.mepChannel14C3CZ +'mA',this.baselines.mepChannel14C4CZ +'mA',],      
+      		[this.baselines.mepChannel15, this.baselines.mepChannel15Side , this.baselines.mepChannel15C1C2 + 'mA', this.baselines.mepChannel15C3C4 + 'mA',this.baselines.mepChannel15C3CZ +'mA',this.baselines.mepChannel15C4CZ +'mA',],       
+      		[this.baselines.mepChannel16, this.baselines.mepChannel16Side , this.baselines.mepChannel16C1C2 + 'mA', this.baselines.mepChannel16C3C4 + 'mA',this.baselines.mepChannel16C3CZ +'mA',this.baselines.mepChannel16C4CZ +'mA',],
         ]
         
 			},
@@ -1907,24 +1913,25 @@ sourceData.forEach(function(sourceRow) {
 		},
 
 
-     { text: '\nBaselines DCS MEPs', style: 'subheader' },
+     { text: 'Baselines DCS-MEPs', style: 'subheader' },
      
       	{
      
 			table: {
 			
 				body: [
-				
-					['Masseter' , this.baselines.masseterSide , '#1: ' + this.baselines.masseter1, '#2: ' +this.baselines.masseter2, '#3: ' + this.baselines.masseter3, '#4: ' +this.baselines.masseter4,],
-					['Orb oris' , this.baselines.orisSide , '#1: ' + this.baselines.oris1, '#2: ' +this.baselines.oris2, '#3: ' + this.baselines.oris3, '#4: ' +this.baselines.oris4,],
-          ['Deltoideus' , this.baselines.deltoideusSide , '#1: ' + this.baselines.deltoideus1, '#2: ' +this.baselines.deltoideus2, '#3: ' + this.baselines.deltoideus3, '#4: ' +this.baselines.deltoideus4,],
-          ['Biceps' , this.baselines.bicepsSide , '#1: ' + this.baselines.biceps1, '#2: ' +this.baselines.biceps2, '#3: ' + this.baselines.biceps3, '#4: ' +this.baselines.biceps4,],
-          ['Extensor' , this.baselines.extensorSide , '#1: ' + this.baselines.extensor1, '#2: ' +this.baselines.extensor2, '#3: ' + this.baselines.extensor3, '#4: ' +this.baselines.extensor4,],
-          ['Thenar' , this.baselines.thenarSide , '#1: ' + this.baselines.thenar1, '#2: ' +this.baselines.thenar2, '#3: ' + this.baselines.thenar3, '#4: ' +this.baselines.thenar4,],
-          ['Tib ant' , this.baselines.tibSide , '#1: ' + this.baselines.tib1, '#2: ' +this.baselines.tib2, '#3: ' + this.baselines.tib3, '#4: ' +this.baselines.tib4,],
-          ['Abd hall' , this.baselines.abdSide , '#1: ' + this.baselines.abd1, '#2: ' +this.baselines.abd2, '#3: ' + this.baselines.abd3, '#4: ' +this.baselines.abd4,],
-          ['Thenar' , this.baselines.thenar2Side , '#1: ' + this.baselines.thenar21, '#2: ' +this.baselines.thenar22, '#3: ' + this.baselines.thenar23, '#4: ' +this.baselines.thenar24,],
-          ['Tib ant' , this.baselines.tib2Side , '#1: ' + this.baselines.tib21, '#2: ' +this.baselines.tib22, '#3: ' + this.baselines.tib23, '#4: ' +this.baselines.tib24,],
+
+          [{text:'', style: 'tableHeader'}, {text:'Seite', style: 'tableHeader'}, {text:'#1', style: 'tableHeader'}, {text:'#2', style: 'tableHeader'}, {text:'#3', style: 'tableHeader'}, {text:'#4', style: 'tableHeader'}],
+					['Masseter' , this.baselines.masseterSide , this.baselines.masseter1, this.baselines.masseter2, this.baselines.masseter3, this.baselines.masseter4,],
+					['Orb oris' , this.baselines.orisSide , this.baselines.oris1, this.baselines.oris2, this.baselines.oris3, this.baselines.oris4,],
+          ['Deltoideus' , this.baselines.deltoideusSide , this.baselines.deltoideus1, this.baselines.deltoideus2, this.baselines.deltoideus3, this.baselines.deltoideus4,],
+          ['Biceps' , this.baselines.bicepsSide , this.baselines.biceps1, this.baselines.biceps2, this.baselines.biceps3, this.baselines.biceps4,],
+          ['Extensor' , this.baselines.extensorSide , this.baselines.extensor1, this.baselines.extensor2, this.baselines.extensor3, this.baselines.extensor4,],
+          ['Thenar' , this.baselines.thenarSide , this.baselines.thenar1, this.baselines.thenar2, this.baselines.thenar3, this.baselines.thenar4,],
+          ['Tib ant' , this.baselines.tibSide , this.baselines.tib1, this.baselines.tib2, this.baselines.tib3, this.baselines.tib4,],
+          ['Abd hall' , this.baselines.abdSide , this.baselines.abd1, this.baselines.abd2, this.baselines.abd3, this.baselines.abd4,],
+          ['Thenar' , this.baselines.thenar2Side , this.baselines.thenar21, this.baselines.thenar22, this.baselines.thenar23, this.baselines.thenar24,],
+          ['Tib ant' , this.baselines.tib2Side , this.baselines.tib21, this.baselines.tib22, this.baselines.tib23, this.baselines.tib24,],
 
       	
         ],
@@ -1934,16 +1941,17 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-     { text: '\nBaselines AEPs', style: 'subheader' },
+     { text: 'Baselines AEPs', style: 'subheader' },
      
       	{
      
 			table: {
 			
 				body: [
-				
-					['AEP L' , 'I: ' + this.baselines.aepLI, 'II: ' + this.baselines.aepLII, 'III: ' +this.baselines.aepLIII, 'IV: ' + this.baselines.aepLIV, 'V: ' +this.baselines.aepLV,],
-          ['AEP R' , 'I: ' + this.baselines.aepRI, 'II: ' + this.baselines.aepRII, 'III: ' +this.baselines.aepRIII, 'IV: ' + this.baselines.aepRIV, 'V: ' +this.baselines.aepRV,],
+        
+          [{text:'', style: 'tableHeader'}, {text:'I', style: 'tableHeader'}, {text:'II', style: 'tableHeader'}, {text:'III', style: 'tableHeader'}, {text:'IV', style: 'tableHeader'}, {text:'V', style: 'tableHeader'}],
+					['AEP L' , this.baselines.aepLI +'ms', this.baselines.aepLII +'ms', this.baselines.aepLIII +'ms', this.baselines.aepLIV +'ms', this.baselines.aepLV +'ms'],
+          ['AEP R' , this.baselines.aepRI +'ms', this.baselines.aepRII +'ms', this.baselines.aepRIII +'ms', this.baselines.aepRIV +'ms', this.baselines.aepRV +'ms'],
 
         ],
 
@@ -1951,15 +1959,16 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-     { text: '\nBaselines VEPs', style: 'subheader' },
+     { text: 'Baselines VEPs', style: 'subheader' },
      
       	{
      
 			table: {
 			
 				body: [
-				
-					['VEP' , 'L: ' + this.baselines.vepL, 'R: ' + this.baselines.vepR, ],
+        
+          [{text:'', style: 'tableHeader'}, {text:'Links', style: 'tableHeader'}, {text:'Rechts', style: 'tableHeader'}],
+					['VEP' , this.baselines.vepL, this.baselines.vepR, ],
           
 
         ],
@@ -1968,24 +1977,42 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-        { text: '\nReflexe', style: 'subheader' },
+        { text: 'Reflexe', style: 'subheader' },
      
       	{
      
 			table: {
 			
 				body: [
-				
-					['BR' , 'L: ' + this.baselines.brL, 'R: ' + this.baselines.brR, ],
-          ['LAR' , 'L: ' + this.baselines.larL, 'R: ' + this.baselines.larR, ],
-          ['BCR' , 'L: ' + this.baselines.bcrL, 'R: ' + this.baselines.bcrR, ],
+        
+          [{text:'Reflex', style: 'tableHeader'}, {text:'Links', style: 'tableHeader'}, {text:'Rechts', style: 'tableHeader'}],
+					['BR' , this.baselines.brL, this.baselines.brR, ],
+          ['LAR' , this.baselines.larL, this.baselines.larR, ],
+          ['BCR' , this.baselines.bcrL, this.baselines.bcrR, ],
           
 
         ],
 
 			},
         
-		},
+    },
+    
+    { text: 'Extras', style: 'subheader'},
+
+    {
+
+      table: {
+
+        body: [
+
+          [{text:'', style: 'tableHeader'}, {text:'Amplitude', style: 'tableHeader'}, {text:'Latenz', style: 'tableHeader'}],
+          ['D-Wave:', this.extras.dWaveAmp + 'mA', this.extras.dWaveLat + 'ms'],
+          [this.extras.additional1, this.extras.additional1Amp, this.extras.additional1Lat],
+          [this.extras.additional2, this.extras.additional2Amp, this.extras.additional2Lat], 
+
+        ],
+      },
+    },
 
    
 
@@ -1996,13 +2023,15 @@ sourceData.forEach(function(sourceRow) {
       {
 				fontSize: 18,
 				bold: true,
-        margin: [0, 10, 0, 10],
-        alignment: 'center'
+        margin: [0, 10, 0, 0],
+        alignment: 'center',
+        color: '#3F51B5'
 			},
       	subheader: 
       {
 				fontSize: 14,
-				bold: true,
+        bold: true,
+        margin: [0, 15, 0, 0],
         
 			},
       	plaintext: 
@@ -2014,10 +2043,19 @@ sourceData.forEach(function(sourceRow) {
 
     	tableHeader: 
       {
-      	fillColor: '#4CAF50',
+      	fillColor: '#3F51B5',
     		color: 'white'
         
+      },
+
+      value: {
+        color: '#3F51B5'
+      },
+
+      filler: {
+        fillColor: 'black'
       }
+
     }
   };
   

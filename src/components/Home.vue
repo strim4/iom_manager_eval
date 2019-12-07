@@ -121,6 +121,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
   
   data() {
@@ -129,6 +130,8 @@ export default {
  
     openItems: {}, 
     completCases: {},
+    name: '',
+    current_user: null,
     };
   },
 
@@ -177,11 +180,19 @@ methods: {
         .then((response) => {
           
           this.completCases = response.data.protocols;
-          this.current_user = response.data.current_user;
+         // this.current_user = response.data.current_user;
           
         })
         .catch(() => {});
     },
+
+
+
+
+
+
+
+   
     
 },
 
@@ -194,6 +205,8 @@ methods: {
 
    this.fetchOpenCases();
    this.fetchAllCases();
+ 
+
 
   },
 };

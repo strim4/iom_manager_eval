@@ -68,13 +68,13 @@
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <v-toolbar-title>IOM-Manager</router-link></v-toolbar-title>
                 <v-spacer></v-spacer>
-                <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link" v-show="$route.path==='/users/register' || $route.path==='/users/login' || $route.path==='/'  ? false : true">
+                <router-link v-bind:to="{ name: 'Home' }" class="side_bar_link" v-show="$route.path==='/users/register' || $route.path==='/users/login' || $route.path==='/' || $route.path==='/home'  ? false : true">
                  <v-btn icon>
           <v-icon>mdi-home</v-icon>
         </v-btn>
         </router-link>
          
-  <div  v-show="$route.path==='/users/register' || $route.path==='/users/login' || $route.path==='/' ? false : true">  Eingeloggt als xxx
+  <div  v-show="$route.path==='/users/register' || $route.path==='/users/login' || $route.path==='/' ? false : true">  Eingeloggt als: <b>{{name}}</b>
         <v-btn icon @click="logout">
            
                 <v-btn icon>
@@ -107,7 +107,7 @@
 <script>
 
 
-// Import main stylesheet
+// Imports
 import './assets/stylesheets/main.css';
 
 import axios from 'axios';
@@ -115,10 +115,31 @@ export default {
   data: () => ({
     drawer: null,
     current_user: null,
+    name: '',
+  
   }),
+
+ 
   mounted(){
-      this.fetchUser();
+
+      
+     this.fetchUser();  
+  
+
+  
+    
   },
+  created(){
+           EventBus.$on('emitName', function (payLoad) {
+         
+            this.name = payLoad;
+            console.log(this.name);
+      
+    });
+
+  },
+
+  
   methods: {
     logout() {
         return axios({
@@ -133,18 +154,54 @@ export default {
         });
 },
 
-    async fetchUser() {
+//get id from loggedin user
+   async fetchUser() {
+     const token = window.localStorage.getItem('auth');
 return axios({
 method: 'get',
 url: 'http://localhost:8081/current_user',
+      headers: {
+        Authorization: `JWT ${token}`,
+        'Content-Type': 'application/json',
+},
 })
 .then((response) => {
 this.current_user = response.data.current_user;
+console.log(this.current_user.id);
+  this.fetchUserName(this.current_user.id);
 
 })
 .catch(() => {
 });
 },
+
+
+//get name to corresponding id 
+ async  fetchUserName(id) {
+      const token = window.localStorage.getItem('auth');
+      return axios({
+        method: 'get',
+        data: {
+          id,
+        },
+        url: `http://localhost:8081/users/${id}`,
+        headers: {
+          Authorization: `JWT ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => {
+          this.name = response.data.users.name;
+          console.log(this.name);
+         
+          
+          
+      
+        })
+        .catch(() => { console.log('error'); });
+    },
+
+  
   },
   props: {
     source: String,

@@ -63,7 +63,7 @@ router.get('/logout', function(req, res){
     });
 
 
-    router.get('/current_user', isLoggedIn, function(req, res) {
+    router.get('/current_user', passport.authenticate('jwt', { session: false }), isLoggedIn, function(req, res) {
         if(req.user) {
         res.send({ current_user: req.user })
         } else {

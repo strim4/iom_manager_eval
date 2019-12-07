@@ -11,14 +11,57 @@
         max-height="160"
       ></v-img>
       </v-row>
+         <v-row>
+          <v-col cols="12" sm="6" md="3"></v-col>
+          <v-col align="center" cols="12" sm="-10" md="6">
+             
+              <v-text-field class="my-n5"  label="Name" v-model="name" required></v-text-field>
+          </v-col>
+      </v-row>
+        <v-row>
+          <v-col cols="12" sm="6" md="3"></v-col>
+          <v-col align="center" cols="12" sm="-10" md="6">
+             <v-text-field class="my-n5" label="E-mail" v-model="email" :rules="emailRules" required></v-text-field>
+              
+          </v-col>
+      </v-row>
+          <v-row>
+          <v-col cols="12" sm="6" md="3"></v-col>
+          <v-col align="center" cols="12" sm="-10" md="6">
+          
+              <v-text-field class="my-n5" label="Passwort" v-model="password" 
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                 :type="show1 ? 'text' : 'password'"
+                
+              
+              counter
+              @click:append="show1 = !show1"
+              required></v-text-field>
+          </v-col>
+      </v-row>
 
-        <v-text-field label="Name" v-model="name" required></v-text-field>
+           <v-row>
+          <v-col cols="12" sm="6" md="3"></v-col>
+          <v-col align="center" cols="12" sm="-10" md="6">
+         
+             
+               <v-text-field class="my-n5" name="input-7-1" label="Passwort bestätigen" v-model="confirm_password"
+                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                 :type="show1 ? 'text' : 'password'"
+                
+              
+              counter
+              @click:append="show1 = !show1"></v-text-field>
+          </v-col>
+      </v-row>
+        
+        
 
-        <v-text-field label="E-mail" v-model="email" :rules="emailRules" required></v-text-field>
+        
 
-        <v-text-field label="Passwort" v-model="password" required></v-text-field>
+        
 
-        <v-text-field name="input-7-1" label="Passwort bestätigen" v-model="confirm_password"></v-text-field>
+       
 
         <v-btn @click="submit" :disabled="!valid" color="success">
 
@@ -36,6 +79,7 @@ import axios from 'axios';
 
 export default {
     data: () => ({
+        show1: false,
         valid: true,
         name: '',
         email: '',

@@ -1214,6 +1214,8 @@
 import axios from 'axios';
 import pdfmake from 'pdfmake';
 import moment from 'moment';
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 
@@ -1489,6 +1491,15 @@ study: '',
 
 
   file: null,
+
+    /* values for evaluation*/
+    age: ['Kind','Erwachsener'],
+    sex: ['Weiblich','Männlich'],
+    local: ['supratentorielle RF','infratentorielle RF','spinal','CEA',''],
+    detail: ['frontal','zentral','parietal','occipital','temporal','cerebellär','KHBW','HWK','BWK','LWK','SWK','Hypophyse','Hirnstamm',''],
+    patho: ['intracerebral','extradural','intradural','intramedullär','vaskulär','Blutungen',''],
+    op: ['Resektion','Clipping','Stabilisation','Dekompression','Biopsie','direkte Stimulation','Verschluss',''],
+    anaest: ['TIVA','TIVA plus','Wach-OP',''],
  
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
@@ -1632,53 +1643,285 @@ openFile: function(){
 //generate PDF Export
 createPDF() {
 
+var sourceData = this.entries
+var bodyData = [];
 
 
-  
+
+sourceData.forEach(function(sourceRow) {
+  var dataRow = [];
+
+
+
+  dataRow.push(sourceRow.ts);
+  dataRow.push(sourceRow.entrycat.name);
+  dataRow.push(sourceRow.event);
+  dataRow.push(sourceRow.comment);
+ 
+ 
+  bodyData.push(dataRow)
+});
+
+  //Documentstructure for export
 	let documentDefinition = {
+
+    pageMargins: [ 20, 70, 20, 20 ],
+    pageSize: 'A4',
+
+    header: [
+
+        { canvas: [{ type: 'line', color:'#3F51B5', x1: 20, y1: 10, x2: 595-20, y2: 10, lineWidth: 0.5 }] },
+
+        {
+           fontSize: 8,
+           columns : [
+               {
+                   text : 'IOM-Manager', margin : [ 20, 0, 0, 0 ], width : 100 
+               }     
+           ]
+
+        },
+
+        {
+           fontSize: 8,
+           columns : [
+               {
+                   text : 'Fall Nr. ' + this.casenr, margin : [ 20,0,0,0 ], width : 100
+               }     
+           ]
+
+        },
+
+        { 
+            canvas: [
+                { type: 'line', color:'#3F51B5', x1: 20, y1: 0, x2: 595-20, y2: 0, lineWidth: 0.5 }
+            ] 
+
+        },
+
+
+
+    ],
   	content: 
     [
-        { text: moment(new Date()).format('DD-MM-YYYY'), alignment: 'right' },
-       { text: 'IM Protokoll Fall Nr. ' + this.casenr, style: 'header' },
+      { text: moment(new Date()).format('DD-MM-YYYY'), alignment: 'right' },
+      { text: 'IOM Protokoll Fall Nr. ' + this.casenr, style: 'header' },
 
-        { text: 'Angaben zu Patient / Operation', style: 'subheader' },
-      { text: '', style: 'subheader' },
-
-       
-      {  
-        table: 
-        {
-            headerRows: 0,                            
-            body: 
-            [   
-              ["Vorname" ,  "Name", "Diagnose", "Opeartion", 'OP-Datum']   , 
-              [this.surname, this.name, this.diagnose, this.operation, this.opdate ],                
-              
-            ]
-        }
-    }, 
-       
-       { text: 'Protokolleinträge', style: 'subheader' },
-      { text: '', style: 'subheader' },
-    
+      { text: 'Patientenangaben', style: 'subheader' },
       
-      {  
+      { text: "Vorname: " + this.surname, style: 'plaintext'},
+      { text: "Name: " + this.name, style: 'plaintext'},
+      { text: "Geburtsdatum: " + this.birthdate, style: 'plaintext'},
+
+      { text: 'Angaben zur Operation', style: 'subheader' },
+
+      { text: "Diagnose: " + this.diagnose, style: 'plaintext'},
+      { text: "Operation: " + this.operation, style: 'plaintext'},
+      { text: "OP-Datum: " + this.opdate, style: 'plaintext'},
+
+       
+       { text: 'Protokolleinträge\n', style: 'subheader' },
+        {  
         table: 
         {
-            headerRows: 0,                            
-            body: 
-            [   
-              ["Uhrzeit" ,  "Kategorie", "Event", "Bemerkung"]   , 
-              [, '','','' ],                
-              
-            ]
+            body: bodyData   	    
         }
+        }, 
+      
+      { text: 'Interpretation', style: 'subheader'},
+      { text: this.interp},
+
+      { text: 'Auswertung Monitorist', style: 'subheader' },
+      { text: '\nFallkodierung:'},
+
+      {
+        table: 
+        {
+          body: [
+
+            ['Alter: ' + this.evaluation.age, 'Lokalisation: ' + this.evaluation.local,'Pathologie: ' + this.evaluation.patho, 'Anästhesie: ' + this.evaluation.anaest],
+            ['Geschlecht: ' + this.evaluation.age, 'Detail: ' + this.evaluation.local, 'Operation: ' + this.evaluation.op,''],
+          ]
+        }
+      
+      },
+      { text: '\n* true = ja, kein Wert = nein', style: 'value' },
+      	{
+     
+			table: {
+			
+				body: [
+
+          ['SSEPS:', {text: this.evaluation.sseps, style: 'value'} , 'Grid-MEPs: ', {text: this.evaluation.gridmeps, style: 'value'}, 'BR: ', {text: this.evaluation.br, style: 'value'}, 'IOM stabil: ', {text: this.evaluation.stabil, style: 'value'}],
+          ['MEPs:', {text: this.evaluation.meps, style: 'value'}, 'Dyn. Sauger:', {text: this.evaluation.sauger, style:'value'}, 'LAR:', {text: this.evaluation.lar, style:'value'}, 'SSEPs:', {text: this.evaluation.sseps2, style:'value'}],
+          ['AEPs:', {text: this.evaluation.aeps, style: 'value'}, 'DNS:', {text: this.evaluation.dns, style: 'value'}, 'BCR:', {text: this.evaluation.bcr, style: 'value'}, 'MEPs:', {text: this.evaluation.meps2, style: 'value'}],
+          ['VEPs:', {text: this.evaluation.veps, style: 'value'}, 'D-Wave:', {text: this.evaluation.dwave, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'AEPs:', {text: this.evaluation.aeps2, style: 'value'}],
+          ['EMG:', {text: this.evaluation.emg, style: 'value'}, 'Penfield:', {text: this.evaluation.penfield, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'VEPs:', {text: this.evaluation.veps2, style: 'value'}],
+          ['ECOG:', {text: this.evaluation.ecog, style: 'value'}, 'Tiefste Schwelle:', {text: this.evaluation.mappingsw, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'Grid-MEPs:', {text: this.evaluation.gripdmeps2, style: 'value'}],
+          ['Wachop:', {text: this.evaluation.wachop, style: 'value'}, 'DBS:', {text: this.evaluation.dbs, style: 'value'}, 'SCS:', {text: this.evaluation.scs, style: 'value'}, 'IB:', {text: this.evaluation.ib, style: 'value'}],
+          ['Studie:', {text: this.evaluation.studycheck , style: 'value'}, {text: this.evaluation.study, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}],
+				
+				]      
+      },
+
+     },
+     { text: '\nBemerkungen: ' + this.evaluation.comment},
+
+     { text: 'Baselines SSEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+        
+          [{text:'', style: 'tableHeader'}, {text:'N', style: 'tableHeader'}, {text:'P', style: 'tableHeader'}, {text:'Amplitude', style: 'tableHeader'}],
+					['Medianus L', this.baselines.ssepsMedianusLN, this.baselines.ssepsMedianusLP, this.baselines.ssepsMedianusLAmp + 'mA',],
+          ['Medianus R', this.baselines.ssepsMedianusRN, this.baselines.ssepsMedianusRP, this.baselines.ssepsMedianusRAmp + 'mA',],
+          ['Tibialis L', this.baselines.ssepsTibialisLN, this.baselines.ssepsTibialisLP, this.baselines.ssepsTibialisLAmp + 'mA',],
+          ['Tibialis R', this.baselines.ssepsTibialisRN, this.baselines.ssepsTibialisRP, this.baselines.ssepsTibialisRAmp + 'mA',],
+      
+				]
+        
+			},
+        
+		},
+
+    { text: 'Baselines TES-MEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+        
+          [{text:'Ableitung', style: 'tableHeader'}, {text:'Seite', style: 'tableHeader'}, {text:'C1/C2', style: 'tableHeader'}, {text:'C3/C4', style: 'tableHeader'}, {text:'C3/Cz', style: 'tableHeader'}, {text:'C4/Cz', style: 'tableHeader'}],
+					[this.baselines.mepChannel1, this.baselines.mepChannel1Side , this.baselines.mepChannel1C1C2 + 'mA', this.baselines.mepChannel1C3C4 + 'mA',this.baselines.mepChannel1C3CZ +'mA',this.baselines.mepChannel1C4CZ +'mA',],
+      		[this.baselines.mepChannel2, this.baselines.mepChannel2Side , this.baselines.mepChannel2C1C2 + 'mA', this.baselines.mepChannel2C3C4 + 'mA',this.baselines.mepChannel2C3CZ +'mA',this.baselines.mepChannel2C4CZ +'mA',],
+          [this.baselines.mepChannel3, this.baselines.mepChannel3Side , this.baselines.mepChannel3C1C2 + 'mA', this.baselines.mepChannel3C3C4 + 'mA',this.baselines.mepChannel3C3CZ +'mA',this.baselines.mepChannel3C4CZ +'mA',],
+				  [this.baselines.mepChannel4, this.baselines.mepChannel4Side , this.baselines.mepChannel4C1C2 + 'mA', this.baselines.mepChannel4C3C4 + 'mA',this.baselines.mepChannel4C3CZ +'mA',this.baselines.mepChannel4C4CZ +'mA',],
+          [this.baselines.mepChannel5, this.baselines.mepChannel5Side , this.baselines.mepChannel5C1C2 + 'mA', this.baselines.mepChannel5C3C4 + 'mA',this.baselines.mepChannel5C3CZ +'mA',this.baselines.mepChannel5C4CZ +'mA',],
+          [this.baselines.mepChannel6, this.baselines.mepChannel6Side , this.baselines.mepChannel6C1C2 + 'mA', this.baselines.mepChannel6C3C4 + 'mA',this.baselines.mepChannel6C3CZ +'mA',this.baselines.mepChannel6C4CZ +'mA',],
+          [this.baselines.mepChannel7, this.baselines.mepChannel7Side , this.baselines.mepChannel7C1C2 + 'mA', this.baselines.mepChannel7C3C4 + 'mA',this.baselines.mepChannel7C3CZ +'mA',this.baselines.mepChannel7C4CZ +'mA',],
+          [this.baselines.mepChannel8, this.baselines.mepChannel8Side , this.baselines.mepChannel8C1C2 + 'mA', this.baselines.mepChannel8C3C4 + 'mA',this.baselines.mepChannel8C3CZ +'mA',this.baselines.mepChannel8C4CZ +'mA',],
+      		[this.baselines.mepChannel9, this.baselines.mepChannel9Side , this.baselines.mepChannel9C1C2 + 'mA', this.baselines.mepChannel9C3C4 + 'mA',this.baselines.mepChannel9C3CZ +'mA',this.baselines.mepChannel9C4CZ +'mA',],
+      		[this.baselines.mepChannel10, this.baselines.mepChannel10Side , this.baselines.mepChannel10C1C2 + 'mA', this.baselines.mepChannel10C3C4 + 'mA',this.baselines.mepChannel10C3CZ +'mA',this.baselines.mepChannel10C4CZ +'mA',],
+      		[this.baselines.mepChannel11, this.baselines.mepChannel11Side , this.baselines.mepChannel11C1C2 + 'mA', this.baselines.mepChannel11C3C4 + 'mA',this.baselines.mepChannel11C3CZ +'mA',this.baselines.mepChannel11C4CZ +'mA',],
+      		[this.baselines.mepChannel12, this.baselines.mepChannel12Side , this.baselines.mepChannel12C1C2 + 'mA', this.baselines.mepChannel12C3C4 + 'mA',this.baselines.mepChannel12C3CZ +'mA',this.baselines.mepChannel12C4CZ +'mA',],
+      		[this.baselines.mepChannel13, this.baselines.mepChannel13Side , this.baselines.mepChannel13C1C2 + 'mA', this.baselines.mepChannel13C3C4 + 'mA',this.baselines.mepChannel13C3CZ +'mA',this.baselines.mepChannel13C4CZ +'mA',],      
+       		[this.baselines.mepChannel14, this.baselines.mepChannel14Side , this.baselines.mepChannel14C1C2 + 'mA', this.baselines.mepChannel14C3C4 + 'mA',this.baselines.mepChannel14C3CZ +'mA',this.baselines.mepChannel14C4CZ +'mA',],      
+      		[this.baselines.mepChannel15, this.baselines.mepChannel15Side , this.baselines.mepChannel15C1C2 + 'mA', this.baselines.mepChannel15C3C4 + 'mA',this.baselines.mepChannel15C3CZ +'mA',this.baselines.mepChannel15C4CZ +'mA',],       
+      		[this.baselines.mepChannel16, this.baselines.mepChannel16Side , this.baselines.mepChannel16C1C2 + 'mA', this.baselines.mepChannel16C3C4 + 'mA',this.baselines.mepChannel16C3CZ +'mA',this.baselines.mepChannel16C4CZ +'mA',],
+        ]
+        
+			},
+        
+		},
+
+
+     { text: 'Baselines DCS-MEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+
+          [{text:'', style: 'tableHeader'}, {text:'Seite', style: 'tableHeader'}, {text:'#1', style: 'tableHeader'}, {text:'#2', style: 'tableHeader'}, {text:'#3', style: 'tableHeader'}, {text:'#4', style: 'tableHeader'}],
+					['Masseter' , this.baselines.masseterSide , this.baselines.masseter1, this.baselines.masseter2, this.baselines.masseter3, this.baselines.masseter4,],
+					['Orb oris' , this.baselines.orisSide , this.baselines.oris1, this.baselines.oris2, this.baselines.oris3, this.baselines.oris4,],
+          ['Deltoideus' , this.baselines.deltoideusSide , this.baselines.deltoideus1, this.baselines.deltoideus2, this.baselines.deltoideus3, this.baselines.deltoideus4,],
+          ['Biceps' , this.baselines.bicepsSide , this.baselines.biceps1, this.baselines.biceps2, this.baselines.biceps3, this.baselines.biceps4,],
+          ['Extensor' , this.baselines.extensorSide , this.baselines.extensor1, this.baselines.extensor2, this.baselines.extensor3, this.baselines.extensor4,],
+          ['Thenar' , this.baselines.thenarSide , this.baselines.thenar1, this.baselines.thenar2, this.baselines.thenar3, this.baselines.thenar4,],
+          ['Tib ant' , this.baselines.tibSide , this.baselines.tib1, this.baselines.tib2, this.baselines.tib3, this.baselines.tib4,],
+          ['Abd hall' , this.baselines.abdSide , this.baselines.abd1, this.baselines.abd2, this.baselines.abd3, this.baselines.abd4,],
+          ['Thenar' , this.baselines.thenar2Side , this.baselines.thenar21, this.baselines.thenar22, this.baselines.thenar23, this.baselines.thenar24,],
+          ['Tib ant' , this.baselines.tib2Side , this.baselines.tib21, this.baselines.tib22, this.baselines.tib23, this.baselines.tib24,],
+
+      	
+        ],
+        
+        
+			},
+        
+		},
+
+     { text: 'Baselines AEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+        
+          [{text:'', style: 'tableHeader'}, {text:'I', style: 'tableHeader'}, {text:'II', style: 'tableHeader'}, {text:'III', style: 'tableHeader'}, {text:'IV', style: 'tableHeader'}, {text:'V', style: 'tableHeader'}],
+					['AEP L' , this.baselines.aepLI +'ms', this.baselines.aepLII +'ms', this.baselines.aepLIII +'ms', this.baselines.aepLIV +'ms', this.baselines.aepLV +'ms'],
+          ['AEP R' , this.baselines.aepRI +'ms', this.baselines.aepRII +'ms', this.baselines.aepRIII +'ms', this.baselines.aepRIV +'ms', this.baselines.aepRV +'ms'],
+
+        ],
+
+			},
+        
+		},
+
+     { text: 'Baselines VEPs', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+        
+          [{text:'', style: 'tableHeader'}, {text:'Links', style: 'tableHeader'}, {text:'Rechts', style: 'tableHeader'}],
+					['VEP' , this.baselines.vepL, this.baselines.vepR, ],
+          
+
+        ],
+
+			},
+        
+		},
+
+        { text: 'Reflexe', style: 'subheader' },
+     
+      	{
+     
+			table: {
+			
+				body: [
+        
+          [{text:'Reflex', style: 'tableHeader'}, {text:'Links', style: 'tableHeader'}, {text:'Rechts', style: 'tableHeader'}],
+					['BR' , this.baselines.brL, this.baselines.brR, ],
+          ['LAR' , this.baselines.larL, this.baselines.larR, ],
+          ['BCR' , this.baselines.bcrL, this.baselines.bcrR, ],
+          
+
+        ],
+
+			},
+        
     },
-       
-      
-      
-      
     
+    { text: 'Extras', style: 'subheader'},
+
+    {
+
+      table: {
+
+        body: [
+
+          [{text:'', style: 'tableHeader'}, {text:'Amplitude', style: 'tableHeader'}, {text:'Latenz', style: 'tableHeader'}],
+          ['D-Wave:', this.extras.dWaveAmp + 'mA', this.extras.dWaveLat + 'ms'],
+          [this.extras.additional1, this.extras.additional1Amp, this.extras.additional1Lat],
+          [this.extras.additional2, this.extras.additional2Amp, this.extras.additional2Lat], 
+
+        ],
+      },
+    },
+
+   
+
   	],
     styles: 
     {
@@ -1686,14 +1929,39 @@ createPDF() {
       {
 				fontSize: 18,
 				bold: true,
-        margin: [0, 10, 0, 10],
-        alignment: 'center'
+        margin: [0, 10, 0, 0],
+        alignment: 'center',
+        color: '#3F51B5'
 			},
+      	subheader: 
+      {
+				fontSize: 14,
+        bold: true,
+        margin: [0, 15, 0, 0],
+        
+			},
+      	plaintext: 
+      {
+				fontSize: 12,
+				bold: false,
+        
+			},
+
     	tableHeader: 
       {
-      	fillColor: '#4CAF50',
+      	fillColor: '#3F51B5',
     		color: 'white'
+        
+      },
+
+      value: {
+        color: '#3F51B5'
+      },
+
+      filler: {
+        fillColor: 'black'
       }
+
     }
   };
   

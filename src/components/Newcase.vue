@@ -4,20 +4,16 @@
     <v-form v-model="valid" ref="form" lazy-validation>
 
         <h1>Neuer Fall</h1>
-        <label>Angaben zum Patienten</label>
+        <h5 class="mt-5">Angaben zum Patienten</h5>
         <v-text-field label="Fall Nr." v-model="casenr" :rules="requiredRules" required></v-text-field>
         <v-text-field label="PID" v-model="pid"></v-text-field>
         <v-text-field label="FID" v-model="fid"></v-text-field>
         <v-text-field label="Name" v-model="name" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Geburtsdatum" readonly prepend-icon="event"  v-model="birthdate" :rules="requiredRules" required></v-text-field>
-        <v-date-picker v-model="birthdate" :format="formatDate" :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
+        <v-date-picker class="mb-5" v-model="birthdate" :format="formatDate" :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
 
-        </br>
-        </br>
-        </br>
-
-        <label>Angaben zur Operation</label>
+        <h5 class="mt-5">Angaben zur Operation</h5>
         <v-select label="Diagnose" v-model="diagnose" :items="diagnoses" item-text="diagnose"></v-select>
         <v-select label="Operation" v-model="operation" :items="operations" item-text="operation"></v-select>
         <v-select label="ISIS-Gerät" v-model="isismodality" :items="isismodalities" item-text="device"></v-select>

@@ -100,8 +100,48 @@
           <v-card-title>
             <span class="headline">Fallauswertung Monitorist:</span>
           </v-card-title>
+
           <v-card-text>
             <v-container>
+                            <v-row>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.age" class="my-n3" :disabled="true"
+                    :items="age"
+                    label="Alter"
+                  ></v-select>
+                  <v-select v-model="evaluation.sex" class="my-n3" :disabled="true"
+                    :items="sex"
+                    label="Geschlecht"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.local" class="my-n3" :disabled="true"
+                    :items="local"
+                    label="Lokalisation"
+                  ></v-select>
+                  <v-select v-model="evaluation.detail" class="my-n3" :disabled="true"
+                    :items="detail"
+                    label="Detail"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.patho" class="my-n3" :disabled="true"
+                    :items="patho"
+                    label="Pathologie"
+                  ></v-select>
+                  <v-select v-model="evaluation.op" class="my-n3" :disabled="true"
+                    :items="op"
+                    label="Operation"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.anaest" class="my-n3" :disabled="true"
+                    :items="anaest"
+                    label="Anästhesie"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-divider></v-divider>
               <v-row>
                 <v-col cols="12" sm="4" md="2">
                  <v-checkbox v-model="evaluation.sseps" :disabled="true" class="my-n3" label="SSEPs" ></v-checkbox>
@@ -1278,6 +1318,10 @@ export default {
 
 
 
+
+
+
+
 dialogEval: false,
 dialogInterpret: false,
 dialogUpload: false,
@@ -1854,12 +1898,6 @@ sourceData.forEach(function(sourceRow) {
           ['Wachop:', {text: this.evaluation.wachop, style: 'value'}, 'DBS:', {text: this.evaluation.dbs, style: 'value'}, 'SCS:', {text: this.evaluation.scs, style: 'value'}, 'IB:', {text: this.evaluation.ib, style: 'value'}],
           ['Studie:', {text: this.evaluation.studycheck , style: 'value'}, {text: this.evaluation.study, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}],
 				
-					// ['SSEPS: ' , {text: this.evaluation.sseps, style: 'value'}, 'MEPs: ', {text: this.evaluation.meps, style: 'value'}, 'AEPs: ', {text: this.evaluation.aeps, style: 'value'}, 'VEPs: ', {text: this.evaluation.veps, style: 'value'}, 'EMG: ', {text: this.evaluation.emg, style: 'value'}, 'ECOG: ', {text: this.evaluation.ecog, style: 'value'}],
-          // ['Gridmeps: ' + this.evaluation.gridmeps, 'Sauger: ' + this.evaluation.sauger, 'DNS: ' + this.evaluation.dns, 'DWave: ' + this.evaluation.dwave, 'Penfield: ' + this.evaluation.penfield, 'Mappingschwelle: ' + this.evaluation.mappingsw,],
-          // ['BR: ' + this.evaluation.br, 'LAR: ' + this.evaluation.lar, 'BCR: ' + this.evaluation.bcr, 'IOM stabil: ' + this.evaluation.stabil, 'SSEPs: ' + this.evaluation.sseps2, 'MEPs: ' + this.evaluation.meps2,],
-          // ['AEPs: ' + this.evaluation.aeps2, 'VEPs: ' + this.evaluation.veps2, 'Grid-MEPs: ' + this.evaluation.gripdmeps2, 'Wachop: ' + this.evaluation.wachop, 'SCS: ' + this.evaluation.scs, 'DBS: ' + this.evaluation.dbs,],
-          // ['IB: ' + this.evaluation.ib, 'Studie: ' + this.evaluation.studycheck, 'Studienname: ' + this.evaluation.study, '', '', '',],
-
 				]      
       },
 

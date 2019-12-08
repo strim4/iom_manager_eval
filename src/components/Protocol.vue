@@ -1085,6 +1085,45 @@
           <v-card-text>
             <v-container>
               <v-row>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.age" class="my-n3"
+                    :items="age"
+                    label="Alter"
+                  ></v-select>
+                  <v-select v-model="evaluation.sex" class="my-n3"
+                    :items="sex"
+                    label="Geschlecht"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.local" class="my-n3"
+                    :items="local"
+                    label="Lokalisation"
+                  ></v-select>
+                  <v-select v-model="evaluation.detail" class="my-n3"
+                    :items="detail"
+                    label="Detail"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.patho" class="my-n3"
+                    :items="patho"
+                    label="Pathologie"
+                  ></v-select>
+                  <v-select v-model="evaluation.op" class="my-n3"
+                    :items="op"
+                    label="Operation"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.anaest" class="my-n3"
+                    :items="anaest"
+                    label="Anästhesie"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-divider></v-divider>
+              <v-row>
                 <v-col cols="12" sm="4" md="2">
                  <v-checkbox v-model="evaluation.sseps" class="my-n3" label="SSEPs" ></v-checkbox>
                  <v-checkbox v-model="evaluation.meps" class="my-n3" label="MEPs" ></v-checkbox>
@@ -1156,7 +1195,7 @@
               </v-row>
               <v-row>
                 <v-col cols="12" md="12">
-                  <v-textarea v-model="evaluation.comment"
+                  <v-textarea class="mb-n10" v-model="evaluation.comment"
                   outlined
                   name="Bemerkungen"
                  label="Bemerkungen"
@@ -1207,6 +1246,16 @@ import Qs from 'qs';
 export default {
   
   data: () => ({
+
+
+    /* values for evaluation*/
+    age: ['Kind','Erwachsener'],
+    sex: ['Weiblich','Männlich'],
+    local: ['supratentorielle RF','infratentorielle RF','spinal','CEA',''],
+    detail: ['frontal','zentral','parietal','occipital','temporal','cerebellär','KHBW','HWK','BWK','LWK','SWK','Hypophyse','Hirnstamm',''],
+    patho: ['intracerebral','extradural','intradural','intramedullär','vaskulär','Blutungen',''],
+    op: ['Resektion','Clipping','Stabilisation','Dekompression','Biopsie','direkte Stimulation','Verschluss',''],
+    anaest: ['TIVA','TIVA plus','Wach-OP',''],
 
       
 
@@ -1456,6 +1505,14 @@ dialogExtras: false,
   },
 
   evaluation: {
+
+      age:'',
+      sex:'',
+      local:'',
+      detail:'',
+      patho:'',
+      op:'',
+      anaest:'',
 
       sseps:'',
       meps:'',

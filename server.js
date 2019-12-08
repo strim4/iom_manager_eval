@@ -25,6 +25,8 @@ jwtOptions.secretOrKey = 'iomapplicationsecretkey';
 
 
 
+
+
 const app = express();
 const router = express.Router();
 app.use(morgan('combined'));
@@ -58,7 +60,7 @@ res.json({ message: 'API Initialized!'});
 
 //user management
 router.get('/logout', function(req, res){
-    req.logout();
+      req.logout();
     res.send();
     });
 

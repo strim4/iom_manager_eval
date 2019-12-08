@@ -28,7 +28,7 @@ module.exports.controller = (app) => {
 
 
       //fetch a single user
-// fetch a single case
+
 app.get('/users/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     User.findOne({_id: req.params.id}, 'name', (error,
     users) => {

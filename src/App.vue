@@ -130,24 +130,22 @@ export default {
     
   },
   created(){
-           EventBus.$on('emitName', function (payLoad) {
-         
-            this.name = payLoad;
-            console.log(this.name);
       
-    });
 
   },
 
   
   methods: {
     logout() {
+           
+localStorage.removeItem('auth');
+sessionStorage.removeItem('auth');
         return axios({
         method: 'get',
         url: 'http://localhost:8081/logout',
         })
         .then(() => {
-
+      
         this.$router.push({ name: 'Login' });
         })
         .catch(() => {

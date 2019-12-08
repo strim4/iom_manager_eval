@@ -1584,7 +1584,14 @@ study: '',
     additional2Lat: '',
 
   },
- 
+     /* values for evaluation*/
+    age: ['Kind','Erwachsener'],
+    sex: ['Weiblich','Männlich'],
+    local: ['supratentorielle RF','infratentorielle RF','spinal','CEA',''],
+    detail: ['frontal','zentral','parietal','occipital','temporal','cerebellär','KHBW','HWK','BWK','LWK','SWK','Hypophyse','Hirnstamm',''],
+    patho: ['intracerebral','extradural','intradural','intramedullär','vaskulär','Blutungen',''],
+    op: ['Resektion','Clipping','Stabilisation','Dekompression','Biopsie','direkte Stimulation','Verschluss',''],
+    anaest: ['TIVA','TIVA plus','Wach-OP',''],
 
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
@@ -1879,10 +1886,25 @@ sourceData.forEach(function(sourceRow) {
             body: bodyData   	    
         }
         }, 
+      
+      { text: 'Interpretation', style: 'subheader'},
+      { text: this.interp},
 
       { text: 'Auswertung Monitorist', style: 'subheader' },
+      { text: '\nFallkodierung'},
+
+      {
+        table: 
+        {
+          body: [
+
+            ['Alter: ' + this.evaluation.age, 'Lokalisation: ' + this.evaluation.local,'Pathologie: ' + this.evaluation.patho, 'Anästhesie: ' + this.evaluation.anaest],
+            ['Geschlecht: ' + this.evaluation.age, 'Detail: ' + this.evaluation.local, 'Operation: ' + this.evaluation.op,''],
+          ]
+        }
       
-      { text: '* true = ja, kein Wert = nein', style: 'value' },
+      },
+      { text: '\n* true = ja, kein Wert = nein', style: 'value' },
       	{
      
 			table: {
@@ -1902,7 +1924,7 @@ sourceData.forEach(function(sourceRow) {
       },
 
      },
-     { text: 'Bemerkungen: ' + this.evaluation.comment},
+     { text: '\nBemerkungen: ' + this.evaluation.comment},
 
      { text: 'Baselines SSEPs', style: 'subheader' },
      

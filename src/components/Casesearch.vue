@@ -1,17 +1,13 @@
 <template slot="items" slot-scope="props" >
-
     <v-container > 
-
   <!-- Datatable with containing all the finished cases -->
-  
-      <v-card > 
+        <v-card > 
                 <v-card-title>
                  Fallarchiv
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" 
                     single-line hide-details></v-text-field>
                 </v-card-title>
-
       <v-data-table
       :headers="headers"
       :items="completcases"
@@ -25,15 +21,10 @@
         mdi-file-document
         </v-icon>
         </router-link>
-      </template>
-
-      
-
+      </template>     
     </v-data-table>
-
       </v-card>
     </v-container>
-     
 </template>
 
 <script>
@@ -41,6 +32,7 @@ import axios from 'axios';
 
 export default {
   name: 'Casesearch',
+  //initialize variables
   data() {
     return {
       color: 'indigo',
@@ -61,17 +53,16 @@ export default {
         { text: 'Operateur', value: 'surgeon', },
         { text: 'Assistent', value: 'assistant', },
         { text: 'Studie', value: 'evaluation.study', },
-      
-
-      ],
+            ],
 
     };
   },
+
   // fetch all cases on pageload
   mounted() {
     this.fetchCases();
-   // console.log(this.ccases);
   },
+  
   // method to fetch all cases from the database
   methods: {
     async fetchCases() {
@@ -86,7 +77,6 @@ export default {
 
       })
         .then((response) => {
-          console.log(response.data.protocols);
           this.completcases = response.data.protocols;
         })
         .catch(() => {});

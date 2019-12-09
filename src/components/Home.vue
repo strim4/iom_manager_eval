@@ -1,10 +1,9 @@
 <template>
   <v-layout>
-    
+    <!--Start Dashboards -->
      <v-container grid-list-md text-xs-center>
        </br></br></br></br>
       <v-layout row wrap>
-     
         <v-flex  xs6>
             <v-card
       class="mx-auto"
@@ -106,14 +105,13 @@
       <v-card-actions>
           <router-link :to="{ name: 'Contact' }">
          <v-btn color="indigo accent-4" text>Kontakt öffnen</v-btn>
-        </router-link>
-        
-        
+        </router-link>        
       </v-card-actions>
     </v-card>
         </v-flex>
       
       </v-layout>
+      <!--End Dashboards -->
     </v-container>
   </v-layout>
 </template>
@@ -123,11 +121,9 @@
 import axios from 'axios';
 
 export default {
-  
+  //initialize variables
   data() {
     return {
-     
- 
     openItems: {}, 
     completCases: {},
     name: '',
@@ -136,7 +132,7 @@ export default {
   },
 
 //Count Cases
-  computed: {
+computed: {
   OpenCaseCount () {
       return Object.keys(this.openItems).length
   },
@@ -166,7 +162,7 @@ methods: {
         .catch(() => {});
     },
 
-
+// fetch all completcases
      async fetchAllCases() {
        const token = window.localStorage.getItem('auth');
       return axios({
@@ -180,33 +176,19 @@ methods: {
         .then((response) => {
           
           this.completCases = response.data.protocols;
-         // this.current_user = response.data.current_user;
+        
           
         })
         .catch(() => {});
     },
 
-
-
-
-
-
-
-   
-    
 },
-
-
-   
-
 
 //fetches open cases on pageload
   mounted(){
 
    this.fetchOpenCases();
    this.fetchAllCases();
- 
-
 
   },
 };

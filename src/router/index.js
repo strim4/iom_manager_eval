@@ -21,6 +21,7 @@ import Protocoloverview from '@/components/Protocoloverview';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
 
+//Tell vue to use the router
 Vue.use(Router);
 
 export default new Router({

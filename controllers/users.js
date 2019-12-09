@@ -14,37 +14,33 @@ const JwtStrategy = passportJWT.Strategy;
 
 module.exports.controller = (app) => {
 
-
+    //set token
     passport.use(new JwtStrategy(jwtOptions, function (jwtPayload, done) {
         //If the token has expiration, raise unauthorized
         var expirationDate = new Date(jwtPayload.exp * 1000)
-        if(expirationDate < new Date()) {
-          return done(null, false);
+        if (expirationDate < new Date()) {
+            return done(null, false);
         }
         var user = jwtPayload
         done(null, user)
         console.log(user);
-      }));
+    }));
 
 
-      //fetch a single user
-
-app.get('/users/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    User.findOne({_id: req.params.id}, 'name', (error,
-    users) => {
-    if (error) { console.log(error); }
-    res.send({
-    users,
+//fetch a single user
+    app.get('/users/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+        User.findOne({ _id: req.params.id }, 'name', (error,
+            users) => {
+            if (error) { console.log(error); }
+            res.send({
+                users,
+            });
+        });
     });
-    });
-    });
 
 
 
-
-
-
-    // register a user
+// register a user
     app.post('/users/register', (req, res) => {
         const name = req.body.name;
         const email = req.body.email;

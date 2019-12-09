@@ -35,7 +35,7 @@ import moment from 'moment';
 
 export default {
   data: () => ({
-
+//initialize variables
     valid: true,
     casenr: '',
     pid: '',
@@ -49,29 +49,15 @@ export default {
     opdate: '',
     surgeon: '',
     assistant: '',
-
-
     requiredRules: [
       v => !!v || 'Bitte befüllen Sie alle Pflichtfelder',
     ],
     select: null,
-    diagnoses: [
-
-    ],
-    operations: [
-
-
-    ],
-    isismodalities: [
-     
-
-    ],
-    surgeons: [
-    
-    ],
-    assistants: [
-     
-    ],
+    diagnoses: [],
+    operations: [],
+    isismodalities: [],
+    surgeons: [],
+    assistants: [],
   }),
 
   
@@ -85,8 +71,8 @@ export default {
   },
 
   methods: {
-
-    formatDate: function (date) {
+//format date 
+formatDate: function (date) {
   return moment(date).format('DD-MM-YYYY')
 },
     // submit method to send the new case to the backend to store
@@ -134,6 +120,7 @@ export default {
       }
       return true;
     },
+    
     // method to reset the form
     clear() {
       this.$refs.form.reset();

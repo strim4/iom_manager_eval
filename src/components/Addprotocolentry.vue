@@ -17,11 +17,7 @@
         </br>
 
     <!-- Datatable with the stored protocolentries -->
-
-     
-
-
-        <v-card>
+          <v-card>
                 <v-card-title>
                     Erfasste Einträge
                     <div class="flex-grow-1"></div>
@@ -36,29 +32,17 @@
       class="elevation-1"
 
     >
-
-    
-
-      <template v-slot:item.action="{ item }">
+          <template v-slot:item.action="{ item }">
             <v-icon
 
           @click="deleteCategory(item._id, item)"
         >
           delete
         </v-icon>
-
       </template>
-
     </v-data-table>
-
       </v-card>
-      </br></br>
-
-</br></br>
-    
-
-
-
+      </br></br></br></br>
     </v-container>
 </template>
 
@@ -66,27 +50,21 @@
 import axios from 'axios';
 
 export default {
+//initialize variables
   data: () => ({
-
     event: '',
     option:'',
-
-  IomCategories:[],
-
+    IomCategories:[],
     valid: true,
-  
     selectoptions: ['IOM', 'Anästhesie', 'OP-Verlauf', 'Weitere'],
     selected: [],
     categories: [],
-   
-  
     rules: [
-      v => !!v || 'Bitte geben Sie eine IOM-Gerät ein',
+    v => !!v || 'Bitte geben Sie eine IOM-Gerät ein',
     ],
     fixed: true,
- 
     search: '',
-   operations: [],
+    operations: [],
     search: '',
     headers: [{
       text: 'Event',
@@ -98,34 +76,21 @@ export default {
 
     ],
 
-
   }),
-computed: {
-
-},
-
 
   // fetch all devices on pageload
   mounted() {
    this.fetchCategories();
-  
- 
-
   },
-  methods: {
 
+  methods: {
+    //sort 
     sortCategories: function(){
       let iomCat = [];
       this.IomCategories = this.categories.filter(cat => cat.name == 'IOM');
-      console.log(this.IomCategories);
-   
-
     },
   
     // submit method to send the new entry oder update a entry to/in the backend
-
-
-
       submit() {
       if (this.$refs.form.validate()) {
         const token = window.localStorage.getItem('auth');
@@ -147,11 +112,8 @@ computed: {
               'Der Eintrag wurde gespeichert!',
               'success',
             );
-           // this.fetchDevices();
-
-            this.$refs.form.reset();
-          
-          })
+             this.$refs.form.reset();
+                    })
           .catch(() => {
             this.$swal(
               'Fehlgeschlagen!',
@@ -162,10 +124,12 @@ computed: {
       }
       return true;
     },
+
     // Reset function
     clear() {
       this.$refs.form.reset();
     },
+
     // fetches all categories from the database
     async fetchCategories() {
       const token = window.localStorage.getItem('auth');
@@ -183,12 +147,10 @@ computed: {
       })
         .then((response) => {
           this.categories = response.data.categories;
-          console.log(this.categories);
-          
-        
         })
         .catch(() => {});
     },
+
     // delete a device from the database
     async  deleteCategory(id, item) {
       const token = window.localStorage.getItem('auth');
@@ -209,8 +171,6 @@ computed: {
         })
         .catch(() => {});
     },
-
-
 
   },
 

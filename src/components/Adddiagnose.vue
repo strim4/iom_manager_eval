@@ -16,8 +16,6 @@
         </br>
 
     <!-- Datatable with the stored diagnoses -->
-
-
         <v-card>
                 <v-card-title>
                     Erfasste Diagnosen
@@ -33,22 +31,15 @@
       class="elevation-1"
 
     >
-
       <template v-slot:item.action="{ item }">
             <v-icon
-
           @click="deleteDiagnose(item._id, item)"
         >
           delete
         </v-icon>
-
       </template>
-
     </v-data-table>
-
       </v-card>
-
-
     </v-container>
 </template>
 
@@ -56,6 +47,7 @@
 import axios from 'axios';
 
 export default {
+  //initialize variables
   data: () => ({
     valid: true,
     diagnose: '',
@@ -81,9 +73,9 @@ export default {
   mounted() {
     this.fetchDiagnoses();
   },
+
   methods: {
     // submit method to send the new diagnose to the backend
-
     submit() {
       if (this.$refs.form.validate()) {
         const token = window.localStorage.getItem('auth');
@@ -118,10 +110,12 @@ export default {
       }
       return true;
     },
+
     // Reset function
     clear() {
       this.$refs.form.reset();
     },
+
     // fetches all diagnoses from the database
     async fetchDiagnoses() {
       const token = window.localStorage.getItem('auth');
@@ -142,10 +136,10 @@ export default {
         })
         .catch(() => {});
     },
+    
     // delete a diagnose from the database
     async  deleteDiagnose(id, item) {
       const token = window.localStorage.getItem('auth');
-      console.log(id);
       return axios({
         method: 'delete',
         data: {

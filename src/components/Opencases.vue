@@ -1,18 +1,14 @@
 <!-- This file contains the structure to display all the open cases -->
 <template slot="items" slot-scope="props" >
-
     <v-container > 
-
   <!-- Datatable with containing all the open cases -->
-  
-      <v-card > 
+        <v-card > 
                 <v-card-title>
                   Offene Fälle
                     <div class="flex-grow-1"></div>
                     <v-text-field v-model="search" append-icon="search" label="Suche" 
                     single-line hide-details></v-text-field>
                 </v-card-title>
-
       <v-data-table
       :headers="headers"
       :items="ccases"
@@ -28,7 +24,6 @@
         </v-icon>
         </router-link>
       </template>
-
         <template v-slot:item.edit="{ item }">
        <router-link :to="{ name: 'Editopencase', params: { id: item._id } }">
             <v-icon>
@@ -36,23 +31,19 @@
         </v-icon>
         </router-link>
       </template>
-
       <template v-slot:item.delete="{ item }">
             <v-icon @click="deleteOpenCase(item._id, item)">
           delete
         </v-icon>
       </template>
-
     </v-data-table>
-
-      </v-card> </br>
+   </v-card> </br>
       <div class="text-right">
          <router-link :to="{ name: 'Newcase' }">
        <v-btn    color="primary"  :left="true" @click="" >Neuer Fall +</v-btn>
        </router-link>
        </div>
-    </v-container>
-     
+    </v-container> 
 </template>
 
 <script>
@@ -60,6 +51,7 @@ import axios from 'axios';
 
 export default {
   name: 'Cases',
+  //initialize variables
   data() {
     return {
       color: 'success',
@@ -82,10 +74,12 @@ export default {
 
     };
   },
+
   // fetch all cases on pageload
   mounted() {
     this.fetchCases();
   },
+
   // method to fetch all cases from the database
   methods: {
     async fetchCases() {
@@ -97,7 +91,6 @@ export default {
             Authorization: `JWT ${token}`,
             'Content-Type': 'application/json',
           },
-
       })
         .then((response) => {
           this.ccases = response.data.cases;
@@ -108,7 +101,6 @@ export default {
     // delete a opencase from the database
     async  deleteOpenCase(id, item) {
       const token = window.localStorage.getItem('auth');
-      console.log(id);
       return axios({
         method: 'delete',
         data: {

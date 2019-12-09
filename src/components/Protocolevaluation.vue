@@ -3,7 +3,7 @@
     <v-container  >
      <v-layout row>
     <v-flex md2 >
-       
+     <!-- Card for patient and op information -->  
         <v-card
       class="mx-auto"
       max-width="175" 
@@ -16,12 +16,9 @@
      </v-card-text>
      <v-card-title>Operation</v-card-title>
      <v-card-text class="text-left">
-     Diagnose: {{diagnose}}</br>
+      Diagnose: {{diagnose}}</br>
       Operation: {{operation}} </br>
       Datum: {{opdate}}
-      <!-- </br>
-      Operateur: {{surgeon}} </br>
-      Assistent: {{assistant}} -->
       </p>
       <v-divider></v-divider>
        </v-card-text>
@@ -37,15 +34,12 @@
       </v-card-text>
       
     </v-card>
-    
-    
-    
 
+<!-- protocol entries -->
     </v-flex>
     <v-flex md10 >
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} </br></p>
-      
-      
+
         </v-flex> 
   </v-layout> 
   <v-layout row>
@@ -62,7 +56,6 @@
         <v-flex md2><b>Eintrag</b></v-flex>
         <v-flex md1></v-flex>
         <v-flex md2><b>Bemerkung</b></v-flex>
-     
       </v-layout >  </br> 
           
       <div v-for="(entry, index) in entries">
@@ -79,28 +72,13 @@
        <v-divider></v-divider>
       </div>
         </v-flex> 
-
-
-      
-
-        
-
-        
-
-
-      
-
   
 <!-- dialog for case evaluation -->
-
-  
          <v-dialog v-model="dialogEval" persistent max-width="1000px">
-        
-        <v-card>
+             <v-card>
           <v-card-title>
             <span class="headline">Fallauswertung Monitorist:</span>
           </v-card-title>
-
           <v-card-text>
             <v-container>
                             <v-row>
@@ -221,13 +199,7 @@
                   ></v-textarea>
                  </v-col>
              </v-row>    
-             
-
             </v-container>
-
-
-            
-           
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -236,7 +208,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-           
+      
   </v-layout> 
   </br></br>
   <v-layout row>
@@ -254,6 +226,7 @@
                 </v-layout>
                </v-flex>
     </v-layout> 
+
 <!-- dialog for baselines  -->
          <v-dialog v-model="dialogBaselines" persistent max-width="1000px">
         
@@ -262,8 +235,6 @@
             <span class="headline">Baselines:</span>
           </v-card-title>
           <v-card-text>
-
-
           <v-expansion-panels focusable>
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines SSEPs</v-expansion-panel-header>
@@ -328,7 +299,6 @@
             </v-container>
               </v-expansion-panel-content>
             </v-expansion-panel>
-
 
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines TES MEPs</v-expansion-panel-header>
@@ -1160,10 +1130,8 @@
         </v-card>
       </v-dialog>
 
-
     <!-- dialog for interpretation -->
          <v-dialog v-model="dialogInterpret" persistent max-width="600px">
-        
         <v-card>
           <v-card-title>
             <span class="headline">Interpretation:</span>
@@ -1187,7 +1155,6 @@
 
        <!-- dialog for extras -->
          <v-dialog v-model="dialogExtras" persistent max-width="600px">
-        
         <v-card>
           <v-card-title>
             <span class="headline">Extras:</span>
@@ -1236,8 +1203,6 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
-
 
     <!-- dialog for interpretation -->
          <v-dialog v-model="dialogInterpret" persistent max-width="600px">
@@ -1313,28 +1278,15 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 export default {
-  
+//initialize variables
   data: () => ({
-
-
-
-
-
-
-
 dialogEval: false,
 dialogInterpret: false,
 dialogUpload: false,
 dialogBaselines: false,
 dialogExtras: false,
-
 file: null,
-
-
-
-    
-    
- interp: '', 
+interp: '', 
     
     casenr: 0,
     pid: '',
@@ -1354,8 +1306,6 @@ file: null,
   timestamps: [],
 
 study: '',
-
-
 
  baselines: {
 
@@ -1571,7 +1521,6 @@ study: '',
 
   },
   
-
     extras: {
 
     dWaveAmp: '',
@@ -1601,35 +1550,18 @@ study: '',
 
   }),
 
-
-
   // store case id from the routerlink to a local variable on page load
   created() {
     this.casenr = this.$route.params.casenr;
    
-    
-    
- 
   },
 
-  
-
-
-  // fetches all case data on load and pushs a first entry in the entry array
+  // fetches all case data on load 
   mounted() {
-  
     this.fetchProtocol(this.casenr);
- 
-
-   
-
   },
 
   methods: {
-
-
-
-
 
   // fetch a single protocol from the database
     async  fetchProtocol(casenr) {
@@ -1646,7 +1578,6 @@ study: '',
         },
       })
         .then((response) => {
-          //this.casenr = response.data.protocols.casenr;
           this.pid = response.data.protocols.pid;
           this.fid = response.data.protocols.fid;
           this.name = response.data.protocols.name;
@@ -1661,17 +1592,14 @@ study: '',
           this.entries = response.data.protocols.entries;
           this.evaluation = response.data.protocols.evaluation;
            this.baselines = response.data.protocols.baselines;
-          this.extras = response.data.protocols.extras;
-          console.log(response.data.protocols);
-         
+          this.extras = response.data.protocols.extras;        
          
         })
         .catch(() => { console.log('error'); });
     },
 
 
-
-  // submit method to send the new protocol to the db and delete the case from opencase db
+  // submit method to send the finished case to the db and delete the case from opencases
     submit() {
       
       if(this.file == null){
@@ -1732,11 +1660,6 @@ study: '',
     },
 
 
- 
-
-
-
-
 //method to open the uploaded file in browser or to download it
 
 openFile: function(){
@@ -1754,22 +1677,16 @@ openFile: function(){
                
                 var win = window.open();
     win.document.write('<iframe src="' + anchor  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
-              
-       
-        
+  
     }
   
 },
 
 
-
 // method to save file to server
 saveFile: function(){
 this.dialogUpload = false;
-console.log(this.file);
 this.submitFile();
-
-
 },
 
 //Upload file to server
@@ -1786,7 +1703,6 @@ const token = window.localStorage.getItem('auth');
     }
   }
 ).then(resp =>{
-  
   console.log('SUCCESS!!');
 })
 .catch(function(){
@@ -1795,27 +1711,19 @@ const token = window.localStorage.getItem('auth');
 
 },
 
-
-
-
 //generate PDF Export
 createPDF() {
 
 var sourceData = this.entries
 var bodyData = [];
 
-
-
 sourceData.forEach(function(sourceRow) {
   var dataRow = [];
-
-
 
   dataRow.push(sourceRow.ts);
   dataRow.push(sourceRow.entrycat.name);
   dataRow.push(sourceRow.event);
   dataRow.push(sourceRow.comment);
- 
  
   bodyData.push(dataRow)
 });
@@ -1857,8 +1765,6 @@ sourceData.forEach(function(sourceRow) {
             ] 
 
         },
-
-
 
     ],
   	content: 

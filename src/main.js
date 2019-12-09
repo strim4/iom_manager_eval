@@ -18,17 +18,10 @@ import router from './router';
 
 
 
-
-
-
-
-
 // User Imports in Vue app
 Vue.use(BootstrapVue);
 Vue.use(Vuetify);
 Vue.use(VueSwal);
-
-
 
 
 

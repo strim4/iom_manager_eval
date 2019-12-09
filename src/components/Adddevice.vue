@@ -16,8 +16,6 @@
         </br>
 
     <!-- Datatable with the stored devices -->
-
-
         <v-card>
                 <v-card-title>
                     Erfasste IOM-Geräte
@@ -31,9 +29,7 @@
       item-key="name"
       :search="search"
       class="elevation-1"
-
     >
-
       <template v-slot:item.action="{ item }">
             <v-icon
 
@@ -41,14 +37,9 @@
         >
           delete
         </v-icon>
-
       </template>
-
     </v-data-table>
-
       </v-card>
-
-
     </v-container>
 </template>
 
@@ -57,6 +48,7 @@ import axios from 'axios';
 
 export default {
   data: () => ({
+  //initialize variables
     valid: true,
     device: '',
     selected: [],
@@ -83,7 +75,6 @@ export default {
   },
   methods: {
     // submit method to send the new device to the backend
-
     submit() {
       if (this.$refs.form.validate()) {
         const token = window.localStorage.getItem('auth');
@@ -118,10 +109,12 @@ export default {
       }
       return true;
     },
+
     // Reset function
     clear() {
       this.$refs.form.reset();
     },
+
     // fetches all devices from the database
     async fetchDevices() {
       const token = window.localStorage.getItem('auth');
@@ -142,10 +135,10 @@ export default {
         })
         .catch(() => {});
     },
+
     // delete a device from the database
     async  deleteDevice(id, item) {
       const token = window.localStorage.getItem('auth');
-      console.log(id);
       return axios({
         method: 'delete',
         data: {
@@ -163,7 +156,6 @@ export default {
         })
         .catch(() => {});
     },
-
   },
 };
 

@@ -16,8 +16,6 @@
         </br>
 
     <!-- Datatable with the stored operations -->
-
-
         <v-card>
                 <v-card-title>
                     Erfasste Operationen
@@ -33,22 +31,15 @@
       class="elevation-1"
 
     >
-
       <template v-slot:item.action="{ item }">
             <v-icon
-
           @click="deleteOperation(item._id, item)"
         >
           delete
         </v-icon>
-
       </template>
-
     </v-data-table>
-
       </v-card>
-
-
     </v-container>
 </template>
 
@@ -56,6 +47,7 @@
 import axios from 'axios';
 
 export default {
+  //initialize variables
   data: () => ({
     valid: true,
     operation: '',
@@ -81,6 +73,7 @@ export default {
   mounted() {
     this.fetchOperations();
   },
+
   methods: {
     // submit method to send the new operation to the backend
 
@@ -118,10 +111,12 @@ export default {
       }
       return true;
     },
+
     // Reset function
     clear() {
       this.$refs.form.reset();
     },
+
     // fetches all operations from the database
     async fetchOperations() {
       const token = window.localStorage.getItem('auth');
@@ -142,10 +137,10 @@ export default {
         })
         .catch(() => {});
     },
+    
     // delete a operation from the database
     async  deleteOperation(id, item) {
       const token = window.localStorage.getItem('auth');
-      console.log(id);
       return axios({
         method: 'delete',
         data: {

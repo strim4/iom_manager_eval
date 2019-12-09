@@ -109,8 +109,8 @@
 
 // Imports
 import './assets/stylesheets/main.css';
-
 import axios from 'axios';
+
 export default {
   data: () => ({
     drawer: null,
@@ -119,23 +119,15 @@ export default {
   
   }),
 
- 
+ //fetch user on Pageload
   mounted(){
-
-      
      this.fetchUser();  
-  
-
-  
-    
   },
-  created(){
-      
 
-  },
 
   
   methods: {
+//logout method
     logout() {
            
 localStorage.removeItem('auth');
@@ -165,9 +157,7 @@ url: 'http://localhost:8081/current_user',
 })
 .then((response) => {
 this.current_user = response.data.current_user;
-console.log(this.current_user.id);
   this.fetchUserName(this.current_user.id);
-
 })
 .catch(() => {
 });
@@ -190,16 +180,10 @@ console.log(this.current_user.id);
       })
         .then((response) => {
           this.name = response.data.users.name;
-          console.log(this.name);
-         
-          
-          
-      
         })
         .catch(() => { console.log('error'); });
     },
 
-  
   },
   props: {
     source: String,

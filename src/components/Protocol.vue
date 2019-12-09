@@ -16,13 +16,9 @@
      </v-card-text>
      <v-card-title>Operation</v-card-title>
      <v-card-text class="text-left">
-     Diagnose: {{diagnose}}</br>
+      Diagnose: {{diagnose}}</br>
       Operation: {{operation}} </br>
       Datum: {{opdate}}
-      <!-- </br>
-      Operateur: {{surgeon}} </br>
-      Assistent: {{assistant}} -->
-      
       <v-divider></v-divider>
        </v-card-text>
       
@@ -32,15 +28,9 @@
       <v-card-text class="text-center">
        <v-btn   class="my-n3" width="180px" color="primary"  @click="dialogExtras = true" >Extras</v-btn>
       </v-card-text>
-      
     </v-card>
-    
-   
-    
     </v-flex>
 
-    
-    
     <!-- protocol entries -->
     <v-flex md10 >
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
@@ -54,8 +44,7 @@
         <v-flex md3><b>Bemerkung</b></v-flex>
         <v-flex md1><b>Aktionen</b></v-flex>
       </v-layout >  </br>  
-      
- 
+   
       <form >
       <div v-for="(entry, index) in entries" :class="{active:entry.selected}" @dblclick="$set(entry, 'selected', !entry.selected)" @contextmenu="">
         <v-layout row >
@@ -92,14 +81,11 @@
 
 <!-- dialog for baselines  -->
          <v-dialog v-model="dialogBaselines" persistent max-width="1000px">
-        
-        <v-card>
+                <v-card>
           <v-card-title>
             <span class="headline">Baselines:</span>
           </v-card-title>
           <v-card-text>
-
-
           <v-expansion-panels focusable>
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines SSEPs</v-expansion-panel-header>
@@ -164,8 +150,6 @@
             </v-container>
               </v-expansion-panel-content>
             </v-expansion-panel>
-
-
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines TES MEPs</v-expansion-panel-header>
             <v-expansion-panel-content>
@@ -1204,9 +1188,6 @@
              </v-row>    
 
             </v-container>
-
-
-            
            
           </v-card-text>
           <v-card-actions>
@@ -1215,38 +1196,22 @@
             <v-btn  depressed  large color="normal"  @click="dialogEval = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog>
-      
-      </v-layout >  </br>  
-           
-      </br> </br></br> 
+      </v-dialog>   
+      </v-layout >          
+      </br> </br></br> </br>
       </form>
-        
-      
-     
-        </v-flex>
-        
-        
+        </v-flex>     
   </v-layout> 
-  
 </v-container>
-
-
 </v-layout>
 </template>
 
-
-
 <script>
 import axios from 'axios';
-import Qs from 'qs';
-
-
 
 export default {
-  
+  //initialize variables
   data: () => ({
-
 
     /* values for evaluation*/
     age: ['Kind','Erwachsener'],
@@ -1257,8 +1222,6 @@ export default {
     op: ['Resektion','Clipping','Stabilisation','Dekompression','Biopsie','direkte Stimulation','Verschluss',''],
     anaest: ['TIVA','TIVA plus','Wach-OP',''],
 
-      
-
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
@@ -1266,18 +1229,12 @@ export default {
     eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust', ''],
 
 
-  //  modalities: ['sseps', 'meps', 'aeps', 'veps', 'emg', 'ecog', 'grid', 'sauger', 'dns', 'dwave', 'penfield'],
-  //  reflexes: ['br', 'lar', 'bcr'],
-  //  summary: ['stabil', 'wachop', 'scs', 'dbs', 'ib'],
-  //  study: ['study'],
+    dialogFinish: false,
+    dialogEval: false,
+    dialogBaselines: false,
+    dialogExtras: false,
 
-
-dialogFinish: false,
-dialogEval: false,
-dialogBaselines: false,
-dialogExtras: false,
-
-  baselines: {
+    baselines: {
 
     ssepsMedianusLN:'',
     ssepsMedianusLP:'',
@@ -1553,7 +1510,6 @@ dialogExtras: false,
     },
 
 
-
     entry: {
       ts: '',
       entrycat: '',
@@ -1563,8 +1519,6 @@ dialogExtras: false,
     entries: [
     
     ],
-
-    
     
     status: 'läuft',
     id: 0,
@@ -1590,57 +1544,33 @@ dialogExtras: false,
 
     selectedEntry: null,
 
-
-
-
     dbcategories: [],
  selected: undefined,
 
- 
   }),
-
-
-  
-
 
   // fetches all case data on load and pushs a first entry in the entry array
   mounted() {
   
     this.fetchCase(this.id);
-  
-
-     this.getNow();
-  
- this.fetchCategories();  
- this.entries.push( {
-      ts: this.entry.ts,
-      entrycat: { "options": [ "IOM gestartet", "IOM beendet", "Kalibrierung" ], "_id": "5dce9280026fa6fcc7f8653e", "name": "IOM" },
-      event: 'IOM gestartet',
-      comment: '',
- }) ;
- console.log(this.entries);
-
-
+    this.getNow();
+    this.fetchCategories();  
+    this.entries.push( {
+          ts: this.entry.ts,
+          entrycat: { "options": [ "IOM gestartet", "IOM beendet", "Kalibrierung" ], "_id": "5dce9280026fa6fcc7f8653e", "name": "IOM" },
+          event: 'IOM gestartet',
+          comment: '',
+    }) ;
 
   },
-
-
 
   // store case id from the routerlink to a local variable on page load
   created() {
     this.id = this.$route.params.id;
-    
-    
  
   },
 
-  
-
   methods: {
-
-
-
- 
 
 //method to add a new entry and scroll down to the last entry
     addNewEntry: function () {
@@ -1653,14 +1583,12 @@ dialogExtras: false,
       comment: this.entry.comment,
  }) ;
 window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
-console.log(this.entries);
+
     },
 
-  
-    
+      
     //method to delete entry
     removeEntry: function (index) {
-
 
       swal({
             title: "Eintrag löschen?",
@@ -1668,31 +1596,24 @@ console.log(this.entries);
             buttons: true,
             dangerMode: true,
             buttons: ["Abbrechen", "Löschen"],
-           
-            
+              
         })
         .then((willDelete) => {
           if (willDelete) {
               this.entries.splice(index, 1,);
-           
-        
+ 
           } else {
            
           }
-        });
-
-     
-     
-     
+        });    
     },
 
-
-   
 
 //formate timestamp
   checkTime: function(i) {
         return (i < 10) ? "0" + i : i;
     },
+
 //method to get the timestamp
    getNow: function() {
       const today = new Date();
@@ -1716,8 +1637,6 @@ this.dialogEval = true;
 
 },
 
-
-
    // fetches all categories from the database
     async fetchCategories() {
       const token = window.localStorage.getItem('auth');
@@ -1735,9 +1654,6 @@ this.dialogEval = true;
       })
         .then((response) => {
           this.dbcategories = response.data.categories;
-      
-          
-        
         })
         .catch(() => {});
     },
@@ -1778,7 +1694,6 @@ this.dialogEval = true;
           
         })
           .then(() => {
-            console.log(this.evaluation);
             this.$swal(
               'Erfolgreich!',
               'Das Protokoll wurde erfolgreich gespeichert!',
@@ -1799,7 +1714,7 @@ this.dialogEval = true;
      
     },
 
-       // delete the specific case from opencase collection
+    // delete the specific case from opencase collection
     async  deleteOpenCase(id) {
      const token = window.localStorage.getItem('auth');
       return axios({

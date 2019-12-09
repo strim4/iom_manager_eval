@@ -2,7 +2,6 @@
 <template>
 <!-- Form to update a case -->
     <v-form v-model="valid" ref="form" lazy-validation>
-
         <h1>Offener Fall bearbeiten</h1>
         <label>Angaben zum Patienten</label>
         <v-text-field label="Fall Nr." v-model="casenr" :rules="requiredRules" required></v-text-field>
@@ -36,6 +35,7 @@
 import axios from 'axios';
 import moment from 'moment';
 export default {
+  //initialize variables
   data: () => ({
     id: 0,
     valid: true,
@@ -52,29 +52,17 @@ export default {
     surgeon: '',
     assistant: '',
 
-
     requiredRules: [
       v => !!v || 'Bitte befüllen Sie alle Pflichtfelder',
     ],
     select: null,
-    diagnoses: [
-
-    ],
-    operations: [
-     
-
-    ],
-    isismodalities: [
-      
-
-    ],
-    surgeons: [
-      
-    ],
-    assistants: [
- 
-    ],
+    diagnoses: [],
+    operations: [],
+    isismodalities: [],
+    surgeons: [],
+    assistants: [],
   }),
+
   // fetches all dropdown values on pageload and fetch specific case from the database
   mounted() {
   
@@ -85,15 +73,15 @@ export default {
     this.fetchSurgeons();
     this.fetchAssistans();
   },
+
   // store case id from the routerlink to a local variable on page load
   created() {
     this.id = this.$route.params.id;
   },
 
   methods: {
-    // case update method
+    // update a case
     update() {
-      console.log(this.casenr);
       if (this.$refs.form.validate()) {
         const token = window.localStorage.getItem('auth');
         return axios({

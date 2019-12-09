@@ -17,8 +17,6 @@
         </br>
 
     <!-- Datatable with the stored surgeons -->
-
-
         <v-card>
                 <v-card-title>
                     Erfasste Operateure
@@ -34,22 +32,15 @@
       class="elevation-1"
 
     >
-
       <template v-slot:item.action="{ item }">
             <v-icon
-
           @click="deleteSurgeon(item._id, item)"
         >
           delete
         </v-icon>
-
       </template>
-
     </v-data-table>
-
       </v-card>
-
-
     </v-container>
 </template>
 
@@ -57,6 +48,7 @@
 import axios from 'axios';
 
 export default {
+  //initialize variables
   data: () => ({
     valid: true,
     surgeon: '',
@@ -75,13 +67,13 @@ export default {
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
-
-
   }),
+
   // fetch all surgeons on pageload
   mounted() {
     this.fetchSurgeons();
   },
+
   methods: {
     // submit method to send the new surgeon to the backend
 
@@ -119,10 +111,12 @@ export default {
       }
       return true;
     },
+
     // Reset function
     clear() {
       this.$refs.form.reset();
     },
+
     // fetches all surgeons from the database
     async fetchSurgeons() {
       const token = window.localStorage.getItem('auth');
@@ -143,10 +137,10 @@ export default {
         })
         .catch(() => {});
     },
+
     // delete a surgeon from the database
     async  deleteSurgeon(id, item) {
       const token = window.localStorage.getItem('auth');
-      console.log(id);
       return axios({
         method: 'delete',
         data: {

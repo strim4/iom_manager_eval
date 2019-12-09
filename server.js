@@ -11,7 +11,7 @@ const cors = require('cors');
 //HTTP request logger
 const morgan = require('morgan');
 const fs = require('fs');
-//login passport configuration
+// passport.js configuration
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const ExtractJwt = passportJWT.ExtractJwt;
@@ -26,7 +26,7 @@ jwtOptions.secretOrKey = 'iomapplicationsecretkey';
 
 
 
-
+//tell express to use the imported modules
 const app = express();
 const router = express.Router();
 app.use(morgan('combined'));
@@ -59,26 +59,29 @@ res.json({ message: 'API Initialized!'});
 });
 
 //user management
+
+//logout
 router.get('/logout', function(req, res){
       req.logout();
     res.send();
     });
 
-
-    router.get('/current_user', passport.authenticate('jwt', { session: false }), isLoggedIn, function(req, res) {
-        if(req.user) {
+//get currentuser
+router.get('/current_user', passport.authenticate('jwt', { session: false }), isLoggedIn, function (req, res) {
+    if (req.user) {
         res.send({ current_user: req.user })
-        } else {
+    } else {
         res.status(403).send({ success: false, msg: 'Unauthorized.' });
-        }
-        });
+    }
+});
 
-        function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated())
+//check if user is loggged in. if not redirect to login page
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
         return next();
-        res.redirect('/');
-        console.log('error! auth failed')
-        };
+    res.redirect('/');
+    console.log('error! auth failed')
+};
 
 //Tell express server to use port 8081
 const port = process.env.API_PORT || 8081;

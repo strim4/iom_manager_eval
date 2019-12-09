@@ -3,7 +3,7 @@
     <v-container  >
      <v-layout row>
     <v-flex md2 >
-       
+       <!-- card for patient and op data -->
         <v-card
       class="mx-auto"
       max-width="175" 
@@ -16,12 +16,9 @@
      </v-card-text>
      <v-card-title>Operation</v-card-title>
      <v-card-text class="text-left">
-     Diagnose: {{diagnose}}</br>
+      Diagnose: {{diagnose}}</br>
       Operation: {{operation}} </br>
       Datum: {{opdate}}
-      <!-- </br>
-      Operateur: {{surgeon}} </br>
-      Assistent: {{assistant}} -->
       </p>
       <v-divider></v-divider>
        </v-card-text>
@@ -38,13 +35,10 @@
       
     </v-card>
     
-    
-    
-
+    <!-- protocol entries -->
     </v-flex>
     <v-flex md10 >
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} </br></p>
-      
       
         </v-flex> 
   </v-layout> 
@@ -80,20 +74,8 @@
       </div>
         </v-flex> 
 
-
-      
-
-        
-
-        
-
-
-      
-
   
 <!-- dialog for case evaluation -->
-
-  
          <v-dialog v-model="dialogEval" persistent max-width="1000px">
         
         <v-card>
@@ -181,13 +163,8 @@
                   ></v-textarea>
                  </v-col>
              </v-row>    
-             
-
             </v-container>
 
-
-            
-           
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -214,6 +191,7 @@
                 </v-layout>
                </v-flex>
     </v-layout> 
+
 <!-- dialog for baselines  -->
          <v-dialog v-model="dialogBaselines" persistent max-width="1000px">
         
@@ -730,7 +708,6 @@
             </v-expansion-panel-content>
             </v-expansion-panel>
 
-
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines DCS MEPs</v-expansion-panel-header>
               <v-expansion-panel-content>
@@ -1050,8 +1027,6 @@
             </v-container>
               </v-expansion-panel-content>
             </v-expansion-panel>
-
-
             <v-expansion-panel>
               <v-expansion-panel-header>Reflexe</v-expansion-panel-header>
               <v-expansion-panel-content>
@@ -1197,18 +1172,9 @@
         </v-card>
       </v-dialog>
 
-
-
-    
-
-  
 </v-container>
-
-
 </v-layout>
 </template>
-
-
 
 <script>
 import axios from 'axios';
@@ -1221,23 +1187,16 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 export default {
-  
+//initialize variables
   data: () => ({
-
-
 
 dialogEval: false,
 dialogInterpret: false,
 dialogUpload: false,
 dialogBaselines: false,
 dialogExtras: false,
-  
-
-
-
-    
-    
- interp: '', 
+ 
+interp: '', 
     
     casenr: 0,
     pid: '',
@@ -1513,39 +1472,23 @@ study: '',
 
 //Link to edf 
 computed: {
-    
     link: function () {
       
        return "./../static/"+this.filename;
     }
   },
+
   // store case id from the routerlink to a local variable on page load
   created() {
     this.casenr = this.$route.params.casenr;
-   
-    
-    
- 
   },
-
-  
-
 
   // fetches all case data on load and pushs a first entry in the entry array
   mounted() {
-  
     this.fetchProtocol(this.casenr);
- 
-
-   
-
   },
 
   methods: {
-
-
-
-
 
   // fetch a single protocol from the database
     async  fetchProtocol(casenr) {
@@ -1562,7 +1505,6 @@ computed: {
         },
       })
         .then((response) => {
-          //this.casenr = response.data.protocols.casenr;
           this.pid = response.data.protocols.pid;
           this.fid = response.data.protocols.fid;
           this.name = response.data.protocols.name;
@@ -1587,7 +1529,7 @@ computed: {
 
 
 
-      // fetch a single protocol from the database
+    // fetch file from server
     async  fetchFile(filename) {
       const token = window.localStorage.getItem('auth');
       return axios({
@@ -1601,17 +1543,12 @@ computed: {
           'Content-Type': 'multipart/form-data',
         },
       })
-        .then((response) => {
-         
+        .then((response) => {       
           this.file = response.data.complet.extras;
-          console.log(response.data.protocols);
-         
-         
+
         })
         .catch(() => { console.log('error'); });
     },
-
-
 
 
 //method to open the uploaded file in browser or to download it
@@ -1631,14 +1568,10 @@ openFile: function(){
                
                 var win = window.open();
     win.document.write('<iframe src="' + anchor  + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>');
-              
-       
-        
+ 
     }
   
 },
-
-
 
 //generate PDF Export
 createPDF() {
@@ -1650,7 +1583,6 @@ var bodyData = [];
 
 sourceData.forEach(function(sourceRow) {
   var dataRow = [];
-
 
 
   dataRow.push(sourceRow.ts);

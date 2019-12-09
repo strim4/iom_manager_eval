@@ -1,12 +1,9 @@
 <!-- This file  contains the structure for the setting page -->
 <template>
 <!-- Navigation to the different subpages -->
-
 <v-container grid-list-md text-xs-center>
-    
        </br></br>
       <v-layout row wrap>
-     
         <v-flex  xs6>
             <v-card
       class="mx-auto"
@@ -151,12 +148,9 @@
     >
       <v-list-item three-line>
         <v-list-item-content>
-          
-          <v-list-item-title class="headline mb-1">Protokolleinträge</v-list-item-title>
-          
+          <v-list-item-title class="headline mb-1">Protokolleinträge</v-list-item-title>   
         </v-list-item-content>
-  
-      <v-list-item-avatar color="purple" size="62">
+        <v-list-item-avatar color="purple" size="62">
         <v-icon dark>mdi-file-document</v-icon>
       </v-list-item-avatar>
       </v-list-item>
@@ -165,16 +159,10 @@
           <router-link :to="{ name: 'Addprotocolentry' }">
          <v-btn color="indigo accent-4" text>Hinzufügen / Bearbeiten</v-btn>
         </router-link>
-        
-        
       </v-card-actions>
     </v-card>
-        </v-flex>
-      
+        </v-flex>    
       </v-layout>
-
-
-     
     </v-container>
 
 </template>

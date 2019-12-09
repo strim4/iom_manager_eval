@@ -1,6 +1,5 @@
 <template>
-
-
+<!-- Login form -->
     <v-form v-model="valid" ref="form" lazy-validation>
         <h1 class="my-5">IOM-Manager - Login:</h1>
         <v-row class="my-5" align="center" justify="center">
@@ -40,16 +39,16 @@
         <router-link v-bind:to="{ name: 'Register' }" >
         <v-btn  color="primary"> Registrieren</v-btn>
         </router-link>
-    
-    
-    
+
     </v-form>
+    <!-- End Loginform-->
 </template>
 
 <script>
 import axios from 'axios';
 export default {
     data: () => ({
+        //initialize variables
         valid: true,
         show1: false,
         email: '',
@@ -59,7 +58,9 @@ export default {
             v => /\S+@\S+\.\S+/.test(v) || 'E-mailadresse ist ungültig',
         ],
     }),
+
     methods: {
+        //Login and user an set user token 
         async submit() {
             return axios({
                     method: 'post',

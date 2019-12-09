@@ -8,6 +8,7 @@
 <script>
 import axios from 'axios';
 export default {
+//initialize variables
     data: () => ({
     
     }),

@@ -1,4 +1,5 @@
 <template>
+<!-- Form for registration -->
     <v-form v-model="valid" ref="form" lazy-validation>
         </br> </br>
         <h1>IOM-Manager - Registrierung:</h1>
@@ -42,35 +43,19 @@
 
            <v-row>
           <v-col cols="12" sm="6" md="3"></v-col>
-          <v-col align="center" cols="12" sm="-10" md="6">
-         
-             
+          <v-col align="center" cols="12" sm="-10" md="6">            
                <v-text-field class="my-n5" name="input-7-1" label="Passwort bestätigen" v-model="confirm_password"
                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                 :type="show1 ? 'text' : 'password'"
-                
-              
+                 :type="show1 ? 'text' : 'password'"        
               counter
               @click:append="show1 = !show1"></v-text-field>
           </v-col>
       </v-row>
         
-        
-
-        
-
-        
-
-       
-
         <v-btn @click="submit" :disabled="!valid" color="success">
-
             Registrieren
-
         </v-btn>
-
         <v-btn @click="clear">Zurücksetzten</v-btn>
-
     </v-form>
 </template>
 
@@ -78,6 +63,7 @@
 import axios from 'axios';
 
 export default {
+//initialize variables
     data: () => ({
         show1: false,
         valid: true,
@@ -90,7 +76,9 @@ export default {
             v => /\S+@\S+\.\S+/.test(v) || 'Die E-Mailadresse ist ungültig',
         ],
     }),
+
     methods: {
+        // register a new user
         async submit() {
             if (this.$refs.form.validate()) {
                 return axios({

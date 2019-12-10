@@ -9,9 +9,12 @@
                     single-line hide-details></v-text-field>
                 </v-card-title>
       <v-data-table
+      v-model="selected"
       :headers="headers"
       :items="completcases"
+      :single-select="singleSelect"
       item-key="casenr"
+      show-select
       :search="search"
       class="elevation-1"  
     >
@@ -21,9 +24,17 @@
         mdi-file-document
         </v-icon>
         </router-link>
+      </template>   
+            <template v-slot:item.delete="{ item }">
+            <v-icon @click="deleteCase(item._id, item)">
+          delete
+        </v-icon>
       </template>     
     </v-data-table>
-      </v-card>
+   </v-card> </br>
+      <div class="text-right">
+       <v-btn    color="primary"  :left="true">zu Analyse hinzufügen</v-btn>
+       </div>
     </v-container>
 </template>
 
@@ -35,6 +46,7 @@ export default {
   //initialize variables
   data() {
     return {
+      singleSelect: false,
       color: 'indigo',
       fixed: true,
       completcases: [],
@@ -42,17 +54,23 @@ export default {
       headers: [
         { text: 'Fall öffnen', value: 'start', sortable: false },
         { text: 'Fall Nr.', value: 'casenr' },
-        { text: 'FID.', value: 'fid' },
+        { text: 'FID', value: 'fid' },
         { text: 'PID', value: 'pid' },
         { text: 'Name', value: 'name' },
         { text: 'Vorname', value: 'surname' },
         { text: 'Geburtsdatum', value: 'birthdate' },
-        { text: 'Diagnose', value: 'diagnose' },
-        { text: 'Operation', value: 'operation' },
-        { text: 'OP-Datum', value: 'opdate', },
-        { text: 'Operateur', value: 'surgeon', },
-        { text: 'Assistent', value: 'assistant', },
+        //{ text: 'Diagnose', value: 'diagnose' },
+        //{ text: 'Operation', value: 'operation' },
+        //{ text: 'OP-Datum', value: 'opdate', },
+        //{ text: 'Operateur', value: 'surgeon', },
+        //{ text: 'Assistent', value: 'assistant', },
+        { text: 'Alter', value: 'age'},
         { text: 'Studie', value: 'evaluation.study', },
+        { text: 'Lokalisation', value: 'local'},
+        { text: 'Detail', value: 'detail'},
+        { text: 'Pathologie', value: 'patho'},
+        { text: 'Operation', value: 'op'},
+        { text: 'Löschen', value: 'delete', sortable: false},
             ],
 
     };
@@ -82,6 +100,7 @@ export default {
         .catch(() => {});
     },
 
+    // delete a case from the database
   
   },
 };

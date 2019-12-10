@@ -81,7 +81,7 @@
           </v-card-title>
           <v-card-text>
             <v-container>
-                            <v-row>
+              <v-row>
                 <v-col cols="12" sm="4" md="3">
                   <v-select v-model="evaluation.age" class="my-n3" :disabled="true"
                     :items="age"
@@ -1204,7 +1204,7 @@
         </v-card>
       </v-dialog>
 
-    <!-- dialog for interpretation -->
+<!--     dialog for interpretation
          <v-dialog v-model="dialogInterpret" persistent max-width="600px">
         
         <v-card>
@@ -1225,7 +1225,7 @@
             <v-btn  depressed  large color="normal"  @click="dialogInterpret = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog>
+      </v-dialog> -->
 
 
       <!-- dialog for fileupload -->

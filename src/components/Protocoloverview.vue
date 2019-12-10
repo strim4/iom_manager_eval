@@ -85,6 +85,45 @@
           <v-card-text>
             <v-container>
               <v-row>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.age" class="my-n3" :disabled="true"
+                    :items="age"
+                    label="Alter"
+                  ></v-select>
+                  <v-select v-model="evaluation.sex" class="my-n3" :disabled="true"
+                    :items="sex"
+                    label="Geschlecht"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.local" class="my-n3" :disabled="true"
+                    :items="local"
+                    label="Lokalisation"
+                  ></v-select>
+                  <v-select v-model="evaluation.detail" class="my-n3" :disabled="true"
+                    :items="detail"
+                    label="Detail"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.patho" class="my-n3" :disabled="true"
+                    :items="patho"
+                    label="Pathologie"
+                  ></v-select>
+                  <v-select v-model="evaluation.op" class="my-n3" :disabled="true"
+                    :items="op"
+                    label="Operation"
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="4" md="3">
+                  <v-select v-model="evaluation.anaest" class="my-n3" :disabled="true"
+                    :items="anaest"
+                    label="Anästhesie"
+                  ></v-select>
+                </v-col>
+              </v-row>
+              <v-divider></v-divider>
+              <v-row>
                 <v-col cols="12" sm="4" md="2">
                  <v-checkbox v-model="evaluation.sseps" :disabled="true" class="my-n3" label="SSEPs" ></v-checkbox>
                  <v-checkbox v-model="evaluation.meps" :disabled="true"  class="my-n3" label="MEPs" ></v-checkbox>

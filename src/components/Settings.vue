@@ -2,7 +2,11 @@
 <template>
 <!-- Navigation to the different subpages -->
 <v-container grid-list-md text-xs-center>
-       </br></br>
+        <template>
+  <div>
+    <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+  </div>
+</template>
       <v-layout row wrap>
         <v-flex  xs6>
             <v-card
@@ -166,3 +170,26 @@
     </v-container>
 
 </template>
+
+<script>
+export default {
+  name: 'Settings',
+  //initialize variables
+  data() {
+    return {
+      breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Einstellungen',
+          disabled: true,
+          href: 'settings',
+        },
+      ],
+    }
+  }
+}
+</script>

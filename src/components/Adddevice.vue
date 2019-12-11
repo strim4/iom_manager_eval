@@ -1,10 +1,15 @@
 <!-- This file contains the structure for the add device site-->
 <template slot="items" slot-scope="props">
     <v-container>
+      <template>
+        <div>
+          <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+        </div>
+      </template>
         <v-col>
             <!-- Form to add a new device -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neue IOM-Geräte hinzufügen</label>
+                <h1>Neue IOM-Geräte hinzufügen</h1>
                 <v-text-field label="IOM-Gerät" :rules="rules" v-model="device" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
@@ -66,6 +71,23 @@ export default {
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
+    breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Einstellungen',
+          disabled: false,
+          href: 'settings',
+        },
+        {
+          text: 'ISIS-Gerät hinzufügen',
+          disabled: true,
+          href: 'adddevice',
+        },
+      ],
 
 
   }),

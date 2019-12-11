@@ -1,8 +1,13 @@
 <!-- This file contains the structure to prapare a new case and save it to the database -->
 <template>
+
 <!-- Form to add a new Case -->
     <v-form v-model="valid" ref="form" lazy-validation>
-
+      <template>
+  <div>
+    <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+  </div>
+</template>
         <h1>Neuer Fall</h1>
         <h5 class="mt-5">Angaben zum Patienten</h5>
         <v-text-field label="Fall Nr." v-model="casenr" :rules="requiredRules" required></v-text-field>
@@ -58,6 +63,19 @@ export default {
     isismodalities: [],
     surgeons: [],
     assistants: [],
+
+    breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Neuer Fall',
+          disabled: true,
+          href: 'newcase',
+        },
+      ],
   }),
 
   

@@ -1,10 +1,15 @@
 <!-- This file contains the structure for the add assistant site-->
 <template slot="items" slot-scope="props">
     <v-container>
+      <template>
+        <div>
+          <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+        </div>
+      </template>
         <v-col>
             <!-- Form to add a new assistant -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neuen Assistenten hinzufügen</label>
+                <h1>Neuen Assistenten hinzufügen</h1>
                 <v-text-field label="Assistent" :rules="rules" v-model="assistant" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
@@ -66,6 +71,23 @@ export default {
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
+    breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Einstellungen',
+          disabled: false,
+          href: 'settings',
+        },
+        {
+          text: 'Assistent hinzufügen',
+          disabled: true,
+          href: 'addassistant',
+        },
+      ],
 
 
   }),

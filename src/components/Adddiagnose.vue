@@ -1,10 +1,15 @@
 <!-- This file contains the structure for the add diagnose site-->
 <template slot="items" slot-scope="props">
     <v-container>
+      <template>
+        <div>
+          <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+        </div>
+      </template>
         <v-col>
             <!-- Form to add a new diagnose -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neue Diagnose hinzufügen</label>
+                <h1>Neue Diagnose hinzufügen</h1>
                 <v-text-field label="Diagnose" :rules="rules" v-model="diagnose" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
                     Hinzufügen
@@ -66,6 +71,23 @@ export default {
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
+    breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Einstellungen',
+          disabled: false,
+          href: 'settings',
+        },
+        {
+          text: 'Diagnose hinzufügen',
+          disabled: true,
+          href: 'adddiagnose',
+        },
+      ],
 
 
   }),

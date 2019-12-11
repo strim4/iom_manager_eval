@@ -1,6 +1,11 @@
 <!-- This file contains the structure to display all the open cases -->
 <template slot="items" slot-scope="props" >
     <v-container > 
+            <template>
+  <div>
+    <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+  </div>
+</template>
   <!-- Datatable with containing all the open cases -->
         <v-card > 
                 <v-card-title>
@@ -70,6 +75,19 @@ export default {
         { text: 'Bearbeiten', value: 'edit', sortable: false },
         { text: 'Löschen', value: 'delete', sortable: false },
 
+      ],
+
+        breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Offene Fälle',
+          disabled: true,
+          href: 'opencases',
+        },
       ],
 
     };

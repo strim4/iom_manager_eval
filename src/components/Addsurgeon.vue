@@ -1,10 +1,15 @@
 <!-- This file contains the structure for the add surgeon site-->
 <template slot="items" slot-scope="props">
     <v-container>
+      <template>
+        <div>
+          <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+        </div>
+      </template>
         <v-col>
             <!-- Form to add a new surgeon -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neuen Operateur hinzufügen</label>
+                <h1>Neuen Operateur hinzufügen</h1>
                 <v-text-field label="Operateur" :rules="rules" v-model="surgeon" 
                 required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
@@ -67,6 +72,23 @@ export default {
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
+          breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Einstellungen',
+          disabled: false,
+          href: 'settings',
+        },
+        {
+          text: 'Operateur hinzufügen',
+          disabled: true,
+          href: 'addsurgeon',
+        },
+      ],
   }),
 
   // fetch all surgeons on pageload

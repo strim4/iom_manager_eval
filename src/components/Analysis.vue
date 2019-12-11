@@ -1,5 +1,11 @@
 <template>
 <v-layout>
+          <template>
+  <div>
+    <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+  </div>
+</template>
+
  <v-btn  color="primary" @click="analyse"> Analyse</v-btn>
 </v-layout>
 </template>
@@ -11,6 +17,18 @@ export default {
 //initialize variables
     data: () => ({
     
+          breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Analyse',
+          disabled: true,
+          href: 'analysis',
+        },
+      ],
     }),
     methods: {
 

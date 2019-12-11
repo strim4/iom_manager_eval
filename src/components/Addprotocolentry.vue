@@ -1,10 +1,15 @@
 <!-- This file contains the structure for the add protocolentries site-->
 <template slot="items" slot-scope="props">
     <v-container>
+      <template>
+        <div>
+          <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+        </div>
+      </template>
         <v-col>
             <!-- Form to add a new device -->
             <v-form v-model="valid" ref="form" lazy-validation>
-                <label>Neue Protokolleinträge hinzufügen</label>
+                <h1>Neue Protokolleinträge hinzufügen</h1>
                 <v-select label="Event" v-model="event" :items="selectoptions" item-text="names" ></v-select>
                 <v-text-field label="Event" :rules="rules" v-model="option" required></v-text-field>
                 <v-btn @click="submit" color="success" :disabled="!valid">
@@ -75,6 +80,23 @@ export default {
     { text: 'Löschen', value: 'action', sortable: false },
 
     ],
+    breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Einstellungen',
+          disabled: false,
+          href: 'settings',
+        },
+        {
+          text: 'Protokolleintrag hinzufügen',
+          disabled: true,
+          href: 'addprotocolentry',
+        },
+      ],
 
   }),
 

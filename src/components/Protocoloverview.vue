@@ -1,5 +1,6 @@
 <template>
 <v-layout  >
+
     <v-container  >
      <v-layout row>
     <v-flex md2 >
@@ -37,7 +38,13 @@
     
     <!-- protocol entries -->
     </v-flex>
+
     <v-flex md10 >
+    <template>
+      <div>
+        <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+      </div>
+    </template>
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} </br></p>
       
         </v-flex> 
@@ -1228,6 +1235,19 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default {
 //initialize variables
   data: () => ({
+
+    breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: true,
+          href: 'home',
+        },
+        {
+          text: 'Fallarchiv',
+          disabled: true,
+          href: 'casesearch',
+        },
+      ],
 
 dialogEval: false,
 dialogInterpret: false,

@@ -1,5 +1,10 @@
 <template slot="items" slot-scope="props" >
     <v-container > 
+      <template>
+  <div>
+    <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+  </div>
+</template>
   <!-- Datatable with containing all the finished cases -->
         <v-card > 
                 <v-card-title>
@@ -24,16 +29,11 @@
         mdi-file-document
         </v-icon>
         </router-link>
-      </template>   
-            <template v-slot:item.delete="{ item }">
-            <v-icon @click="deleteCase(item._id, item)">
-          delete
-        </v-icon>
-      </template>     
+      </template>       
     </v-data-table>
    </v-card> </br>
       <div class="text-right">
-       <v-btn    color="primary"  :left="true">zu Analyse hinzufügen</v-btn>
+       <v-btn    color="primary" disabled="true" :left="true">zu Analyse hinzufügen</v-btn>
        </div>
     </v-container>
 </template>
@@ -70,8 +70,19 @@ export default {
         { text: 'Detail', value: 'detail'},
         { text: 'Pathologie', value: 'patho'},
         { text: 'Operation', value: 'op'},
-        { text: 'Löschen', value: 'delete', sortable: false},
             ],
+      breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Fallsuche',
+          disabled: true,
+          href: 'casesearch',
+        },
+      ],
 
     };
   },
@@ -99,8 +110,6 @@ export default {
         })
         .catch(() => {});
     },
-
-    // delete a case from the database
   
   },
 };

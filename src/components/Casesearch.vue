@@ -154,9 +154,10 @@ export default {
           .then(() => {
             this.$swal(
               'Erfolgreich!',
-              'Die Analyse finden Sie nun im Menu "Analysen"!',
+              'Die Analyse finden Sie nun im Menu "Analyse".',
               'success',
             );
+            this.dialogAnalyse = false;
             
            
           })

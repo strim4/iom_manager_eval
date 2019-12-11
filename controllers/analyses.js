@@ -6,10 +6,10 @@ module.exports.controller = (app) => {
 //fetch all Analyses
 app.get('/analyses', passport.authenticate('jwt', { session: false }),(req, res) => {
     AnalyseSchema.find({}, 'name cases', (error,
-    analyes) => {
+    analyses) => {
     if (error) { console.log(error); }
     res.send({
-        analyes,
+        analyses,
     });
     });
     }); 
@@ -29,16 +29,16 @@ app.get('/cases/:id', passport.authenticate('jwt', { session: false }), (req, re
 
 
 
-    /*delete a analyse from the database
+    //delete a analyse from the database
 
-app.delete('/cases/:id',  passport.authenticate('jwt', { session: false }), (req, res) => {
-    CaseSchema.remove({
+app.delete('/analyses/:id',  passport.authenticate('jwt', { session: false }), (req, res) => {
+    AnalyseSchema.remove({
         _id: req.params.id 
     }, function(error, ccase){
         if (error){console.error(error);}
         res.send({success:true})
     })
-    }); */
+    }); 
 
 
 // add a new analyse

@@ -98,8 +98,9 @@ export default {
     this.fetchCases();
   },
 
-  // method to fetch all cases from the database
+  
   methods: {
+    // method to fetch all cases from the database
     async fetchCases() {
       const token = window.localStorage.getItem('auth');
       return axios({

@@ -33,8 +33,29 @@
     </v-data-table>
    </v-card> </br>
       <div class="text-right">
-       <v-btn    color="primary" disabled="true" :left="true">zu Analyse hinzufügen</v-btn>
+       <v-btn    color="primary"  :left="true" @click="dialogAnalyse = true">Neue Analyse mit selketierten Fällen</v-btn>
        </div>
+        <!-- dialog to add new analyse -->
+         <v-dialog v-model="dialogAnalyse" persistent max-width="600px">
+        
+        <v-card>
+          <v-card-title>
+            <span class="headline">Neue Analyse:</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+
+                  <v-text-field v-model="analyse.name" class="my-n5" label="Geben Sie eine Bezeichnung ein"  ></v-text-field>
+
+            </v-container>
+           
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn  depressed  large color="success"  @click="saveAnalyse">Speichern</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
 </template>
 
@@ -47,9 +68,13 @@ export default {
   data() {
     return {
       singleSelect: false,
+      selected: [],
       color: 'indigo',
       fixed: true,
       completcases: [],
+      dialogAnalyse: false,
+      analyse: {},
+      
       search: '',
       headers: [
         { text: 'Fall öffnen', value: 'start', sortable: false },
@@ -109,6 +134,43 @@ export default {
           this.completcases = response.data.protocols;
         })
         .catch(() => {});
+    },
+
+     saveAnalyse: function() {
+    
+         const token = window.localStorage.getItem('auth');
+        return axios({
+          method: 'post',
+          data: {
+            name: this.analyse.name,
+            cases: this.selected,
+          },
+          url: 'http://localhost:8081/analyses',
+          headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(() => {
+            this.$swal(
+              'Erfolgreich!',
+              'Die Analyse finden Sie nun im Menu "Analysen"!',
+              'success',
+            );
+            
+           
+          })
+          .catch(() => {
+            this.$swal(
+              'Fehler!',
+              'Die Analyse konnte nicht gespeichert werden!',
+              'error',
+            );
+          });
+     
+    },
+    showSelect: function(){
+      console.log(this.selected );
     },
   
   },

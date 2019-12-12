@@ -1239,14 +1239,15 @@ export default {
     breadcrumbs: [
         {
           text: 'Dashboard',
-          disabled: true,
+          disabled: false,
           href: 'home',
         },
         {
-          text: 'Fallarchiv',
-          disabled: true,
+          text: 'Fallsuche',
+          disabled: false,
           href: 'casesearch',
         },
+       
       ],
 
 dialogEval: false,

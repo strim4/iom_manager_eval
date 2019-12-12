@@ -37,7 +37,7 @@
       </template>
     </v-data-table>
    </v-card> </br>
-     
+      <v-btn @click="analyseR">Run R</v-btn>
     </v-container> 
 </template>
 
@@ -143,11 +143,21 @@ export default {
 
 
 
-    analyse: function(){
-        var R = require("r-script");
-        var out = R("test.r")
-           .data()
-           .callSync();
+   async analyseR(){
+      //const token = window.localStorage.getItem('auth');
+      return axios({
+        method: 'get',
+        url: 'http://localhost:8081/ex-async',
+         headers: {
+           // Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+      })
+        .then((response) => {
+          //this.analyses = response.data.analyses;
+          console.log(response.data);
+        })
+        .catch(() => {});
 
     },
        

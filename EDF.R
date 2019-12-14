@@ -1,6 +1,7 @@
 ??edfReader
 library(edfReader)
 library(jsonlite)
+
 library(dplyr)
 libDir <- system.file("extdata", package="edfReader")
 
@@ -12,4 +13,4 @@ CHdr <- readEdfHeader(MEPtest)
 
 TSignals <-readEdfSignals(CHdr, simplify=FALSE ,fragments = TRUE)
 TSignals
-mutate(TSignals = as.character(TSignals))
+toJSON(TSignals)

@@ -150,7 +150,7 @@ export default {
         url: 'http://localhost:8081/ex-async',
          headers: {
            // Authorization: `JWT ${token}`,
-            'Content-Type': 'application/json',
+            //'Content-Type': 'application/json',
           },
       })
         .then((response) => {

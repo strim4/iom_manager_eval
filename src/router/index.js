@@ -24,6 +24,7 @@ import Login from '@/components/Login';
 //Tell vue to use the router
 Vue.use(Router);
 
+
 export default new Router({
   // mode history makes it possible to use the arrows in the browser to navigate back and forth
   mode: 'history',
@@ -117,6 +118,28 @@ export default new Router({
       path: '/users/register',
       name: 'Register',
       component: Register,
+      // In beforeEnter method the ip addresses This method defines which IPs can access the registry page.
+      // This ensures that only users in a certain network, e.g. from the Inselspital, can register new users. 
+      //The method is disabled because the application is currently installed locally or on a public server.
+
+
+     /*beforeEnter(to, from, next) {
+           
+        $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+          
+          handleJsonResponse(data);
+        });
+        function handleJsonResponse(data) {
+        if(data.geobytesremoteip == '213.55.161.' || 'enter authorized IP'){
+          next();
+        }else{
+          next(false);
+          alert("Nur Benutzer innerhalb des Netzwerkes können neue Benutzer registrieren");
+        };
+  
+      };
+      
+      } */
       },
       {
         path: '/',

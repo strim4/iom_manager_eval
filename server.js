@@ -72,6 +72,7 @@ function executeExAsync(callback) {
 
   
 
+
 	R('ex-async.R').data({ df: attitude, nGroups: 3, fxn: 'mean' }).call(function(error, result) {
 		if (error) {
             console.error('ex-async throws error', error);

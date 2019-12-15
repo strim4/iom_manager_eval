@@ -96,20 +96,15 @@ export default {
         // { text: 'Pathologie', value: 'patho'},
         { text: 'Operation', value: 'evaluation.op'},
         { text: 'OP-Technik', value: 'evlauation.optechnik'},
-        { text: 'TES-MEP', value: 'evaluation.meps2'},
-        { text: 'DCS-MEP', value: 'evaluation.gripdmeps2'},
-        { text: 'SSEP', value: 'evaluation.sseps2'},
-        { text: 'AEP', value: 'evaluation.aeps2'},
-        { text: 'VEP', value: 'evaluation.veps2'},
-        { text: 'BR', value: 'evaluation.br'},
-        { text: 'LAR', value: 'evaluation.lar'},
-        { text: 'BCR', value: 'evaluation.bcr'},
-        { text: 'Dyn. Sauger', value: 'evaluation.sauger'},
-        { text: 'DNS', value: 'evaluation.dns'},
-        { text: 'D-Welle', value: 'evaluation.dwave'},
-        { text: 'Penfield', value: 'evaluation.penfield'},
+        { text: 'Modalitäten', value: 'evaluation.modalities'},
+        // { text: 'TES-MEP', value: 'evaluation.meps2'},
+        // { text: 'DCS-MEP', value: 'evaluation.gripdmeps2'},
+        // { text: 'SSEP', value: 'evaluation.sseps2'},
+        // { text: 'AEP', value: 'evaluation.aeps2'},
+        // { text: 'VEP', value: 'evaluation.veps2'},
+        { text: 'Mapping', value: 'evaluation.mapping'},
+        { text: 'Reflexes', value: 'evaluation.reflexes'},
 
-        
             ],
       breadcrumbs: [
         {

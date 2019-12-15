@@ -1108,39 +1108,28 @@
               </v-row>
               <v-divider></v-divider>
               <v-row>
-                <v-col cols="12" sm="4" md="2">
-                 <v-checkbox v-model="evaluation.sseps" class="my-n3" label="SSEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.meps" class="my-n3" label="MEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.aeps" class="my-n3" label="AEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.veps" class="my-n3" label="VEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.emg" class="my-n3" label="EMG" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.ecog" class="my-n3" label="ECOG" ></v-checkbox>
-                </v-col>
-
-                <v-col cols="12" sm="4" md="4">
-                 <v-checkbox v-model="evaluation.gridmeps" class="my-n3" label="Grid-MEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.sauger" class="my-n3" label="Dynamischer Sauger" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.dns" class="my-n3" label="DNS" ></v-checkbox>
-                  <v-checkbox v-model="evaluation.dwave" class="my-n3" label="D-Welle" ></v-checkbox>
-                  <v-checkbox v-model="evaluation.penfield" class="my-n3" label="Penfield"></v-checkbox>
-                  <v-text-field v-model="evaluation.mappingsw" class="my-n6" label="tiefste Mapping-Schwelle" suffix="mA"></v-text-field>
-                </v-col>
-
-                <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.br" class="my-n3" label="BR" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.lar" class="my-n3" label="LAR" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.bcr" class="my-n3" label="BCR" ></v-checkbox>
+                <v-col cols="12" sm="4" md="8">
+                 <v-select v-model="evaluation.modalities" class="my-n3" label="Modalitäten" :items="modalities" multiple chips></v-select>
+                  <v-select v-model="evaluation.mapping" class="my-n3" label="Mapping" :items="mapping" multiple chips></v-select>
+                  <v-row>
+                    <v-col cols="12" sm="4" md="4">
+                    <label>Tiefste Mapping-Schwelle</label>
+                    </v-col>
+                    <v-col cols="12" sm="4" md="2">
+                    <v-text-field v-model="evaluation.mappingsw" class="my-n3" suffix="mA"></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-select v-model="evaluation.reflexes" class="my-n3" label="Reflexe" :items="reflexes" multiple chips></v-select>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="4">
-                  <v-checkbox v-model="evaluation.stabil" class="my-n3" label="IOM stabil"></v-checkbox>
                   <v-select v-model="evaluation.sseps2" class="my-n3"
                     :items="eventchanges"
                     label="SSEPs"
                   ></v-select>
                   <v-select v-model="evaluation.meps2" class="my-n3"
                     :items="eventchanges"
-                    label="MEPs"
+                    label="TES-MEPs"
                   ></v-select>
                   <v-select v-model="evaluation.aeps2" class="my-n3"
                     :items="eventchanges"
@@ -1152,19 +1141,17 @@
                   ></v-select>
                   <v-select v-model="evaluation.gripdmeps2" class="my-n3"
                     :items="eventchanges"
-                    label="Grid-MEPs"
+                    label="DCS-MEPs"
                   ></v-select>
                 </v-col>
               </v-row>
               <v-divider></v-divider>
               <v-row>
-                 <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.wachop" class="my-n3" label="Wach-OP" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.scs" class="my-n3" label="SCS" ></v-checkbox>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.dbs" class="my-n3" label="DBS" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.ib" class="my-n3" label="IB" ></v-checkbox>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-select v-model="evaluation.optechnik" class="my-n3" 
+                    :items="optechnik"
+                    label="OP-Technik"
+                  ></v-select>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-checkbox  class="my-n3" v-model="evaluation.studycheck" label="Studienfall" ></v-checkbox>
@@ -1216,18 +1203,21 @@ export default {
     /* values for evaluation*/
     age: ['Kind','Erwachsener'],
     sex: ['Weiblich','Männlich'],
-    local: ['supratentorielle RF','infratentorielle RF','spinal','CEA',''],
+    local: ['supratentorielle RF','infratentorielle RF','spinal','Gefässe',''],
     detail: ['frontal','zentral','parietal','occipital','temporal','cerebellär','KHBW','HWK','BWK','LWK','SWK','Hypophyse','Hirnstamm',''],
     patho: ['intracerebral','extradural','intradural','intramedullär','vaskulär','Blutungen',''],
     op: ['Resektion','Clipping','Stabilisation','Dekompression','Biopsie','direkte Stimulation','Verschluss',''],
     anaest: ['TIVA','TIVA plus','Wach-OP',''],
+    optechnik: ['Wach-OP', 'SCS', 'DBS', 'IB', ''],
+    modalities: ['SSEPs ', 'TES-MEPs ', 'DCS-MEPs ', 'AEPs ', 'VEPs ', 'CCEPs ', 'EMG ', 'ECOG '],
+    mapping:['Dynamischer Sauger ', 'DNS ', 'D-Welle ', 'Penfield '],
+    reflexes:['BR ', 'LAR ', 'BCR '],
 
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
     muscles: ['Occulomotor', 'Trochlearis', 'Masseter', 'Abduzens', 'Orb occ', 'Labialis', 'Orb oris', 'Mentalis', 'Glosso', 'Vagus', 'Accessorius', 'Hypoglosso', 'Deltoideus', 'Biceps', 'Triceps', 'Extensor', 'Thenar', 'Hypothenar', 'Aductor', 'Ileopsoas', 'Quadri', 'Tib ant', 'Gastro', 'Abd hall', ''],
     eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust', ''],
-
 
     dialogFinish: false,
     dialogEval: false,
@@ -1471,38 +1461,20 @@ export default {
       op:'',
       anaest:'',
 
-      sseps:'',
-      meps:'',
-      aeps:'',	
-      veps:'',
-      emg:'',
-      ecog:'',
-
-      gridmeps:'',
-      sauger:'',
-      dns:'',
-      dwave:'',
-      penfield:'',
+      modalities:'',
+      mapping:'',
+      reflexes:'',
       mappingsw:'',
 
-      br:'',
-      lar:'',
-      bcr:'',
-
-      stabil:'',
       sseps2:'',
       meps2:'',
       aeps2:'',
       veps2:'',
       gridmeps2:'',
 
-      wachop:'',
-      scs:'',
-      dbs:'',
-      ib:'',
+      optechnik: '',
       study:'',
       studycheck: false,
-
 
       comment:'',
 
@@ -1772,7 +1744,7 @@ this.dialogEval = true;
 
 <style>
 .active {
-  background-color: yellow;
+  background-color: pink;
 }
 </style>
 

@@ -131,32 +131,21 @@
               </v-row>
               <v-divider></v-divider>
               <v-row>
-                <v-col cols="12" sm="4" md="2">
-                 <v-checkbox v-model="evaluation.sseps" :disabled="true" class="my-n3" label="SSEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.meps" :disabled="true"  class="my-n3" label="MEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.aeps" :disabled="true"  class="my-n3" label="AEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.veps" :disabled="true" class="my-n3" label="VEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.emg" :disabled="true" class="my-n3" label="EMG" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.ecog" :disabled="true"  class="my-n3" label="ECOG" ></v-checkbox>
-                </v-col>
-
-                <v-col cols="12" sm="4" md="4">
-                 <v-checkbox v-model="evaluation.gridmeps" :disabled="true"  class="my-n3" label="Grid-MEPs" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.sauger" :disabled="true"  class="my-n3" label="Dynamischer Sauger" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.dns" :disabled="true"  class="my-n3" label="DNS" ></v-checkbox>
-                  <v-checkbox v-model="evaluation.dwave" :disabled="true"  class="my-n3" label="D-Welle" ></v-checkbox>
-                  <v-checkbox v-model="evaluation.penfield" :disabled="true"  class="my-n3" label="Penfield"></v-checkbox>
-                  <v-text-field v-model="evaluation.mappingsw" :disabled="true" class="my-n6" label="tiefste Mapping-Schwelle" suffix="mA"></v-text-field>
-                </v-col>
-
-                <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.br" :disabled="true"  class="my-n3" label="BR" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.lar" :disabled="true" class="my-n3" label="LAR" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.bcr" :disabled="true" class="my-n3" label="BCR" ></v-checkbox>
+                <v-col cols="12" sm="4" md="8">
+                 <v-select v-model="evaluation.modalities" class="my-n3" label="Modalitäten" :items="modalities" multiple :disabled="true"></v-select>
+                  <v-select v-model="evaluation.mapping" class="my-n3" label="Mapping" :items="mapping" multiple :disabled="true"></v-select>
+                  <v-row>
+                    <v-col cols="12" sm="4" md="4">
+                    <label>Tiefste Mapping-Schwelle</label>
+                    </v-col>
+                    <v-col cols="12" sm="4" md="2">
+                    <v-text-field v-model="evaluation.mappingsw" class="my-n3" suffix="mA" :disabled="true"></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-select v-model="evaluation.reflexes" class="my-n3" label="Reflexe" :items="reflexes" multiple :disabled="true"></v-select>
                 </v-col>
 
                 <v-col cols="12" sm="6" md="4">
-                  <v-checkbox v-model="evaluation.stabil" :disabled="true" class="my-n3" label="IOM stabil"></v-checkbox>
                   <v-select v-model="evaluation.sseps2" class="my-n3" :disabled="true" 
                     :items="eventchanges"
                     label="SSEPs"
@@ -169,7 +158,7 @@
                     :items="eventchanges"
                     label="AEPs"
                   ></v-select>
-                  <v-select v-model="evaluation.veps2"class="my-n3" :disabled="true" 
+                  <v-select v-model="evaluation.veps2" class="my-n3" :disabled="true" 
                     :items="eventchanges"
                     label="VEPs"
                   ></v-select>
@@ -181,13 +170,11 @@
               </v-row>
               <v-divider></v-divider>
               <v-row>
-                 <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.wachop"  :disabled="true" class="my-n3" label="Wach-OP" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.scs" :disabled="true" class="my-n3" label="SCS" ></v-checkbox>
-                </v-col>
-                <v-col cols="12" sm="6" md="2">
-                 <v-checkbox v-model="evaluation.dbs" :disabled="true" class="my-n3" label="DBS" ></v-checkbox>
-                 <v-checkbox v-model="evaluation.ib" :disabled="true"  class="my-n3" label="IB" ></v-checkbox>
+                 <v-col cols="12" sm="6" md="4">
+                    <v-select v-model="evaluation.optechnik" class="my-n3" :disabled="true" 
+                    :items="optechnik"
+                    label="OP-Technik"
+                  ></v-select>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
                   <v-checkbox  class="my-n3" v-model="evaluation.studycheck" :disabled="true"  label="Studienfall"></v-checkbox>
@@ -1239,12 +1226,12 @@ export default {
     breadcrumbs: [
         {
           text: 'Dashboard',
-          disabled: false,
+          disabled: true,
           href: 'home',
         },
         {
           text: 'Fallsuche',
-          disabled: false,
+          disabled: true,
           href: 'casesearch',
         },
        
@@ -1514,19 +1501,21 @@ study: '',
     /* values for evaluation*/
     age: ['Kind','Erwachsener'],
     sex: ['Weiblich','Männlich'],
-    local: ['supratentorielle RF','infratentorielle RF','spinal','CEA',''],
+    local: ['supratentorielle RF','infratentorielle RF','spinal','Gefässe',''],
     detail: ['frontal','zentral','parietal','occipital','temporal','cerebellär','KHBW','HWK','BWK','LWK','SWK','Hypophyse','Hirnstamm',''],
     patho: ['intracerebral','extradural','intradural','intramedullär','vaskulär','Blutungen',''],
     op: ['Resektion','Clipping','Stabilisation','Dekompression','Biopsie','direkte Stimulation','Verschluss',''],
     anaest: ['TIVA','TIVA plus','Wach-OP',''],
+    optechnik: ['Wach-OP', 'SCS', 'DBS', 'IB', ''],
+    modalities: ['SSEPs ', 'TES-MEPs ', 'DCS-MEPs ', 'AEPs ', 'VEPs ', 'CCEPs ', 'EMG ', 'ECOG '],
+    mapping:['Dynamischer Sauger ', 'DNS ', 'D-Welle ', 'Penfield '],
+    reflexes:['BR ', 'LAR ', 'BCR '],
  
  /* values for the baselines */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
     muscles: ['Occulomotor', 'Trochlearis', 'Masseter', 'Abduzens', 'Orb occ', 'Labialis', 'Orb oris', 'Mentalis', 'Glosso', 'Vagus', 'Accessorius', 'Hypoglosso', 'Deltoideus', 'Biceps', 'Triceps', 'Extensor', 'Thenar', 'Hypothenar', 'Aductor', 'Ileopsoas', 'Quadri', 'Tib ant', 'Gastro', 'Abd hall', ''],
     eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust'],
-
-   
 
   }),
 
@@ -1737,21 +1726,24 @@ sourceData.forEach(function(sourceRow) {
         }
       
       },
-      { text: '\n* true = ja, kein Wert = nein', style: 'value' },
+      { text: '\n' },
       	{
      
 			table: {
 			
 				body: [
 
-          ['SSEPS:', {text: this.evaluation.sseps, style: 'value'} , 'Grid-MEPs: ', {text: this.evaluation.gridmeps, style: 'value'}, 'BR: ', {text: this.evaluation.br, style: 'value'}, 'IOM stabil: ', {text: this.evaluation.stabil, style: 'value'}],
-          ['MEPs:', {text: this.evaluation.meps, style: 'value'}, 'Dyn. Sauger:', {text: this.evaluation.sauger, style:'value'}, 'LAR:', {text: this.evaluation.lar, style:'value'}, 'SSEPs:', {text: this.evaluation.sseps2, style:'value'}],
-          ['AEPs:', {text: this.evaluation.aeps, style: 'value'}, 'DNS:', {text: this.evaluation.dns, style: 'value'}, 'BCR:', {text: this.evaluation.bcr, style: 'value'}, 'MEPs:', {text: this.evaluation.meps2, style: 'value'}],
-          ['VEPs:', {text: this.evaluation.veps, style: 'value'}, 'D-Wave:', {text: this.evaluation.dwave, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'AEPs:', {text: this.evaluation.aeps2, style: 'value'}],
-          ['EMG:', {text: this.evaluation.emg, style: 'value'}, 'Penfield:', {text: this.evaluation.penfield, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'VEPs:', {text: this.evaluation.veps2, style: 'value'}],
-          ['ECOG:', {text: this.evaluation.ecog, style: 'value'}, 'Tiefste Schwelle:', {text: this.evaluation.mappingsw, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, 'Grid-MEPs:', {text: this.evaluation.gripdmeps2, style: 'value'}],
-          ['Wachop:', {text: this.evaluation.wachop, style: 'value'}, 'DBS:', {text: this.evaluation.dbs, style: 'value'}, 'SCS:', {text: this.evaluation.scs, style: 'value'}, 'IB:', {text: this.evaluation.ib, style: 'value'}],
-          ['Studie:', {text: this.evaluation.studycheck , style: 'value'}, {text: this.evaluation.study, style: 'value'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}, {text:'', style: 'filler'}],
+          ['Modalitäten', {text: this.evaluation.modalities, style: 'value'}],
+          ['Mapping', {text: this.evaluation.mapping, style: 'value'}],
+          ['Tiefste Mapping-Schwelle:', {text: this.evaluation.mappingsw, style: 'value'}],
+          ['Reflexe', {text: this.evaluation.reflexes, style: 'value'}],
+          ['SSEPs:', {text: this.evaluation.sseps2, style:'value'}],
+          ['TES-MEPs:', {text: this.evaluation.meps2, style: 'value'}],
+          ['AEPs:', {text: this.evaluation.aeps2, style: 'value'}],
+          ['VEPs:', {text: this.evaluation.veps2, style: 'value'}],
+          ['DCS-MEPs:', {text: this.evaluation.gripdmeps2, style: 'value'}],
+          ['OP-Technik:', {text: this.evaluation.optechnik, style: 'value'}],
+          ['Studie:', {text: this.evaluation.study, style: 'value'}],
 				
 				]      
       },

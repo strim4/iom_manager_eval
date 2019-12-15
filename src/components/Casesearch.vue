@@ -13,7 +13,7 @@
                     <v-text-field v-model="search" append-icon="search" label="Suche" 
                     single-line hide-details></v-text-field>
                 </v-card-title>
-      <v-data-table
+      <v-data-table 
       v-model="selected"
       :headers="headers"
       :items="completcases"
@@ -78,32 +78,32 @@ export default {
       search: '',
       headers: [
         { text: 'Fall öffnen', value: 'start', sortable: false },
-        { text: 'Fall Nr.', value: 'casenr' },
+        { text: 'Fall Nr.', value: 'casenr', width: '90px' },
         //{ text: 'FID', value: 'fid' },
         //{ text: 'PID', value: 'pid' },
-        { text: 'Name', value: 'name' },
-        { text: 'Vorname', value: 'surname' },
-        { text: 'Geburtsdatum', value: 'birthdate' },
-        { text: 'Alter', value: 'evaluation.age'},
-        { text: 'Studie', value: 'evaluation.study', },
-        { text: 'Diagnose', value: 'diagnose' },
+        { text: 'Name', value: 'name', width: '120px'},
+        { text: 'Vorname', value: 'surname', width: '120px'},
+        { text: 'Geb-Datum', value: 'birthdate', width: '120px'},
+        { text: 'Alter', value: 'evaluation.age', width: '120px'},
+        { text: 'OP-Datum', value: 'opdate', width: '120px'},
+        { text: 'Diagnose', value: 'diagnose', width: '120px'},
         //{ text: 'Operation', value: 'operation' },
-        { text: 'OP-Datum', value: 'opdate', },
         //{ text: 'Operateur', value: 'surgeon', },
         //{ text: 'Assistent', value: 'assistant', },
-        { text: 'Lokalisation', value: 'evaluation.local'},
-        { text: 'Detail', value: 'valuation.detail'},
+        { text: 'Lokalisation', value: 'evaluation.local', width: '150px'},
+        { text: 'Detail', value: 'evaluation.detail', width: '120px'},
         // { text: 'Pathologie', value: 'patho'},
-        { text: 'Operation', value: 'evaluation.op'},
-        { text: 'OP-Technik', value: 'evlauation.optechnik'},
-        { text: 'Modalitäten', value: 'evaluation.modalities'},
+        { text: 'Operation', value: 'evaluation.op', width: '120px'},
+        { text: 'OP-Technik', value: 'evaluation.optechnik', width: '120px'},
+        { text: 'Modalitäten', value: 'evaluation.modalities', width: '150px'},
         // { text: 'TES-MEP', value: 'evaluation.meps2'},
         // { text: 'DCS-MEP', value: 'evaluation.gripdmeps2'},
         // { text: 'SSEP', value: 'evaluation.sseps2'},
         // { text: 'AEP', value: 'evaluation.aeps2'},
         // { text: 'VEP', value: 'evaluation.veps2'},
-        { text: 'Mapping', value: 'evaluation.mapping'},
-        { text: 'Reflexes', value: 'evaluation.reflexes'},
+        { text: 'Mapping', value: 'evaluation.mapping', width: '180px'},
+        { text: 'Reflexes', value: 'evaluation.reflexes', width: '150px'},
+        { text: 'Studie', value: 'evaluation.study', width: '120px'},
 
             ],
       breadcrumbs: [

@@ -50,24 +50,18 @@
      </br></br>
       <v-layout row>
         <v-flex md2><b><p>Uhrzeit</p></b></v-flex>
-        <v-flex md1></v-flex>
         <v-flex md2><b>Kategorie</b></v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md2><b>Eintrag</b></v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md2><b>Bemerkung</b></v-flex>
+        <v-flex md3><b>Eintrag</b></v-flex>
+        <v-flex md4><b>Bemerkung</b></v-flex>
       </v-layout >  </br> 
           
       <div v-for="(entry, index) in entries">
         <v-layout row >
           
         <v-flex md2 >{{entry.ts}}</v-flex>
-        <v-flex md1></v-flex>
         <v-flex md2 >{{entry.entrycat.name}}</v-flex>
-        <v-flex md1></v-flex>
-       <v-flex md2 >{{entry.event}}</v-flex>
-        <v-flex md1></v-flex>
-        <v-flex md3> <v-textarea v-model="entry.comment"  :auto-grow="true" :dense="true" :readonly="true" :rows="2"></v-textarea></v-flex>        
+        <v-flex md3 >{{entry.event}}</v-flex>
+        <v-flex md4> <v-textarea v-model="entry.comment"  :auto-grow="true" :dense="true" :readonly="true" :rows="2"></v-textarea></v-flex>        
       </v-layout > 
        <v-divider></v-divider>
       </div>

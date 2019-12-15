@@ -36,7 +36,6 @@
      <p class=".font-weight-medium">Fall-Nr. {{casenr}} - IOM {{status}} </br></p>
       <v-layout row>
         <v-flex md2><b><p>Uhrzeit</p></b></v-flex>
-       
         <v-flex md2><b>Kategorie</b></v-flex>
         <v-flex md1></v-flex>
         <v-flex md2><b>Eintrag</b></v-flex>

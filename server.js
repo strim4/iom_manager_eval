@@ -62,31 +62,26 @@ router.get('/', function(req, res) {
 res.json({ message: 'API Initialized!'});
 });
 
+
 //R test function
 function executeExAsync(callback) {
 	const attitude = [
-		{ group: '(40,55]', rating: 46.7143, advance: 41.1429 },
-		{ group: '(55,70]', rating: 64.6154, advance: 41.9231 },
-		{ group: '(70,85]', rating: 77.2, advance: 45.5 }
+	
     ];
 
+    
   
-
-
-	R('ex-async.R').data({ df: attitude, nGroups: 3, fxn: 'mean' }).call(function(error, result) {
+// the path to R bin must be added to the systemenvironment variables
+// the directory r library mus be writeable 
+    R('EDF.R').data({ df: attitude, nGroups: 3, fxn: 'mean' }).call(function(error, result) {
 		if (error) {
-            console.error('ex-async throws error', error);
-            
-	return callback(error, null);
+			//console.error('ex-async throws error', error);
+			return callback(error, null);
 		}
 		console.error('ex-async success result', result);
-        return callback(null, result);
+		return callback(null, result);
 	});
 }; 
-
-
-
-
 
 
 

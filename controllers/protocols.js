@@ -89,6 +89,7 @@ const newProtocol = new ProtocolSchema({
     evaluation: req.body.evaluation,
     baselines: req.body.baselines,
     extras: req.body.extras,
+    closing: req.body.closing,
 
 });
 

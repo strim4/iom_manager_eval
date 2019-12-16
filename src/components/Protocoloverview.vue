@@ -33,6 +33,9 @@
       <v-card-text class="text-center">
        <v-btn   class="my-n3" width="180px" color="primary"  @click="dialogExtras = true" >Extras</v-btn>
       </v-card-text>
+      <v-card-text class="text-center">
+       <v-btn   class="my-n3" width="180px" color="primary"  @click="dialogClosing = true" >Closing</v-btn>
+      </v-card-text>
       
     </v-card>
     

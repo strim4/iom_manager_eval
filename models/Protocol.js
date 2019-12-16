@@ -22,6 +22,7 @@ entries : Object,
 evaluation: Object,
 baselines: Object,
 extras: Object,
+closing: Object,
 },
 { typeKey: '$type' }
 );

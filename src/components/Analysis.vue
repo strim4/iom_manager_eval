@@ -38,15 +38,23 @@
     </v-data-table>
    </v-card> </br>
       <v-btn @click="analyseR">Run R</v-btn>
+      <v-btn @click="drawChart">Chart</v-btn>
+  <canvas id="myChart" width="auto" height="100"></canvas>
     </v-container> 
 </template>
 
 
 <script>
 import axios from 'axios';
+import Chart from 'chart.js';
+
+
+
 export default {
 //initialize variables
     data: () => ({
+      edfData: {},
+      lab: [],
     
           breadcrumbs: [
         {
@@ -94,7 +102,7 @@ export default {
       })
         .then((response) => {
           this.analyses = response.data.analyses;
-          console.log(this.analyses);
+        
         })
         .catch(() => {});
     },
@@ -154,10 +162,146 @@ export default {
           },
       })
         .then((response) => {
-          //this.analyses = response.data.analyses;
-          console.log(response.data);
+  
+      
+          this.edfData = response.data;
+          console.log(this.edfData[ 'Thenar re' ].fragments[0].signal);
+          console.log(this.edfData[ 'Extensor re' ].fragments[0].signal);
+          for(let i = 0; i<this.edfData[ 'Thenar re' ].fragments[0].signal.length; i++){
+         this.lab.push(i);
+       };
+       console.log(this.lab);
         })
         .catch(() => {});
+
+    },
+
+    drawChart: function(){
+      var ctx = document.getElementById('myChart');
+       console.log(this.edfData[ 'Thenar re' ].fragments[0].signal);
+      
+      
+var myChart = new Chart(ctx, {
+    type: 'line',
+   
+    data:
+    { labels: this.lab,
+      datasets: [
+            {
+                label: "Thenar re",
+             
+                data: this.edfData[ 'Thenar re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(75,192,192,0.4)",
+                  borderColor: "rgba(75,192,192,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(75,192,192,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            },
+             {
+                label: "Tib ant re",
+                data: this.edfData[ 'Tib ant re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(204, 235, 52,0.4)",
+                  borderColor: "rgba(204, 235, 52,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(204, 235, 52,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(204, 235, 52,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            }, 
+             {
+                label: "Extensor re",
+                data: this.edfData[ 'Extensor re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(229, 52, 2352,0.4)",
+                  borderColor: "rgba(229, 52, 235,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(229, 52, 235,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(229, 52, 235,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            },
+            {
+                label: "Deltoideus re",
+                data: this.edfData[ 'Deltoideus re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(150, 235, 52,0.4)",
+                  borderColor: "rgba(150, 235, 52,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(150, 235, 52,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(150, 235, 52,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            },]},
+   options:{
+                 responsive: true, 
+             scales: {
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Amplitude [mV]'
+      }
+    }],
+     xAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Latency [ms]'
+      }
+    }]
+  }     
+            }
+});
 
     },
        

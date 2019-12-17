@@ -1,6 +1,11 @@
 <template>
+
  <v-layout>
+  
       <v-flex fluid>
+         <div>
+    <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+  </div>
         <v-row>
           <v-col cols="12" md="6">
             <v-card>
@@ -48,6 +53,18 @@ export default {
   //initialize variables
   data() {
     return {
+         breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          href: 'home',
+        },
+        {
+          text: 'Kontakt / Info',
+          disabled: true,
+          href: 'contact',
+        },
+      ],
 
         contactText: 'Bei Fragen wenden Sie sich bitte an die folgende Kontaktperson: ',
         contactPerson: 'Chantal Zbinden, Inselspital Bern',

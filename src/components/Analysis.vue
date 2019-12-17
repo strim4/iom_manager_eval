@@ -38,7 +38,7 @@
     </v-data-table>
    </v-card> </br>
       <v-btn @click="analyseR">Run R</v-btn>
-      <v-btn @click="drawChart">Chart</v-btn>
+     
   <canvas id="myChart" width="auto" height="100"></canvas>
     </v-container> 
 </template>
@@ -150,7 +150,8 @@ export default {
     },
 
 
-
+//triggers R function on server that emmits r file to R. R file is proccessed in 
+//R an the return to the server. Server returns data to frontend and afterwards the signal curves are drawn
    async analyseR(){
       //const token = window.localStorage.getItem('auth');
       return axios({
@@ -165,22 +166,14 @@ export default {
   
       
           this.edfData = response.data;
-          console.log(this.edfData[ 'Thenar re' ].fragments[0].signal);
-          console.log(this.edfData[ 'Extensor re' ].fragments[0].signal);
+      
           for(let i = 0; i<this.edfData[ 'Thenar re' ].fragments[0].signal.length; i++){
          this.lab.push(i);
        };
-       console.log(this.lab);
-        })
-        .catch(() => {});
-
-    },
-
-    drawChart: function(){
-      var ctx = document.getElementById('myChart');
-       console.log(this.edfData[ 'Thenar re' ].fragments[0].signal);
+           var ctx = document.getElementById('myChart');
       
       
+ //Draw Curves with charts.js     
 var myChart = new Chart(ctx, {
     type: 'line',
    
@@ -290,20 +283,26 @@ var myChart = new Chart(ctx, {
     yAxes: [{
       scaleLabel: {
         display: true,
-        labelString: 'Amplitude [mV]'
+        labelString: 'Amplitude [mV]',
+         fontStyle: "bold",
       }
     }],
      xAxes: [{
       scaleLabel: {
         display: true,
-        labelString: 'Latency [ms]'
+        labelString: 'Latency [ms]',
+         fontStyle: "bold",
       }
     }]
   }     
             }
 });
+        })
+        .catch(() => {});
 
     },
+
+
        
 },}
 </script>

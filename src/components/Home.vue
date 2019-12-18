@@ -1,9 +1,17 @@
 <template>
   <v-layout>
+
     <!--Start Dashboards -->
      <v-container grid-list-md text-xs-center>
-       </br></br></br></br>
       <v-layout row wrap>
+        <v-row   align="center" justify="center">
+         <v-img
+        src="./../static/logo.png"
+        position='center center'
+        max-height="260"
+        max-width="580"
+      ></v-img>
+      </v-row>
         <v-flex  xs6>
             <v-card
       class="mx-auto"
@@ -17,7 +25,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="green" size="62">
+      <v-list-item-avatar color="indigo" size="50">
         <span class="white--text headline">{{ CompletCaseCount}}</span>
       </v-list-item-avatar>
       </v-list-item>
@@ -43,7 +51,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="orange" size="62">
+      <v-list-item-avatar color="indigo" size="50">
         <span class="white--text headline">{{OpenCaseCount}}</span>
       </v-list-item-avatar>
       </v-list-item>
@@ -71,7 +79,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="pink" size="62">
+      <v-list-item-avatar color="indigo" size="50">
         <v-icon dark>mdi-book</v-icon>
       </v-list-item-avatar>
       </v-list-item>
@@ -97,7 +105,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="blue" size="62">
+      <v-list-item-avatar color="indigo" size="50">
         <v-icon dark>mdi-email</v-icon>
       </v-list-item-avatar>
       </v-list-item>

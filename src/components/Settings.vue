@@ -21,7 +21,7 @@
           
         </v-list-item-content>
   
-       <v-list-item-avatar color="green" size="62">
+       <v-list-item-avatar color="indigo" size="62">
         <v-icon dark>mdi-apps</v-icon>
       </v-list-item-avatar>
       </v-list-item>
@@ -47,7 +47,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="orange" size="62">
+      <v-list-item-avatar color="indigo" size="62">
         <v-icon dark>mdi-silverware</v-icon>
       </v-list-item-avatar>
       </v-list-item>
@@ -75,7 +75,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="pink" size="62">
+      <v-list-item-avatar color="indigo" size="62">
         <v-icon dark>mdi-desktop-mac</v-icon>
       </v-list-item-avatar>
       </v-list-item>
@@ -101,7 +101,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="cyan" size="62">
+      <v-list-item-avatar color="indigo" size="62">
         <v-icon dark>mdi-account-outline</v-icon>
       </v-list-item-avatar>
       </v-list-item>
@@ -129,7 +129,7 @@
           
         </v-list-item-content>
   
-      <v-list-item-avatar color="lime" size="62">
+      <v-list-item-avatar color="indigo" size="62">
         <v-icon dark>mdi-account</v-icon>
       </v-list-item-avatar>
       </v-list-item>
@@ -154,7 +154,7 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">Protokolleinträge</v-list-item-title>   
         </v-list-item-content>
-        <v-list-item-avatar color="purple" size="62">
+        <v-list-item-avatar color="indigo" size="62">
         <v-icon dark>mdi-file-document</v-icon>
       </v-list-item-avatar>
       </v-list-item>

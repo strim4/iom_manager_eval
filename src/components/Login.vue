@@ -6,8 +6,8 @@
          <v-img
         src="./../static/logo.png"
         position='center center'
-        max-width="160"
         max-height="160"
+        max-width="360"
       ></v-img>
       </v-row>
       <v-row>

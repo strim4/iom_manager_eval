@@ -3,13 +3,12 @@
     <v-form v-model="valid" ref="form" lazy-validation>
         </br> </br>
         <h1>IOM-Manager - Registrierung:</h1>
-         </br>
         <v-row   align="center" justify="center">
          <v-img
         src="./../static/logo.png"
         position='center center'
-        max-width="160"
         max-height="160"
+        max-width="360"
       ></v-img>
       </v-row>
          <v-row>
@@ -51,7 +50,7 @@
               @click:append="show1 = !show1"></v-text-field>
           </v-col>
       </v-row>
-        
+        </br>
         <v-btn @click="submit" :disabled="!valid" color="success">
             Registrieren
         </v-btn>

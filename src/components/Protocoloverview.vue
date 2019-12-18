@@ -213,9 +213,11 @@
                    <v-flex md0.5></v-flex>
                     <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF generieren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
+                    <v-flex md2.5> <v-btn    color="primary"  @click="">Kurvenansicht</v-btn></v-flex>
+                    <v-flex md0.5></v-flex>
                     <v-flex md2.5> <a :href="link"  target="_blank"><v-btn    color="primary"  @click="">EDF herunterladen</v-btn></a></v-flex>
                     <v-flex md0.5></v-flex>
-                    <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation anzeigen</v-btn></v-flex>
+                    <v-flex md2.5><v-btn    color="primary"  @click="dialogInterpret = true">Interpretation</v-btn></v-flex>
                     
                     
                 </v-layout>
@@ -1174,15 +1176,18 @@
           <v-card-text>
             <v-container>
               <v-row>
-                  <v-textarea  v-model="interp" :outlined="true" :auto-grow="true" :disabled="true" ></v-textarea>
+                  <v-textarea  v-model="interp.text" :outlined="true" :auto-grow="true" ></v-textarea>
               </v-row>
+              <v-text-field v-model="interp.histopatho" label="Histopathologie"></v-text-field>
+              <v-select v-model="interp.deficits" class="my-n3" label="Defizite" :items="deficits" multiple chips></v-select>
             </v-container>
            
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             
-            <v-btn  depressed  large color="primary"  @click="dialogInterpret = false">Schliessen</v-btn>
+            <v-btn  depressed  large color="success"  @click="submitInterp()" >Speichern</v-btn>
+            <v-btn  depressed  large color="normal"  @click="dialogInterpret = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -2229,7 +2234,13 @@ dialogBaselines: false,
 dialogExtras: false,
 dialogClosing: false,
  
-interp: '', 
+
+interp: {
+
+  text: '',
+  histopatho: '',
+  deficits: '',
+},
     
     casenr: 0,
     pid: '',
@@ -2710,14 +2721,22 @@ study: '',
     modalities: ['SSEPs ', 'TES-MEPs ', 'DCS-MEPs ', 'AEPs ', 'VEPs ', 'CCEPs ', 'EMG ', 'ECOG '],
     mapping:['Dynamischer Sauger ', 'DNS ', 'D-Welle ', 'Penfield '],
     reflexes:['BR ', 'LAR ', 'BCR '],
+
+    /* values for interpretation*/
+    deficits:['1 Tag postop ', '1 Woche postop ', '1 Monat postop '],
  
  /* values for the baselines and for the closing*/
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
     muscles: ['Occulomotor', 'Trochlearis', 'Masseter', 'Abduzens', 'Orb occ', 'Labialis', 'Orb oris', 'Mentalis', 'Glosso', 'Vagus', 'Accessorius', 'Hypoglosso', 'Deltoideus', 'Biceps', 'Triceps', 'Extensor', 'Thenar', 'Hypothenar', 'Aductor', 'Ileopsoas', 'Quadri', 'Tib ant', 'Gastro', 'Abd hall', ''],
-    eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust'],
+    eventchanges: ['normal', 'bedeutende Veränderungen', 'Verlust', ''],
 
   }),
+
+  //Submission of interpretation to the database
+  submitInterp(){
+
+  },
 
 //Link to edf 
 computed: {
@@ -2911,7 +2930,9 @@ sourceData.forEach(function(sourceRow) {
         }, 
       
       { text: 'Interpretation', style: 'subheader'},
-      { text: this.interp},
+      { text: this.interp.text},
+      { text: this.interp.histopatho},
+      { text: this.interp.deficits},
 
       { text: 'Auswertung Monitorist', style: 'subheader' },
       { text: '\nFallkodierung:'},

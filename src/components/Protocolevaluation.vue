@@ -2838,7 +2838,7 @@ study: '',
           .then(() => {
             this.$swal(
               'Erfolgreich!',
-              'Das Fall wurde erfolgreich abgeschlossen!',
+              'Der Fall wurde erfolgreich abgeschlossen!',
               'success',
             );
       

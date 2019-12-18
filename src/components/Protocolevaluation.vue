@@ -223,19 +223,32 @@
             <v-expansion-panel>
               <v-expansion-panel-header>Baselines SSEPs</v-expansion-panel-header>
               <v-expansion-panel-content>
-              <v-container > 
+              <v-container> 
+              <v-row>
+                <v-col cols="12" sm="6" md="2">
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-label>N</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-label>P</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label>Amplitude</v-label>
+                </v-col>
+              </v-row>
               <v-row>
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader class="my-n5" >Medianus L</v-subheader>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsMedianusLN" :disabled="true" class="my-n5" label="N:" ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsMedianusLN" :disabled="true" class="my-n5"></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsMedianusLP" class="my-n5" label="P:" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsMedianusLP" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.ssepsMedianusLAmp" class="my-n5" label="Amplitude:" suffix="mA" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsMedianusLAmp" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -243,13 +256,13 @@
                   <v-subheader class="my-n5" >Medianus R</v-subheader>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsMedianusRN" class="my-n5" label="N:" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsMedianusRN" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsMedianusRP" class="my-n5" label="P:" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsMedianusRP" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.ssepsMedianusRAmp" class="my-n5" label="Amplitude:" suffix="mA" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsMedianusRAmp" class="my-n5" suffix="mA" :disabled="true"  ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -257,13 +270,13 @@
                   <v-subheader class="my-n5" >Tibialis L</v-subheader>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsTibialisLN" class="my-n5" label="N:" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsTibialisLN" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsTibialisLP" class="my-n5" label="P:" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsTibialisLP" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.ssepsTibialisLAmp" class="my-n5" label="Amplitude:" suffix="mA" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsTibialisLAmp" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -271,13 +284,13 @@
                   <v-subheader class="my-n5" >Tibialis R</v-subheader>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsTibialisRN" class="my-n5" label="N:" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsTibialisRN" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.ssepsTibialisRP" class="my-n5" label="P:" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsTibialisRP" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.ssepsTibialisRAmp" class="my-n5" label="Amplitude:" suffix="mA" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.ssepsTibialisRAmp" class="my-n5" suffix="mA" :disabled="true"  ></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -289,434 +302,437 @@
             <v-expansion-panel-content>
               <v-container>
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                <v-col cols="12" sm="6" md="3">
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <label>Seite</label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <label>C1/C2</label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <label>C3/C4</label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <label>C3/Cz</label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <label>C4/Cz</label>
+                </v-col>
+              </v-row>
+              <v-row>
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel1" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 1"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel1Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel1C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel1C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel1C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel1C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel1C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel1C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel1C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel1C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               
                <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel2" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 2"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel2Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel2C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel2C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel2C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel2C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel2C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel2C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel2C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel2C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                </v-row> 
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel3" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 3"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel3Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel3C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel3C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel3C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel3C3C4" class="my-n5"  suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel3C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel3C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel3C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel3C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel4" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 4"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel4Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel4C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel4C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel4C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel4C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel4C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel4C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel4C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel4C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel5" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 5"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel5Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel5C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel5C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel5C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel5C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel5C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel5C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel5C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel5C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel6" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 6"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel6Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel6C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel6C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel6C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel6C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel6C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel6C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel6C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel6C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel7" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 7"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel7Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel7C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel7C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel7C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel7C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel7C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel7C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel7C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel7C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel8" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 8"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel8Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel8C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel8C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel8C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel8C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel8C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel8C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel8C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel8C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel9" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 9"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel9Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel9C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel9C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel9C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel9C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel9C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel9C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel9C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel9C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
                <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel10" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 10"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel10Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel10C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel10C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel10C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel10C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel10C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel10C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel10C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel10C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel11" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 11"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel11Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel11C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel11C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel11C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel11C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel11C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel11C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel11C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel11C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel12" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 12"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel12Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel12C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel12C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel12C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel12C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel12C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel12C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel12C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel12C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel13" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 13"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel13Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel13C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel13C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel13C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel13C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel13C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel13C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel13C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel13C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel14" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 14"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel14Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel14C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel14C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel14C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel14C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel14C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel14C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel14C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel14C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel15" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 15"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel15Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel15C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel15C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel15C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel15C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel15C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel15C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel15C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel15C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
               <v-row>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="3">
                   <v-select v-model="baselines.mepChannel16" class="my-n5" :disabled="true" 
                     :items="muscles"
                     label="Kanal 16"
                   ></v-select>
                  </v-col>
-                  <v-col cols="12" sm="6" md="2">
+                  <v-col cols="12" sm="6" md="1">
                   <v-select v-model="baselines.mepChannel16Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                  <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel16C1C2" class="my-n5" label="C1/C2" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel16C1C2" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel16C3C4" class="my-n5" label="C3/C4" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel16C3C4" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel16C3CZ" class="my-n5" label="C3/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel16C3CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                   <v-text-field  v-model="baselines.mepChannel16C4CZ" class="my-n5" label="C4/Cz" suffix="mA" :disabled="true" ></v-text-field>
+                   <v-text-field  v-model="baselines.mepChannel16C4CZ" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
 
@@ -729,6 +745,26 @@
               <v-expansion-panel-header>Baselines DCS MEPs</v-expansion-panel-header>
               <v-expansion-panel-content>
               <v-container>
+                <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label></v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label>Seite</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label>#1</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label>#2</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label>#3</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label>#4</v-label>
+                </v-col>
+              </v-row>
               <v-row>
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader class="my-n5" >Masseter</v-subheader>
@@ -736,20 +772,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.masseterSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.masseter1" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.masseter1" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.masseter2"  class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.masseter2"  class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.masseter3"  class="my-n5" label="#3" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.masseter3"  class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.masseter4"  class="my-n5" label="#4"  :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.masseter4"  class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -759,20 +794,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.orisSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.oris1" class="my-n5" label="#1" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.oris1" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.oris2" class="my-n5" label="#2"  :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.oris2" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.oris3" class="my-n5" label="#3" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.oris3" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.oris4" class="my-n5" label="#4" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.oris4" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -782,20 +816,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.deltoideusSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.deltoideus1" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.deltoideus1" class="my-n5"  :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.deltoideus2" class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.deltoideus2" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.deltoideus3" class="my-n5" label="#3" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.deltoideus3" class="my-n5"  :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.deltoideus4" class="my-n5" label="#4" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.deltoideus4" class="my-n5"  :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -805,20 +838,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.bicepsSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.biceps1" class="my-n5" label="#1" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.biceps1" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.biceps2" class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.biceps2" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.biceps3" class="my-n5" label="#3" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.biceps3" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.biceps4" class="my-n5" label="#4" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.biceps4" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -828,20 +860,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.extensorSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.extensor1" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.extensor1" class="my-n5"  :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.extensor2" class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.extensor2" class="my-n5"  :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.extensor3" class="my-n5" label="#3" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.extensor3" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.extensor4" class="my-n5" label="#4" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.extensor4" class="my-n5"  :disabled="true"  ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -851,20 +882,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.thenarSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.thenar1" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.thenar1" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field  v-model="baselines.thenar2" class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field  v-model="baselines.thenar2" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.thenar3" class="my-n5" label="#3" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.thenar3" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.thenar4" class="my-n5" label="#4" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.thenar4" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -874,20 +904,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.tibSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib1" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.tib1" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib2" class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.tib2" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib3" class="my-n5" label="#3" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.tib3" class="my-n5"  :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib4" class="my-n5" label="#4" :disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.tib4" class="my-n5"  :disabled="true"  ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -897,20 +926,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.abdSide" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.abd1" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.abd1" class="my-n5"  :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.abd2" class="my-n5" label="#2":disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.abd2" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.abd3" class="my-n5" label="#3":disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.abd3" class="my-n5" :disabled="true"  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.abd4" class="my-n5" label="#4" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.abd4" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -920,20 +948,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.thenar2Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.thenar21" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.thenar21" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.thenar22" class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.thenar22" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.thenar23" class="my-n5" label="#3" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.thenar23" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.thenar24" class="my-n5" label="#4" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.thenar24" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -943,20 +970,19 @@
                 <v-col cols="12" sm="6" md="2">
                   <v-select v-model="baselines.tib2Side" class="my-n5" :disabled="true" 
                     :items="sides"
-                    label="Seite"
                   ></v-select>
                  </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib21" class="my-n5" label="#1" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.tib21" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib22" class="my-n5" label="#2" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.tib22" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib23" class="my-n5" label="#3" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.tib23" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="2">
-                  <v-text-field v-model="baselines.tib24" class="my-n5" label="#4" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.tib24" class="my-n5" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -968,24 +994,44 @@
               <v-expansion-panel-header>Baselines AEPs</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-container>
+                <v-row>
+                <v-col cols="12" sm="6" md="2">
+                  <v-label></v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-label>I</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-label>II</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-label>III</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-label>IV</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="1">
+                  <v-label>V</v-label>
+                </v-col>
+              </v-row>
               <v-row>
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader class="my-n5" >AEP L</v-subheader>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepLI" class="my-n5"  label="I" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepLI" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepLII" class="my-n5"  label="II" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepLII" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepLIII" class="my-n5"  label="III" suffix="ms":disabled="true"  ></v-text-field>
+                  <v-text-field v-model="baselines.aepLIII" class="my-n5" suffix="ms":disabled="true"  ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepLIV" class="my-n5"  label="IV" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepLIV" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field  v-model="baselines.aepLV" class="my-n5" label="V" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field  v-model="baselines.aepLV" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -993,19 +1039,19 @@
                   <v-subheader class="my-n5" >AEP R</v-subheader>
                 </v-col>
                 <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepRI" class="my-n5"  label="I" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepRI" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepRII" class="my-n5"  label="II" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepRII" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepRIII" class="my-n5"  label="III" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepRIII" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepRIV" class="my-n5"  label="IV" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepRIV" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-text-field v-model="baselines.aepRV" class="my-n5"  label="V" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="baselines.aepRV" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -1139,13 +1185,23 @@
             <v-container>
               <v-row>
                 <v-col cols="12" sm="6" md="3">
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <label>Amplitude</label>
+                </v-col>
+                <v-col cols="12" sm="6" md="3">
+                  <label>Latenz</label>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="3">
                   <v-subheader class="my-n5" >D-Welle:</v-subheader>
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
-                  <v-text-field v-model="extras.dWaveAmp" class="my-n5" label="Amplitude" suffix="mA" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="extras.dWaveAmp" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
-                  <v-text-field v-model="extras.dWaveLat" class="my-n5" label="Latenz" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="extras.dWaveLat" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
               <v-row>
@@ -1153,10 +1209,10 @@
                   <v-text-field v-model="extras.additional1" class="my-n5" label="Weitere" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
-                  <v-text-field v-model="extras.additional1Amp" class="my-n5" label="Amplitude" suffix="mA" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="extras.additional1Amp" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
-                  <v-text-field v-model="extras.additional1Lat" class="my-n5" label="Latenz" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="extras.additional1Lat" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
                <v-row>
@@ -1164,10 +1220,10 @@
                   <v-text-field v-model="extras.additional2" class="my-n5" label="Weitere" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
-                  <v-text-field v-model="extras.additional2Amp" class="my-n5" label="Amplitude" suffix="mA" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="extras.additional2Amp" class="my-n5" suffix="mA" :disabled="true" ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="3">
-                  <v-text-field v-model="extras.additional2Lat" class="my-n5" label="Latenz" suffix="ms" :disabled="true" ></v-text-field>
+                  <v-text-field v-model="extras.additional2Lat" class="my-n5" suffix="ms" :disabled="true" ></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -1503,7 +1559,7 @@
                   ></v-select>
                  </v-col>
                   <v-col cols="12" sm="6" md="1">
-                  <v-select v-model="baselines.mepChannel9Side" class="my-n5" :disabled="true" 
+                  <v-select v-model="closing.mepChannel9Side" class="my-n5" :disabled="true" 
                     :items="sides"
                   ></v-select>
                  </v-col>
@@ -2679,7 +2735,7 @@ study: '',
     mapping:['Dynamischer Sauger ', 'DNS ', 'D-Welle ', 'Penfield '],
     reflexes:['BR ', 'LAR ', 'BCR '],
 
- /* values for the baselines */
+ /* values for the baselines and for the closing */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
     muscles: ['Occulomotor', 'Trochlearis', 'Masseter', 'Abduzens', 'Orb occ', 'Labialis', 'Orb oris', 'Mentalis', 'Glosso', 'Vagus', 'Accessorius', 'Hypoglosso', 'Deltoideus', 'Biceps', 'Triceps', 'Extensor', 'Thenar', 'Hypothenar', 'Aductor', 'Ileopsoas', 'Quadri', 'Tib ant', 'Gastro', 'Abd hall', ''],
@@ -2730,7 +2786,7 @@ study: '',
           this.evaluation = response.data.protocols.evaluation;
           this.baselines = response.data.protocols.baselines;
           this.extras = response.data.protocols.extras;   
-          //this.closing = response.data.protocols.closing;     
+          this.closing = response.data.protocols.closing;     
          
         })
         .catch(() => { console.log('error'); });
@@ -2767,7 +2823,7 @@ study: '',
             evaluation: this.evaluation,
             baselines: this.baselines,
             extras: this.extras,
-            //closing: this.closing,
+            closing: this.closing,
             interp: this.interp,
             file: this.file.name,
             
@@ -3091,7 +3147,7 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-        { text: 'Reflexe', style: 'subheader' },
+        { text: 'Baselines: Reflexe', style: 'subheader' },
      
       	{
      
@@ -3128,7 +3184,7 @@ sourceData.forEach(function(sourceRow) {
       },
     },
 
-/*     { text: 'Closing SSEPs', style: 'subheader' },
+     { text: 'Closing SSEPs', style: 'subheader' },
      
       	{
      
@@ -3244,7 +3300,7 @@ sourceData.forEach(function(sourceRow) {
         
 		},
 
-        { text: 'Reflexe', style: 'subheader' },
+        { text: 'Closing: Reflexe', style: 'subheader' },
      
       	{
      
@@ -3262,7 +3318,7 @@ sourceData.forEach(function(sourceRow) {
 
 			},
         
-    }, */
+    }, 
  
 
    
@@ -3303,9 +3359,6 @@ sourceData.forEach(function(sourceRow) {
         color: '#3F51B5'
       },
 
-      filler: {
-        fillColor: 'black'
-      }
 
     }
   };

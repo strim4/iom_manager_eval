@@ -1,12 +1,16 @@
 <!-- This file contains the structure to update a case and save it to the database -->
 <template>
+
 <!-- Form to update a case -->
     <v-form v-model="valid" ref="form" lazy-validation>
+        <div>
+    <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
+  </div>
         <h1>Offener Fall bearbeiten</h1>
         <label>Angaben zum Patienten</label>
         <v-text-field label="Fall Nr." v-model="casenr" :rules="requiredRules" required></v-text-field>
-        <v-text-field label="PID" v-model="pid" :rules="requiredRules" required></v-text-field>
-        <v-text-field label="FID" v-model="fid" :rules="requiredRules" required></v-text-field>
+        <v-text-field label="PID" v-model="pid"></v-text-field>
+        <v-text-field label="FID" v-model="fid"></v-text-field>
         <v-text-field label="Name" v-model="name" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Geburtsdatum" readonly prepend-icon="event"  v-model="birthdate" :rules="requiredRules" required></v-text-field>
@@ -61,6 +65,19 @@ export default {
     isismodalities: [],
     surgeons: [],
     assistants: [],
+
+        breadcrumbs: [
+        {
+          text: 'Dashboard',
+          disabled: true,
+          href: 'home',
+        },
+        {
+          text: 'Offene Fälle',
+          disabled: true,
+          href: 'opencases',
+        },
+      ],
   }),
 
   // fetches all dropdown values on pageload and fetch specific case from the database

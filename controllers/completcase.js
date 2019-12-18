@@ -7,7 +7,7 @@ module.exports.controller = (app) => {
 
 // fetch all completed cases
 app.get('/completcase', passport.authenticate('jwt', { session: false }),(req, res) => {
-    CompletcaseSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras interpretation edf', (error,
+    CompletcaseSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing interpretation edf', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({
@@ -18,7 +18,7 @@ app.get('/completcase', passport.authenticate('jwt', { session: false }),(req, r
 
 //fetch a single case
 app.get('/completcase/:casenr',  passport.authenticate('jwt', { session: false }),(req, res) => {
-    CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras edf', (error,
+    CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing edf', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({
@@ -49,6 +49,7 @@ app.post('/completcase', passport.authenticate('jwt', { session: false }), (req,
         evaluation: req.body.evaluation,
         baselines: req.body.baselines,
         extras: req.body.extras,
+        closing: req.body.closing,
         interpretation: req.body.interp,
         edf: req.body.file,
     
@@ -97,6 +98,7 @@ const newCompletCase = new CompletcaseSchema({
    evaluation: req.body.evaluation,
    baselines: req.body.baselines,
    extras: req.body.extras,
+   closing: req.body.closing,
    interpretation: req.body.interpretation,
    edf: req.body.edf,
 

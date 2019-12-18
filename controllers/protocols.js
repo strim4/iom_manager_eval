@@ -6,7 +6,7 @@ module.exports.controller = (app) => {
 
 // fetch all protocols
 app.get('/protocols', passport.authenticate('jwt', { session: false }),(req, res) => {
-    ProtocolSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
+    ProtocolSchema.find({}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({
@@ -17,7 +17,7 @@ app.get('/protocols', passport.authenticate('jwt', { session: false }),(req, res
 
 //fetch a single protocol
 app.get('/protocols/:casenr',passport.authenticate('jwt', { session: false }), (req, res) => {
-    ProtocolSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras', (error,
+    ProtocolSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({

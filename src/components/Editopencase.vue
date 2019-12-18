@@ -7,7 +7,9 @@
     <v-breadcrumbs :items="breadcrumbs" divider=">"></v-breadcrumbs>
   </div>
         <h1>Offener Fall bearbeiten</h1>
-        <label>Angaben zum Patienten</label>
+      <v-row>
+      <v-col cols="12" sm="6" md="6">
+        <h5 class="mt-5">Angaben zum Patienten</h5>
         <v-text-field label="Fall Nr." v-model="casenr" :rules="requiredRules" required></v-text-field>
         <v-text-field label="PID" v-model="pid"></v-text-field>
         <v-text-field label="FID" v-model="fid"></v-text-field>
@@ -15,23 +17,23 @@
         <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
         <v-text-field label="Geburtsdatum" readonly prepend-icon="event"  v-model="birthdate" :rules="requiredRules" required></v-text-field>
         <v-date-picker v-model="birthdate" :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
-
-        </br>
-        </br>
-        </br>
-
-        <label>Angaben zur Operation</label>
+      </v-col>
+      <v-col cols="12" sm="6" md="6">
+        <h5 class="mt-5">Angaben zur Operation</h5>
         <v-select label="Diagnose" v-model="diagnose" :items="diagnoses" item-text="diagnose"></v-select>
         <v-select label="Operation" v-model="operation" :items="operations" item-text="operation"></v-select>
         <v-select label="ISIS-Gerät" v-model="isismodality" :items="isismodalities" item-text="device"></v-select>
-        <v-text-field label="OP-Datum" prepend-icon="event" v-model="opdate"></v-text-field>
-        <v-date-picker v-model="opdate" :landscape="$vuetify.breakpoint.smAndUp" :locale="'de'"></v-date-picker>
         <v-select label="Operateur" v-model="surgeon" :items="surgeons" item-text="surgeon"></v-select>
         <v-select label="Assistent" v-model="assistant" :items="assistants" item-text="assistant"></v-select>
-        <v-btn @click="update" color="success" :disabled="!valid">
+        <v-text-field label="OP-Datum" prepend-icon="event" v-model="opdate"></v-text-field>
+        <v-date-picker v-model="opdate" :landscape="$vuetify.breakpoint.smAndUp" :locale="'de'"></v-date-picker>
+        
+      </v-col>
+        </v-row>
+        <v-btn class="mt-5" @click="update" color="success" :disabled="!valid">
             speichern
         </v-btn>
-        <v-btn @click="clear">zurücksetzten</v-btn>
+        <v-btn class="mt-5" @click="clear">zurücksetzten</v-btn>
     </v-form>
 </template>
 

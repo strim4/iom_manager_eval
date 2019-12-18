@@ -1273,7 +1273,7 @@
                   <v-label>Amplitude</v-label>
                 </v-col>
               </v-row>
-  <!--        <v-row>
+          <v-row>
                 <v-col cols="12" sm="6" md="2">
                   <v-subheader class="my-n5" >Medianus L</v-subheader>
                 </v-col>
@@ -2174,7 +2174,7 @@
                     label="R"
                   ></v-select>
                 </v-col>
-              </v-row> -->
+              </v-row>
             </v-container>
               </v-expansion-panel-content>
             </v-expansion-panel>
@@ -3105,7 +3105,7 @@ sourceData.forEach(function(sourceRow) {
       },
     },
 
-/*     { text: 'Closing SSEPs', style: 'subheader' },
+    { text: 'Closing SSEPs', style: 'subheader' },
      
       	{
      
@@ -3239,7 +3239,7 @@ sourceData.forEach(function(sourceRow) {
 
 			},
         
-    }, */
+    }, 
 
    
 

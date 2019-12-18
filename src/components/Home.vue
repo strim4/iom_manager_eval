@@ -4,14 +4,20 @@
     <!--Start Dashboards -->
      <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
-        <v-row   align="center" justify="center">
+        <v-col>
+
+        <v-row class="my-5" align="center" justify="center">
          <v-img
         src="./../static/logo.png"
         position='center center'
-        max-height="260"
-        max-width="580"
+        max-height="150"
+        max-width="300"
       ></v-img>
       </v-row>
+      <v-row  class="mb-5" align="center" justify="center">
+          <h1>IOM-Manager</h1>
+        </v-row>
+      <v-row>
         <v-flex  xs6>
             <v-card
       class="mx-auto"
@@ -117,7 +123,8 @@
       </v-card-actions>
     </v-card>
         </v-flex>
-      
+      </v-row>
+      </v-col>
       </v-layout>
       <!--End Dashboards -->
     </v-container>

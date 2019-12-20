@@ -5,10 +5,10 @@ library(jsonlite)
 
 libDir <- system.file("extdata", package="edfReader")
 
+list <- input[[1]]
 
 
-
-MEPtest <- paste(libDir, "/MEPtest2.edf", sep='')
+MEPtest <- paste(libDir, list$name, sep='')
 CHdr <- readEdfHeader(MEPtest)
 
 TSignals <-readEdfSignals(CHdr, simplify=FALSE ,fragments = TRUE)

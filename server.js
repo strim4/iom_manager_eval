@@ -21,6 +21,7 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'iomapplicationsecretkey';
 
 const R = require('r-script');
+const edfName = '';
 
 
 
@@ -65,15 +66,15 @@ res.json({ message: 'API Initialized!'});
 
 //R test function
 function executeExAsync(callback) {
-	const attitude = [
+	const inSig = [
 	
     ];
 
     
-  
+
 // the path to R bin must be added to the systemenvironment variables
 // the directory r library mus be writeable 
-    R('EDF.R').data({ df: attitude, nGroups: 3, fxn: 'mean' }).call(function(error, result) {
+    R('EDF.R').data({ df: inSig,  name: this.edfName }).call(function(error, result) {
 		if (error) {
 			//console.error('ex-async throws error', error);
 			return callback(error, null);
@@ -86,11 +87,15 @@ function executeExAsync(callback) {
 
 
 
-app.get('/ex-async', function(req, res) {
+app.post('/ex-async', function(req, res) {
+    this.edfName =req.body.name;
 	executeExAsync(function(error, result) {
 		if (error) {
 			return res.status(500).send(error);
-		}
+        }
+        
+        
+        console.log(edfName);
 		return res.status(200).send(result);
 	});
 });

@@ -53,6 +53,7 @@ import Chart from 'chart.js';
 export default {
 //initialize variables
     data: () => ({
+      edfName: '/MEPtest2.edf',
       edfData: {},
       lab: [],
     
@@ -155,7 +156,10 @@ export default {
    async analyseR(){
       //const token = window.localStorage.getItem('auth');
       return axios({
-        method: 'get',
+        method: 'post',
+        data: {
+            name: this.edfName,
+          },
         url: 'http://localhost:8081/ex-async',
          headers: {
            // Authorization: `JWT ${token}`,

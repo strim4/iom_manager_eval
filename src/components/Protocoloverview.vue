@@ -2,6 +2,7 @@
 <v-layout  >
 
     <v-container  >
+    
      <v-layout row>
     <v-flex md2 >
        <!-- card for patient and op data -->
@@ -213,7 +214,7 @@
                    <v-flex md0.5></v-flex>
                     <v-flex md2> <v-btn    color="primary"  @click="createPDF">PDF generieren</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
-                    <v-flex md2.5> <v-btn    color="primary"  @click="">Kurvenansicht</v-btn></v-flex>
+                    <v-flex md2.5> <v-btn    color="primary"  @click="analyseR">Kurvenansicht</v-btn></v-flex>
                     <v-flex md0.5></v-flex>
                     <v-flex md2.5> <a :href="link"  target="_blank"><v-btn    color="primary"  @click="">EDF herunterladen</v-btn></a></v-flex>
                     <v-flex md0.5></v-flex>
@@ -223,6 +224,9 @@
                 </v-layout>
                </v-flex>
     </v-layout> 
+    
+      
+    
 
 <!-- dialog for baselines  -->
          <v-dialog v-model="dialogBaselines" persistent max-width="1000px">
@@ -2193,10 +2197,25 @@
         </v-card>
       </v-dialog> 
 
+        <v-dialog v-model="dialogCurve" width="auto" height="100" >
+        
+     <v-card>
+          
+                <canvas id="myChart" width="auto" height="100" color="white"></canvas>    
       
+     </v-card>
+          
+            <v-btn  depressed  large color="normal"  @click="dialogCurve = false">schliessen</v-btn>
+         
+      </v-dialog>
+
+
+  
 
 </v-container>
+
 </v-layout>
+
 </template>
 
 <script>
@@ -2205,6 +2224,7 @@ import pdfmake from 'pdfmake';
 import moment from 'moment';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import Chart from 'chart.js';
 
 
 
@@ -2212,7 +2232,10 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default {
 //initialize variables
   data: () => ({
-
+    dialogCurve:false,
+ edfName: '/MEPtest2.edf',
+    edfData: {},
+      lab: [],
     breadcrumbs: [
         {
           text: 'Dashboard',
@@ -2841,6 +2864,164 @@ openFile: function(){
     }
   
 },
+
+//triggers R function on server that emmits r file to R. R file is proccessed in 
+//R an the return to the server. Server returns data to frontend and afterwards the signal curves are drawn
+   async analyseR(){
+      //const token = window.localStorage.getItem('auth');
+        this.dialogCurve = true;
+      return axios({
+        method: 'post',
+        data: {
+            name: this.edfName,
+          },
+        url: 'http://localhost:8081/ex-async',
+         headers: {
+           // Authorization: `JWT ${token}`,
+            //'Content-Type': 'application/json',
+          },
+      })
+        .then((response) => {
+  
+     
+          this.edfData = response.data;
+      
+          for(let i = 0; i<this.edfData[ 'Thenar re' ].fragments[0].signal.length; i++){
+         this.lab.push(i);
+       };
+          
+           var ctx = document.getElementById('myChart');
+        
+         
+      
+      
+ //Draw Curves with charts.js     
+var myChart = new Chart(ctx, {
+    type: 'line',
+   
+    data:
+    { labels: this.lab,
+      datasets: [
+            {
+                label: "Thenar re",
+             
+                data: this.edfData[ 'Thenar re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(75,192,192,0.4)",
+                  borderColor: "rgba(75,192,192,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(75,192,192,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            },
+             {
+                label: "Tib ant re",
+                data: this.edfData[ 'Tib ant re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(204, 235, 52,0.4)",
+                  borderColor: "rgba(204, 235, 52,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(204, 235, 52,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(204, 235, 52,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            }, 
+             {
+                label: "Extensor re",
+                data: this.edfData[ 'Extensor re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(229, 52, 2352,0.4)",
+                  borderColor: "rgba(229, 52, 235,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(229, 52, 235,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(229, 52, 235,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            },
+            {
+                label: "Deltoideus re",
+                data: this.edfData[ 'Deltoideus re' ].fragments[0].signal,
+                fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(150, 235, 52,0.4)",
+                  borderColor: "rgba(150, 235, 52,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(150, 235, 52,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(150, 235, 52,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                 
+                  spanGaps: false,
+                
+            },]},
+   options:{
+                 responsive: true, 
+             scales: {
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Amplitude [mV]',
+         fontStyle: "bold",
+      }
+    }],
+     xAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Latency [ms]',
+         fontStyle: "bold",
+      }
+    }]
+  }     
+            }
+});
+        })
+        .catch(() => {});
+   },
 
 //generate PDF Export
 createPDF() {

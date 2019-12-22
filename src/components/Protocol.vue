@@ -2193,6 +2193,7 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 
 export default {
   //initialize variables
@@ -2941,11 +2942,11 @@ this.dialogEval = true;
           this.fid = response.data.cases.fid;
           this.name = response.data.cases.name;
           this.surname = response.data.cases.surname;
-          this.birthdate = response.data.cases.birthdate;
+          this.birthdate = moment( response.data.cases.birthdate).format("DD-MM-YYYY");
           this.diagnose = response.data.cases.diagnose;
           this.operation = response.data.cases.operation;
           this.isismodality = response.data.cases.isismodality;
-          this.opdate = response.data.cases.opdate;
+          this.opdate = moment( response.data.cases.opdate).format("DD-MM-YYYY");
           this.surgeon = response.data.cases.surgeon;
           this.assistant = response.data.cases.assistant;
         })

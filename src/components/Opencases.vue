@@ -29,6 +29,12 @@
         </v-icon>
         </router-link>
       </template>
+       <template v-slot:item.birthdate="{ item }">
+      {{ formatDate(item.birthdate) }}
+    </template>
+     <template v-slot:item.opdate="{ item }">
+      {{ formatDate(item.opdate) }}
+    </template>
         <template v-slot:item.edit="{ item }">
        <router-link :to="{ name: 'Editopencase', params: { id: item._id } }">
             <v-icon>
@@ -53,6 +59,7 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 
 export default {
   name: 'Cases',
@@ -116,6 +123,10 @@ export default {
         })
         .catch(() => {});
     },
+//format date
+     formatDate(value) {
+      return moment(value).format("DD-MM-YYYY")
+  },
 
     // delete a opencase from the database
     async  deleteOpenCase(id, item) {

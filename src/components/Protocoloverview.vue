@@ -2200,6 +2200,20 @@
         <v-dialog v-model="dialogCurve" width="auto" height="100" >
         
      <v-card>
+       <div v-if="loading">
+         </br></br></br></br>
+       <p class="text-center"  >
+         Daten werden geladen</br>
+         <v-progress-circular
+        indeterminate
+        color="primary"
+        :size="70"
+        :width="7"
+       
+      ></v-progress-circular>
+      
+      </p>
+      </div>
           
                 <canvas id="myChart" width="auto" height="100" color="white"></canvas>    
       
@@ -2284,7 +2298,7 @@ interp: {
 
 study: '',
 
-
+loading: false,
 
  baselines: {
 
@@ -2800,11 +2814,11 @@ computed: {
           this.fid = response.data.protocols.fid;
           this.name = response.data.protocols.name;
           this.surname = response.data.protocols.surname;
-          this.birthdate = response.data.protocols.birthdate;
+          this.birthdate =moment( response.data.protocols.birthdate).format("DD-MM-YYYY");
           this.diagnose = response.data.protocols.diagnose;
           this.operation = response.data.protocols.operation;
           this.isismodality = response.data.protocols.isismodality;
-          this.opdate = response.data.protocols.opdate;
+          this.opdate = moment( response.data.protocols.opdate).format("DD-MM-YYYY");
           this.surgeon = response.data.protocols.surgeon;
           this.assistant = response.data.protocols.assistant;
           this.entries = response.data.protocols.entries;
@@ -2870,6 +2884,7 @@ openFile: function(){
    async analyseR(){
       //const token = window.localStorage.getItem('auth');
         this.dialogCurve = true;
+        this.loading = true;
       return axios({
         method: 'post',
         data: {
@@ -2883,11 +2898,12 @@ openFile: function(){
       })
         .then((response) => {
   
-     
+           this.loading = false;
           this.edfData = response.data;
       
           for(let i = 0; i<this.edfData[ 'Thenar re' ].fragments[0].signal.length; i++){
          this.lab.push(i);
+        
        };
           
            var ctx = document.getElementById('myChart');

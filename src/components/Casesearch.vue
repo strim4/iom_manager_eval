@@ -29,7 +29,13 @@
         mdi-file-document
         </v-icon>
         </router-link>
-      </template>       
+      </template>   
+        <template v-slot:item.birthdate="{ item }">
+      {{ formatDate(item.birthdate) }}
+    </template>
+     <template v-slot:item.opdate="{ item }">
+      {{ formatDate(item.opdate) }}
+    </template>    
     </v-data-table>
    </v-card> </br>
       <div class="text-right">
@@ -61,6 +67,7 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 
 export default {
   name: 'Casesearch',
@@ -183,6 +190,10 @@ export default {
     showSelect: function(){
       console.log(this.selected );
     },
+    //format date
+     formatDate(value) {
+      return moment(value).format("DD-MM-YYYY")
+  },
   
   },
 };

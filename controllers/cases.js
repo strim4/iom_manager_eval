@@ -1,6 +1,7 @@
 //this file contains the endpoint to CRUD cases in the database
 const CaseSchema = require('../models/Case.js');
 const passport = require('passport');
+const moment = require('moment');
 
 module.exports.controller = (app) => {
 // fetch all cases

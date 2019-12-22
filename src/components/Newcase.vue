@@ -18,7 +18,7 @@
           <v-text-field label="Name" v-model="name" :rules="requiredRules" required></v-text-field>
           <v-text-field label="Vorname" v-model="surname" :rules="requiredRules" required></v-text-field>
          <v-text-field label="Geburtsdatum" readonly prepend-icon="event"  v-model="birthdate" :rules="requiredRules" required></v-text-field>
-          <v-date-picker class="mb-5" v-model="birthdate" :format="formatDate" :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
+          <v-date-picker class="mb-5" v-model="birthdate"  :landscape="$vuetify.breakpoint.smAndUp"  :locale="'de'"></v-date-picker>
         </v-col>
         <v-col cols="12" sm="6" md="6">
         <h5 class="mt-5">Angaben zur Operation</h5>
@@ -111,11 +111,11 @@ formatDate: function (date) {
             fid: this.fid,
             name: this.name,
             surname: this.surname,
-            birthdate: moment(this.birthdate).format('DD-MM-YYYY'),
+            birthdate: this.birthdate,
             diagnose: this.diagnose,
             operation: this.operation,
             isismodality: this.isismodality,
-            opdate: moment(this.opdate).format('DD-MM-YYYY'),
+            opdate: this.opdate,
             surgeon: this.surgeon,
             assistant: this.assistant,
           },

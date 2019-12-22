@@ -5,6 +5,7 @@ library(jsonlite)
 
 libDir <- system.file("extdata", package="edfReader")
 
+#Input from r-script
 list <- input[[1]]
 
 

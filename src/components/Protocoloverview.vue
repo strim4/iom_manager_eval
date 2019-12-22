@@ -1190,7 +1190,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             
-            <v-btn  depressed  large color="success"  @click="submitInterp()" >Speichern</v-btn>
+            <v-btn  depressed  large color="success"  @click="submitInterp" >Speichern</v-btn>
             <v-btn  depressed  large color="normal"  @click="dialogInterpret = false">Abbrechen</v-btn>
           </v-card-actions>
         </v-card>
@@ -2770,10 +2770,7 @@ loading: false,
 
   }),
 
-  //Submission of interpretation to the database
-  submitInterp(){
 
-  },
 
 //Link to edf 
 computed: {
@@ -2833,7 +2830,61 @@ computed: {
         .catch(() => { console.log('error'); });
     },
 
-
+    // update a case
+    update() {
+    
+        const token = window.localStorage.getItem('auth');
+        return axios({
+          method: 'put',
+          data: {
+           casenr: this.casenr,
+        pid: this.pid,
+        fid: this.fid,
+        name: this.name,
+        surname: this.surname,
+        birthdate: this.birthdate,
+        diagnose: this.diagnose,
+        operation: this.operation,
+        isismodality:this.isismodality,
+        opdate: this.opdate,
+        surgeon: this.surgeon,
+        assistant: this.assistant,
+        entries: this.entries,
+        evaluation: this.evaluation,
+        baselines:this.baselines,
+        extras: this.extras,
+        closing: this.losing,
+        interpretation:this.interp,
+        edf:this.file,
+          },
+          url: `http://localhost:8081/completcase/${this.casenr}`,
+          headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(() => {
+            this.$swal(
+              'Erfolgreich!',
+              'Der Fall wurde erfolgreich aktualisiert!',
+              'success',
+            );
+          
+          })
+          .catch(() => {
+            this.$swal(
+              'Fehler!',
+              'Der Fall konnte nicht aktualisiert werden!',
+              'error',
+            );
+          });
+      },
+     
+  //Submission of interpretation to the database
+  submitInterp(){
+    this.dialogInterpret = false;
+this.update();
+  },
 
     // fetch file from server
     async  fetchFile(filename) {

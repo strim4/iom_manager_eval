@@ -11,14 +11,14 @@
     >
     <v-card-title>Patientendaten</v-card-title>
       <v-card-text class="text-left">
-     {{name}}, {{surname}}</br> {{birthdate}}
+     {{name}}, {{surname}}</br> {{formBirthdate}}
      <v-divider></v-divider>
      </v-card-text>
      <v-card-title>Operation</v-card-title>
      <v-card-text class="text-left">
       Diagnose: {{diagnose}}</br>
       Operation: {{operation}} </br>
-      Datum: {{opdate}}
+      Datum: {{formOpdate}}
       <v-divider></v-divider>
        </v-card-text>
       
@@ -2715,10 +2715,12 @@ export default {
     name: '',
     surname: '',
     birthdate: null,
+    formBirthdate: '',
+    formOpdate: '',
     diagnose: '',
     operation: '',
     isismodality: '',
-    opdate: '',
+    opdate: null,
     surgeon: '',
     assistant: '',
 
@@ -2942,13 +2944,15 @@ this.dialogEval = true;
           this.fid = response.data.cases.fid;
           this.name = response.data.cases.name;
           this.surname = response.data.cases.surname;
-          this.birthdate = moment( response.data.cases.birthdate).format("DD-MM-YYYY");
+          this.birthdate =  response.data.cases.birthdate;
           this.diagnose = response.data.cases.diagnose;
           this.operation = response.data.cases.operation;
           this.isismodality = response.data.cases.isismodality;
-          this.opdate = moment( response.data.cases.opdate).format("DD-MM-YYYY");
+          this.opdate = response.data.cases.opdate;
           this.surgeon = response.data.cases.surgeon;
           this.assistant = response.data.cases.assistant;
+          this.formBirthdate = moment( response.data.cases.birthdate).format("DD-MM-YYYY");
+          this.formOpdate = moment( response.data.cases.opdate).format("DD-MM-YYYY");
         })
         .catch(() => { console.log('error'); });
     },

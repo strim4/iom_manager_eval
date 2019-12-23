@@ -22,6 +22,7 @@
       show-select
       :search="search"
       class="elevation-1"  
+       multi-sort
     >
       <template v-slot:item.start="{ item }">
        <router-link :to="{ name: 'Protocoloverview',  params: { casenr: item.casenr }  }">
@@ -110,6 +111,9 @@ export default {
         // { text: 'VEP', value: 'evaluation.veps2'},
         { text: 'Mapping', value: 'evaluation.mapping', width: '180px'},
         { text: 'Reflexes', value: 'evaluation.reflexes', width: '150px'},
+        { text: 'Defizit nach 1 Tag', value: 'interpretation.deficitsDay',  width: '180px'},
+       { text: 'Defizit nach 1 Woche', value: 'interpretation.deficitsWeek',  width: '180px'},
+         { text: 'Defizit nach 1 Monat', value: 'interpretation.deficitsMonth',  width: '180px'},
         { text: 'Studie', value: 'evaluation.study', width: '120px'},
 
             ],

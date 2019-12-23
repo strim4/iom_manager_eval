@@ -27,7 +27,7 @@
         <v-select label="ISIS-Gerät" v-model="isismodality" :items="isismodalities" item-text="device"></v-select>
         <v-select label="Operateur" v-model="surgeon" :items="surgeons" item-text="surgeon"></v-select>
         <v-select label="Assistent" v-model="assistant" :items="assistants" item-text="assistant"></v-select>
-        <v-text-field label="OP-Datum" prepend-icon="event" v-model="opdate"></v-text-field>
+        <v-text-field label="OP-Datum" prepend-icon="event" v-model="opdate" :rules="requiredRules" required>></v-text-field>
         <v-date-picker v-model="opdate" :landscape="$vuetify.breakpoint.smAndUp" :locale="'de'"></v-date-picker>
 
         </v-col>
@@ -63,6 +63,7 @@ export default {
     requiredRules: [
       v => !!v || 'Bitte befüllen Sie alle Pflichtfelder',
     ],
+    
     select: null,
     diagnoses: [],
     operations: [],

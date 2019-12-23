@@ -17,13 +17,46 @@ app.get('/completcase', passport.authenticate('jwt', { session: false }),(req, r
     });
 
 //fetch a single case
-app.get('/completcase/:casenr',  passport.authenticate('jwt', { session: false }),(req, res) => {
-    CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing edf', (error,
+app.get('/completcase/:casenr',  (req, res) => {
+    CompletcaseSchema.findOne({casenr: req.params.casenr}, '_id casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing interpretation edf', (error,
     protocols) => {
     if (error) { console.log(error); }
     res.send({
     protocols,
     });
+    });
+    });
+
+    
+    // update a  case
+app.put('/completcase/:casenr',  passport.authenticate('jwt', { session: false }),(req, res) => {
+    CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing interpretation edf', (error,
+        protocols) => {
+    if (error) { console.log(error); }
+    protocols.casenr = req.body.casenr,
+    protocols.pid = req.body.pid,
+    protocols.fid = req.body.fid,
+    protocols.name = req.body.name,
+    protocols.surname= req.body.surname,
+    protocols.birthdate = req.body.birthdate,
+    protocols.diagnose = req.body.diagnose,
+    protocols.operation = req.body.operation,
+    protocols.isismodality = req.body.isismodality,
+    protocols.opdate = req.body.opdate,
+    protocols.surgeon = req.body.surgeon,
+    protocols.assistant= req.body.assistant,
+    protocols.entries = req.body.entries,
+    protocols.evaluation= req.body.evaluation,
+    protocols.baselines= req.body.baselines,
+    protocols.extras= req.body.extras,
+    protocols.closing= req.body.closing,
+    protocols.interpretation= req.body.interp,
+    protocols.edf= req.body.file,
+    protocols.save(function (error, protocols) {
+        if (error) { console.log(error); }
+        res.send(protocols)
+        })
+  
     });
     });
     
@@ -56,37 +89,6 @@ app.post('/completcase', passport.authenticate('jwt', { session: false }), (req,
     });
 
 
-    // update a  case
-app.put('/completcase/:casenr',  passport.authenticate('jwt', { session: false }),(req, res) => {
-    CompletcaseSchema.findOne({casenr: req.params.casenr}, 'casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing edf', (error,
-        protocols) => {
-    if (error) { console.log(error); }
-    protocols.casenr = req.body.casenr,
-    protocols.pid = req.body.pid,
-    protocols.fid = req.body.fid,
-    protocols.name = req.body.name,
-    protocols.surname= req.body.surname,
-    protocols.birthdate = req.body.birthdate,
-    protocols.diagnose = req.body.diagnose,
-    protocols.operation = req.body.operation,
-    protocols.isismodality = req.body.isismodality,
-    protocols.opdate = req.body.opdate,
-    protocols.surgeon = req.body.surgeon,
-    protocols.assistant= req.body.assistant,
-    protocols.entries = req.body.entries,
-    protocols.evaluation= req.body.evaluation,
-    protocols.baselines= req.body.baselines,
-    protocols.extras= req.body.extras,
-    protocols.closing= req.body.closing,
-    protocols.interpretation= req.body.interp,
-    protocols.edf= req.body.file,
-    protocols.save(function (error, protocols) {
-        if (error) { console.log(error); }
-        res.send(protocols)
-        })
-  
-    });
-    });
     
     newCompletCase.save((error, protocol) => {
     if (error) { console.log(error); }

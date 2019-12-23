@@ -23,7 +23,7 @@ evaluation: Object,
 baselines: Object,
 extras: Object,
 closing: Object,
-interpretation: String,
+interpretation: Object,
 edf: String,
 
 },

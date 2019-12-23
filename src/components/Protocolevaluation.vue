@@ -1161,7 +1161,26 @@
           <v-card-text>
             <v-container>
               <v-row>
-                  <v-textarea  v-model="interp" :outlined="true" :auto-grow="true" ></v-textarea>
+                <v-text-field v-model="interp.histopatho" label="Histopathologie"></v-text-field>
+              </v-row>
+              <v-textarea  v-model="interp.text" :outlined="true" :auto-grow="true" ></v-textarea>
+              <v-label>Defizite</v-label>
+              <v-row>
+                <v-col>
+                  <v-select v-model="interp.deficitsDay" class="my-n3" label="1 Tag postop" :items="deficits" multiple chips></v-select>
+                 <v-text-field v-model="interp.CNDay" class="my-n3" label="CN"></v-text-field>
+                 <v-text-field v-model="interp.MCRSDay" label="MCRS"></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-select v-model="interp.deficitsWeek" class="my-n3" label="1 Woche postop" :items="deficits" multiple chips></v-select>
+                  <v-text-field v-model="interp.CNWeek" class="my-n3" label="CN"></v-text-field>
+                 <v-text-field v-model="interp.MCRSWeek" label="MCRS"></v-text-field>
+                </v-col>
+               <v-col>
+                 <v-select v-model="interp.deficitsMonth" class="my-n3" label="1 Monat postop" :items="deficits" multiple chips></v-select>
+                 <v-text-field v-model="interp.CNMonth" class="my-n3" label="CN"></v-text-field>
+                 <v-text-field v-model="interp.MCRSMonth" label="MCRS"></v-text-field>
+               </v-col>
               </v-row>
             </v-container>
            
@@ -2259,7 +2278,21 @@ dialogBaselines: false,
 dialogExtras: false,
 dialogClosing: false,
 file: null,
-interp: '', 
+
+interp: {
+
+  text: '',
+  histopatho: '',
+  deficitsDay: '',
+  deficitsWeek: '',
+  deficitsMonth: '',
+  CNDay: '',
+  MCRSDay: '',
+  CNWeek: '',
+  MCRSWeek: '',
+  CNMonth: '',
+  MCRSMonth: '',
+},
     
     casenr: 0,
     pid: '',
@@ -2735,6 +2768,9 @@ study: '',
     mapping:['Dynamischer Sauger ', 'DNS ', 'D-Welle ', 'Penfield '],
     reflexes:['BR ', 'LAR ', 'BCR '],
 
+    /* values for interpretation*/
+    deficits:['Motorisch ', 'Sensibel ', 'Visuell ', 'Hirnnerven '],
+
  /* values for the baselines and for the closing */
     items: ['vorhanden', 'mässig', 'schlecht', ''],
     sides: ['L', 'R', ''],
@@ -2990,7 +3026,11 @@ sourceData.forEach(function(sourceRow) {
         }, 
       
       { text: 'Interpretation', style: 'subheader'},
-      { text: this.interp},
+      { text: this.interp.histopatho},
+      { text: this.interp.text},
+      { text: 'Defizit: 1 Tag posoperativ: ' + this.interp.deficitsDay},
+      { text: 'Defizit: 1 Woche posoperativ: ' + this.interp.deficitsWeek},
+      { text: 'Defizit: 1 Monat posoperativ: ' + this.interp.deficitsMonth},
 
       { text: 'Auswertung Monitorist', style: 'subheader' },
       { text: '\nFallkodierung'},

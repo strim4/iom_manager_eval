@@ -17,7 +17,7 @@ app.get('/completcase', passport.authenticate('jwt', { session: false }),(req, r
     });
 
 //fetch a single case
-app.get('/completcase/:casenr',  (req, res) => {
+app.get('/completcase/:casenr', passport.authenticate('jwt', { session: false }), (req, res) => {
     CompletcaseSchema.findOne({casenr: req.params.casenr}, '_id casenr pid fid name surname birthdate diagnose operation isismodality opdate surgeon assistant entries evaluation baselines extras closing interpretation edf', (error,
     protocols) => {
     if (error) { console.log(error); }

@@ -2766,8 +2766,8 @@ study: '',
     op: ['Resektion','Clipping','Stabilisation','Dekompression','Biopsie','direkte Stimulation','Verschluss',''],
     anaest: ['TIVA','TIVA plus','Wach-OP',''],
     optechnik: ['Wach-OP', 'SCS', 'DBS', 'IB', ''],
-    modalities: ['SSEPs ', 'TES-MEPs ', 'DCS-MEPs ', 'AEPs ', 'VEPs ', 'CCEPs ', 'EMG ', 'ECOG '],
-    mapping:['Dynamischer Sauger ', 'DNS ', 'D-Welle ', 'Penfield '],
+    modalities: ['SSEPs ', 'TES-MEPs ', 'DCS-MEPs ', 'AEPs ', 'VEPs ', 'CCEPs ', 'EMG ', 'ECOG ', 'D-Welle '],
+    mapping:['Dynamischer Sauger ', 'DNS ', 'Penfield '],
     reflexes:['BR ', 'LAR ', 'BCR '],
 
     /* values for interpretation*/

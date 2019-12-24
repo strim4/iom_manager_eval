@@ -70,7 +70,8 @@ export default {
     isismodalities: [],
     surgeons: [],
     assistants: [],
-
+    ccases: [],
+    compCases: [],
     breadcrumbs: [
         {
           text: 'Dashboard',
@@ -93,6 +94,8 @@ export default {
     this.fetchDevices();
     this.fetchSurgeons();
     this.fetchAssistans();
+    this.fetchCases();
+    this.fetchCompCases();
   },
 
   methods: {
@@ -100,10 +103,33 @@ export default {
 formatDate: function (date) {
   return moment(date).format('DD-MM-YYYY')
 },
-    // submit method to send the new case to the backend to store
+    // submit method to send the new case to the backend to store. checks if casenr already exists
     submit() {
-      if (this.$refs.form.validate()) {
-         const token = window.localStorage.getItem('auth');
+      if (this.$refs.form.validate()  ) {
+        var found = false;
+for(var i = 0; i < this.ccases.length; i++) {
+    if (this.ccases[i].casenr == this.casenr) {
+        found = true;
+      
+        break;
+    }
+};
+for(var i = 0; i < this.compCases.length; i++) {
+    if (this.compCases[i].casenr == this.casenr) {
+        found = true;
+       
+        break;
+    }
+};
+        
+        if(found){
+           this.$swal(
+              'Fehler!',
+              'Die Fallnummer existiert bereits!',
+              'error',
+            );
+        }else{
+           const token = window.localStorage.getItem('auth');
         return axios({
           method: 'post',
           data: {
@@ -142,6 +168,11 @@ formatDate: function (date) {
               'error',
             );
           });
+
+
+
+
+          };
       }
       return true;
     },
@@ -233,6 +264,39 @@ formatDate: function (date) {
       })
         .then((response) => {
           this.assistants = response.data.assistants;
+        })
+        .catch(() => {});
+    },
+
+      async fetchCases() {
+      const token = window.localStorage.getItem('auth');
+      return axios({
+        method: 'get',
+        url: 'http://localhost:8081/cases',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+      })
+        .then((response) => {
+          this.ccases = response.data.cases;
+        })
+        .catch(() => {});
+    },
+
+     async fetchCompCases() {
+      const token = window.localStorage.getItem('auth');
+      return axios({
+        method: 'get',
+        url: 'http://localhost:8081/completcase',
+         headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'application/json',
+          },
+
+      })
+        .then((response) => {
+          this.compCases = response.data.protocols;
         })
         .catch(() => {});
     },

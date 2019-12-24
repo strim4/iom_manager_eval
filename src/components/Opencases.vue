@@ -17,7 +17,7 @@
       <v-data-table
       :headers="headers"
       :items="ccases"
-      item-key="name"
+      item-key="casenr"
       :search="search"
       class="elevation-1"  
       no-data-text="keine offenen Fälle gefunden - Legen Sie eine neuen Fall an"

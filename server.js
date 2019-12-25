@@ -129,7 +129,7 @@ function isLoggedIn(req, res, next) {
 };
 
 //Tell express server to use port 8081
-const port = process.env.PORT || 8081;
+const port = process.env.API_PORT || 8081;
 app.use('/', router);
 app.listen(port, function() {
 console.log(`api running on port ${port}`);

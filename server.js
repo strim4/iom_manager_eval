@@ -45,7 +45,7 @@ app.use(passport.initialize());
 
 
 //connect to mongodb
-mongoose.connect('mongodb://localhost/iom_manager', function() {
+mongoose.connect('mongodb+srv://iommanager:Sommer2019@cluster0-vjmex.mongodb.net/test?retryWrites=true&w=majority', function() {
 console.log('Connection has been made');
 })
 .catch(err => {
@@ -132,5 +132,6 @@ function isLoggedIn(req, res, next) {
 const port = process.env.API_PORT || 8081;
 app.use('/', router);
 app.listen(port, function() {
+    
 console.log(`api running on port ${port}`);
 });
